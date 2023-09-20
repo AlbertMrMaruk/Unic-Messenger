@@ -37,7 +37,7 @@ wss.on("connection", function (ws) {
     //   cluster: "eu",
     // });
     // pusher.trigger("unic-messenger", "message", { message: "hello world" });
-    ws.send(req.body);
+    ws.send(JSON.parse(req.body));
     response.sendStatus(200);
   });
   ws.send("msg from server!");
