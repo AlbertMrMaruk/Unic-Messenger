@@ -1,8 +1,6 @@
-import WebSocket from "ws";
-
 function clickChat() {
   try {
-    const socket = new WebSocket(`wss://unic-messenger.vercel.app/`);
+    const socket = new WebSocket(`ws://89.111.131.15:3002/`);
     socket.addEventListener("open", () => {
       console.log("Соединение установлено");
       //   socket.send(
