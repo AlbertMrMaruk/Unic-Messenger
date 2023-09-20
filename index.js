@@ -2,6 +2,7 @@ const http = require("http");
 const Websocket = require("ws");
 const express = require("express");
 const app = express();
+
 // const Pusher = require("pusher");
 
 // let pusher = new Pusher({
@@ -29,7 +30,7 @@ wss.on("connection", function (ws) {
     console.log("server receive message: ", message.toString());
   });
   app.post("/post", function (req, response) {
-    console.log(req.body, "mmmm");
+    console.log(req.body, "mmmm", response, req);
     // pusher = new Pusher({
     //   appId: "1674014",
     //   key: "f6bfd10812a202b8d89b",
@@ -37,7 +38,7 @@ wss.on("connection", function (ws) {
     //   cluster: "eu",
     // });
     // pusher.trigger("unic-messenger", "message", { message: "hello world" });
-    ws.send(Blob.toString(req.body));
+    ws.send(req.body);
     response.sendStatus(200);
   });
   ws.send("msg from server!");
