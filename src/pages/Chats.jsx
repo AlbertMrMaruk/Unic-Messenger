@@ -20,7 +20,6 @@ function Chats() {
         "
           onClick={() => {
             console.log(text);
-            clickChat();
             setText("");
           }}
         >
