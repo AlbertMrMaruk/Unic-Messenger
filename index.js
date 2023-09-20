@@ -18,6 +18,7 @@ app.get("/*", (_, res) => {
     if (err) console.error(err);
   });
 });
+pusher.trigger("unic-messenger", "message", { message: "hello world" });
 app.post("/post", function (req, response) {
   console.log(req.body, "mmmm");
   pusher.trigger("unic-messenger", "message", { message: "hello world" });
