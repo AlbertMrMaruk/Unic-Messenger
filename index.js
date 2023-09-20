@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const Pusher = require("pusher");
 
-const pusher = new Pusher({
+let pusher = new Pusher({
   appId: "1674014",
   key: "f6bfd10812a202b8d89b",
   secret: "5fb358742397778f2b73",
@@ -22,6 +22,13 @@ app.get("/*", (_, res) => {
 pusher.trigger("unic-messenger", "message", { message: "hello world" });
 app.post("/post", function (req, response) {
   console.log(req.body, "mmmm");
+  pusher = new Pusher({
+    appId: "1674014",
+    key: "f6bfd10812a202b8d89b",
+    secret: "5fb358742397778f2b73",
+    cluster: "eu",
+    useTLS: true,
+  });
   pusher.trigger("unic-messenger", "message", { message: "hello world" });
   // ws.send("dcjndjc");
   response.sendStatus(200);
