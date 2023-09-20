@@ -1,3 +1,5 @@
+import withPusher from "react-pusher-hoc";
+
 function clickChat() {
   try {
     const socket = new WebSocket(`wss://unic-messenger.vercel.app/`);
@@ -32,5 +34,16 @@ function clickChat() {
     console.log(err);
   }
 }
+
+const mapEventsToProps = {
+  mapPropsToValues: (props) => ({
+    items: [],
+  }),
+  events: {
+    "unic-messenger.add": (item, state, props) => ({
+      items: state.items.concat(item),
+    }),
+  },
+};
 
 export default clickChat;
