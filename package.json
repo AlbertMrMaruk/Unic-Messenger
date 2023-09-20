@@ -19,7 +19,8 @@
     "ws": "8.14.1"
   },
   "scripts": {
-    "build": "react-scripts build &&  node ./server.js"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [

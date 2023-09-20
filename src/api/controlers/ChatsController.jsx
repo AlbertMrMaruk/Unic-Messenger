@@ -34,7 +34,7 @@
 // }
 
 const mapEventsToProps = {
-  mapPropsToValues: (props) => ({
+  mapPropsToValues: () => ({
     items: [],
   }),
   events: {
