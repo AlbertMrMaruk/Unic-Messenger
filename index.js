@@ -10,7 +10,7 @@ app.get("/*", (_, res) => {
   });
 });
 app.post("/post", function (req, response) {
-  console.log("mmmm");
+  console.log(req.body, "mmmm");
   // ws.send("dcjndjc");
   response.sendStatus(200);
 });
