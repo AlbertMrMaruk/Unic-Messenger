@@ -1,47 +1,49 @@
-// function clickChat() {
-//   try {
-//     const socket = new WebSocket(`wss://unic-messenger.vercel.app/`);
-//     socket.addEventListener("open", () => {
-//       console.log("Соединение установлено");
-//       //   socket.send(
-//       //     JSON.stringify({
-//       //       content: "0",
-//       //       type: "get old",
-//       //     })
-//       //   );
-//     });
+import WebSocket from "ws";
 
-//     socket.addEventListener("close", (event) => {
-//       if (event.wasClean) {
-//         console.log("Соединение закрыто чисто");
-//       } else {
-//         console.log("Обрыв соединения");
-//       }
+function clickChat() {
+  try {
+    const socket = new WebSocket(`wss://unic-messenger.vercel.app/`);
+    socket.addEventListener("open", () => {
+      console.log("Соединение установлено");
+      //   socket.send(
+      //     JSON.stringify({
+      //       content: "0",
+      //       type: "get old",
+      //     })
+      //   );
+    });
 
-//       console.log(`Код: ${event.code} | Причина: ${event.reason}`);
-//     });
+    socket.addEventListener("close", (event) => {
+      if (event.wasClean) {
+        console.log("Соединение закрыто чисто");
+      } else {
+        console.log("Обрыв соединения");
+      }
 
-//     socket.addEventListener("message", (event) => {
-//       console.log("Получены данные", event.data);
-//     });
+      console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+    });
 
-//     // socket.addEventListener("error", (event) => {
-//     //   console.log("Ошибка", event.message);
-//     // });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
+    socket.addEventListener("message", (event) => {
+      console.log("Получены данные", event.data);
+    });
 
-const mapEventsToProps = {
-  mapPropsToValues: () => ({
-    items: [],
-  }),
-  events: {
-    "unic-messenger.message": (body) => console.log(body, " djbdb"),
-  },
-};
+    socket.addEventListener("error", (event) => {
+      console.log("Ошибка", event.message);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-export default mapEventsToProps;
+// const mapEventsToProps = {
+//   mapPropsToValues: () => ({
+//     items: [],
+//   }),
+//   events: {
+//     "unic-messenger.message": (body) => console.log(body, " djbdb"),
+//   },
+// };
 
-// export default clickChat;
+// export default mapEventsToProps;
+
+export default clickChat;

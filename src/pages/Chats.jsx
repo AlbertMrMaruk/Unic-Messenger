@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-// import clickChat from "../api/controlers/ChatsController";
-import withPusher from "react-pusher-hoc";
-import mapEventsToProps from "../api/controlers/ChatsController";
+import clickChat from "../api/controlers/ChatsController";
+// import withPusher from "react-pusher-hoc";
+// import mapEventsToProps from "../api/controlers/ChatsController";
 
 function Chats() {
   const [text, setText] = useState("");
@@ -21,6 +21,7 @@ function Chats() {
           onClick={() => {
             console.log(text);
             setText("");
+            clickChat();
           }}
         >
           Send
@@ -30,4 +31,6 @@ function Chats() {
   );
 }
 
-export default withPusher(mapEventsToProps)(Chats);
+// export default withPusher(mapEventsToProps)(Chats);
+
+export default Chats;
