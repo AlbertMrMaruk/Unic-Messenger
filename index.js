@@ -8,6 +8,7 @@ const pusher = new Pusher({
   appId: "1674014",
   key: "f6bfd10812a202b8d89b",
   secret: "5fb358742397778f2b73",
+  cluster: "eu",
 });
 
 pusher.trigger("unic-messenger", "message", { message: "hello world" });
