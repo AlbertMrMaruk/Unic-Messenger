@@ -9,6 +9,7 @@ const pusher = new Pusher({
   key: "f6bfd10812a202b8d89b",
   secret: "5fb358742397778f2b73",
   cluster: "eu",
+  useTLS: true,
 });
 
 console.log("Hello server");
