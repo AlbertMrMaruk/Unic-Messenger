@@ -1,5 +1,3 @@
-import withPusher from "react-pusher-hoc";
-
 // function clickChat() {
 //   try {
 //     const socket = new WebSocket(`wss://unic-messenger.vercel.app/`);
