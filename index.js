@@ -9,7 +9,11 @@ app.get("/*", (_, res) => {
     if (err) console.error(err);
   });
 });
-
+app.post("/post", function (req, response) {
+  console.log("mmmm");
+  ws.send("dcjndjc");
+  response.sendStatus(200);
+});
 const server = http.createServer(app);
 const wss = new Websocket.Server({ server });
 wss.on("connection", function (ws) {
@@ -19,11 +23,7 @@ wss.on("connection", function (ws) {
     console.log("server receive message: ", message.toString());
   });
   ws.send("msg from server!");
-  app.post("/post", function (req, response) {
-    console.log("mmmm");
-    ws.send("dcjndjc");
-    response.sendStatus(200);
-  });
+
   ws.on("close", function (message) {
     console.log("连接断开", message);
   });
