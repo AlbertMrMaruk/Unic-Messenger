@@ -4,6 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+"build": "react-scripts build && node ./server.js",
+"dev": "npm run build && node ./server.js",
+"test": "react-scripts test",
+"eject": "react-scripts eject"
+
 In the project directory, you can run:
 
 ### `npm start`

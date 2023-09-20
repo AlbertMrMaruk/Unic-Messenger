@@ -32,3 +32,21 @@ wss.on("connection", function (ws) {
 server.listen(3002, function () {
   console.log(`Приложение запущено на порту  ${3002}!`);
 });
+
+// const express = require("express");
+
+// const app = express();
+
+// app.get("/*", (_, res) => {
+//   res.sendFile(`${__dirname}/build/index.html`, null, (err) => {
+//     if (err) console.error(err);
+//   });
+// });
+
+// const port = process.env.PORT || 3000;
+
+// app.listen(port, () =>
+//   console.log(`Server running on ${port}, http://localhost:${port}`)
+// );
+
+module.exports = server;
