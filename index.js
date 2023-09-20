@@ -30,7 +30,7 @@ wss.on("connection", function (ws) {
     console.log("server receive message: ", message.toString());
   });
   app.post("/post", function (req, response) {
-    console.log(req.body, "mmmm", response, req);
+    console.log(req.blob(), "mmmm", req);
     // pusher = new Pusher({
     //   appId: "1674014",
     //   key: "f6bfd10812a202b8d89b",
