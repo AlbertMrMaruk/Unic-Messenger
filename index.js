@@ -2,16 +2,16 @@ const http = require("http");
 // const Websocket = require("ws");
 const express = require("express");
 const app = express();
-// const Pusher = require("pusher");
+const Pusher = require("pusher");
 
-// const pusher = new Pusher({
-//   appId: "1674014",
-//   key: "f6bfd10812a202b8d89b",
-//   secret: "5fb358742397778f2b73",
-//   cluster: "eu",
-// });
+const pusher = new Pusher({
+  appId: "1674014",
+  key: "f6bfd10812a202b8d89b",
+  secret: "5fb358742397778f2b73",
+  cluster: "eu",
+});
 
-// pusher.trigger("unic-messenger", "message", { message: "hello world" });
+pusher.trigger("unic-messenger", "message", { message: "hello world" });
 
 console.log("Hello server");
 app.use(express.static(__dirname + "/build/"));
