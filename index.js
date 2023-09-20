@@ -11,8 +11,6 @@ const pusher = new Pusher({
   cluster: "eu",
 });
 
-pusher.trigger("unic-messenger", "message", { message: "hello world" });
-
 console.log("Hello server");
 app.use(express.static(__dirname + "/build/"));
 app.get("/*", (_, res) => {
@@ -22,6 +20,7 @@ app.get("/*", (_, res) => {
 });
 app.post("/post", function (req, response) {
   console.log(req.body, "mmmm");
+  pusher.trigger("unic-messenger", "message", { message: "hello world" });
   // ws.send("dcjndjc");
   response.sendStatus(200);
 });
