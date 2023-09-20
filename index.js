@@ -14,6 +14,8 @@ const app = express();
 
 console.log("Hello server");
 app.use(express.static(__dirname + "/build/"));
+app.use(bodyParser.json());
+
 app.get("/*", (_, res) => {
   res.sendFile(`${__dirname}/build/index.html`, null, (err) => {
     if (err) console.error(err);
