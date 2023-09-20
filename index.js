@@ -29,9 +29,9 @@ wss.on("connection", function (ws) {
   });
 });
 
-server.listen(3002, function () {
-  console.log(`Приложение запущено на порту  ${3002}!`);
-});
+// server.listen(3002, function () {
+//   console.log(`Приложение запущено на порту  ${3002}!`);
+// });
 
 // const express = require("express");
 
