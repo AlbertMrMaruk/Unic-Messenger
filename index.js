@@ -10,7 +10,7 @@ const pusher = new Pusher({
   secret: "5fb358742397778f2b73",
 });
 
-pusher.trigger("channel-1", "test_event", { message: "hello world" });
+pusher.trigger("unic-messenger", "message", { message: "hello world" });
 
 console.log("Hello server");
 app.use(express.static(__dirname + "/build/"));
