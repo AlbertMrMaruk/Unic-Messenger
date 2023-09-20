@@ -25,7 +25,7 @@ app.post("/post", function (req, response) {
   // ws.send("dcjndjc");
   response.sendStatus(200);
 });
-// const server = http.createServer(app);
+const server = http.createServer(app);
 // const wss = new Websocket.Server({ server });
 // wss.on("connection", function (ws) {
 //   // Клиент подключен
@@ -44,4 +44,4 @@ app.post("/post", function (req, response) {
 //   console.log(`Приложение запущено на порту  ${3002}!`);
 // });
 
-module.exports = app;
+module.exports = server;
