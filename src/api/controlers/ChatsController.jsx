@@ -23,6 +23,7 @@ function clickChat() {
 
     socket.addEventListener("message", (event) => {
       console.log("Получены данные", event.data);
+      console.log(JSON.parse(event.data));
     });
 
     socket.addEventListener("error", (event) => {

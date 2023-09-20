@@ -33,7 +33,7 @@ wss.on("connection", function (ws) {
     console.log("server receive message: ", message.toString());
   });
   app.post("/post", function (req, response) {
-    console.log(req.body, "mmmm", req);
+    console.log(req.body, "mmmm");
     // pusher = new Pusher({
     //   appId: "1674014",
     //   key: "f6bfd10812a202b8d89b",
@@ -41,7 +41,7 @@ wss.on("connection", function (ws) {
     //   cluster: "eu",
     // });
     // pusher.trigger("unic-messenger", "message", { message: "hello world" });
-    ws.send(req.body);
+    ws.send(JSON.stringify(req.body));
     response.sendStatus(200);
   });
   ws.send("msg from server!");
