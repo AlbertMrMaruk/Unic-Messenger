@@ -33,7 +33,7 @@ wss.on("connection", function (ws) {
     console.log("server receive message: ", message.toString());
   });
   app.post("/post", function (req, response) {
-    console.log(req.body, "mmmm");
+    // console.log(req.body, "mmmm");
     // pusher = new Pusher({
     //   appId: "1674014",
     //   key: "f6bfd10812a202b8d89b",
@@ -44,7 +44,6 @@ wss.on("connection", function (ws) {
     ws.send(JSON.stringify(req.body));
     response.sendStatus(200);
   });
-  ws.send("msg from server!");
 
   ws.on("close", function (message) {
     console.log("连接断开", message);
