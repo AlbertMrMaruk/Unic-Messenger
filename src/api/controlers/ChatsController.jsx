@@ -1,14 +1,8 @@
 function clickChat() {
   try {
-    const socket = new WebSocket(`ws://89.111.131.15:3002/`);
+    const socket = new WebSocket(`ws://89.111.131.15/`);
     socket.addEventListener("open", () => {
       console.log("Соединение установлено");
-      //   socket.send(
-      //     JSON.stringify({
-      //       content: "0",
-      //       type: "get old",
-      //     })
-      //   );
     });
 
     socket.addEventListener("close", (event) => {
@@ -33,16 +27,5 @@ function clickChat() {
     console.log(err);
   }
 }
-
-// const mapEventsToProps = {
-//   mapPropsToValues: () => ({
-//     items: [],
-//   }),
-//   events: {
-//     "unic-messenger.message": (body) => console.log(body, " djbdb"),
-//   },
-// };
-
-// export default mapEventsToProps;
 
 export default clickChat;
