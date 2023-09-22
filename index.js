@@ -3,6 +3,7 @@ const Websocket = require("ws");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const { send } = require("process");
 
 console.log("Hello server");
 app.use(express.static(__dirname + "/build/"));
@@ -16,20 +17,27 @@ app.get("/*", (_, res) => {
 
 const server = http.createServer(app);
 const wss = new Websocket.Server({ server });
-wss.on("connection", function (ws) {
+const funcWs = function (ws) {
   // Клиент подключен
+  console.log("Client ready");
   ws.on("message", function (message) {
     ws.send(message.toString());
     console.log("server receive message: ", message.toString());
-  });
-  app.post("/post", function (req, response) {
-    ws.send(JSON.stringify(req.body));
-    response.sendStatus(200);
   });
 
   ws.on("close", function (message) {
     console.log("连接断开", message);
   });
+};
+
+wss.on("connection", funcWs);
+app.post("/post", function (req, response) {
+  wss.clients.forEach((ws) => {
+    console.log("dhhd");
+    ws.send(JSON.stringify(req.body));
+  });
+
+  response.sendStatus(200);
 });
 
 server.listen(3002, function () {
