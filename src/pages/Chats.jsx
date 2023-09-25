@@ -44,7 +44,7 @@ function Chats({ messages, setMessages }) {
         className="w-[72%] bg-inherit min-h-[100vh]
        "
       >
-        <div className="w-[100%] min-h-[90vh] flex-col py-3  flex items-start justify-end mx-[2.5rem]">
+        <div className="w-[100%] min-h-[90vh] flex-col py-3  flex items-start justify-end px-[2.5rem]">
           {messages.map((el) => {
             console.log(el);
             return <Message message={el} />;
@@ -62,7 +62,12 @@ function Chats({ messages, setMessages }) {
         "
             onClick={async () => {
               console.log(text);
+              setMessages((prev) => [
+                ...prev,
+                { payload: { body: prev }, event: "send" },
+              ]);
               await ChatsApi.sendText(text, "79253580573");
+
               setText("");
             }}
           >
