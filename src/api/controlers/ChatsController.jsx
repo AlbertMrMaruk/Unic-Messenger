@@ -17,9 +17,9 @@ function clickChat(messages, setMessages) {
 
     socket.addEventListener("message", (event) => {
       //   console.log("Получены данные", event.data);
-      console.log(messages);
+      console.log(messagesArr);
       messagesArr.push(JSON.parse(event.data));
-      setMessages([messagesArr]);
+      setMessages(messagesArr);
       //   console.log(JSON.parse(event.data));
     });
 
