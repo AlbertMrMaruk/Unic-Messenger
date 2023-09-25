@@ -24,11 +24,14 @@ function Chats({ messages, setMessages }) {
   return (
     <div className="bg-[#050505] flex h-max min-h-[100vh]">
       <div
-        className="w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] min-h-[100vh] p-[2rem]
+        className="w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] min-h-[100vh] p-[1rem]
        "
       >
-        <div className="flex  items-center justify-between w-[100%]">
+        <div className="flex  items-center justify-between w-[100%] px-[1rem]">
           <div className="bg-white rounded-full w-[45px] h-[45px]"></div>
+          <h3 className="font-bold text-white text-xl ml-[2rem]">
+            Альберт Марукян
+          </h3>
         </div>
         <div
           className="flex flex-col
