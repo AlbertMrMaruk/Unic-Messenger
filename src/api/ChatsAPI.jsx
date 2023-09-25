@@ -25,12 +25,8 @@ class ChatsAPI {
   }
   async getChats() {
     try {
-      console.log("wtf");
-      await fetch(`${API_URL}/api/default/chats`).then((response) => {
-        //do something awesome that makes the world a better place
-        console.log(response);
-        return response;
-      });
+      const resp = await fetch(`${API_URL}/api/default/chats`, { headers: {} });
+      return resp;
     } catch (err) {
       console.log("Err:", err);
     }
