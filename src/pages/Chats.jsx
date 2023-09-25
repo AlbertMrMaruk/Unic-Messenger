@@ -4,10 +4,9 @@ import Message from "../components/blocks/Message";
 
 function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
+  const [chats, setChats] = useState([]);
   useEffect(() => {
-    fetch("http://89.111.131.15/api/default/chats")
-      .then((resp) => resp.json())
-      .then((res) => console.log(res));
+    setChats(ChatsApi.getChats());
   }, []);
   return (
     <div className="bg-[#050505] flex h-max min-h-[100vh]">
@@ -23,16 +22,22 @@ function Chats({ messages, setMessages }) {
         items-center mt-[2rem]
          "
         >
-          <div
-            className="p-[1rem]  
-             border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#1f2022]"
-          >
-            <div className="bg-white rounded-full w-[40px] h-[40px]"></div>
-            <div className="flex flex-col gap-1 text-[#e9e9e9] text-left">
-              <h3 className="text-md">Альберт</h3>
-              <p className="text-xs text-[#777779]">Текст сообщения </p>
-            </div>
-          </div>
+          {chats.slice(0, 7).map((el, index) => {
+            <div
+              className="p-[1rem]  
+  border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#1f2022]"
+              key={index}
+            >
+              <div className="bg-white rounded-full w-[40px] h-[40px]"></div>
+              <div className="flex flex-col gap-1 text-[#e9e9e9] text-left">
+                <h3 className="text-md">{el?.name}</h3>
+                <p className="text-xs text-[#777779]">
+                  {el?.fromMe ? "Вы: " : ""}
+                  {el?.lastMessage.body}{" "}
+                </p>
+              </div>
+            </div>;
+          })}
         </div>
       </div>
       <div
