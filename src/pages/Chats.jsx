@@ -4,11 +4,8 @@ import Message from "../components/blocks/Message";
 
 function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
-  useEffect(() => {
-    function callGetChats() {
-      return ChatsApi.getChats();
-    }
-    const chats = callGetChats();
+  useEffect(async () => {
+    const chats = await ChatsApi.getChats();
     console.log(chats);
   }, []);
   return (
