@@ -18,7 +18,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "push": "npm run build && git add . && git commit -m 'Git' && git push -u "
   },
   "eslintConfig": {
     "extends": [
