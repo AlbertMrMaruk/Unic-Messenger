@@ -5,7 +5,8 @@ import Message from "../components/blocks/Message";
 function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
   useEffect(async () => {
-    await ChatsApi.getChats();
+    const chats = await ChatsApi.getChats();
+    console.log(chats);
   }, []);
   return (
     <div className="bg-[#050505] flex h-max min-h-[100vh]">
