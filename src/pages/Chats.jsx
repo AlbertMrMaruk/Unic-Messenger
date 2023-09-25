@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import ChatsApi from "../api/ChatsApi";
 import Message from "../components/blocks/Message";
 import { useLocation } from "react-router-dom";
-
 import Chat from "../components/blocks/Chat";
 
 function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
   const [chats, setChats] = useState([]);
   const { state } = useLocation();
-  const [currentChat, setCurrentChat] = useState(state.id);
+  const [currentChat, setCurrentChat] = useState(state?.id ?? "");
   useEffect(() => {
     fetch(`http://89.111.131.15/api/default/chats`)
       .then((resp) => resp.json())
