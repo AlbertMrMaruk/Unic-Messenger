@@ -19,23 +19,13 @@ function Chats({ messages, setMessages }) {
          "
         >
           <div
-            className="p-[1rem]  rounded-xl 
-             border-[#2a2a2a] w-[100%] flex items-center gap-6 cursor-pointer hover:bg-[#1f2022]"
-          >
-            <div className="bg-white rounded-full w-[40px] h-[40px]"></div>
-            <div className="flex flex-col gap-1 text-[#e9e9e9] text-left">
-              <h3 className="text-md">Alex</h3>
-              <p className="text-xs text-[#777779]">Text something</p>
-            </div>
-          </div>
-          <div
             className="p-[1rem]  
              border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#1f2022]"
           >
             <div className="bg-white rounded-full w-[40px] h-[40px]"></div>
             <div className="flex flex-col gap-1 text-[#e9e9e9] text-left">
-              <h3 className="text-md">Alex</h3>
-              <p className="text-xs text-[#777779]">Text something</p>
+              <h3 className="text-md">Альберт</h3>
+              <p className="text-xs text-[#777779]">Текст сообщения </p>
             </div>
           </div>
         </div>
