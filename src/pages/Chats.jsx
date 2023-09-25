@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import clickChat from "../api/controlers/ChatsController";
+import ChatsApi from "../api/ChatsApi";
 import Message from "../components/blocks/Message";
 
 function Chats() {
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
+  clickChat(setMessages);
   return (
     <div className="bg-[#050505] flex h-max min-h-[100vh]">
       <div
@@ -45,7 +47,7 @@ function Chats() {
         className="w-[72%] bg-inherit min-h-[100vh]
        "
       >
-        <div className="w-[100%] min-h-[90vh] flex-col  items-start justify-end mx-[2.5rem]">
+        <div className="w-[100%] min-h-[90vh] flex-col py-3  flex items-start justify-end mx-[2.5rem]">
           {messages.map((el) => {
             console.log(el);
             return <Message message={el} />;
@@ -61,8 +63,8 @@ function Chats() {
         "
             onClick={() => {
               console.log(text);
+              console.log(ChatsApi.sendText(text, "79253580573"));
               setText("");
-              clickChat(setMessages);
             }}
           >
             Send
