@@ -54,6 +54,8 @@ function Chats({ messages, setMessages }) {
           <input
             className="bg-[#1c1d1f] text-white rounded-xl  w-[80%] p-2 px-4 h-[45px] mr-2"
             placeholder="Ваше сообщение"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
           />
           <button
             className="bg-[#44a0ff] rounded-xl text-white p-1 text-xl w-[65px] h-[45px]
