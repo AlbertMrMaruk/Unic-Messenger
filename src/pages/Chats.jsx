@@ -46,9 +46,10 @@ function Chats() {
        "
       >
         <div className="w-[100%] min-h-[90vh] flex items-end">
-          {messages.map((el) => (
-            <Message message={el} />
-          ))}
+          {messages.map((el) => {
+            console.log(el);
+            return <Message message={el} />;
+          })}
         </div>
         <div className="w-[100%] min-h-[10h] flex justify-center items-center">
           <input
@@ -62,7 +63,6 @@ function Chats() {
               console.log(text);
               setText("");
               clickChat(messages, setMessages);
-              console.log(messages);
             }}
           >
             Send
