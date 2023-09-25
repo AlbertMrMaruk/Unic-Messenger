@@ -27,7 +27,7 @@ function Chats({ messages, setMessages }) {
         items-center mt-[2rem]
          "
         >
-          {chats.map((el, index) => {
+          {chats.map((el, index) => (
             <div
               className="p-[1rem]  
   border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#1f2022]"
@@ -41,8 +41,8 @@ function Chats({ messages, setMessages }) {
                   {el?.lastMessage.body}{" "}
                 </p>
               </div>
-            </div>;
-          })}
+            </div>
+          ))}
         </div>
       </div>
       <div
