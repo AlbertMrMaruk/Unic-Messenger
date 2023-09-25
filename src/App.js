@@ -3,7 +3,7 @@ import clickChat from "./api/controlers/ChatsController";
 import { useEffect, useState } from "react";
 function App() {
   const [messages, setMessages] = useState([]);
-  useEffect(clickChat(setMessages), []);
+  useEffect(() => clickChat(setMessages), []);
   return <Chats messages={messages} setMessages={setMessages} />;
 }
 
