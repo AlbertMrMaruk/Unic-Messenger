@@ -64,7 +64,7 @@ function Chats({ messages, setMessages }) {
               console.log(text);
               setMessages((prev) => [
                 ...prev,
-                { payload: { body: prev }, event: "send" },
+                { payload: { body: text }, event: "send" },
               ]);
               await ChatsApi.sendText(text, "79253580573");
 
