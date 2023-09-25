@@ -25,8 +25,8 @@ class ChatsAPI {
   }
   async getChats() {
     try {
-      const resp = await fetch(`${API_URL}/api/default/chats`, { headers: {} });
-      return resp;
+      //   const resp = await fetch(`${API_URL}/api/default/chats`);
+      //   return resp;
     } catch (err) {
       console.log("Err:", err);
     }
