@@ -5,8 +5,10 @@ import Message from "../components/blocks/Message";
 function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
   const [chats, setChats] = useState([]);
-  useEffect(async () => {
-    setChats(await ChatsApi.getChats());
+  useEffect(() => {
+    fetch(`http://89.111.131.15/api/default/chats`)
+      .then((resp) => resp.json())
+      .then((res) => setChats(res.slice(0, 8)));
   }, []);
   return (
     <div className="bg-[#050505] flex h-max min-h-[100vh]">
