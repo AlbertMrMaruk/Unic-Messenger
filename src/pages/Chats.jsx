@@ -27,7 +27,7 @@ function Chats({ messages, setMessages }) {
         className="w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] min-h-[100vh] p-[1rem]
        "
       >
-        <div className="flex  items-center justify-between w-[100%] px-[1rem]">
+        <div className="flex  items-center pt-[.5rem] w-[100%] px-[1rem]">
           <div className="bg-white rounded-full w-[45px] h-[45px]"></div>
           <h3 className="font-bold text-white text-xl ml-[2rem]">
             Альберт Марукян
