@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-import clickChat from "../api/controlers/ChatsController";
 import ChatsApi from "../api/ChatsApi";
 import Message from "../components/blocks/Message";
 
-function Chats() {
+function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
-  const [messages, setMessages] = useState([]);
-  clickChat(setMessages);
-  useEffect(() => clickChat(setMessages), []);
   return (
     <div className="bg-[#050505] flex h-max min-h-[100vh]">
       <div
@@ -62,9 +58,9 @@ function Chats() {
           <button
             className="bg-[#44a0ff] rounded-xl text-white p-1 text-xl w-[65px] h-[45px]
         "
-            onClick={() => {
+            onClick={async () => {
               console.log(text);
-              console.log(ChatsApi.sendText(text, "79253580573"));
+              await ChatsApi.sendText(text, "79253580573");
               setText("");
             }}
           >

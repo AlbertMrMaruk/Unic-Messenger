@@ -3,6 +3,7 @@ class ChatsAPI {
   async sendText(message, phone) {
     try {
       await fetch(`${API_URL}/api/sendText`, {
+        mode: "no-cors",
         method: "post",
         headers: {
           Accept: "application/json",
