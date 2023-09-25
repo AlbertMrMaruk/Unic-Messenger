@@ -11,9 +11,6 @@ function clickChat(messages, setMessages) {
       } else {
         console.log("Обрыв соединения");
       }
-      setTimeout(function () {
-        clickChat();
-      }, 1000);
       console.log(`Код: ${event.code} | Причина: ${event.reason}`);
     });
 

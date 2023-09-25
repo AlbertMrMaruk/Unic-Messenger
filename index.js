@@ -3,7 +3,6 @@ const Websocket = require("ws");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const { send } = require("process");
 
 console.log("Hello server");
 app.use(express.static(__dirname + "/build/"));
