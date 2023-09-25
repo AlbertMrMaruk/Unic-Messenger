@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChatsApi from "../api/ChatsApi";
 import Message from "../components/blocks/Message";
 
 function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
+  useEffect(() => {
+    console.log(ChatsApi.getChats());
+  }, []);
   return (
     <div className="bg-[#050505] flex h-max min-h-[100vh]">
       <div

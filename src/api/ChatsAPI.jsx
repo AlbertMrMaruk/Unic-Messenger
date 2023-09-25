@@ -23,6 +23,16 @@ class ChatsAPI {
       console.log("Err", error);
     }
   }
+  async getChats() {
+    try {
+      await fetch(`${API_URL}/api/default/chats`).then((response) => {
+        //do something awesome that makes the world a better place
+        return response;
+      });
+    } catch (err) {
+      console.log("Err:", err);
+    }
+  }
 }
 
 export default new ChatsAPI();
