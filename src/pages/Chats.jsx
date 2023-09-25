@@ -8,7 +8,10 @@ function Chats({ messages, setMessages }) {
   useEffect(() => {
     fetch(`http://89.111.131.15/api/default/chats`)
       .then((resp) => resp.json())
-      .then((res) => setChats(res.slice(0, 8)));
+      .then((res) => {
+        console.log(res);
+        setChats(res.slice(0, 8));
+      });
   }, []);
   return (
     <div className="bg-[#050505] flex h-max min-h-[100vh]">
