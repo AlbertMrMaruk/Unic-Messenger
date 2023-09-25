@@ -62,7 +62,7 @@ function Chats() {
             onClick={() => {
               console.log(text);
               setText("");
-              clickChat(messages, setMessages);
+              clickChat(setMessages);
             }}
           >
             Send
