@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import clickChat from "../api/controlers/ChatsController";
 import ChatsApi from "../api/ChatsApi";
 import Message from "../components/blocks/Message";
@@ -7,6 +7,7 @@ function Chats() {
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
   clickChat(setMessages);
+  useEffect(() => clickChat(setMessages), []);
   return (
     <div className="bg-[#050505] flex h-max min-h-[100vh]">
       <div

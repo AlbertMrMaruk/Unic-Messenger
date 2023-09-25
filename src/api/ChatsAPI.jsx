@@ -1,4 +1,4 @@
-const API_URL = "http://89.111.131.15";
+const API_URL = "http://89.111.131.15:8080";
 class ChatsAPI {
   async sendText(message, phone) {
     try {
