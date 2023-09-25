@@ -1,5 +1,5 @@
 function clickChat(messages, setMessages) {
-  const messagesArr = messages;
+  const messagesArr = [...messages];
   try {
     const socket = new WebSocket(`ws://89.111.131.15/`);
     socket.addEventListener("open", () => {
