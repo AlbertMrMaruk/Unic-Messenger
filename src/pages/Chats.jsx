@@ -11,6 +11,7 @@ function Chats({ messages, setMessages }) {
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
   useEffect(() => {
     setCurrentChat(state.id);
+    setMessages([]);
   }, [state]);
   useEffect(() => {
     fetch(`http://89.111.131.15/api/default/chats`)
