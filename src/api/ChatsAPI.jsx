@@ -23,7 +23,7 @@ class ChatsAPI {
       console.log("Err", error);
     }
   }
-  getChats() {
+  async getChats() {
     try {
       fetch(`${API_URL}/api/default/chats`)
         .then((resp) => resp.json())
