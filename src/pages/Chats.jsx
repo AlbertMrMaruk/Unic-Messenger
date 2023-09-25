@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import ChatsApi from "../api/ChatsApi";
 import Message from "../components/blocks/Message";
+import { useLocation } from "react-router-dom";
+
+import Chat from "../components/blocks/Chat";
 
 function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
   const [chats, setChats] = useState([]);
+  const { state } = useLocation();
+  const [currentChat, setCurrentChat] = useState(state.id);
   useEffect(() => {
     fetch(`http://89.111.131.15/api/default/chats`)
       .then((resp) => resp.json())
@@ -28,21 +33,7 @@ function Chats({ messages, setMessages }) {
          "
         >
           {chats.map((el, index) => (
-            <div
-              className="p-[1rem]  
-  border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#1f2022]"
-              key={index}
-              data-id={el.id._serialized}
-            >
-              <div className="bg-white rounded-full w-[40px] h-[40px]"></div>
-              <div className="flex flex-col gap-1 text-[#e9e9e9] text-left">
-                <h3 className="text-md">{el?.name}</h3>
-                <p className="text-xs text-[#777779]">
-                  {el?.lastMessage.fromMe ? "Вы: " : ""}
-                  {el?.lastMessage.body}{" "}
-                </p>
-              </div>
-            </div>
+            <Chat chat={el} key={index} />
           ))}
         </div>
       </div>
@@ -72,7 +63,7 @@ function Chats({ messages, setMessages }) {
                 ...prev,
                 { payload: { body: text }, event: "send" },
               ]);
-              await ChatsApi.sendText(text, "79253580573");
+              await ChatsApi.sendText(text, currentChat);
 
               setText("");
             }}

@@ -12,7 +12,7 @@ class ChatsAPI {
         //make sure to serialize your JSON body
         body: JSON.stringify({
           session: "default",
-          chatId: `${phone}@c.us`,
+          chatId: `${phone}`,
           text: message,
         }),
       }).then((response) => {
