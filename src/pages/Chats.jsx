@@ -45,7 +45,7 @@ function Chats() {
         className="w-[72%] bg-inherit min-h-[100vh]
        "
       >
-        <div className="w-[100%] min-h-[90vh]">
+        <div className="w-[100%] min-h-[90vh] flex items-end">
           {messages.map((el) => (
             <Message message={el} />
           ))}

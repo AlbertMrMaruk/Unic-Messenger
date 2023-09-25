@@ -1,4 +1,5 @@
 function clickChat(messages, setMessages) {
+  const messagesArr = messages;
   try {
     const socket = new WebSocket(`ws://89.111.131.15/`);
     socket.addEventListener("open", () => {
@@ -17,7 +18,8 @@ function clickChat(messages, setMessages) {
     socket.addEventListener("message", (event) => {
       //   console.log("Получены данные", event.data);
       console.log(messages);
-      setMessages([...messages, JSON.parse(event.data)]);
+      messagesArr.push(JSON.parse(event.data));
+      setMessages([messagesArr]);
       //   console.log(JSON.parse(event.data));
     });
 
