@@ -58,7 +58,16 @@ function Chats({ messages, setMessages }) {
         className="w-[72%] bg-inherit h-[100vh]
        "
       >
-        <div className="bg-inherit h-[10vh] border-b-[1px] border-[#2a2a2a]"></div>
+        {state && (
+          <div className="bg-inherit h-[10vh] border-b-[1px] border-[#2a2a2a]">
+            <div className="flex  items-center pt-[.5rem] w-[100%] px-[3rem]">
+              <div className="bg-white rounded-full w-[45px] h-[45px]"></div>
+              <h3 className="font-bold text-white text-xl ml-[2rem]">
+                {state?.name}
+              </h3>
+            </div>
+          </div>
+        )}
 
         <div className="w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[2.5rem] overflow-scroll h-[80vh] mt-2">
           {messages.map((el) => {

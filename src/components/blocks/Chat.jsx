@@ -7,7 +7,9 @@ function Chat({ chat }) {
       className="p-[1rem]  
 border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#1f2022]"
       data-id={chat.id._serialized}
-      onClick={() => navigate("/", { state: { id: chat.id._serialized } })}
+      onClick={() =>
+        navigate("/", { state: { id: chat.id._serialized, name: chat.name } })
+      }
     >
       <div className="bg-white rounded-full w-[40px] h-[40px]"></div>
       <div className="flex flex-col gap-1 text-[#e9e9e9] text-left">
