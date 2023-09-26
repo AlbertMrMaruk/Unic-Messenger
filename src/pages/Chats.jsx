@@ -60,9 +60,9 @@ function Chats({ messages, setMessages }) {
       >
         {state && (
           <div className="bg-inherit h-[10vh] border-b-[1px] border-[#2a2a2a]">
-            <div className="flex  items-center pt-[.5rem] w-[100%] px-[3rem]">
+            <div className="flex  items-center py-[.8rem] w-[100%] px-[3rem]">
               <div className="bg-white rounded-full w-[45px] h-[45px]"></div>
-              <h3 className="font-bold text-white text-xl ml-[2rem]">
+              <h3 className="font-bold text-white  ml-[1.5rem] text-2xl">
                 {state?.name}
               </h3>
             </div>
