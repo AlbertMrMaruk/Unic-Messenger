@@ -11,20 +11,27 @@ function Chats({ messages, setMessages }) {
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
   useEffect(() => {
     setCurrentChat(state.id);
-    setMessages([]);
+    fetch(
+      `http://89.111.131.15/api/default/chats/${state.id}/messages?downloadMedia=false&limit=10`
+    )
+      .then((resp) => resp.json)
+      .then((res) => {
+        console.log(res);
+        setMessages(res);
+      });
   }, [state]);
   useEffect(() => {
     fetch(`http://89.111.131.15/api/default/chats`)
       .then((resp) => resp.json())
       .then((res) => {
         console.log(res);
-        setChats(res.slice(0, 6));
+        setChats(res.slice(0, 10));
       });
   }, []);
   return (
     <div className="bg-[#050505] flex h-max min-h-[100vh]">
       <div
-        className="w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] min-h-[100vh] p-[1rem]
+        className="w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] min-h-[100vh] p-[1rem] 
        "
       >
         <div className="flex  items-center pt-[.5rem] w-[100%] px-[1rem]">
@@ -35,7 +42,7 @@ function Chats({ messages, setMessages }) {
         </div>
         <div
           className="flex flex-col
-        items-center mt-[2rem]
+        items-center mt-[2rem] overflow-scroll h-[90vh]
          "
         >
           {chats.map((el, index) => (
@@ -47,7 +54,7 @@ function Chats({ messages, setMessages }) {
         className="w-[72%] bg-inherit min-h-[100vh]
        "
       >
-        <div className="w-[100%] min-h-[90vh] flex-col py-3  flex items-start justify-end px-[2.5rem]">
+        <div className="w-[100%] min-h-[90vh] flex-col py-3  flex items-start justify-end px-[2.5rem]overflow-scroll h-[90vh]">
           {messages.map((el) => {
             console.log(el);
             return <Message message={el} />;
