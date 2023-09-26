@@ -58,7 +58,7 @@ function Chats({ messages, setMessages }) {
         className="w-[72%] bg-inherit min-h-[100vh]
        "
       >
-        <div className="w-[100%] min-h-[90vh] flex-col py-3  flex items-start justify-end px-[2.5rem]overflow-scroll h-[90vh]">
+        <div className="w-[100%] flex-col py-3  flex items-start justify-end px-[2.5rem] overflow-scroll h-[90vh]">
           {messages.map((el) => {
             console.log(el);
             return <Message message={el} />;
