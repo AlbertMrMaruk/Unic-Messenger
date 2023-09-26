@@ -10,11 +10,16 @@ function Chats({ messages, setMessages }) {
   const { state } = useLocation();
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
   useEffect(() => {
-    setCurrentChat(state.id);
+    setCurrentChat(state?.id);
     fetch(
-      `http://89.111.131.15/api/default/chats/${state.id}/messages?downloadMedia=false&limit=10`
+      `http://89.111.131.15/api/default/chats/${state?.id}/messages?downloadMedia=false&limit=10`
     )
-      .then((resp) => resp.json)
+      .then((resp) => {
+        if (resp.ok) {
+          console.log(resp.json()); //first consume it in console.log
+          return resp.json(); //then consume it again, the error happens
+        }
+      })
       .then((res) => {
         console.log(res);
         setMessages(res);
