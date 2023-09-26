@@ -16,7 +16,6 @@ function Chats({ messages, setMessages }) {
     )
       .then((resp) => {
         if (resp.ok) {
-          console.log(resp.json()); //first consume it in console.log
           return resp.json(); //then consume it again, the error happens
         }
       })
@@ -47,7 +46,7 @@ function Chats({ messages, setMessages }) {
         </div>
         <div
           className="flex flex-col
-        items-center mt-[2rem] overflow-scroll h-[90vh]
+        items-center mt-[2rem] overflow-scroll h-[85vh]
          "
         >
           {chats.map((el, index) => (
