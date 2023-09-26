@@ -39,8 +39,8 @@ function Chats({ messages, setMessages }) {
        "
       >
         <div className="flex  items-center pt-[.5rem] w-[100%] px-[1rem]">
-          <div className="bg-white rounded-full w-[45px] h-[45px]"></div>
-          <h3 className="font-bold text-white text-xl ml-[2rem]">
+          <div className="bg-white rounded-full w-[40px] h-[40px]"></div>
+          <h3 className="font-bold text-white text-xl ml-[1.5rem]">
             Альберт Марукян
           </h3>
         </div>
@@ -61,8 +61,8 @@ function Chats({ messages, setMessages }) {
         {state && (
           <div className="bg-inherit h-[10vh] border-b-[1px] border-[#2a2a2a]">
             <div className="flex  items-center py-[.8rem] w-[100%] px-[3rem]">
-              <div className="bg-white rounded-full w-[45px] h-[45px]"></div>
-              <h3 className="font-bold text-white  ml-[1.5rem] text-2xl">
+              <div className="bg-white rounded-full w-[40px] h-[40px]"></div>
+              <h3 className="font-bold text-white  ml-[1.5rem] text-[1.3rem]">
                 {state?.name}
               </h3>
             </div>
@@ -75,29 +75,41 @@ function Chats({ messages, setMessages }) {
             return <Message message={el} />;
           })}
         </div>
-        <div className="w-[100%] h-[7h] flex justify-center items-center">
-          <input
-            className="bg-[#1c1d1f] text-white rounded-xl  w-[80%] p-2 px-4 h-[45px] mr-2"
-            placeholder="Ваше сообщение"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-          <button
-            className="bg-[#44a0ff] rounded-xl text-white p-1 text-xl w-[65px] h-[45px]
-        "
-            onClick={async () => {
-              console.log(text);
-              setMessages((prev) => [
-                ...prev,
-                { payload: { body: text }, event: "send" },
-              ]);
-              await ChatsApi.sendText(text, currentChat);
+        <div className="w-[100%] h-[7h]  justify-center items-center">
+          <div className="relative flex flex-wrap items-stretch m-auto w-[90%]">
+            <input
+              type="text"
+              className="
+              bg-[#1c1d1f] text-white rounded-l-xl   
+              p-2 px-4 h-[45px] 
+              relative  -mr-0.5 block w-[1px] min-w-0 flex-auto  outline-none "
+              placeholder="Ваше сообщение"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+            <button
+              class="bg-[#44a0ff]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[65px] h-[45px]"
+              type="button"
+            >
+              Файл
+            </button>
+            <button
+              class="bg-[#44a0ff]  p-1 text-xs z-[2] inline-block rounded-r-xl  w-[95px] h-[45px] text-white font-bold uppercase"
+              type="button"
+              onClick={async () => {
+                console.log(text);
+                setMessages((prev) => [
+                  ...prev,
+                  { payload: { body: text }, event: "send" },
+                ]);
+                await ChatsApi.sendText(text, currentChat);
 
-              setText("");
-            }}
-          >
-            Send
-          </button>
+                setText("");
+              }}
+            >
+              Отправить
+            </button>
+          </div>
         </div>
       </div>
     </div>
