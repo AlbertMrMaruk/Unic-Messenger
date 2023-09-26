@@ -21,7 +21,7 @@ function Chats({ messages, setMessages }) {
       })
       .then((res) => {
         console.log(res);
-        setMessages(res);
+        setMessages(res.reverse());
       });
   }, [state]);
   useEffect(() => {
@@ -60,7 +60,7 @@ function Chats({ messages, setMessages }) {
       >
         <div className="bg-inherit h-[10vh] border-b-[1px] border-[#2a2a2a]"></div>
 
-        <div className="w-[100%] flex-col py-3  flex items-start justify-start px-[2.5rem] overflow-scroll h-[80vh] mt-2">
+        <div className="w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[2.5rem] overflow-scroll h-[80vh] mt-2">
           {messages.map((el) => {
             console.log(el);
             return <Message message={el} />;
