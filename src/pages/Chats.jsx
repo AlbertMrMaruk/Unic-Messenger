@@ -33,9 +33,9 @@ function Chats({ messages, setMessages }) {
       });
   }, []);
   return (
-    <div className="bg-[#050505] flex h-max min-h-[100vh]">
+    <div className="bg-[#050505] flex  h-[100vh]">
       <div
-        className="w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] min-h-[100vh] p-[1rem] 
+        className="w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] h-[100vh] p-[1rem] 
        "
       >
         <div className="flex  items-center pt-[.5rem] w-[100%] px-[1rem]">
@@ -55,10 +55,12 @@ function Chats({ messages, setMessages }) {
         </div>
       </div>
       <div
-        className="w-[72%] bg-inherit min-h-[100vh]
+        className="w-[72%] bg-inherit h-[100vh]
        "
       >
-        <div className="w-[100%] flex-col py-3  flex items-start justify-end px-[2.5rem] overflow-scroll h-[90vh]">
+        <div className="bg-inherit h-[10vh] border-b-[1px] border-[#2a2a2a]"></div>
+
+        <div className="w-[100%] flex-col py-3  flex items-start justify-end px-[2.5rem] overflow-scroll h-[78vh] mt-2">
           {messages.map((el) => {
             console.log(el);
             return <Message message={el} />;
