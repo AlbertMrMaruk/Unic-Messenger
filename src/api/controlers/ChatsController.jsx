@@ -18,11 +18,7 @@ function clickChat(setMessages) {
       //   console.log("Получены данные", event.data);
       //   console.log(messagesArr);
       //   console.log(messagesArr);
-      setMessages((prev) => {
-        console.log([JSON.parse(event.data), ...prev]);
-        return [JSON.parse(event.data), ...prev];
-      });
-
+      setMessages((prev) => [JSON.parse(event.data), ...prev]);
       //   console.log(JSON.parse(event.data));
     });
 

@@ -99,8 +99,8 @@ function Chats({ messages, setMessages }) {
               onClick={async () => {
                 console.log(text);
                 setMessages((prev) => [
-                  ...prev,
                   { payload: { body: text }, event: "send" },
+                  ...prev,
                 ]);
                 await ChatsApi.sendText(text, currentChat);
 
