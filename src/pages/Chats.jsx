@@ -60,13 +60,13 @@ function Chats({ messages, setMessages }) {
       >
         <div className="bg-inherit h-[10vh] border-b-[1px] border-[#2a2a2a]"></div>
 
-        <div className="w-[100%] flex-col py-3  flex items-start justify-end px-[2.5rem] overflow-scroll h-[78vh] mt-2">
+        <div className="w-[100%] flex-col py-3  flex items-start justify-start px-[2.5rem] overflow-scroll h-[80vh] mt-2">
           {messages.map((el) => {
             console.log(el);
             return <Message message={el} />;
           })}
         </div>
-        <div className="w-[100%] min-h-[10h] flex justify-center items-center">
+        <div className="w-[100%] h-[7h] flex justify-center items-center">
           <input
             className="bg-[#1c1d1f] text-white rounded-xl  w-[80%] p-2 px-4 h-[45px] mr-2"
             placeholder="Ваше сообщение"
