@@ -7,7 +7,13 @@ function Message({ message }) {
           : "bg-[#44a0ff] self-end"
       }`}
     >
-      {message?.payload?.body ?? message.body}
+      {console.log(message)}
+      {message?.payload?.mediaUrl ? (
+        <img src={message?.payload?.mediaUrl} alt="Image from user" />
+      ) : (
+        message?.payload?.body ?? message.body
+      )}
+      {}
     </div>
   );
 }
