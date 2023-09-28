@@ -12,7 +12,7 @@ function Chats({ messages, setMessages }) {
   useEffect(() => {
     setCurrentChat(state?.id);
     fetch(
-      `http://89.111.131.15/api/default/chats/${state?.id}/messages?downloadMedia=false&limit=20`
+      `http://89.111.131.15/api/default/chats/${state?.id}/messages?downloadMedia=true&limit=20`
     )
       .then((resp) => {
         if (resp.ok) {
