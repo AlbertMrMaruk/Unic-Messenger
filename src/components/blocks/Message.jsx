@@ -1,4 +1,6 @@
 function Message({ message }) {
+  const url = message?.payload?.mediaUrl ?? message?.mediaUrl;
+  const text = message?.payload?.body ?? message.body;
   return (
     <div
       className={`mx-3 mb-2 rounded-xl  text-white px-3 py-2 max-w-[45%] w-fit ${
@@ -8,10 +10,13 @@ function Message({ message }) {
       }`}
     >
       {console.log(message)}
-      {message?.payload?.mediaUrl ? (
-        <img src={message?.payload?.mediaUrl} alt="Image from user" />
+      {url ? (
+        <img
+          src={"http://89.111.131.15" + url.slice(21)}
+          alt="Image from user"
+        />
       ) : (
-        message?.payload?.body ?? message.body
+        text
       )}
       {}
     </div>
