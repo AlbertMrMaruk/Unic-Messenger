@@ -13,7 +13,7 @@ function Message({ message }) {
   };
   return (
     <div
-      className={`mx-3 mb-2 rounded-xl  text-white px-3 py-2 max-w-[45%] w-fit flex flex-col gap-1 ${
+      className={`mx-3 mb-2 rounded-xl  text-white px-[0.5rem] min-w-[9%] py-2 max-w-[45%] w-fit flex flex-col gap-1 ${
         message.event === "message" || message.fromMe === false
           ? "bg-[#2a2a2e] self-start"
           : "bg-[#44a0ff] self-end"
@@ -36,7 +36,9 @@ function Message({ message }) {
           {text}
         </span>
       )}
-      <span className="text-right p-1">{calcDate(timestamp)}</span>
+      <span className="text-right p-1 mt-[-1.1rem] text-[10px]">
+        {calcDate(timestamp)}
+      </span>
     </div>
   );
 }
