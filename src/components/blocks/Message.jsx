@@ -19,7 +19,6 @@ function Message({ message }) {
           : "bg-[#44a0ff] self-end"
       }`}
     >
-      {console.log(message)}
       {url ? (
         <img
           src={"http://89.111.131.15" + url.slice(21)}

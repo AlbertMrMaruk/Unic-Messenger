@@ -29,14 +29,16 @@ function Chats({ messages, setMessages }) {
       .then((res) => {
         const newChat = res.slice(0, 10);
 
-        newChat.forEach((el) => {
+        newChat.forEach((el, index) => {
           fetch(
             `http://89.111.131.15/api/contacts/profile-picture?contactId=${el?.id?.user}&session=default`
           )
             .then((el) => el.json())
             .then((res) => {
               el.img = res?.profilePictureURL;
-              setChats(newChat);
+              if (index === newChat.length - 1) {
+                setChats(newChat);
+              }
             });
         });
 
