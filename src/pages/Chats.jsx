@@ -26,7 +26,7 @@ function Chats({ messages, setMessages }) {
   }, [state]);
   useEffect(() => {
     fetch(`http://89.111.131.15/api/sessions/default/me`)
-      .then((res) => res.json)
+      .then((res) => res.json())
       .then((res) => {
         console.log(res);
         fetch(
@@ -35,7 +35,7 @@ function Chats({ messages, setMessages }) {
             -5
           )}&session=default`
         )
-          .then((img) => img.json)
+          .then((img) => img.json())
           .then((img) => {
             setCurrentUser({ ...res, img: img.profilePictureURL });
             console.log({ ...res, img: img.profilePictureURL });
