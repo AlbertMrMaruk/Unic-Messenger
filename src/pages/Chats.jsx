@@ -81,7 +81,7 @@ function Chats({ messages, setMessages }) {
           </div>
           <h3 className="font-bold text-white text-xl ml-[1.5rem]">
             {console.log(currentUser)}
-            {currentUser?.name ?? ""}
+            {currentUser?.pushName ?? ""}
           </h3>
         </div>
         <div
