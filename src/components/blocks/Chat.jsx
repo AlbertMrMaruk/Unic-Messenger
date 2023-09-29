@@ -9,7 +9,13 @@ function Chat({ chat }) {
 border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#1f2022]"
       data-id={chat.id._serialized}
       onClick={() =>
-        navigate("/", { state: { id: chat.id._serialized, name: chat.name } })
+        navigate("/", {
+          state: {
+            id: chat.id._serialized,
+            name: chat.name,
+            img: chat.img ?? "",
+          },
+        })
       }
     >
       <div className="bg-[#ababab] rounded-full w-[40px] h-[40px]">

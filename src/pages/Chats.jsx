@@ -100,7 +100,13 @@ function Chats({ messages, setMessages }) {
         {state && (
           <div className="bg-inherit h-[10vh] border-b-[1px] border-[#2a2a2a]">
             <div className="flex  items-center py-[.8rem] w-[100%] px-[3rem]">
-              <div className="bg-white rounded-full w-[40px] h-[40px]"></div>
+              <div className="bg-white rounded-full w-[40px] h-[40px]">
+                <img
+                  src={state?.img}
+                  className="rounded-full w-[100%]"
+                  alt={state?.name}
+                />
+              </div>
               <h3 className="font-bold text-white  ml-[1.5rem] text-[1.3rem]">
                 {state?.name}
               </h3>
