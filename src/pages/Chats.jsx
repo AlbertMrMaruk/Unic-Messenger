@@ -7,6 +7,7 @@ import Chat from "../components/blocks/Chat";
 function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
   const [chats, setChats] = useState([]);
+  const [currentUser, setCurrentUser] = useState();
   const { state } = useLocation();
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
   useEffect(() => {
@@ -24,6 +25,22 @@ function Chats({ messages, setMessages }) {
       });
   }, [state]);
   useEffect(() => {
+    fetch(`http://89.111.131.15/api/sessions/default/me`)
+      .then((res) => res.json)
+      .then((res) => {
+        fetch(
+          `http://89.111.131.15/api/contacts/profile-picture?contactId=${res.id.slice(
+            0,
+            -5
+          )}&session=default`
+        )
+          .then((img) => img.json)
+          .then((img) => {
+            setCurrentUser({ ...res, img: img.profilePictureURL });
+            console.log({ ...res, img: img.profilePictureURL });
+          });
+      });
+
     fetch(`http://89.111.131.15/api/default/chats`)
       .then((resp) => resp.json())
       .then((res) => {
@@ -52,9 +69,17 @@ function Chats({ messages, setMessages }) {
        "
       >
         <div className="flex  items-center pt-[.5rem] w-[100%] px-[1rem]">
-          <div className="bg-white rounded-full w-[40px] h-[40px]"></div>
+          <div className="bg-white rounded-full w-[40px] h-[40px]">
+            {currentUser?.img && (
+              <img
+                src={currentUser.img}
+                className="rounded-full w-[100%]"
+                alt={currentUser.name}
+              />
+            )}
+          </div>
           <h3 className="font-bold text-white text-xl ml-[1.5rem]">
-            Альберт Марукян
+            {currentUser?.name ?? ""}
           </h3>
         </div>
         <div
