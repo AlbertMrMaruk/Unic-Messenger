@@ -31,7 +31,7 @@ function Message({ message }) {
             message.event === "message" || message.fromMe === false
               ? "text-left"
               : "text-right"
-          } mr-[2rem]`}
+          } mr-[2.5rem]`}
         >
           {text}
         </span>
