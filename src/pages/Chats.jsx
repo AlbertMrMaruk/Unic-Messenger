@@ -28,6 +28,7 @@ function Chats({ messages, setMessages }) {
     fetch(`http://89.111.131.15/api/sessions/default/me`)
       .then((res) => res.json)
       .then((res) => {
+        console.log(res);
         fetch(
           `http://89.111.131.15/api/contacts/profile-picture?contactId=${res.id.slice(
             0,
