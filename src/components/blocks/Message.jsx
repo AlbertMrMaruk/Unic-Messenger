@@ -3,8 +3,8 @@ function Message({ message }) {
   const text = message?.payload?.body ?? message.body;
   const timestamp = message?.payload?.timestamp ?? message.timestamp;
   const calcDate = (timestamp) => {
-    let h = new Date(timestamp).getHours();
-    let m = new Date(timestamp).getMinutes();
+    let h = new Date(+(timestamp + "000")).getHours();
+    let m = new Date(+(timestamp + "000")).getMinutes();
 
     h = h < 10 ? "0" + h : h;
     m = m < 10 ? "0" + m : m;
@@ -13,7 +13,7 @@ function Message({ message }) {
   };
   return (
     <div
-      className={`mx-3 mb-2 rounded-xl  text-white px-3 py-2 max-w-[45%] w-fit ${
+      className={`mx-3 mb-2 rounded-xl  text-white px-3 py-2 max-w-[45%] w-fit flex flex-col gap-1 ${
         message.event === "message" || message.fromMe === false
           ? "bg-[#2a2a2e] self-start"
           : "bg-[#44a0ff] self-end"
@@ -26,9 +26,17 @@ function Message({ message }) {
           className="max-w-[300px]"
         />
       ) : (
-        text
+        <span
+          className={` ${
+            message.event === "message" || message.fromMe === false
+              ? "text-left"
+              : "text-right"
+          } `}
+        >
+          {text}
+        </span>
       )}
-      <span className="text-right">{calcDate(timestamp)}</span>
+      <span className="text-right p-1">{calcDate(timestamp)}</span>
     </div>
   );
 }
