@@ -62,7 +62,7 @@ function Chats({ messages, setMessages }) {
 
         console.log(newChat);
       });
-  }, []);
+  }, [chats, currentUser]);
   return (
     <div className="bg-[#050505] flex  h-[100vh]">
       <div
