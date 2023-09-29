@@ -34,7 +34,6 @@ function Chats({ messages, setMessages }) {
           )
             .then((el) => el.json())
             .then((res) => {
-              console.log(res, el);
               el.img = res?.profilePictureURL;
             });
         });
