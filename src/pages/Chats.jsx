@@ -3,6 +3,7 @@ import ChatsApi from "../api/ChatsApi";
 import Message from "../components/blocks/Message";
 import { useLocation } from "react-router-dom";
 import Chat from "../components/blocks/Chat";
+import { Tooltip } from "../components/blocks/Tooltip";
 
 function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
@@ -129,12 +130,14 @@ function Chats({ messages, setMessages }) {
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
-            <button
-              class="bg-[#44a0ff]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[65px] h-[45px]"
-              type="button"
-            >
-              Файл
-            </button>
+            <Tooltip message="jjcdn">
+              <button
+                class="bg-[#44a0ff]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[65px] h-[45px]"
+                type="button"
+              >
+                Файл
+              </button>
+            </Tooltip>
             <button
               class="bg-[#44a0ff]  p-1 text-xs z-[2] inline-block rounded-r-xl  w-[95px] h-[45px] text-white font-bold uppercase"
               type="button"
