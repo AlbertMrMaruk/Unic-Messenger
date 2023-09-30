@@ -10,7 +10,7 @@ function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
   const [chats, setChats] = useState([]);
   const [file, setFile] = useState("");
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [currentUser, setCurrentUser] = useState();
   const { state } = useLocation();
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");

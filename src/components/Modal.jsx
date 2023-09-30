@@ -6,12 +6,19 @@ export default function Modal({ file, setShowModal }) {
       <div className="relative my-6 mx-auto w-[50%]">
         <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-[#1c1d1f] outline-none focus:outline-none">
           <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
-            <h3 className="text-3xl font=semibold">Отправить файл</h3>
+            <h3 className="text-3xl font-bold text-white m-auto">
+              Отправить файл
+            </h3>
           </div>
-          <div className="relative p-2 flex-auto">
-            <label className="block text-white text-md font-bold mb-1">
+          <div className="relative p-2 ml-2 flex-auto">
+            <label className="block text-white text-md font-bold mb-1 ">
               Файл:
             </label>
+            <img
+              src={file}
+              alt="File for send"
+              className="w-[70%] h-[70%] m-auto"
+            />
           </div>
           <div className="flex items-center justify-end p-2 border-t border-solid border-blueGray-200 rounded-b">
             <button
@@ -19,14 +26,14 @@ export default function Modal({ file, setShowModal }) {
               type="button"
               onClick={() => setShowModal(false)}
             >
-              Close
+              Отменить
             </button>
             <button
-              className="text-white bg-yellow-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+              className="text-white bg-[#44a0ff]  font-bold uppercase text-sm px-6 py-3 rounded-xl shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
               type="button"
               onClick={() => setShowModal(false)}
             >
-              Submit
+              Отправить
             </button>
           </div>
         </div>
