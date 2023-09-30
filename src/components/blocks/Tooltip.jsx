@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaFile, FaImage } from "react-icons/fa";
+import { TERipple } from "tw-elements-react";
 
 export const Tooltip = ({ setFile, children, setShowModal }) => {
   const [show, setShow] = useState(false);
@@ -38,16 +39,18 @@ export const Tooltip = ({ setFile, children, setShowModal }) => {
           <div className="flex flex-col gap-2 ">
             <FaImage color="#44a0ff" className="m-auto w-[25px] h-[25px]" />
             <span className="text-sm font-bold">Фото</span>
-            <input
-              type="file"
-              className=" w-[35px] h-[70px] absolute opacity-0  cursor-pointer
+            <TERipple>
+              <input
+                type="file"
+                className=" w-[35px] h-[70px] absolute opacity-0  cursor-pointer
             "
-              onChange={(e) => {
-                setFile(getBase64(e.target.files[0]));
-                setShowModal(true);
-              }}
-              accept="image/png, image/jpeg"
-            />
+                onChange={(e) => {
+                  setFile(getBase64(e.target.files[0]));
+                  setShowModal(true);
+                }}
+                accept="image/png, image/jpeg"
+              />
+            </TERipple>
           </div>
         </span>
         <div className="w-3 h-3 -mt-2 rotate-45 bg-[#1c1d1f] mb-2" />
