@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 
 function Chat({ chat }) {
   const navigate = useNavigate();
-  console.log(chat);
   return (
     <div
       className="p-[1rem]  
