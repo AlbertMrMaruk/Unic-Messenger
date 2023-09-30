@@ -4,36 +4,40 @@ import { FaFile, FaImage } from "react-icons/fa";
 export const Tooltip = ({ children }) => {
   const [show, setShow] = useState(false);
   return (
-    <div className="relative flex flex-col items-center group">
-      <span
-        className="flex justify-center"
-        onMouseEnter={() => setShow(true)}
-        onMouseLeave={() => setShow(false)}
-      >
-        {children}
-      </span>
+    <div
+      className="relative flex flex-col items-center group"
+      onClick={() => setShow(show)}
+    >
+      <span className="flex justify-center">{children}</span>
       <div
         className={`absolute whitespace-nowrap bottom-full flex flex-col items-center  group-hover:flex ${
           !show ? "hidden" : null
         }`}
       >
         <span className="relative z-10 p-4 text-xs leading-none text-white whitespace-no-wrap bg-[#1c1d1f] shadow-lg rounded-md flex gap-3">
-          <div className="flex flex-col gap-2">
-            <FaFile color="#44a0ff" />
-            <span className="text-sm">Файл</span>
+          <div className="flex flex-col gap-2 cursor-pointer">
+            <FaFile color="#44a0ff" width={25} height={25} className="m-auto" />
+            <span className="text-sm font-bold">Файл</span>
             <input
               type="file"
-              className="invisible w-full
+              className=" w-[35px] h-[70px] absolute opacity-0 
             "
+              accept="image/png, image/jpeg"
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <FaImage color="#44a0ff" />
-            <span className="text-sm">Фото</span>
+          <div className="flex flex-col gap-2 cursor-pointer">
+            <FaImage
+              color="#44a0ff"
+              width={25}
+              height={25}
+              className="m-auto"
+            />
+            <span className="text-sm font-bold">Фото</span>
             <input
               type="file"
-              className="invisible w-full
+              className=" w-[35px] h-[70px] absolute opacity-0 
             "
+              accept="image/png, image/jpeg"
             />
           </div>
         </span>
