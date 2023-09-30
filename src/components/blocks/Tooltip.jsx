@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaFile, FaImage } from "react-icons/fa";
 
-export const Tooltip = ({ setFile, children, setShowModal }) => {
+export const Tooltip = ({ setFile, children, setShowModal, showModal }) => {
   const [show, setShow] = useState(false);
   function getBase64(file) {
     let reader = new FileReader();
@@ -44,8 +44,8 @@ export const Tooltip = ({ setFile, children, setShowModal }) => {
               className=" w-[35px] h-[70px] absolute opacity-0  cursor-pointer
             "
               onChange={(e) => {
+                setShowModal(!showModal);
                 setFile(getBase64(e.target.files[0]));
-                setShowModal(true);
               }}
               accept="image/png, image/jpeg"
             />
