@@ -6,7 +6,7 @@ export const Tooltip = ({ children }) => {
   return (
     <div
       className="relative flex flex-col items-center group"
-      onClick={() => setShow(show)}
+      onClick={() => setShow(!show)}
     >
       <span className="flex justify-center">{children}</span>
       <div
@@ -16,7 +16,7 @@ export const Tooltip = ({ children }) => {
       >
         <span className="relative z-10 p-4 text-xs leading-none text-white whitespace-no-wrap bg-[#1c1d1f] shadow-lg rounded-md flex gap-3">
           <div className="flex flex-col gap-2 cursor-pointer">
-            <FaFile color="#44a0ff" width={25} height={25} className="m-auto" />
+            <FaFile color="#44a0ff" className="m-auto w-[25px] h-[25px]" />
             <span className="text-sm font-bold">Файл</span>
             <input
               type="file"
@@ -26,12 +26,7 @@ export const Tooltip = ({ children }) => {
             />
           </div>
           <div className="flex flex-col gap-2 cursor-pointer">
-            <FaImage
-              color="#44a0ff"
-              width={25}
-              height={25}
-              className="m-auto"
-            />
+            <FaImage color="#44a0ff" className="m-auto w-[25px] h-[25px]" />
             <span className="text-sm font-bold">Фото</span>
             <input
               type="file"
