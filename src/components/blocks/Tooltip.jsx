@@ -3,6 +3,8 @@ import { FaFile, FaImage } from "react-icons/fa";
 
 export const Tooltip = ({ children }) => {
   const [show, setShow] = useState(false);
+  const [file, setFile] = useState("");
+
   return (
     <div
       className="relative flex flex-col items-center group"
@@ -22,6 +24,10 @@ export const Tooltip = ({ children }) => {
               type="file"
               className=" w-[35px] h-[70px] absolute opacity-0  cursor-pointer
             "
+              onChange={(e) => {
+                console.log(e);
+                setFile(e);
+              }}
               accept="image/png, image/jpeg"
             />
           </div>
