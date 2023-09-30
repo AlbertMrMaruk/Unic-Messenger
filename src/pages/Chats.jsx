@@ -46,7 +46,6 @@ function Chats({ messages, setMessages }) {
       .then((resp) => resp.json())
       .then((res) => {
         const newChat = res.slice(0, 10);
-
         newChat.forEach((el, index) => {
           fetch(
             `http://89.111.131.15/api/contacts/profile-picture?contactId=${el?.id?.user}&session=default`
@@ -62,7 +61,7 @@ function Chats({ messages, setMessages }) {
 
         console.log(newChat);
       });
-  }, []);
+  }, [state]);
   return (
     <div className="bg-[#050505] flex  h-[100vh]">
       <div
