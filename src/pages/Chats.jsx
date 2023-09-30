@@ -58,7 +58,7 @@ function Chats({ messages, setMessages }) {
             });
         });
 
-        console.log(newChat);
+        console.log(newChat, "ddd");
       });
   }, [state]);
   return (
