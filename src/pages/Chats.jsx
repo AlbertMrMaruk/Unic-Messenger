@@ -4,11 +4,13 @@ import Message from "../components/blocks/Message";
 import { useLocation } from "react-router-dom";
 import Chat from "../components/blocks/Chat";
 import { Tooltip } from "../components/blocks/Tooltip";
+import Modal from "../components/Modal";
 
 function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
   const [chats, setChats] = useState([]);
   const [file, setFile] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const [currentUser, setCurrentUser] = useState();
   const { state } = useLocation();
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
@@ -131,7 +133,7 @@ function Chats({ messages, setMessages }) {
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
-            <Tooltip setFile={setFile}>
+            <Tooltip setFile={setFile} setShowModal={setShowModal}>
               <button
                 class="bg-[#44a0ff]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[65px] h-[45px]"
                 type="button"
@@ -158,6 +160,7 @@ function Chats({ messages, setMessages }) {
           </div>
         </div>
       </div>
+      <Modal file={file} showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 }
