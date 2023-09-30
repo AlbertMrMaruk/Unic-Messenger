@@ -1,75 +1,64 @@
 import React from "react";
-import {
-  TERipple,
-  TEModal,
-  TEModalDialog,
-  TEModalContent,
-  TEModalHeader,
-  TEModalBody,
-  TEModalFooter,
-} from "tw-elements-react";
 
-export default function Modal({ file, showModal, setShowModal }) {
+export default function Modal({ file, setShowModal }) {
   return (
     <div>
       {/* <!-- Button trigger modal --> */}
 
       {/* <!-- Modal --> */}
-      <TEModal show={showModal} setShow={setShowModal}>
-        <TEModalDialog>
-          <TEModalContent>
-            <TEModalHeader>
-              {/* <!--Modal title--> */}
-              <h5 className="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200">
-                Modal title
-              </h5>
-              {/* <!--Close button--> */}
+      <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+        <div className="relative w-auto my-6 mx-auto max-w-3xl">
+          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
+              <h3 className="text-3xl font=semibold">General Info</h3>
               <button
-                type="button"
-                className="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                className="bg-transparent border-0 text-black float-right"
                 onClick={() => setShowModal(false)}
-                aria-label="Close"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <span className="text-black opacity-7 h-6 w-6 text-xl block bg-gray-400 py-0 rounded-full">
+                  x
+                </span>
               </button>
-            </TEModalHeader>
-            {/* <!--Modal body--> */}
-            <TEModalBody>Modal body text goes here.</TEModalBody>
-            <TEModalFooter>
-              <TERipple rippleColor="light">
-                <button
-                  type="button"
-                  className="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
-                  onClick={() => setShowModal(false)}
-                >
-                  Close
-                </button>
-              </TERipple>
-              <TERipple rippleColor="light">
-                <button
-                  type="button"
-                  className="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                >
-                  Save changes
-                </button>
-              </TERipple>
-            </TEModalFooter>
-          </TEModalContent>
-        </TEModalDialog>
-      </TEModal>
+            </div>
+            <div className="relative p-6 flex-auto">
+              <form className="bg-gray-200 shadow-md rounded px-8 pt-6 pb-8 w-full">
+                <label className="block text-black text-sm font-bold mb-1">
+                  First Name
+                </label>
+                <input className="shadow appearance-none border rounded w-full py-2 px-1 text-black" />
+                <label className="block text-black text-sm font-bold mb-1">
+                  Last Name
+                </label>
+                <input className="shadow appearance-none border rounded w-full py-2 px-1 text-black" />
+                <label className="block text-black text-sm font-bold mb-1">
+                  Address
+                </label>
+                <input className="shadow appearance-none border rounded w-full py-2 px-1 text-black" />
+                <label className="block text-black text-sm font-bold mb-1">
+                  City
+                </label>
+                <input className="shadow appearance-none border rounded w-full py-2 px-1 text-black" />
+              </form>
+            </div>
+            <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+              <button
+                className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                type="button"
+                onClick={() => setShowModal(false)}
+              >
+                Close
+              </button>
+              <button
+                className="text-white bg-yellow-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                type="button"
+                onClick={() => setShowModal(false)}
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

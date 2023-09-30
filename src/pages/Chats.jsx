@@ -158,8 +158,8 @@ function Chats({ messages, setMessages }) {
               Отправить
             </button>
           </div>
+          {showModal && <Modal file={file} setShowModal={setShowModal} />}
         </div>
-        <Modal file={file} showModal={showModal} setShowModal={setShowModal} />
       </div>
     </div>
   );
