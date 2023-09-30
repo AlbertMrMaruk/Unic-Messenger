@@ -36,7 +36,11 @@ function Message({ message }) {
           {text}
         </span>
       )}
-      <span className="text-right  mt-[-1.1rem] text-[10px]">
+      <span
+        className={`text-right  mt-[-1.1rem] text-[10px]  ${
+          url ? "mt-[-1.8rem] p-[0.4rem] bg-[#2a2a2e52]" : " mt-[-1.1rem]"
+        }`}
+      >
         {calcDate(timestamp)}
       </span>
     </div>
