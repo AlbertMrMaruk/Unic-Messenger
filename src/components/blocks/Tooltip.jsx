@@ -4,7 +4,16 @@ import { FaFile, FaImage } from "react-icons/fa";
 export const Tooltip = ({ children }) => {
   const [show, setShow] = useState(false);
   const [file, setFile] = useState("");
-
+  function getBase64(file) {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log("Error: ", error);
+    };
+  }
   return (
     <div
       className="relative flex flex-col items-center group"
@@ -25,8 +34,8 @@ export const Tooltip = ({ children }) => {
               className=" w-[35px] h-[70px] absolute opacity-0  cursor-pointer
             "
               onChange={(e) => {
-                console.log(e);
-                setFile(e);
+                console.log(getBase64(e.target.files[0]));
+                setFile(getBase64(e.target.files[0]));
               }}
               accept="image/png, image/jpeg"
             />
