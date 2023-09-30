@@ -8,6 +8,7 @@ import { Tooltip } from "../components/blocks/Tooltip";
 function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
   const [chats, setChats] = useState([]);
+  const [file, setFile] = useState("");
   const [currentUser, setCurrentUser] = useState();
   const { state } = useLocation();
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
@@ -130,7 +131,7 @@ function Chats({ messages, setMessages }) {
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
-            <Tooltip>
+            <Tooltip setFile={setFile}>
               <button
                 class="bg-[#44a0ff]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[65px] h-[45px]"
                 type="button"

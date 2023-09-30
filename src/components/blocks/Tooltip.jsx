@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { FaFile, FaImage } from "react-icons/fa";
 
-export const Tooltip = ({ children }) => {
+export const Tooltip = ({ setFile, children }) => {
   const [show, setShow] = useState(false);
-  const [file, setFile] = useState("");
   function getBase64(file) {
     let reader = new FileReader();
     reader.readAsDataURL(file);
@@ -33,10 +32,6 @@ export const Tooltip = ({ children }) => {
               type="file"
               className=" w-[35px] h-[70px] absolute opacity-0  cursor-pointer
             "
-              onChange={(e) => {
-                console.log(getBase64(e.target.files[0]));
-                setFile(getBase64(e.target.files[0]));
-              }}
               accept="image/png, image/jpeg"
             />
           </div>
@@ -47,6 +42,9 @@ export const Tooltip = ({ children }) => {
               type="file"
               className=" w-[35px] h-[70px] absolute opacity-0  cursor-pointer
             "
+              onChange={(e) => {
+                setFile(getBase64(e.target.files[0]));
+              }}
               accept="image/png, image/jpeg"
             />
           </div>

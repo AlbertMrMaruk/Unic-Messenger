@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-function Chat({ chat }) {
+function Chat({ setFile, chat }) {
   const navigate = useNavigate();
   return (
     <div
