@@ -12,7 +12,12 @@ export const Tooltip = ({ setFile, children, setShowModal }) => {
       if (encoded.length % 4 > 0) {
         encoded += "=".repeat(4 - (encoded.length % 4));
       }
-      setFile({ file: encoded, name: file.name, type: file.type });
+      setFile({
+        file: reader.result,
+        encoded,
+        name: file.name,
+        type: file.type,
+      });
     };
     reader.onerror = function (error) {
       console.log("Error: ", error);

@@ -52,7 +52,7 @@ export default function Modal({ file, text, setShowModal }) {
                   file: {
                     mimetype: file.type,
                     filename: file.name,
-                    data: file.file,
+                    data: file.encoded,
                   },
                   caption: text,
                   session: "default",
@@ -62,7 +62,7 @@ export default function Modal({ file, text, setShowModal }) {
                   file: {
                     mimetype: file.type,
                     filename: file.name,
-                    data: file.file,
+                    data: file.encoded,
                   },
                   caption: text,
                   session: "default",
