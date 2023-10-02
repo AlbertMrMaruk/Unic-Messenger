@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-import ChatsApi from "../api/ChatsApi";
 import Spinner from "./blocks/Spinner";
 import { useState } from "react";
 
@@ -69,7 +68,7 @@ export default function Modal({
                   },
                   caption: text,
                   session: "default",
-                }).then((res) => {
+                }).then(() => {
                   setMessages((prev) => [
                     {
                       payload: { body: text, userMediaUrl: file.file },

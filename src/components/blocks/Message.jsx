@@ -3,8 +3,8 @@ function Message({ message }) {
     message?.payload?.mediaUrl ??
     message?.mediaUrl ??
     message?.payload?.userMediaUrl;
-  const text = message?.payload?.body ?? message.body;
-  const timestamp = message?.payload?.timestamp ?? message.timestamp;
+  const text = message?.payload?.body ?? message?.body;
+  const timestamp = message?.payload?.timestamp ?? message?.timestamp;
   const calcDate = (timestamp) => {
     let h = new Date(
       message?.payload?.userMediaUrl ? +timestamp : +(timestamp + "000")
@@ -21,7 +21,7 @@ function Message({ message }) {
   return (
     <div
       className={`mx-3 mb-2 rounded-xl  text-white pr-2 pl-3 min-w-[9%] py-2 max-w-[45%] w-fit flex flex-col gap-1 ${
-        message.event === "message" || message.fromMe === false
+        message?.event === "message" || message?.fromMe === false
           ? "bg-[#2a2a2e] self-start"
           : "bg-[#181d22] self-end"
       }`}
@@ -39,7 +39,7 @@ function Message({ message }) {
       {text && (
         <span
           className={` ${
-            message.event === "message" || message.fromMe === false
+            message?.event === "message" || message?.fromMe === false
               ? "text-left mr-[2.5rem]"
               : "text-right mr-[2rem]"
           } `}
