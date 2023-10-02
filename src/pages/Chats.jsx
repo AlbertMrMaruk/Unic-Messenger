@@ -60,10 +60,8 @@ function Chats({ messages, setMessages }) {
                 setChats(newChat);
               }
             });
-          setShowSpinner(false);
         });
-
-        console.log(newChat, "ddd");
+        setShowSpinner(false);
       });
   }, [state]);
   return (
