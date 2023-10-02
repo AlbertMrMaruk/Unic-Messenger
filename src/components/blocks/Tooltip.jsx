@@ -8,7 +8,11 @@ export const Tooltip = ({ setFile, children, setShowModal }) => {
     reader.readAsDataURL(file);
     console.log(file);
     reader.onload = () => {
-      setFile({ file: reader.result, name: file.name, type: file.type });
+      let encoded = reader.result.toString().replace(/^data:(.*,)?/, "");
+      if (encoded.length % 4 > 0) {
+        encoded += "=".repeat(4 - (encoded.length % 4));
+      }
+      setFile({ file: encoded, name: file.name, type: file.type });
     };
     reader.onerror = function (error) {
       console.log("Error: ", error);
