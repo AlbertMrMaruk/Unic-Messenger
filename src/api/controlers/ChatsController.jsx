@@ -6,13 +6,13 @@ function clickChat(setMessages) {
     });
 
     socket.addEventListener("close", (event) => {
-      socket = new WebSocket(`ws://89.111.131.15/`);
       if (event.wasClean) {
         console.log("Соединение закрыто чисто");
       } else {
         console.log("Обрыв соединения");
       }
       console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+      clickChat();
     });
 
     socket.addEventListener("message", (event) => {
