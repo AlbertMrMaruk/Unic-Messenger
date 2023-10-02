@@ -63,19 +63,20 @@ export default function Modal({
                   },
                   caption: text,
                   session: "default",
+                }).then(() => {
+                  ChatsApi.getMessages(state?.id, 1)
+                    .then((resp) => {
+                      if (resp.ok) {
+                        return resp.json();
+                      }
+                    })
+                    .then((res) => {
+                      console.log(res);
+                      setMessages((prev) => [...res, ...prev]);
+                    });
+                  setText("");
+                  setShowModal(false);
                 });
-                ChatsApi.getMessages(state?.id, 1)
-                  .then((resp) => {
-                    if (resp.ok) {
-                      return resp.json();
-                    }
-                  })
-                  .then((res) => {
-                    console.log(res);
-                    setMessages((prev) => [...res, ...prev]);
-                  });
-                setText("");
-                setShowModal(false);
               }}
             >
               Отправить
