@@ -19,13 +19,14 @@ function Message({ message }) {
           : "bg-[#181d22] self-end"
       }`}
     >
-      {url ? (
+      {url && (
         <img
           src={"http://89.111.131.15" + url.slice(21)}
           alt="Image from user"
           className="max-w-[300px]"
         />
-      ) : (
+      )}
+      {text && (
         <span
           className={` ${
             message.event === "message" || message.fromMe === false
