@@ -60,9 +60,9 @@ export default function Modal({ file, text, setShowModal }) {
                 sendImage({
                   chatId: state?.id,
                   file: {
-                    mimetype: "image/jpeg",
-                    filename: "filename.jpeg",
-                    data: file,
+                    mimetype: file.type,
+                    filename: file.name,
+                    data: file.file,
                   },
                   caption: text,
                   session: "default",
