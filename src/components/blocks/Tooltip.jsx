@@ -43,8 +43,8 @@ export const Tooltip = ({ setFile, children, setShowModal, showModal }) => {
               type="file"
               className=" w-[35px] h-[70px] absolute opacity-0  cursor-pointer
             "
+              onClick={() => setShowModal(true)}
               onChange={(e) => {
-                setShowModal(!showModal);
                 setFile(getBase64(e.target.files[0]));
               }}
               accept="image/png, image/jpeg"
