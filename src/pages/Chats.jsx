@@ -163,7 +163,9 @@ function Chats({ messages, setMessages }) {
             </button>
           </div>
 
-          {showModal && <Modal file={file} setShowModal={setShowModal} />}
+          {showModal && (
+            <Modal text={text} file={file} setShowModal={setShowModal} />
+          )}
         </div>
       </div>
     </div>

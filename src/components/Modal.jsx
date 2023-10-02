@@ -1,7 +1,21 @@
-import React from "react";
+import { useLocation } from "react-router-dom";
 
-export default function Modal({ file, setShowModal }) {
-  console.log(file);
+export default function Modal({ file, text, setShowModal }) {
+  const { state } = useLocation();
+  const sendImage = (data) => {
+    fetch(`http://89.111.131.15/api/sendImage`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+
+      //make sure to serialize your JSON body
+      body: JSON.stringify(data),
+    }).then((resp) => {
+      console.log(resp);
+    });
+  };
   return (
     <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-[rgba(0,0,0,.7)]">
       <div className="relative my-6 mx-auto w-[50%]">
@@ -32,7 +46,29 @@ export default function Modal({ file, setShowModal }) {
             <button
               className="text-white bg-[#44a0ff]  font-bold uppercase text-sm px-6 py-3 rounded-[5px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
               type="button"
-              onClick={() => setShowModal(false)}
+              onClick={() => {
+                console.log({
+                  chatId: state?.id,
+                  file: {
+                    mimetype: "image/jpeg",
+                    filename: "filename.jpeg",
+                    data: file,
+                    caption: text,
+                    session: "default",
+                  },
+                });
+                sendImage({
+                  chatId: state?.id,
+                  file: {
+                    mimetype: "image/jpeg",
+                    filename: "filename.jpeg",
+                    data: file,
+                    caption: text,
+                    session: "default",
+                  },
+                });
+                setShowModal(false);
+              }}
             >
               Отправить
             </button>

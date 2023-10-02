@@ -6,9 +6,9 @@ export const Tooltip = ({ setFile, children, setShowModal }) => {
   function getBase64(file) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    let res;
+    console.log(file);
     reader.onload = () => {
-      setFile(reader.result);
+      setFile({ file: reader.result, name: file.src });
     };
     reader.onerror = function (error) {
       console.log("Error: ", error);
