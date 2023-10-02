@@ -63,9 +63,9 @@ export default function Modal({ file, text, setShowModal }) {
                     mimetype: "image/jpeg",
                     filename: "filename.jpeg",
                     data: file,
-                    caption: text,
-                    session: "default",
                   },
+                  caption: text,
+                  session: "default",
                 });
                 setShowModal(false);
               }}
