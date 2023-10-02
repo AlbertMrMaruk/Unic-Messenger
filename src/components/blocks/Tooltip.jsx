@@ -7,14 +7,12 @@ export const Tooltip = ({ setFile, children, setShowModal }) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     let res;
-    reader.onload = function () {
-      res = reader.result;
+    reader.onload = () => {
+      setFile(reader.result);
     };
     reader.onerror = function (error) {
       console.log("Error: ", error);
     };
-    console.log(res);
-    return res;
   }
   return (
     <div
@@ -47,7 +45,7 @@ export const Tooltip = ({ setFile, children, setShowModal }) => {
               className=" w-[35px] h-[70px] absolute opacity-0  cursor-pointer
             "
               onChange={(e) => {
-                setFile(getBase64(e.target.files[0]));
+                getBase64(e.target.files[0]);
                 setShowModal(true);
               }}
               accept="image/png, image/jpeg"
