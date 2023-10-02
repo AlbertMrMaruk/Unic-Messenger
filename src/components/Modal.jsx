@@ -70,20 +70,17 @@ export default function Modal({
                   caption: text,
                   session: "default",
                 }).then((res) => {
-                  console.log(res, res.json());
-                  ChatsApi.getMessages(state?.id, 1)
-                    .then((resp) => {
-                      if (resp.ok) {
-                        return resp.json();
-                      }
-                    })
-                    .then((res) => {
-                      console.log(res);
-                      setMessages((prev) => [...res, ...prev]);
-                      setText("");
-                      setShowSpinner(false);
-                      setShowModal(false);
-                    });
+                  setMessages((prev) => [
+                    {
+                      payload: { body: text, mediaUrl: file.file },
+                      event: "send",
+                    },
+                    ,
+                    ...prev,
+                  ]);
+                  setText("");
+                  setShowSpinner(false);
+                  setShowModal(false);
                 });
               }}
             >
