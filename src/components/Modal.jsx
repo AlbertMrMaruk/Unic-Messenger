@@ -10,9 +10,9 @@ export default function Modal({ file, setShowModal }) {
               Отправить файл
             </h3>
           </div>
-          <div className="relative p-2 ml-2 flex-auto">
+          <div className="relative p-2 ml-2 flex-auto text-center">
             <label className="block text-white text-md font-bold mb-1 ">
-              Файл:
+              Файл
             </label>
             <img
               src={file}
@@ -20,7 +20,7 @@ export default function Modal({ file, setShowModal }) {
               className="w-[70%] h-[70%] m-auto"
             />
           </div>
-          <div className="flex items-center justify-end p-2 border-t border-solid border-[#2a2a2a] rounded-b">
+          <div className="flex items-center justify-end py-[1rem] px-2 border-t border-solid border-[#2a2a2a] rounded-b">
             <button
               className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
               type="button"
@@ -29,7 +29,7 @@ export default function Modal({ file, setShowModal }) {
               Отменить
             </button>
             <button
-              className="text-white bg-[#44a0ff]  font-bold uppercase text-sm px-6 py-3 rounded-xl shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+              className="text-white bg-[#44a0ff]  font-bold uppercase text-sm px-6 py-3 rounded-[5px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
               type="button"
               onClick={() => setShowModal(false)}
             >
