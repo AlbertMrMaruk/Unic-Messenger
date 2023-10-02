@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ChatsApi from "../api/ChatsApi";
 import Message from "../components/blocks/Message";
+import Spinner from "../components/blocks/Spinner";
 import { useLocation } from "react-router-dom";
 import Chat from "../components/blocks/Chat";
 import { Tooltip } from "../components/blocks/Tooltip";
@@ -8,6 +9,7 @@ import Modal from "../components/Modal";
 
 function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
+  const [showSpinner, setShowSpinner] = useState(true);
   const [chats, setChats] = useState([]);
   const [file, setFile] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -57,6 +59,7 @@ function Chats({ messages, setMessages }) {
               if (index === newChat.length - 1) {
                 setChats(newChat);
               }
+              setShowSpinner(false);
             });
         });
 
@@ -88,9 +91,11 @@ function Chats({ messages, setMessages }) {
         items-center mt-[2rem] overflow-scroll h-[85vh]
          "
         >
-          {chats.map((el, index) => (
-            <Chat chat={el} key={index} />
-          ))}
+          {showSpinner ? (
+            <Spinner />
+          ) : (
+            chats.map((el, index) => <Chat chat={el} key={index} />)
+          )}
         </div>
       </div>
       <div
