@@ -18,7 +18,7 @@ export default function Modal({ file, setShowModal }) {
             <img
               src={file}
               alt="File for send"
-              className="w-[70%] h-[70%] m-auto"
+              className="w-[40%]  mx-auto my-3"
             />
           </div>
           <div className="flex items-center justify-end py-[1rem] px-2 border-t border-solid border-[#2a2a2a] rounded-b">
