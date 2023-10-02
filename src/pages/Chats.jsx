@@ -59,8 +59,8 @@ function Chats({ messages, setMessages }) {
               if (index === newChat.length - 1) {
                 setChats(newChat);
               }
-              setShowSpinner(false);
             });
+          setShowSpinner(false);
         });
 
         console.log(newChat, "ddd");
