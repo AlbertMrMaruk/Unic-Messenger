@@ -8,7 +8,7 @@ export const Tooltip = ({ setFile, children, setShowModal }) => {
     reader.readAsDataURL(file);
     console.log(file);
     reader.onload = () => {
-      setFile({ file: reader.result, name: file.src });
+      setFile({ file: reader.result, name: file.name, type: file.type });
     };
     reader.onerror = function (error) {
       console.log("Error: ", error);

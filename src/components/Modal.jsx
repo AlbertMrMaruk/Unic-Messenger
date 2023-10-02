@@ -30,7 +30,7 @@ export default function Modal({ file, text, setShowModal }) {
               Файл
             </label>
             <img
-              src={file}
+              src={file.file}
               alt="File for send"
               className="w-[40%]  mx-auto my-3"
             />
@@ -50,9 +50,9 @@ export default function Modal({ file, text, setShowModal }) {
                 console.log({
                   chatId: state?.id,
                   file: {
-                    mimetype: "image/jpeg",
-                    filename: "filename.jpeg",
-                    data: file,
+                    mimetype: file.type,
+                    filename: file.name,
+                    data: file.file,
                     caption: text,
                     session: "default",
                   },
