@@ -58,10 +58,10 @@ function Chats({ messages, setMessages }) {
               el.img = res?.profilePictureURL;
               if (index === newChat.length - 1) {
                 setChats(newChat);
+                setShowSpinner(false);
               }
             });
         });
-        setShowSpinner(false);
       });
   }, [state]);
   return (
