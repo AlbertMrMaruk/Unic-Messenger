@@ -30,9 +30,9 @@ function Message({ message }) {
         <span
           className={` ${
             message.event === "message" || message.fromMe === false
-              ? "text-left"
-              : "text-right"
-          } mr-[2.5rem]`}
+              ? "text-left mr-[2.5rem]"
+              : "text-right mr-[2rem]"
+          } `}
         >
           {text}
         </span>
