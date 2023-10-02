@@ -1,11 +1,12 @@
 function clickChat(setMessages) {
   try {
-    const socket = new WebSocket(`ws://89.111.131.15/`);
+    let socket = new WebSocket(`ws://89.111.131.15/`);
     socket.addEventListener("open", () => {
       console.log("Соединение установлено");
     });
 
     socket.addEventListener("close", (event) => {
+      socket = new WebSocket(`ws://89.111.131.15/`);
       if (event.wasClean) {
         console.log("Соединение закрыто чисто");
       } else {
@@ -15,12 +16,8 @@ function clickChat(setMessages) {
     });
 
     socket.addEventListener("message", (event) => {
-      //   console.log("Получены данные", event.data);
-      //   console.log(messagesArr);
-      //   console.log(messagesArr);
       console.log(event.data);
       setMessages((prev) => [JSON.parse(event.data), ...prev]);
-      //   console.log(JSON.parse(event.data));
     });
 
     socket.addEventListener("error", (event) => {

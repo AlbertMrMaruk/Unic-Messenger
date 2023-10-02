@@ -9,14 +9,12 @@ class ChatsAPI {
           "Content-Type": "application/json",
         },
 
-        //make sure to serialize your JSON body
         body: JSON.stringify({
           session: "default",
           chatId: `${phone}`,
           text: message,
         }),
       }).then((response) => {
-        //do something awesome that makes the world a better place
         return response;
       });
     } catch (error) {
