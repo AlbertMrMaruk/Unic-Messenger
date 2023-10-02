@@ -69,7 +69,8 @@ export default function Modal({
                   },
                   caption: text,
                   session: "default",
-                }).then(() => {
+                }).then((res) => {
+                  console.log(res, res.json());
                   ChatsApi.getMessages(state?.id, 1)
                     .then((resp) => {
                       if (resp.ok) {
@@ -77,6 +78,7 @@ export default function Modal({
                       }
                     })
                     .then((res) => {
+                      console.log(res);
                       setMessages((prev) => [...res, ...prev]);
                       setText("");
                       setShowSpinner(false);
