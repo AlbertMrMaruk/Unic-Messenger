@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function Modal({ file, setShowModal }) {
+  console.log(file);
   return (
     <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-[rgba(0,0,0,.7)]">
       <div className="relative my-6 mx-auto w-[50%]">
