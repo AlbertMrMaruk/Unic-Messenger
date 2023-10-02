@@ -16,9 +16,7 @@ function Chats({ messages, setMessages }) {
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
   useEffect(() => {
     setCurrentChat(state?.id);
-    fetch(
-      `http://89.111.131.15/api/default/chats/${state?.id}/messages?downloadMedia=true&limit=20`
-    )
+    ChatsApi.getMessages(state?.id, 20)
       .then((resp) => {
         if (resp.ok) {
           return resp.json(); //then consume it again, the error happens
@@ -164,7 +162,13 @@ function Chats({ messages, setMessages }) {
           </div>
 
           {showModal && (
-            <Modal text={text} file={file} setShowModal={setShowModal} />
+            <Modal
+              text={text}
+              setText={setText}
+              setMessages={setMessages}
+              file={file}
+              setShowModal={setShowModal}
+            />
           )}
         </div>
       </div>

@@ -23,6 +23,11 @@ class ChatsAPI {
       console.log("Err", error);
     }
   }
+  getMessages(id, limit) {
+    return fetch(
+      `http://89.111.131.15/api/default/chats/${id}/messages?downloadMedia=true&limit=${limit}`
+    );
+  }
 }
 
 export default new ChatsAPI();

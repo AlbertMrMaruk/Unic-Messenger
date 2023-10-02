@@ -1,6 +1,13 @@
 import { useLocation } from "react-router-dom";
+import ChatsApi from "../api/ChatsApi";
 
-export default function Modal({ file, text, setShowModal }) {
+export default function Modal({
+  setMessages,
+  setText,
+  file,
+  text,
+  setShowModal,
+}) {
   const { state } = useLocation();
   const sendImage = (data) => {
     fetch(`http://89.111.131.15/api/sendImage`, {
@@ -47,16 +54,6 @@ export default function Modal({ file, text, setShowModal }) {
               className="text-white bg-[#44a0ff]  font-bold uppercase text-sm px-6 py-3 rounded-[5px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
               type="button"
               onClick={() => {
-                console.log({
-                  chatId: state?.id,
-                  file: {
-                    mimetype: file.type,
-                    filename: file.name,
-                    data: file.encoded,
-                  },
-                  caption: text,
-                  session: "default",
-                });
                 sendImage({
                   chatId: state?.id,
                   file: {
@@ -67,6 +64,17 @@ export default function Modal({ file, text, setShowModal }) {
                   caption: text,
                   session: "default",
                 });
+                ChatsApi.getMessages(state?.id, 1)
+                  .then((resp) => {
+                    if (resp.ok) {
+                      return resp.json();
+                    }
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    setMessages((prev) => [...res, ...prev]);
+                  });
+                setText("");
                 setShowModal(false);
               }}
             >
