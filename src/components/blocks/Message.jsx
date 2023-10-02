@@ -1,5 +1,8 @@
 function Message({ message }) {
-  const url = message?.payload?.mediaUrl ?? message?.mediaUrl;
+  const url =
+    message?.payload?.mediaUrl ??
+    message?.mediaUrl ??
+    message?.payload?.userMediaUrl;
   const text = message?.payload?.body ?? message.body;
   const timestamp = message?.payload?.timestamp ?? message.timestamp;
   const calcDate = (timestamp) => {
@@ -21,7 +24,10 @@ function Message({ message }) {
     >
       {url && (
         <img
-          src={"http://89.111.131.15" + url.slice(21)}
+          src={
+            message?.payload?.userMediaUrl ||
+            "http://89.111.131.15" + url.slice(21)
+          }
           alt="Image from user"
           className="max-w-[300px]"
         />

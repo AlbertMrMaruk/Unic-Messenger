@@ -72,7 +72,7 @@ export default function Modal({
                 }).then((res) => {
                   setMessages((prev) => [
                     {
-                      payload: { body: text, mediaUrl: file.file },
+                      payload: { body: text, userMediaUrl: file.file },
                       event: "send",
                     },
                     ,
