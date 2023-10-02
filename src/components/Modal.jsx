@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom";
 import ChatsApi from "../api/ChatsApi";
+import Spinner from "./blocks/Spinner";
+import { useState } from "react";
 
 export default function Modal({
   setMessages,
@@ -9,8 +11,9 @@ export default function Modal({
   setShowModal,
 }) {
   const { state } = useLocation();
+  const [showSpinner, setShowSpinner] = useState(false);
   const sendImage = (data) => {
-    fetch(`http://89.111.131.15/api/sendImage`, {
+    return fetch(`http://89.111.131.15/api/sendImage`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -19,8 +22,6 @@ export default function Modal({
 
       //make sure to serialize your JSON body
       body: JSON.stringify(data),
-    }).then((resp) => {
-      console.log(resp);
     });
   };
   return (
@@ -32,16 +33,20 @@ export default function Modal({
               Отправить файл
             </h3>
           </div>
-          <div className="relative p-2 ml-2 flex-auto text-center">
-            <label className="block text-white text-md font-bold mb-1 ">
-              Файл
-            </label>
-            <img
-              src={file.file}
-              alt="File for send"
-              className="w-[40%]  mx-auto my-3"
-            />
-          </div>
+          {showSpinner ? (
+            <Spinner />
+          ) : (
+            <div className="relative p-2 ml-2 flex-auto text-center">
+              <label className="block text-white text-md font-bold mb-1 ">
+                Файл
+              </label>
+              <img
+                src={file.file}
+                alt="File for send"
+                className="w-[40%]  mx-auto my-3"
+              />
+            </div>
+          )}
           <div className="flex items-center justify-end py-[1rem] px-2 border-t border-solid border-[#2a2a2a] rounded-b">
             <button
               className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
@@ -54,6 +59,7 @@ export default function Modal({
               className="text-white bg-[#44a0ff]  font-bold uppercase text-sm px-6 py-3 rounded-[5px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
               type="button"
               onClick={() => {
+                setShowSpinner(true);
                 sendImage({
                   chatId: state?.id,
                   file: {
@@ -71,11 +77,11 @@ export default function Modal({
                       }
                     })
                     .then((res) => {
-                      console.log(res);
                       setMessages((prev) => [...res, ...prev]);
+                      setText("");
+                      setShowSpinner(false);
+                      setShowModal(false);
                     });
-                  setText("");
-                  setShowModal(false);
                 });
               }}
             >
