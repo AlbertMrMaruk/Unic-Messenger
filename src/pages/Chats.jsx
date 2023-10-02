@@ -10,6 +10,7 @@ import Modal from "../components/Modal";
 function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
   const [showSpinner, setShowSpinner] = useState(true);
+  const [showSpinner2, setShowSpinner2] = useState(true);
   const [chats, setChats] = useState([]);
   const [file, setFile] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -18,6 +19,7 @@ function Chats({ messages, setMessages }) {
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
   useEffect(() => {
     setCurrentChat(state?.id);
+    setShowSpinner2(true);
     ChatsApi.getMessages(state?.id, 20)
       .then((resp) => {
         if (resp.ok) {
@@ -27,6 +29,7 @@ function Chats({ messages, setMessages }) {
       .then((res) => {
         console.log(res);
         setMessages(res.reverse());
+        setShowSpinner2(false);
       });
   }, [state]);
   useEffect(() => {
@@ -118,9 +121,11 @@ function Chats({ messages, setMessages }) {
         )}
 
         <div className="w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[2.5rem] overflow-scroll h-[80vh] mt-2">
-          {messages.map((el) => (
-            <Message message={el} />
-          ))}
+          {showSpinner2 ? (
+            <Spinner />
+          ) : (
+            messages.map((el) => <Message message={el} />)
+          )}
         </div>
         <div className="w-[100%] h-[7h]  justify-center items-center">
           <div className="relative flex flex-wrap items-stretch m-auto w-[90%]">
