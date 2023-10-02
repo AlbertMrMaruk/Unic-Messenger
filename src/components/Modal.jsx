@@ -74,6 +74,7 @@ export default function Modal({
                     {
                       payload: { body: text, userMediaUrl: file.file },
                       event: "send",
+                      timestamp: Date.now(),
                     },
                     ,
                     ...prev,
