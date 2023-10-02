@@ -162,8 +162,8 @@ function Chats({ messages, setMessages }) {
               Отправить
             </button>
           </div>
-          {console.log(showModal)}
-          {showModal ? <Modal file={file} setShowModal={setShowModal} /> : ""}
+
+          {showModal && <Modal file={file} setShowModal={setShowModal} />}
         </div>
       </div>
     </div>

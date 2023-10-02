@@ -4,14 +4,17 @@ import { FaFile, FaImage } from "react-icons/fa";
 export const Tooltip = ({ setFile, children, setShowModal }) => {
   const [show, setShow] = useState(false);
   function getBase64(file) {
-    let reader = new FileReader();
+    const reader = new FileReader();
     reader.readAsDataURL(file);
+    let res;
     reader.onload = function () {
-      return reader.result;
+      res = reader.result;
     };
     reader.onerror = function (error) {
       console.log("Error: ", error);
     };
+    console.log(res);
+    return res;
   }
   return (
     <div
