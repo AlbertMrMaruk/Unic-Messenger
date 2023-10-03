@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function ModalAccount({ setSession, setShowModal }) {
   const [showSpinner, setShowSpinner] = useState(false);
-  const [qrCode, setQrCode] = useState("");
+  const [qrCode, setQrCode] = useState(false);
   const [phone, setPhone] = useState("");
   const [confirm, setConfirm] = useState(false);
   const startSession = (phone) => {
@@ -61,7 +61,7 @@ export default function ModalAccount({ setSession, setShowModal }) {
                   />
                 </>
               ) : (
-                <>{qrCode}</>
+                <>{console.log(qrCode)}</>
               )}
             </div>
           )}
@@ -81,13 +81,15 @@ export default function ModalAccount({ setSession, setShowModal }) {
                   setShowSpinner(true);
                   startSession(phone).then((resp, status) => {
                     console.log(resp, resp.json(), status);
-
-                    getQR(phone).then((data) => {
-                      console.log(data, data.json());
-                      setQrCode(data?.body);
-                      setConfirm(true);
-                      setShowSpinner(false);
-                    });
+                    setTimeout(
+                      getQR(phone).then((data) => {
+                        console.log(data, data.json());
+                        // setQrCode(data);
+                        // setConfirm(true);
+                        setShowSpinner(false);
+                      }),
+                      10000
+                    );
                   });
                 }}
               >
