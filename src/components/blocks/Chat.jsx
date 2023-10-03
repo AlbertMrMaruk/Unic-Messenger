@@ -31,7 +31,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         <p className="text-[0.85rem] text-[#777779]">
           {chat.lastMessage.fromMe ? "Вы: " : ""}
           {chat.lastMessage.body.length > 20
-            ? chat.lastMessage.body.split(0, 20) + "..."
+            ? chat.lastMessage.body.slice(0, 20) + "..."
             : chat.lastMessage.body}
         </p>
       </div>
