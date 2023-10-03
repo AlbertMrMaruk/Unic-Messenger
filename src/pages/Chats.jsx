@@ -105,7 +105,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               </p>
             </div>
           </div>
-          <div className="m-auto rounded-full bg-[#44a0ff] p-[0.65rem]">
+          <div className="m-auto rounded-full bg-[#44a0ff] p-[0.65rem] mt-[.5rem] cursor-pointer">
             <FaPlus className="color-white bg-inherit w-[15px] h-[15px]" />
           </div>
         </div>
