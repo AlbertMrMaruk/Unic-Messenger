@@ -61,7 +61,7 @@ export default function ModalAccount({ setSession, setShowModal }) {
                   />
                 </>
               ) : (
-                <>{console.log(qrCode)}</>
+                <>{}</>
               )}
             </div>
           )}
@@ -79,15 +79,16 @@ export default function ModalAccount({ setSession, setShowModal }) {
                 type="button"
                 onClick={() => {
                   setShowSpinner(true);
-                  startSession(phone).then((resp, status) => {
-                    console.log(resp, resp.json(), status);
+                  startSession(phone).then((resp) => {
+                    console.log(resp, resp.json());
                     setTimeout(
-                      getQR(phone).then((data) => {
-                        console.log(data, data.json());
-                        // setQrCode(data);
-                        // setConfirm(true);
-                        setShowSpinner(false);
-                      }),
+                      // getQR(phone).then((data) => {
+                      //   console.log(data, data.json());
+                      //   // setQrCode(data);
+                      //   // setConfirm(true);
+                      //   setShowSpinner(false);
+                      // }),
+                      console.log("fuck"),
                       10000
                     );
                   });
@@ -101,11 +102,11 @@ export default function ModalAccount({ setSession, setShowModal }) {
                 type="button"
                 onClick={() => {
                   setShowSpinner(true);
-                  getQR().then((data) => {
-                    console.log(data);
-                    setQrCode(data?.body);
-                    setConfirm(false);
-                  });
+                  // getQR().then((data) => {
+                  //   console.log(data);
+                  //   setQrCode(data?.body);
+                  //   setConfirm(false);
+                  // });
                 }}
               >
                 Добавить
