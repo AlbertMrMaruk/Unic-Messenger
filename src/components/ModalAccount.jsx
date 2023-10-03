@@ -33,9 +33,6 @@ export default function ModalAccount({ setSession, setShowModal }) {
       }),
     });
   };
-  const getQR = (session) => {
-    return fetch(`http://89.111.131.15/api/${session}/auth/qr`);
-  };
   return (
     <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-[rgba(0,0,0,.7)]">
       <div className="relative my-6 mx-auto w-[50%]">
@@ -61,7 +58,13 @@ export default function ModalAccount({ setSession, setShowModal }) {
                   />
                 </>
               ) : (
-                <>{}</>
+                <>
+                  <img
+                    src={qrCode}
+                    alt="File for send"
+                    className="w-[40%]  mx-auto my-3"
+                  />
+                </>
               )}
             </div>
           )}
@@ -79,17 +82,12 @@ export default function ModalAccount({ setSession, setShowModal }) {
                 type="button"
                 onClick={() => {
                   setShowSpinner(true);
-                  startSession(phone).then((resp) => {
-                    console.log(resp, resp.json());
+                  startSession(phone).then(() => {
                     setTimeout(() => {
-                      getQR(phone).then((data) => {
-                        console.log(data);
-                        // setQrCode(data);
-                        // setConfirm(true);
-                        setShowSpinner(false);
-                      });
-                      console.log("fuck");
-                    }, 25000);
+                      setQrCode(`http://89.111.131.15/api/${phone}/auth/qr`);
+                    }, 15000);
+                    setShowSpinner(false);
+                    setConfirm(true);
                   });
                 }}
               >
