@@ -112,7 +112,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         {/* Chats */}
         <div
           className="flex flex-col
-        items-center mt-[1rem] overflow-scroll h-[85vh]
+        items-center mt-[1rem] overflow-scroll h-[60vh]
          "
         >
           {showSpinner ? (
