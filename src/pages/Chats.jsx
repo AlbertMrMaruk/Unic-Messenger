@@ -81,7 +81,7 @@ function Chats({ messages, setMessages }) {
               <img
                 src={currentUser.img}
                 className="rounded-full w-[100%]"
-                alt={currentUser.name}
+                alt={currentUser?.pushName}
               />
             )}
           </div>
@@ -90,29 +90,29 @@ function Chats({ messages, setMessages }) {
           </h3>
         </div>
         {/* Choose messenger Block */}
-        <div className="flex flex-col px-3 py-3 rounded-xl bg-[#1c1d1f] ">
+        <div className="flex flex-col px-3 py-3 rounded-xl bg-[#1c1d1f] mt-[1.5rem]">
           <div
             className="p-[1rem]  
 border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#3f4145]"
           >
-            <div className="rounded-full w-[40px] h-[40px]">
+            <div className="rounded-full w-[40px] h-[40px] text-white ">
               <FaWhatsapp className="w-[40px] h-[40px]" />
             </div>
             <div className="flex flex-col gap-1 text-[#e9e9e9] text-left max-w-[75%]">
-              <h3 className="text-md">WhatsApp Account</h3>
+              <h3 className="text-md font-bold">WhatsApp Account</h3>
               <p className="text-[0.85rem] text-[#777779]">
-                {currentUser?.name}
+                {currentUser?.pushName}
               </p>
             </div>
           </div>
-          <div className="m-auto rounded-full bg-[#44a0ff] p-3">
-            <FaPlus className="bg-white w-[25px] h-[25px]" />
+          <div className="m-auto rounded-full bg-[#44a0ff] p-[0.65rem]">
+            <FaPlus className="color-white bg-inherit w-[15px] h-[15px]" />
           </div>
         </div>
         {/* Chats */}
         <div
           className="flex flex-col
-        items-center mt-[2rem] overflow-scroll h-[85vh]
+        items-center mt-[1rem] overflow-scroll h-[85vh]
          "
         >
           {showSpinner ? (
