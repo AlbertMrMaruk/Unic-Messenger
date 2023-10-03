@@ -6,7 +6,6 @@ export const Tooltip = ({ setFile, children, setShowModal }) => {
   function getBase64(file) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    console.log(file);
     reader.onload = () => {
       let encoded = reader.result.toString().replace(/^data:(.*,)?/, "");
       if (encoded.length % 4 > 0) {

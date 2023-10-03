@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ChatsApi from "../api/ChatsApi";
+import { FaWhatsapp, FaPlus } from "react-icons/fa";
 import Message from "../components/blocks/Message";
 import Spinner from "../components/blocks/Spinner";
 import { useLocation } from "react-router-dom";
@@ -27,7 +28,6 @@ function Chats({ messages, setMessages }) {
         }
       })
       .then((res) => {
-        console.log(res);
         setMessages(res.reverse());
         setShowSpinner2(false);
       });
@@ -69,10 +69,12 @@ function Chats({ messages, setMessages }) {
   }, [state]);
   return (
     <div className="bg-[#050505] flex  h-[100vh]">
+      {/* Left Sidebar */}
       <div
         className="w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] h-[100vh] p-[1rem] 
        "
       >
+        {/* Top menu */}
         <div className="flex  items-center pt-[.5rem] w-[100%] px-[1rem]">
           <div className="bg-white rounded-full w-[40px] h-[40px]">
             {currentUser?.img && (
@@ -87,6 +89,27 @@ function Chats({ messages, setMessages }) {
             {currentUser?.pushName ?? ""}
           </h3>
         </div>
+        {/* Choose messenger Block */}
+        <div className="flex flex-col px-3 py-3 rounded-xl bg-[#1c1d1f] ">
+          <div
+            className="p-[1rem]  
+border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#3f4145]"
+          >
+            <div className="rounded-full w-[40px] h-[40px]">
+              <FaWhatsapp className="w-[40px] h-[40px]" />
+            </div>
+            <div className="flex flex-col gap-1 text-[#e9e9e9] text-left max-w-[75%]">
+              <h3 className="text-md">WhatsApp Account</h3>
+              <p className="text-[0.85rem] text-[#777779]">
+                {currentUser?.name}
+              </p>
+            </div>
+          </div>
+          <div className="m-auto rounded-full bg-[#44a0ff] p-3">
+            <FaPlus className="bg-white w-[25px] h-[25px]" />
+          </div>
+        </div>
+        {/* Chats */}
         <div
           className="flex flex-col
         items-center mt-[2rem] overflow-scroll h-[85vh]
@@ -99,10 +122,12 @@ function Chats({ messages, setMessages }) {
           )}
         </div>
       </div>
+      {/* Main Part */}
       <div
         className="w-[72%] bg-inherit h-[100vh]
        "
       >
+        {/* Top Menu Contact Name */}
         {state && (
           <div className="bg-inherit h-[10vh] border-b-[1px] border-[#2a2a2a]">
             <div className="flex  items-center py-[.8rem] w-[100%] px-[3rem]">
@@ -119,14 +144,15 @@ function Chats({ messages, setMessages }) {
             </div>
           </div>
         )}
-
+        {/* Messages in chat */}
         <div className="w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[2.5rem] overflow-scroll h-[80vh] mt-2">
           {showSpinner2 ? (
             <Spinner />
           ) : (
-            messages.map((el) => <Message message={el} />)
+            messages.map((el, index) => <Message message={el} key={index} />)
           )}
         </div>
+        {/* Input and buttons for send messages */}
         <div className="w-[100%] h-[7h]  justify-center items-center">
           <div className="relative flex flex-wrap items-stretch m-auto w-[90%]">
             <input
@@ -155,7 +181,6 @@ function Chats({ messages, setMessages }) {
               class="bg-[#44a0ff]  p-1 text-xs z-[2] inline-block rounded-r-xl  w-[95px] h-[45px] text-white font-bold uppercase"
               type="button"
               onClick={async () => {
-                console.log(text);
                 setMessages((prev) => [
                   {
                     payload: { body: text },
@@ -173,6 +198,7 @@ function Chats({ messages, setMessages }) {
             </button>
           </div>
 
+          {/* Modal  */}
           {showModal && (
             <Modal
               text={text}
