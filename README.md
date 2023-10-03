@@ -6,8 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 "build": "react-scripts build && node ./server.js",
 "dev": "npm run build && node ./server.js",
-"test": "react-scripts test",
-"eject": "react-scripts eject"
+~/users# docker run --rm -d -v `pwd`/.sessions:/app/.sessionsUser -p 8080:3000/tcp -e WHATSAPP_START_SESSION=default --name whatsapp-http-api-4 devlikeapro/whatsapp-http-api-plus
+4250a7bc58f80b9aa3cea08f8bff3b4fbd44e249711c5423ca71635f272a79ea
 
 In the project directory, you can run:
 
