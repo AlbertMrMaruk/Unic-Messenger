@@ -81,15 +81,13 @@ export default function ModalAccount({ setSession, setShowModal }) {
                   setShowSpinner(true);
                   startSession(phone).then((resp, status) => {
                     console.log(resp, resp.json(), status);
-                    setTimeout(
-                      getQR(phone).then((data) => {
-                        console.log(data, data.json());
-                        setQrCode(data?.body);
-                        setConfirm(true);
-                        setShowSpinner(false);
-                      }),
-                      5000
-                    );
+
+                    getQR(phone).then((data) => {
+                      console.log(data, data.json());
+                      setQrCode(data?.body);
+                      setConfirm(true);
+                      setShowSpinner(false);
+                    });
                   });
                 }}
               >
