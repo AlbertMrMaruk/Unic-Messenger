@@ -49,7 +49,7 @@ export default function ModalAccount({ setSession, setShowModal }) {
             <Spinner />
           ) : (
             <div className="relative p-2 ml-2 flex-auto text-center">
-              {qrCode ? (
+              {!qrCode ? (
                 <>
                   <label className="block text-white text-md font-bold mb-1 ">
                     Номер телефона
