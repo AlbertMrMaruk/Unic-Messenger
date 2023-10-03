@@ -9,6 +9,7 @@ import { Tooltip } from "../components/blocks/Tooltip";
 import Modal from "../components/Modal";
 
 function Chats({ messages, setMessages }) {
+  const [session, setSession] = useState("default");
   const [text, setText] = useState("");
   const [showSpinner, setShowSpinner] = useState(true);
   const [showSpinner2, setShowSpinner2] = useState(true);
@@ -21,7 +22,7 @@ function Chats({ messages, setMessages }) {
   useEffect(() => {
     setCurrentChat(state?.id);
     setShowSpinner2(true);
-    ChatsApi.getMessages(state?.id, 20)
+    ChatsApi.getMessages(state?.id, 20, session)
       .then((resp) => {
         if (resp.ok) {
           return resp.json(); //then consume it again, the error happens
@@ -33,14 +34,14 @@ function Chats({ messages, setMessages }) {
       });
   }, [state]);
   useEffect(() => {
-    fetch(`http://89.111.131.15/api/sessions/default/me`)
+    fetch(`http://89.111.131.15/api/sessions/${session}/me`)
       .then((res) => res.json())
       .then((res) => {
         fetch(
           `http://89.111.131.15/api/contacts/profile-picture?contactId=${res.id.slice(
             0,
             -5
-          )}&session=default`
+          )}&session=${session}`
         )
           .then((img) => img.json())
           .then((img) => {
@@ -54,7 +55,7 @@ function Chats({ messages, setMessages }) {
         const newChat = res.slice(0, 10);
         newChat.forEach((el, index) => {
           fetch(
-            `http://89.111.131.15/api/contacts/profile-picture?contactId=${el?.id?.user}&session=default`
+            `http://89.111.131.15/api/contacts/profile-picture?contactId=${el?.id?.user}&session=${session}`
           )
             .then((el) => el.json())
             .then((res) => {
@@ -189,7 +190,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                   },
                   ...prev,
                 ]);
-                await ChatsApi.sendText(text, currentChat);
+                await ChatsApi.sendText(text, currentChat, session);
 
                 setText("");
               }}
@@ -202,12 +203,14 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           {showModal && (
             <Modal
               text={text}
+              session={session}
               setText={setText}
               setMessages={setMessages}
               file={file}
               setShowModal={setShowModal}
             />
           )}
+          {/* Modal To Connect New Account */}
         </div>
       </div>
     </div>

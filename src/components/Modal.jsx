@@ -5,6 +5,7 @@ import { useState } from "react";
 export default function Modal({
   setMessages,
   setText,
+  session,
   file,
   text,
   setShowModal,
@@ -67,7 +68,7 @@ export default function Modal({
                     data: file.encoded,
                   },
                   caption: text,
-                  session: "default",
+                  session,
                 }).then(() => {
                   setMessages((prev) => [
                     {
