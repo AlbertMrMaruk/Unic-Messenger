@@ -7,21 +7,23 @@ import { useLocation } from "react-router-dom";
 import Chat from "../components/blocks/Chat";
 import { Tooltip } from "../components/blocks/Tooltip";
 import Modal from "../components/Modal";
+import ModalAccount from "../components/ModalAccount";
 
 function Chats({ messages, setMessages }) {
   const [session, setSession] = useState("default");
   const [text, setText] = useState("");
   const [showSpinner, setShowSpinner] = useState(true);
-  const [showSpinner2, setShowSpinner2] = useState(true);
+  const [showSpinnerMessages, setShowSpinnerMessages] = useState(true);
   const [chats, setChats] = useState([]);
   const [file, setFile] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [showModalAccount, setShowModalAccount] = useState(false);
   const [currentUser, setCurrentUser] = useState();
   const { state } = useLocation();
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
   useEffect(() => {
     setCurrentChat(state?.id);
-    setShowSpinner2(true);
+    setShowSpinnerMessages(true);
     ChatsApi.getMessages(state?.id, 20, session)
       .then((resp) => {
         if (resp.ok) {
@@ -30,7 +32,7 @@ function Chats({ messages, setMessages }) {
       })
       .then((res) => {
         setMessages(res.reverse());
-        setShowSpinner2(false);
+        setShowSpinnerMessages(false);
       });
   }, [state]);
   useEffect(() => {
@@ -106,7 +108,10 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               </p>
             </div>
           </div>
-          <div className="m-auto rounded-full bg-[#44a0ff] p-[0.65rem] mt-[.5rem] cursor-pointer">
+          <div
+            className="m-auto rounded-full bg-[#44a0ff] p-[0.65rem] mt-[.5rem] cursor-pointer"
+            onClick={() => setShowModalAccount(true)}
+          >
             <FaPlus className="color-white bg-inherit w-[15px] h-[15px]" />
           </div>
         </div>
@@ -147,7 +152,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         )}
         {/* Messages in chat */}
         <div className="w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[2.5rem] overflow-scroll h-[80vh] mt-2">
-          {showSpinner2 ? (
+          {showSpinnerMessages ? (
             <Spinner />
           ) : (
             messages.map((el, index) => <Message message={el} key={index} />)
@@ -211,6 +216,12 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             />
           )}
           {/* Modal To Connect New Account */}
+          {showModalAccount && (
+            <ModalAccount
+              setSession={setSession}
+              setShowModal={setShowModalAccount}
+            />
+          )}
         </div>
       </div>
     </div>
