@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export default function ModalAccount({ setSession, setShowModal }) {
   const [showSpinner, setShowSpinner] = useState(false);
+  const [qrCode, setQrCode] = useState("");
   const [phone, setPhone] = useState("");
   const [confirm, setConfirm] = useState(false);
   const startSession = (phone) => {
@@ -48,14 +49,20 @@ export default function ModalAccount({ setSession, setShowModal }) {
             <Spinner />
           ) : (
             <div className="relative p-2 ml-2 flex-auto text-center">
-              <label className="block text-white text-md font-bold mb-1 ">
-                Номер телефона
-              </label>
-              <input
-                className=" bg-[#1c1d1f] text-white rounded-l-xl    p-2 px-4 h-[45px]  relative  block w-[6rem] m-auto  outline-none "
-                onChange={(e) => setPhone(e.target.value)}
-                value={phone}
-              />
+              {qrCode ? (
+                <>
+                  <label className="block text-white text-md font-bold mb-1 ">
+                    Номер телефона
+                  </label>
+                  <input
+                    className=" bg-[#cdcdcd] text-black rounded-[5px]  font-bold  px-[.5rem] py-[.2rem] h-[35px]  relative  block w-[250px] mx-auto my-[1rem] text-[14px] outline-none "
+                    onChange={(e) => setPhone(e.target.value)}
+                    value={phone}
+                  />
+                </>
+              ) : (
+                <>{qrCode}</>
+              )}
             </div>
           )}
           <div className="flex items-center justify-end py-[1rem] px-2 border-t border-solid border-[#2a2a2a] rounded-b">
@@ -66,7 +73,7 @@ export default function ModalAccount({ setSession, setShowModal }) {
             >
               Отменить
             </button>
-            {confirm || (
+            {!confirm ? (
               <button
                 className="text-white bg-[#44a0ff]  font-bold uppercase text-sm px-6 py-3 rounded-[5px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                 type="button"
@@ -74,23 +81,29 @@ export default function ModalAccount({ setSession, setShowModal }) {
                   setShowSpinner(true);
                   startSession(phone).then((resp, status) => {
                     console.log(resp, resp.json(), status);
-                    getQR(phone).then((data) => {
-                      console.log(data, data.json());
-                      setConfirm(true);
-                    });
+                    setTimeout(
+                      getQR(phone).then((data) => {
+                        console.log(data, data.json());
+                        setQrCode(data?.body);
+                        setConfirm(true);
+                        setShowSpinner(false);
+                      }),
+                      5000
+                    );
                   });
                 }}
               >
                 Далее
               </button>
-            )}
-            {confirm && (
+            ) : (
               <button
                 className="text-white bg-[#44a0ff]  font-bold uppercase text-sm px-6 py-3 rounded-[5px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                 type="button"
                 onClick={() => {
                   setShowSpinner(true);
-                  getQR().then(() => {
+                  getQR().then((data) => {
+                    console.log(data);
+                    setQrCode(data?.body);
                     setConfirm(false);
                   });
                 }}
