@@ -89,7 +89,7 @@ export default function ModalAccount({ setSession, setShowModal }) {
                         setShowSpinner(false);
                       });
                       console.log("fuck");
-                    }, 15000);
+                    }, 25000);
                   });
                 }}
               >
