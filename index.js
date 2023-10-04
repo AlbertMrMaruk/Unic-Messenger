@@ -11,7 +11,7 @@ require(__dirname + "/models/User");
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
-  process.env.MONGODB_URI || `mongodb://localhost:27017/node-react-starter`
+  process.env.MONGODB_URI || `mongodb://89.111.131.15:27017/messenger`
 );
 require(__dirname + "/routes/userRoutes")(app);
 app.use(express.static(__dirname + "/build/"));
