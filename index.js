@@ -54,7 +54,7 @@ app.post("/post", function (req, response) {
   response.sendStatus(200);
 });
 
-mongoose.connect(`mongodb://127.0.0.1:27017/messenger`);
+// mongoose.connect(`mongodb://127.0.0.1:27017/messenger`);
 
 server.listen(3002, function () {
   console.log(`Приложение запущено на порту  ${3002}!`);
