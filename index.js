@@ -7,14 +7,14 @@ const bodyParser = require("body-parser");
 
 console.log("Hello server");
 
-require(__dirname + "/models/User");
+// require(__dirname + "/models/User");
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
   process.env.MONGODB_URI || `mongodb://89.111.131.15:27017/messenger`
 );
 console.log(mongoose);
-require(__dirname + "/routes/userRoutes")(app);
+// require(__dirname + "/routes/userRoutes")(app);
 app.use(express.static(__dirname + "/build/"));
 app.use(bodyParser.json());
 
