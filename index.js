@@ -1,19 +1,19 @@
 const http = require("http");
 const Websocket = require("ws");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 
 console.log("Hello server");
 
-require(__dirname + "/models/User");
+// require(__dirname + "/models/User");
 
-// mongoose.Promise = global.Promise;
-// mongoose.connect(
-//   process.env.MONGODB_URI || `mongodb://localhost:27017/node-react-starter`
-// );
-require(__dirname + "/routes/userRoutes")(app);
+mongoose.Promise = global.Promise;
+mongoose.connect(
+  process.env.MONGODB_URI || `mongodb://localhost:27017/node-react-starter`
+);
+// require(__dirname + "/routes/userRoutes")(app);
 app.use(express.static(__dirname + "/build/"));
 app.use(bodyParser.json());
 

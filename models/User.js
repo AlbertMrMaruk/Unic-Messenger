@@ -6,4 +6,4 @@ const userSchema = new Schema({
   description: String,
 });
 
-mongoose.model("users", productSchema);
+mongoose.model("users", userSchema);
