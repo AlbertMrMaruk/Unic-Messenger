@@ -10,9 +10,9 @@ console.log("Hello server");
 require("./models/User");
 
 mongoose.Promise = global.Promise;
-mongoose.connect(
-  process.env.MONGODB_URI || `mongodb://localhost:27017/node-react-starter`
-);
+// mongoose.connect(
+//   process.env.MONGODB_URI || `mongodb://localhost:27017/node-react-starter`
+// );
 require("./routes/userRoutes")(app);
 app.use(express.static(__dirname + "/build/"));
 app.use(bodyParser.json());
