@@ -13,7 +13,7 @@ require("./models/User");
 // mongoose.connect(
 //   process.env.MONGODB_URI || `mongodb://localhost:27017/node-react-starter`
 // );
-require("./routes/userRoutes")(app);
+// require("./routes/userRoutes")(app);
 app.use(express.static(__dirname + "/build/"));
 app.use(bodyParser.json());
 
