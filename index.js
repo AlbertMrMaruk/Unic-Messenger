@@ -1,6 +1,6 @@
 const http = require("http");
 const Websocket = require("ws");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -10,7 +10,6 @@ console.log("Hello server");
 // require(__dirname + "/models/User");
 
 // mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://127.0.0.1:27017/messenger`);
 
 // const db = mongoose.connection;
 // console.log(db);
@@ -54,6 +53,8 @@ app.post("/post", function (req, response) {
 
   response.sendStatus(200);
 });
+
+mongoose.connect(`mongodb://127.0.0.1:27017/messenger`);
 
 server.listen(3002, function () {
   console.log(`Приложение запущено на порту  ${3002}!`);
