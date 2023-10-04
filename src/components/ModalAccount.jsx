@@ -1,7 +1,12 @@
 import Spinner from "./blocks/Spinner";
 import { useState } from "react";
 
-export default function ModalAccount({ setSession, setShowModal }) {
+export default function ModalAccount({
+  setSession,
+  session,
+  setAccounts,
+  setShowModal,
+}) {
   const [showSpinner, setShowSpinner] = useState(false);
   const [qrCode, setQrCode] = useState(false);
   const [phone, setPhone] = useState("");
@@ -85,9 +90,10 @@ export default function ModalAccount({ setSession, setShowModal }) {
                   startSession(phone).then(() => {
                     setTimeout(() => {
                       setQrCode(`http://89.111.131.15/api/${phone}/auth/qr`);
-                    }, 25000);
-                    setShowSpinner(false);
-                    setConfirm(true);
+                      setShowSpinner(false);
+                      setConfirm(true);
+                      setSession(phone);
+                    }, 22000);
                   });
                 }}
               >
@@ -99,11 +105,8 @@ export default function ModalAccount({ setSession, setShowModal }) {
                 type="button"
                 onClick={() => {
                   setShowSpinner(true);
-                  // getQR().then((data) => {
-                  //   console.log(data);
-                  //   setQrCode(data?.body);
-                  //   setConfirm(false);
-                  // });
+                  setAccounts((prev) => [...prev, session]);
+                  setShowModal(false);
                 }}
               >
                 Добавить

@@ -11,6 +11,7 @@ import ModalAccount from "../components/ModalAccount";
 
 function Chats({ messages, setMessages }) {
   const [session, setSession] = useState("default");
+  const [accounts, setAccounts] = useState(["default"]);
   const [text, setText] = useState("");
   const [showSpinner, setShowSpinner] = useState(true);
   const [showSpinnerMessages, setShowSpinnerMessages] = useState(true);
@@ -93,21 +94,23 @@ function Chats({ messages, setMessages }) {
           </h3>
         </div>
         {/* Choose messenger Block */}
-        <div className="flex flex-col px-3 py-3 rounded-xl bg-[#1c1d1f] mt-[1.5rem]">
-          <div
-            className="p-[1rem]  
+        <div className="flex flex-col px-3 py-3 rounded-xl bg-[#1c1d1f] gap-1 mt-[1.5rem]">
+          {accounts.map((el, index) => (
+            <div
+              className="p-[1rem]  
 border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#3f4145]"
-          >
-            <div className="rounded-full w-[40px] h-[40px] text-white ">
-              <FaWhatsapp className="w-[40px] h-[40px]" />
+              key={index}
+              onClick={() => setSession(el)}
+            >
+              <div className="rounded-full w-[40px] h-[40px] text-white ">
+                <FaWhatsapp className="w-[40px] h-[40px]" />
+              </div>
+              <div className="flex flex-col gap-1 text-[#e9e9e9] text-left max-w-[75%]">
+                <h3 className="text-md font-bold">WhatsApp Account</h3>
+                <p className="text-[0.85rem] text-[#777779]">{el}</p>
+              </div>
             </div>
-            <div className="flex flex-col gap-1 text-[#e9e9e9] text-left max-w-[75%]">
-              <h3 className="text-md font-bold">WhatsApp Account</h3>
-              <p className="text-[0.85rem] text-[#777779]">
-                {currentUser?.pushName}
-              </p>
-            </div>
-          </div>
+          ))}
           <div
             className="m-auto rounded-full bg-[#44a0ff] p-[0.65rem] mt-[.5rem] cursor-pointer"
             onClick={() => setShowModalAccount(true)}
@@ -220,6 +223,8 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             <ModalAccount
               setSession={setSession}
               setShowModal={setShowModalAccount}
+              session={session}
+              setAccounts={setAccounts}
             />
           )}
         </div>
