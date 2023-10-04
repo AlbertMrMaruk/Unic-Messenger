@@ -9,11 +9,17 @@ console.log("Hello server");
 
 // require(__dirname + "/models/User");
 
-mongoose.Promise = global.Promise;
-mongoose.connect(
-  process.env.MONGODB_URI || `mongodb://89.111.131.15:27017/messenger`
-);
-console.log(mongoose);
+// mongoose.Promise = global.Promise;
+mongoose.connect(`mongodb://89.111.131.15:27017/messenger`);
+
+const db = mongoose.connection;
+console.log(db);
+db.on("error", () => {
+  console.log("> error occurred from the database");
+});
+db.once("open", () => {
+  console.log("> successfully opened the database");
+});
 // require(__dirname + "/routes/userRoutes")(app);
 app.use(express.static(__dirname + "/build/"));
 app.use(bodyParser.json());
