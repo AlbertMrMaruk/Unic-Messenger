@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 
 console.log("Hello server");
 
-require("./models/User");
+// require("./models/User");
 
 // mongoose.Promise = global.Promise;
 // mongoose.connect(
