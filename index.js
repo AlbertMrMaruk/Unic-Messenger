@@ -1,6 +1,6 @@
 const http = require("http");
 const Websocket = require("ws");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -13,6 +13,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(
   process.env.MONGODB_URI || `mongodb://89.111.131.15:27017/messenger`
 );
+console.log(mongoose);
 require(__dirname + "/routes/userRoutes")(app);
 app.use(express.static(__dirname + "/build/"));
 app.use(bodyParser.json());
