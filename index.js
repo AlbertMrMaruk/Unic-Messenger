@@ -10,7 +10,7 @@ console.log("Hello server");
 // require(__dirname + "/models/User");
 
 // mongoose.Promise = global.Promise;
-// mongoose.connect(`mongodb://89.111.131.15:27017/messenger`);
+mongoose.connect(`mongodb://89.111.131.15/database/messenger`);
 
 // const db = mongoose.connection;
 // console.log(db);
