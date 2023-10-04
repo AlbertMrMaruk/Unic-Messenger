@@ -27,7 +27,7 @@ function Chats({ messages, setMessages }) {
     ChatsApi.getMessages(state?.id, 20, session)
       .then((resp) => {
         if (resp.ok) {
-          return resp.json(); //then consume it again, the error happens
+          return resp.json(); // then consume it again, the error happens
         }
       })
       .then((res) => {

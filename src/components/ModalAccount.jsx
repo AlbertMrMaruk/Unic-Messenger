@@ -85,7 +85,7 @@ export default function ModalAccount({ setSession, setShowModal }) {
                   startSession(phone).then(() => {
                     setTimeout(() => {
                       setQrCode(`http://89.111.131.15/api/${phone}/auth/qr`);
-                    }, 15000);
+                    }, 25000);
                     setShowSpinner(false);
                     setConfirm(true);
                   });
