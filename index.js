@@ -1,6 +1,6 @@
 const http = require("http");
 const Websocket = require("ws");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -10,16 +10,16 @@ console.log("Hello server");
 // require(__dirname + "/models/User");
 
 // mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://89.111.131.15:27017/messenger`);
+// mongoose.connect(`mongodb://89.111.131.15:27017/messenger`);
 
-const db = mongoose.connection;
-console.log(db);
-db.on("error", () => {
-  console.log("> error occurred from the database");
-});
-db.once("open", () => {
-  console.log("> successfully opened the database");
-});
+// const db = mongoose.connection;
+// console.log(db);
+// db.on("error", () => {
+//   console.log("> error occurred from the database");
+// });
+// db.once("open", () => {
+//   console.log("> successfully opened the database");
+// });
 // require(__dirname + "/routes/userRoutes")(app);
 app.use(express.static(__dirname + "/build/"));
 app.use(bodyParser.json());
