@@ -55,6 +55,22 @@ function Chats({ messages, setMessages }) {
     fetch(`http://89.111.131.15/api/default/chats`)
       .then((resp) => resp.json())
       .then((res) => {
+        // Adding to mongoose database
+        fetch(`http://89.111.131.15/database/users`, {
+          method: "post",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            name: "Albert Marukyan",
+            accounts: [session],
+            chats: [res],
+          }),
+        })
+          .then((res) => res.json())
+          .then((res) => console.log(res));
         const newChat = res.slice(0, 10);
         newChat.forEach((el, index) => {
           fetch(

@@ -10,37 +10,32 @@ module.exports = (app) => {
 
   app.post(`/database/users`, async (req, res) => {
     console.log(req.body);
-    let product = await User.create({
-      name: "ALBERT",
-      description: "Hmmm2",
-    });
+    let product = await User.create(req.body);
     return res.status(201).send({
       error: false,
       product,
     });
   });
 
-  //   app.put(`/api/product/:id`, async (req, res) => {
-  //     const {id} = req.params;
+  app.put(`/database/users/:id`, async (req, res) => {
+    const { id } = req.params;
 
-  //     let product = await Product.findByIdAndUpdate(id, req.body);
+    let product = await Product.findByIdAndUpdate(id, req.body);
 
-  //     return res.status(202).send({
-  //       error: false,
-  //       product
-  //     })
+    return res.status(202).send({
+      error: false,
+      product,
+    });
+  });
 
-  //   });
+  app.delete(`/database/users/:id`, async (req, res) => {
+    const { id } = req.params;
 
-  //   app.delete(`/api/product/:id`, async (req, res) => {
-  //     const {id} = req.params;
+    let product = await Product.findByIdAndDelete(id);
 
-  //     let product = await Product.findByIdAndDelete(id);
-
-  //     return res.status(202).send({
-  //       error: false,
-  //       product
-  //     })
-
-  //   })
+    return res.status(202).send({
+      error: false,
+      product,
+    });
+  });
 };
