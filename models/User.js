@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const userSchema = new Schema({
   name: String,
   accounts: Array,
-  chats: Array,
+  chats: String,
 });
 
 mongoose.model("users", userSchema);
