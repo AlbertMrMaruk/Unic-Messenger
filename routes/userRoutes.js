@@ -4,8 +4,8 @@ const User = mongoose.model("users");
 module.exports = (app) => {
   app.get(`/database/users`, async (req, res) => {
     console.log(req);
-    let products = await Product.find();
-    return res.status(200).send(products);
+    let users = await User.find();
+    return res.status(200).send(users);
   });
 
   app.post(`/database/users`, async (req, res) => {
