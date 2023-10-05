@@ -29,7 +29,7 @@ db.once("open", () => {
 require(__dirname + "/routes/userRoutes")(app);
 app.use(express.static(__dirname + "/build/"));
 app.use(bodyParser.json());
-app.use(express.json({ limit: "200mb" }));
+app.use(express.json({ limit: "500mb" }));
 
 app.get("/*", (_, res) => {
   res.sendFile(`${__dirname}/build/index.html`, null, (err) => {

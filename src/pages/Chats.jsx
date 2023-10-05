@@ -66,7 +66,7 @@ function Chats({ messages, setMessages }) {
           body: JSON.stringify({
             name: "Albert Marukyan",
             accounts: [session],
-            chats: res.join(","),
+            chats: res,
           }),
         })
           .then((res) => res.json())
