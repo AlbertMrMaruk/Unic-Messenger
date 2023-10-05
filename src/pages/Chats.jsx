@@ -56,6 +56,13 @@ function Chats({ messages, setMessages }) {
       .then((resp) => resp.json())
       .then((res) => {
         // Adding to mongoose database
+        const data = JSON.stringify({
+          name: "Albert Marukyan",
+          accounts: [session],
+          chats: res,
+        });
+        console.log(Buffer.byteLength(data, "utf8"));
+
         fetch(`http://89.111.131.15/database/users`, {
           method: "post",
           headers: {
@@ -63,11 +70,7 @@ function Chats({ messages, setMessages }) {
             "Content-Type": "application/json",
           },
 
-          body: JSON.stringify({
-            name: "Albert Marukyan",
-            accounts: [session],
-            chats: res,
-          }),
+          body: data,
         })
           .then((res) => res.json())
           .then((res) => console.log(res));
