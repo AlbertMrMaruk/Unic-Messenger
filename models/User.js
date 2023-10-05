@@ -1,9 +1,9 @@
-// const mongoose = require("mongoose");
-// const { Schema } = mongoose;
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-// const userSchema = new Schema({
-//   name: String,
-//   description: String,
-// });
+const userSchema = new Schema({
+  name: String,
+  description: String,
+});
 
-// mongoose.model("users", userSchema);
+mongoose.model("users", userSchema);

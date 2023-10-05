@@ -7,10 +7,10 @@ const mongoose = require("mongoose");
 
 console.log("Hello server");
 
-// require(__dirname + "/models/User");
+require(__dirname + "/models/User");
 
 // mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://localhost:27017/local`, {
+mongoose.connect(`mongodb://89.111.131.15:27017/users`, {
   authSource: "admin",
   useNewUrlParser: true,
   user: "admin",
@@ -26,7 +26,7 @@ db.on("error", () => {
 db.once("open", () => {
   console.log("> successfully opened the database");
 });
-// require(__dirname + "/routes/userRoutes")(app);
+require(__dirname + "/routes/userRoutes")(app);
 app.use(express.static(__dirname + "/build/"));
 app.use(bodyParser.json());
 
