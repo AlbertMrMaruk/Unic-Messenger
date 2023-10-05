@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 const User = mongoose.model("users");
 
 module.exports = (app) => {
-  app.get(`/api/users`, async (req, res) => {
+  app.get(`/database/users`, async (req, res) => {
     console.log(req);
     let products = await Product.find();
     return res.status(200).send(products);
   });
 
-  app.post(`/api/users`, async (req, res) => {
+  app.post(`/database/users`, async (req, res) => {
     console.log(req.body);
     let product = await User.create({
       name: "ALBERT",
