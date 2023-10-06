@@ -64,7 +64,10 @@ function Chats({ messages, setMessages }) {
             const data = {
               name: "Albert Marukyan",
               accounts: [session],
-              chats: res,
+              chats: res.map((el) => {
+                delete el.lastMessage;
+                return el;
+              }),
             };
             res.slice(0, 10).forEach((el, index) => {
               console.log(el);
