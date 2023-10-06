@@ -58,9 +58,9 @@ function Chats({ messages, setMessages }) {
         // Adding to mongoose database
 
         fetch(`http://89.111.131.15/database/users`)
-          .then((res) => res.json())
-          .then((res) => {
-            console.log(res);
+          .then((mda) => mda.json())
+          .then((mda2) => {
+            console.log(mda2);
             const data = JSON.stringify({
               name: "Albert Marukyan",
               accounts: [session],
