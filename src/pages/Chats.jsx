@@ -61,11 +61,11 @@ function Chats({ messages, setMessages }) {
           .then((mda) => mda.json())
           .then((mda2) => {
             console.log(mda2);
-            const data = JSON.stringify({
+            const data = {
               name: "Albert Marukyan",
               accounts: [session],
               chats: res,
-            });
+            };
             res.slice(0, 10).forEach((el, index) => {
               console.log(el);
               ChatsApi.getMessages(el.id._serialized, 20, session)
@@ -79,7 +79,7 @@ function Chats({ messages, setMessages }) {
                         Accept: "application/json",
                         "Content-Type": "application/json",
                       },
-                      body: data,
+                      body: JSON.stringify(data),
                     })
                       .then((res) => res.json())
                       .then((res) => console.log(res));
