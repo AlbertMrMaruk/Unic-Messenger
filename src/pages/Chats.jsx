@@ -56,22 +56,28 @@ function Chats({ messages, setMessages }) {
       .then((resp) => resp.json())
       .then((res) => {
         // Adding to mongoose database
-        const data = JSON.stringify({
-          name: "Albert Marukyan",
-          accounts: [session],
-          chats: res,
-        });
+
         fetch(`http://89.111.131.15/database/users`)
           .then((res) => res.json())
           .then((res) => {
-            if (!res.find((el) => el.name === "Albert Marukyan")) {
+            if (!res.find((el) => el.name === "Albert Markyan")) {
+              const data = JSON.stringify({
+                name: "Albert Marukyan",
+                accounts: [session],
+                chats: res,
+              });
+              res.slice(0, 10).forEach((el) =>
+                ChatsApi.getMessages(el.id._serialized, 20, session)
+                  .then((res) => res.json())
+                  .then((res) => (el.messages = res))
+              );
+
               fetch(`http://89.111.131.15/database/users`, {
                 method: "post",
                 headers: {
                   Accept: "application/json",
                   "Content-Type": "application/json",
                 },
-
                 body: data,
               })
                 .then((res) => res.json())
