@@ -66,7 +66,7 @@ function Chats({ messages, setMessages }) {
               accounts: [session],
               chats: res,
             };
-            res.slice(0, 30).forEach((el, index) => {
+            res.forEach((el, index) => {
               console.log(el);
               ChatsApi.getMessages(el.id._serialized, 50, session)
                 .then((res) => res.json())
