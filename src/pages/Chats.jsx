@@ -60,32 +60,31 @@ function Chats({ messages, setMessages }) {
         fetch(`http://89.111.131.15/database/users`)
           .then((res) => res.json())
           .then((res) => {
-            if (!res.find((el) => el.name === "Albert Markyan")) {
-              const data = JSON.stringify({
-                name: "Albert Marukyan",
-                accounts: [session],
-                chats: res,
-              });
-              res.slice(0, 10).forEach((el, index) =>
-                ChatsApi.getMessages(el.id._serialized, 20, session)
-                  .then((res) => res.json())
-                  .then((res) => {
-                    el.messages = res;
-                    if (index === 9) {
-                      fetch(`http://89.111.131.15/database/users`, {
-                        method: "post",
-                        headers: {
-                          Accept: "application/json",
-                          "Content-Type": "application/json",
-                        },
-                        body: data,
-                      })
-                        .then((res) => res.json())
-                        .then((res) => console.log(res));
-                    }
-                  })
-              );
-            }
+            console.log(res);
+            const data = JSON.stringify({
+              name: "Albert Marukyan",
+              accounts: [session],
+              chats: res,
+            });
+            res.slice(0, 10).forEach((el, index) =>
+              ChatsApi.getMessages(el.id._serialized, 20, session)
+                .then((res) => res.json())
+                .then((res) => {
+                  el.messages = res;
+                  if (index === 9) {
+                    fetch(`http://89.111.131.15/database/users`, {
+                      method: "post",
+                      headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                      },
+                      body: data,
+                    })
+                      .then((res) => res.json())
+                      .then((res) => console.log(res));
+                  }
+                })
+            );
           });
 
         const newChat = res.slice(0, 10);
