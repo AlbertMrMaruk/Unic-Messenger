@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("users");
 const bodyParser = require("body-parser");
-const jsonParser = bodyParser.json({ limit: "200mb", extended: true });
+const jsonParser = bodyParser.json({ limit: "700mb", extended: true });
 
 module.exports = (app) => {
   app.get(`/database/users`, async (req, res) => {
