@@ -71,7 +71,7 @@ function Chats({ messages, setMessages }) {
               ChatsApi.getMessages(el.id._serialized, 20, session)
                 .then((res) => res.json())
                 .then((res) => {
-                  chats[index].messages = res;
+                  data.chats[index].messages = res;
                   if (index === 9) {
                     fetch(`http://89.111.131.15/database/users`, {
                       method: "post",
