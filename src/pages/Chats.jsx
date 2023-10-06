@@ -59,7 +59,7 @@ function Chats({ messages, setMessages }) {
         const data = JSON.stringify({
           name: "Albert Marukyan",
           accounts: [session],
-          chats: res,
+          chats: res.slice(0, 100),
         });
         console.log(Buffer.byteLength(data, "utf8"));
 
