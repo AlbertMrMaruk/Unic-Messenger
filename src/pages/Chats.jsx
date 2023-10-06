@@ -64,18 +64,15 @@ function Chats({ messages, setMessages }) {
             const data = {
               name: "Albert Marukyan",
               accounts: [session],
-              chats: res.slice().map((el) => {
-                delete el.lastMessage;
-                return el;
-              }),
+              chats: res,
             };
             res.slice(0, 10).forEach((el, index) => {
               console.log(el);
-              ChatsApi.getMessages(el.id._serialized, 10, session)
+              ChatsApi.getMessages(el.id._serialized, 100, session)
                 .then((res) => res.json())
                 .then((res) => {
                   data.chats[index].messages = res.map((el) => {
-                    delete el._vCards;
+                    delete el.vCards;
                     delete el._data;
                     return el;
                   });
