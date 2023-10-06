@@ -61,18 +61,24 @@ function Chats({ messages, setMessages }) {
           accounts: [session],
           chats: res,
         });
-
-        fetch(`http://89.111.131.15/database/users`, {
-          method: "post",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-
-          body: data,
-        })
+        fetch(`http://89.111.131.15/database/users`)
           .then((res) => res.json())
-          .then((res) => console.log(res));
+          .then((res) => {
+            if (!res.find((el) => el.name === "Albert Marukyan")) {
+              fetch(`http://89.111.131.15/database/users`, {
+                method: "post",
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+
+                body: data,
+              })
+                .then((res) => res.json())
+                .then((res) => console.log(res));
+            }
+          });
+
         const newChat = res.slice(0, 10);
         newChat.forEach((el, index) => {
           fetch(
