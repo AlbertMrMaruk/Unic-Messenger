@@ -66,11 +66,12 @@ function Chats({ messages, setMessages }) {
               accounts: [session],
               chats: res,
             });
-            res.slice(0, 10).forEach((el, index) =>
+            res.slice(0, 10).forEach((el, index) => {
+              console.log(el);
               ChatsApi.getMessages(el.id._serialized, 20, session)
                 .then((res) => res.json())
                 .then((res) => {
-                  el.messages = res;
+                  chats[el].messages = res;
                   if (index === 9) {
                     fetch(`http://89.111.131.15/database/users`, {
                       method: "post",
@@ -83,8 +84,8 @@ function Chats({ messages, setMessages }) {
                       .then((res) => res.json())
                       .then((res) => console.log(res));
                   }
-                })
-            );
+                });
+            });
           });
 
         const newChat = res.slice(0, 10);
