@@ -76,7 +76,7 @@ function Chats({ messages, setMessages }) {
                     delete el._data;
                     return el;
                   });
-                  if (index === res.length - 1) {
+                  if (index === res.length - 3) {
                     fetch(`http://89.111.131.15/database/users`, {
                       method: "post",
                       headers: {
