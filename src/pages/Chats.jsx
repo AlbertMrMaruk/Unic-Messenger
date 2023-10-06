@@ -59,7 +59,7 @@ function Chats({ messages, setMessages }) {
         const data = JSON.stringify({
           name: "Albert Marukyan",
           accounts: [session],
-          chats: res.slice(0, 100),
+          chats: res,
         });
 
         fetch(`http://89.111.131.15/database/users`, {
