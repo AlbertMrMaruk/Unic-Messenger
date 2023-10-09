@@ -103,11 +103,11 @@ function Chats({ messages, setMessages }) {
                   });
               });
             } else {
-              setDataUser(mda2);
-              setChats(mda2.chats.slice(0, 30));
+              setDataUser(mda2[0]);
+              setChats(mda2[0].chats.slice(0, 30));
               setShowSpinner(false);
               setMessages(
-                mda2.chats.find((el) => el.id === state?.id).messages
+                mda2[0].chats.find((el) => el.id === state?.id).messages
               );
               setShowSpinnerMessages(false);
             }
