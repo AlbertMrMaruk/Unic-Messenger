@@ -16,7 +16,7 @@ function clickChat(setMessages) {
       clickChat(setMessages);
     });
 
-    socket.onmessage((event) => {
+    socket.on("message", (event) => {
       setMessages((prev) => [JSON.parse(event.data), ...prev]);
     });
 
