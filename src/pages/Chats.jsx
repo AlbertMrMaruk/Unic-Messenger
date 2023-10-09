@@ -8,6 +8,7 @@ import Chat from "../components/blocks/Chat";
 import { Tooltip } from "../components/blocks/Tooltip";
 import Modal from "../components/Modal";
 import ModalAccount from "../components/ModalAccount";
+import DatabaseAPI from "../api/DatabaseAPI";
 
 function Chats({ messages, setMessages }) {
   const [session, setSession] = useState("default");
@@ -55,57 +56,50 @@ function Chats({ messages, setMessages }) {
     fetch(`http://89.111.131.15/api/default/chats`)
       .then((resp) => resp.json())
       .then((res) => {
-        // Adding to mongoose database
-
-        fetch(`http://89.111.131.15/database/users`)
-          .then((mda) => mda.json())
-          .then((mda2) => {
-            console.log(mda2);
-            const data = {
-              name: "Albert Marukyan",
-              accounts: [session],
-              chats: res,
-            };
-            res.forEach((el, index) => {
-              console.log(el);
-              ChatsApi.getMessages(el.id._serialized, 50, session)
-                .then((res) => res.json())
-                .then((res) => {
-                  data.chats[index].messages = res.map((el) => {
-                    delete el.vCards;
-                    delete el._data;
-                    return el;
-                  });
-                  if (index === data.chats.length - 1) {
-                    fetch(`http://89.111.131.15/database/users`, {
-                      method: "post",
-                      headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify(data),
-                    })
-                      .then((res) => res.json())
-                      .then((res) => console.log(res));
-                  }
-                });
-            });
-          });
-
-        const newChat = res.slice(0, 10);
-        newChat.forEach((el, index) => {
+        // const newChat = res.slice(0, 10);
+        res.forEach((el, index) => {
           fetch(
             `http://89.111.131.15/api/contacts/profile-picture?contactId=${el?.id?.user}&session=${session}`
           )
             .then((el) => el.json())
             .then((res) => {
               el.img = res?.profilePictureURL;
-              if (index === newChat.length - 1) {
-                setChats(newChat);
+              if (index === 9) {
+                setChats(res);
                 setShowSpinner(false);
               }
             });
         });
+        // Adding to mongoose database
+        console.log(currentUser?.pushName);
+        DatabaseAPI.getUser(currentUser?.pushName)
+          .then((mda) => mda.json())
+          .then((mda2) => {
+            console.log(mda2);
+            if (mda2 === []) {
+              const data = {
+                name: currentUser.pushName,
+                accounts: [session],
+                chats: res,
+              };
+              res.forEach((el, index) => {
+                ChatsApi.getMessages(el.id._serialized, 50, session)
+                  .then((res) => res.json())
+                  .then((res) => {
+                    data.chats[index].messages = res.map((el) => {
+                      delete el.vCards;
+                      delete el._data;
+                      return el;
+                    });
+                    if (index === data.chats.length - 1) {
+                      DatabaseAPI.addUser(data)
+                        .then((res) => res.json())
+                        .then((res) => console.log(res));
+                    }
+                  });
+              });
+            }
+          });
       });
   }, [state]);
   return (
@@ -130,6 +124,7 @@ function Chats({ messages, setMessages }) {
             {currentUser?.pushName ?? ""}
           </h3>
         </div>
+
         {/* Choose messenger Block */}
         <div className="flex flex-col px-3 py-3 rounded-xl bg-[#1c1d1f] gap-1 mt-[1.5rem]">
           {accounts.map((el, index) => (
