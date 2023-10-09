@@ -71,11 +71,10 @@ function Chats({ messages, setMessages }) {
             });
         });
         // Adding to mongoose database
-        console.log(currentUser?.pushName);
         DatabaseAPI.getUser("albert")
           .then((mda) => mda.json())
           .then((mda2) => {
-            console.log(mda2);
+            console.log(mda2, mda2 === [], mda2 ?? "yes");
             if (mda2 === []) {
               console.log("Starting");
               const data = {
