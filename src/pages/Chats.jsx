@@ -107,7 +107,8 @@ function Chats({ messages, setMessages }) {
               setChats(mda2[0].chats.slice(0, 30));
               setShowSpinner(false);
               setMessages(
-                mda2[0].chats.find((el) => el.id === state?.id).messages
+                mda2[0].chats.find((el) => el.id._serialized === state?.id)
+                  .messages
               );
               setShowSpinnerMessages(false);
             }
