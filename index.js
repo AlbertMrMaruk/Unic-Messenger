@@ -64,9 +64,9 @@ const funcWs = function (ws) {
 
 wss.on("connection", funcWs);
 app.post("/post", function (req, response) {
-  console.log("Hmmm", wss.clients);
+  console.log("Hmmm");
   wss.clients.forEach((ws) => {
-    console.log("dhhd");
+    console.log("dhhd", ws);
     ws.send(JSON.stringify(req.body));
   });
 
