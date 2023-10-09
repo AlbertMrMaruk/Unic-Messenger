@@ -74,7 +74,7 @@ function Chats({ messages, setMessages }) {
 
         // Adding to mongoose database
         setShowSpinnerMessages(true);
-        DatabaseAPI.getUser("albet")
+        DatabaseAPI.getUser("albert")
           .then((mda) => mda.json())
           .then((mda2) => {
             console.log(mda2, mda2.length === 0, mda2 ?? "yes");
