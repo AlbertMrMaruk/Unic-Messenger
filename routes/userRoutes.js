@@ -8,6 +8,11 @@ module.exports = (app) => {
     let users = await User.find();
     return res.status(200).send(users);
   });
+  app.get(`/database/users/:user`, async (req, res) => {
+    const { user } = req.params;
+    let users = await User.find((el) => el.username === user);
+    return res.status(200).send(users);
+  });
 
   app.post(`/database/users`, jsonParser, async (req, res) => {
     let user = await User.create(req.body);

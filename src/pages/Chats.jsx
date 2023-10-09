@@ -72,13 +72,15 @@ function Chats({ messages, setMessages }) {
         });
         // Adding to mongoose database
         console.log(currentUser?.pushName);
-        DatabaseAPI.getUser(currentUser?.pushName)
+        DatabaseAPI.getUser("albert")
           .then((mda) => mda.json())
           .then((mda2) => {
             console.log(mda2);
             if (mda2 === []) {
+              console.log("Starting");
               const data = {
                 name: currentUser.pushName,
+                username: "albert",
                 accounts: [session],
                 chats: res,
               };
