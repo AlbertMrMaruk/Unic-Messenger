@@ -12,10 +12,11 @@ function clickChat(setMessages) {
         console.log("Обрыв соединения");
       }
       console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+
       clickChat();
     });
 
-    socket.addEventListener("message", (event) => {
+    socket.onmessage((event) => {
       setMessages((prev) => [JSON.parse(event.data), ...prev]);
     });
 
