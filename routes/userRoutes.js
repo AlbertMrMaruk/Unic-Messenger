@@ -10,7 +10,7 @@ module.exports = (app) => {
   });
   app.get(`/database/users/:user`, async (req, res) => {
     const { user } = req.params;
-    let users = await User.find((el) => el.username === user);
+    let users = await User.where("username").equals(user);
     return res.status(200).send(users);
   });
 
