@@ -13,6 +13,7 @@ import DatabaseAPI from "../api/DatabaseAPI";
 function Chats({ messages, setMessages }) {
   const [session, setSession] = useState("default");
   const [accounts, setAccounts] = useState(["default"]);
+  const [dataUser, setDataUser] = useState();
   const [text, setText] = useState("");
   const [showSpinner, setShowSpinner] = useState(true);
   const [showSpinnerMessages, setShowSpinnerMessages] = useState(true);
@@ -26,16 +27,18 @@ function Chats({ messages, setMessages }) {
   useEffect(() => {
     setCurrentChat(state?.id);
     setShowSpinnerMessages(true);
-    ChatsApi.getMessages(state?.id, 20, session)
-      .then((resp) => {
-        if (resp.ok) {
-          return resp.json(); // then consume it again, the error happens
-        }
-      })
-      .then((res) => {
-        setMessages(res.reverse());
-        setShowSpinnerMessages(false);
-      });
+    // ChatsApi.getMessages(state?.id, 20, session)
+    //   .then((resp) => {
+    //     if (resp.ok) {
+    //       return resp.json(); // then consume it again, the error happens
+    //     }
+    //   })
+    //   .then((res) => {
+    //     setMessages(res.reverse());
+    //     setShowSpinnerMessages(false);
+    //   });
+    setMessages(chats.find((el) => el.id === state?.id).messages);
+    setShowSpinnerMessages(false);
   }, [state]);
   useEffect(() => {
     fetch(`http://89.111.131.15/api/sessions/${session}/me`)
@@ -56,20 +59,21 @@ function Chats({ messages, setMessages }) {
     fetch(`http://89.111.131.15/api/default/chats`)
       .then((resp) => resp.json())
       .then((res) => {
-        const newChat = res.slice(0, 10);
-        newChat.forEach((el, index) => {
-          fetch(
-            `http://89.111.131.15/api/contacts/profile-picture?contactId=${el?.id?.user}&session=${session}`
-          )
-            .then((el) => el.json())
-            .then((res) => {
-              el.img = res?.profilePictureURL;
-              if (index === 9) {
-                setChats(newChat);
-                setShowSpinner(false);
-              }
-            });
-        });
+        // const newChat = res.slice(0, 10);
+        // newChat.forEach((el, index) => {
+        //   fetch(
+        //     `http://89.111.131.15/api/contacts/profile-picture?contactId=${el?.id?.user}&session=${session}`
+        //   )
+        //     .then((el) => el.json())
+        //     .then((res) => {
+        //       el.img = res?.profilePictureURL;
+        //       if (index === 9) {
+        //         setChats(newChat);
+        //         setShowSpinner(false);
+        //       }
+        //     });
+        // });
+
         // Adding to mongoose database
         DatabaseAPI.getUser("albert")
           .then((mda) => mda.json())
@@ -99,6 +103,10 @@ function Chats({ messages, setMessages }) {
                     }
                   });
               });
+            } else {
+              setDataUser(mda2);
+              setChats(mda2.chats.slice(0, 30));
+              setShowSpinner(false);
             }
           });
       });
