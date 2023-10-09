@@ -56,8 +56,8 @@ function Chats({ messages, setMessages }) {
     fetch(`http://89.111.131.15/api/default/chats`)
       .then((resp) => resp.json())
       .then((res) => {
-        // const newChat = res.slice(0, 10);
-        res.forEach((el, index) => {
+        const newChat = res.slice(0, 10);
+        newChat.forEach((el, index) => {
           fetch(
             `http://89.111.131.15/api/contacts/profile-picture?contactId=${el?.id?.user}&session=${session}`
           )
@@ -65,7 +65,7 @@ function Chats({ messages, setMessages }) {
             .then((res) => {
               el.img = res?.profilePictureURL;
               if (index === 9) {
-                setChats(res);
+                setChats(newChat);
                 setShowSpinner(false);
               }
             });
