@@ -77,14 +77,14 @@ server.listen(3002, function () {
   console.log(`Приложение запущено на порту  ${3002}!`);
 });
 
-setInterval(function ping() {
-  Array.from(connected_clients.values()).forEach(function each(client_stream) {
-    if (!client_stream.is_alive) {
-      client_stream.terminate();
-      return;
-    }
-    client_stream.is_alive = false;
-    client_stream.ping();
-  });
-}, 1000);
+// setInterval(function ping() {
+//   Array.from(connected_clients.values()).forEach(function each(client_stream) {
+//     if (!client_stream.is_alive) {
+//       client_stream.terminate();
+//       return;
+//     }
+//     client_stream.is_alive = false;
+//     client_stream.ping();
+//   });
+// }, 1000);
 module.exports = server;
