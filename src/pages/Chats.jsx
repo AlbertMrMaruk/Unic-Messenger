@@ -74,8 +74,8 @@ function Chats({ messages, setMessages }) {
         DatabaseAPI.getUser("albert")
           .then((mda) => mda.json())
           .then((mda2) => {
-            console.log(mda2, mda2 === [], mda2 ?? "yes");
-            if (mda2 === []) {
+            console.log(mda2, mda2.length === 0, mda2 ?? "yes");
+            if (mda2.length === 0) {
               console.log("Starting");
               const data = {
                 name: currentUser.pushName,
