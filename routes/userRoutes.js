@@ -22,25 +22,25 @@ module.exports = (app) => {
     });
   });
 
-  app.put(`/database/users/:id`, async (req, res) => {
-    const { id } = req.params;
+  app.put(`/database/users/:username`, jsonParser, async (req, res) => {
+    const { username } = req.params;
 
-    let product = await Product.findByIdAndUpdate(id, req.body);
+    let user = await User.updateOne({ username }, req.body);
 
     return res.status(202).send({
       error: false,
-      product,
+      user,
     });
   });
 
   app.delete(`/database/users/:id`, async (req, res) => {
     const { id } = req.params;
 
-    let product = await Product.findByIdAndDelete(id);
+    let user = await User.findByIdAndDelete(id);
 
     return res.status(202).send({
       error: false,
-      product,
+      user,
     });
   });
 };
