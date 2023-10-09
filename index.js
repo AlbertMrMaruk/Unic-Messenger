@@ -38,18 +38,18 @@ app.get("/*", (_, res) => {
 
 const server = http.createServer(app);
 const wss = new Websocket.Server({ server });
-const connected_clients = new Map();
+// const connected_clients = new Map();
 const funcWs = function (ws) {
   // Клиент подключен
   console.log("Client ready");
   // NOTE: only for demonstration, will cause collisions.  Use a UUID or some other identifier that's actually unique
-  const this_stream_id = Array.from(connected_clients.values()).length;
+  // const this_stream_id = Array.from(connected_clients.values()).length;
 
-  connected_clients.set(this_stream_id, ws);
-  ws.is_alive = true;
-  ws.on("pong", () => {
-    ws.is_alive = true;
-  });
+  // connected_clients.set(this_stream_id, ws);
+  // ws.is_alive = true;
+  // ws.on("pong", () => {
+  //   ws.is_alive = true;
+  // });
 
   ws.on("message", function (message) {
     ws.send(message.toString());
@@ -58,12 +58,13 @@ const funcWs = function (ws) {
 
   ws.on("close", function (message) {
     console.log("连接断开", message);
-    connected_clients.delete(this_stream_id);
+    // connected_clients.delete(this_stream_id);
   });
 };
 
 wss.on("connection", funcWs);
 app.post("/post", function (req, response) {
+  console.log("Hmmm", wss);
   wss.clients.forEach((ws) => {
     console.log("dhhd");
     ws.send(JSON.stringify(req.body));
