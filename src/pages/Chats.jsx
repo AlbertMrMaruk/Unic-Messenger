@@ -26,7 +26,7 @@ function Chats({ messages, setMessages }) {
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
   useEffect(() => {
     setCurrentChat(state?.id);
-    setShowSpinnerMessages(true);
+
     // ChatsApi.getMessages(state?.id, 20, session)
     //   .then((resp) => {
     //     if (resp.ok) {
@@ -37,8 +37,6 @@ function Chats({ messages, setMessages }) {
     //     setMessages(res.reverse());
     //     setShowSpinnerMessages(false);
     //   });
-    setMessages(chats.find((el) => el.id === state?.id).messages);
-    setShowSpinnerMessages(false);
   }, [state]);
   useEffect(() => {
     fetch(`http://89.111.131.15/api/sessions/${session}/me`)
@@ -75,6 +73,7 @@ function Chats({ messages, setMessages }) {
         // });
 
         // Adding to mongoose database
+        setShowSpinnerMessages(true);
         DatabaseAPI.getUser("albert")
           .then((mda) => mda.json())
           .then((mda2) => {
@@ -107,6 +106,10 @@ function Chats({ messages, setMessages }) {
               setDataUser(mda2);
               setChats(mda2.chats.slice(0, 30));
               setShowSpinner(false);
+              setMessages(
+                mda2.chats.find((el) => el.id === state?.id).messages
+              );
+              setShowSpinnerMessages(false);
             }
           });
       });
