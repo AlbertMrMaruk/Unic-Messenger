@@ -78,7 +78,7 @@ function Chats({ messages, setMessages }) {
             if (mda2.length === 0) {
               console.log("Starting");
               const data = {
-                name: currentUser.pushName,
+                name: "Albert Marukyan",
                 username: "albert",
                 accounts: [session],
                 chats: res,
