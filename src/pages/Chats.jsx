@@ -13,7 +13,7 @@ import DatabaseAPI from "../api/DatabaseAPI";
 function Chats({ messages, setMessages }) {
   const [session, setSession] = useState("default");
   const [accounts, setAccounts] = useState(["default"]);
-  const [messagesDFinished, setMessagesDFinished] = useState(0);
+  const [messagesDFinished, setMessagesDFinished] = useState([]);
   const [dataUser, setDataUser] = useState();
   const [text, setText] = useState("");
   const [showSpinner, setShowSpinner] = useState(true);
@@ -103,9 +103,9 @@ function Chats({ messages, setMessages }) {
                       return el;
                     });
                     console.log("wtf", index, data.chats.length);
-                    setMessagesDFinished((prev) => prev + 1);
-                    console.log(messagesDFinished);
-                    if (messagesDFinished === 30) {
+                    setMessagesDFinished((prev) => [...prev, allSize]);
+                    console.log(messagesDFinished.length);
+                    if (messagesDFinished.length === 30) {
                       console.log(allSize);
                       data.allSize = allSize;
 
