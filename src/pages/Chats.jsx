@@ -149,11 +149,6 @@ function Chats({ messages, setMessages }) {
         }
       });
   }, [state]);
-  useEffect(() => {
-    console.log("changed?");
-    if (dataUser !== [])
-      DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
-  }, [dataUser]);
   return (
     <div className="bg-[#050505] flex  h-[100vh]">
       {/* Left Sidebar */}
@@ -306,21 +301,18 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                   });
                   ChatsApi.sendText(text, currentChat, session).then((res) => {
                     console.log("sended:" + res);
-                    setDataUser((prev) => {
-                      const chatIndex = chats.findIndex(
-                        (el) => el === currentChat
-                      );
-                      prev.chats[chatIndex].messages = [
-                        ...prev.chats[chatIndex].messages,
-                        {
-                          payload: { body: text },
-                          event: "send",
-                          timestamp: Date.now(),
-                        },
-                      ];
-                      console.log(prev);
-                      return prev;
-                    });
+                    const chatIndex = chats.findIndex(
+                      (el) => el === currentChat
+                    );
+                    chats[chatIndex].messages = [
+                      ...chats[chatIndex].messages,
+                      {
+                        payload: { body: text },
+                        event: "send",
+                        timestamp: Date.now(),
+                      },
+                    ];
+                    DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
                   });
                 }, 1000);
                 setText("");
