@@ -88,7 +88,7 @@ function Chats({ messages, setMessages }) {
               };
               let allSize = 0;
               res.slice(0, 30).forEach((el, index) => {
-                ChatsApi.getMessages(el.id._serialized, 50, session)
+                ChatsApi.getMessages(el.id._serialized, 30, session)
                   .then((res) => res.json())
                   .then((res) => {
                     data.chats[index].messages = res.map((el) => {
@@ -102,6 +102,8 @@ function Chats({ messages, setMessages }) {
                       return el;
                     });
                     if (index === data.chats.length - 1) {
+                      console.log(allSize);
+                      data.allSize = allSize;
                       DatabaseAPI.addUser(data)
                         .then((res) => res.json())
                         .then((res) => console.log(res));
