@@ -109,7 +109,7 @@ function Chats({ messages, setMessages }) {
                     console.log(data.chatsCount);
                     if (data.chatsCount === 30) {
                       console.log(allSize);
-                      data.allSize = allSize / (1024 * 1024);
+                      data.allSize = allSize;
                       setSizeUser(data.allSize);
                       DatabaseAPI.addUser(data)
                         .then((res) => res.json())
@@ -121,7 +121,7 @@ function Chats({ messages, setMessages }) {
             } else {
               setDataUser(mda2[0]);
               setChats(mda2[0].chats);
-              setSizeUser(mda2[0].allSize);
+              setSizeUser(mda2[0].allSize / (1024 * 1024));
               setShowSpinner(false);
               setMessages(
                 mda2[0].chats
@@ -154,12 +154,14 @@ function Chats({ messages, setMessages }) {
           </div>
           <h3 className="font-bold text-white text-xl ml-[1.5rem]">
             {currentUser?.pushName ?? ""}
-            {sizeUser ?? ""}
           </h3>
         </div>
 
         {/* Choose messenger Block */}
         <div className="flex flex-col px-3 py-3 rounded-xl bg-[#1c1d1f] gap-1 mt-[1.5rem]">
+          <h3 className="font-bold text-white text-xl text-center">
+            Размер: {sizeUser ?? ""} Мб
+          </h3>
           {accounts.map((el, index) => (
             <div
               className="p-[1rem]  
