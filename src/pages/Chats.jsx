@@ -104,17 +104,18 @@ function Chats({ messages, setMessages }) {
                     });
                     console.log("wtf", index, data.chats.length);
                     setMessagesDFinished((prev) => prev + 1);
+                    console.log(messagesDFinished);
+                    if (messagesDFinished === 30) {
+                      console.log(allSize);
+                      data.allSize = allSize;
+
+                      DatabaseAPI.addUser(data)
+                        .then((res) => res.json())
+                        .then((res) => console.log(res));
+                      setMessagesDFinished(0);
+                    }
                   });
               });
-              if (messagesDFinished === 30) {
-                console.log(allSize);
-                data.allSize = allSize;
-
-                DatabaseAPI.addUser(data)
-                  .then((res) => res.json())
-                  .then((res) => console.log(res));
-                setMessagesDFinished(0);
-              }
             } else {
               setDataUser(mda2[0]);
               setChats(mda2[0].chats);
@@ -132,6 +133,7 @@ function Chats({ messages, setMessages }) {
   return (
     <div className="bg-[#050505] flex  h-[100vh]">
       {/* Left Sidebar */}
+
       <div
         className="w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] h-[100vh] p-[1rem] 
        "
