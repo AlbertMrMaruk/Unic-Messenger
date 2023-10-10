@@ -154,7 +154,7 @@ function Chats({ messages, setMessages }) {
       {/* Left Sidebar */}
 
       <div
-        className="w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] h-[100vh] p-[1rem] 
+        className="w-[100%] hidden md:block md:w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] h-[100vh] p-[1rem] 
        "
       >
         {/* Top menu */}
@@ -223,7 +223,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
       </div>
       {/* Main Part */}
       <div
-        className="w-[72%] bg-inherit h-[100vh]
+        className="w-[100%] hidden md:block md:w-[72%] bg-inherit h-[100vh]
        "
       >
         {/* Top Menu Contact Name */}
