@@ -101,6 +101,7 @@ function Chats({ messages, setMessages }) {
                       delete el._data;
                       return el;
                     });
+                    console.log("wtf", index, data.chats.length);
                     if (index === data.chats.length - 1) {
                       console.log(allSize);
                       data.allSize = allSize;
