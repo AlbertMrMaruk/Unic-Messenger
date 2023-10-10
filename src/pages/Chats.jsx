@@ -160,7 +160,7 @@ function Chats({ messages, setMessages }) {
         {/* Choose messenger Block */}
         <div className="flex flex-col px-3 py-3 rounded-xl bg-[#1c1d1f] gap-1 mt-[1.5rem]">
           <h3 className="font-bold text-white text-xl text-center">
-            Размер: {(sizeUser + " ").slice(0, 3) ?? ""} Мб
+            Размер: {(sizeUser + " ").slice(0, 4) ?? ""} Мб
           </h3>
           {accounts.map((el, index) => (
             <div
