@@ -49,11 +49,6 @@ class ChatsAPI {
       }),
     });
   }
-  getMessages(id, limit, session) {
-    return fetch(
-      `http://89.111.131.15/api/${session}/chats/${id}/messages?downloadMedia=true&limit=${limit}`
-    );
-  }
   sendSeen(phone, session) {
     return fetch(`http://89.111.131.15/api/sendSeen`, {
       method: "post",
@@ -67,6 +62,11 @@ class ChatsAPI {
         chatId: `${phone}`,
       }),
     });
+  }
+  getMessages(id, limit, session) {
+    return fetch(
+      `http://89.111.131.15/api/${session}/chats/${id}/messages?downloadMedia=true&limit=${limit}`
+    );
   }
 }
 

@@ -290,19 +290,13 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 ]);
 
                 await ChatsApi.sendSeen(currentChat, session);
-                await ChatsApi.startTyping({
-                  currentChat,
-                  session,
-                });
+                await ChatsApi.startTyping(currentChat, session);
                 setTimeout(async () => {
-                  await ChatsApi.stopTyping({
-                    currentChat,
-                    session,
-                  });
+                  await ChatsApi.stopTyping(currentChat, session);
                   ChatsApi.sendText(text, currentChat, session).then((res) => {
                     console.log("sended:" + res);
                     const chatIndex = chats.findIndex(
-                      (el) => el === currentChat
+                      (el) => el.id._serialized === currentChat
                     );
                     chats[chatIndex].messages = [
                       ...chats[chatIndex].messages,
