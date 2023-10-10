@@ -84,14 +84,20 @@ function Chats({ messages, setMessages }) {
                 name: "Albert Marukyan",
                 username: "albert",
                 accounts: [session],
-                chats: res,
+                chats: res.slice(0, 30),
               };
+              let allSize = 0;
               res.forEach((el, index) => {
                 ChatsApi.getMessages(el.id._serialized, 50, session)
                   .then((res) => res.json())
                   .then((res) => {
                     data.chats[index].messages = res.map((el) => {
                       delete el.vCards;
+                      if (el.hasMedia) {
+                        console.log(el._data.size);
+                        el.size = el._data.size;
+                        allSize += +el._data.size;
+                      }
                       delete el._data;
                       return el;
                     });
@@ -104,11 +110,12 @@ function Chats({ messages, setMessages }) {
               });
             } else {
               setDataUser(mda2[0]);
-              setChats(mda2[0].chats.slice(0, 30));
+              setChats(mda2[0].chats);
               setShowSpinner(false);
               setMessages(
-                mda2[0].chats.find((el) => el.id._serialized === state?.id)
-                  .messages
+                mda2[0].chats
+                  .find((el) => el.id._serialized === state?.id)
+                  .messages.reverse()
               );
               setShowSpinnerMessages(false);
             }
