@@ -154,7 +154,7 @@ function Chats({ messages, setMessages }) {
       {/* Left Sidebar */}
 
       <div
-        className="w-[100%] hidden md:block md:w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] h-[100vh] p-[1rem] 
+        className="w-[100%] block md:w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] h-[100vh] p-[1rem] 
        "
       >
         {/* Top menu */}
