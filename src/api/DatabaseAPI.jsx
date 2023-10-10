@@ -7,6 +7,16 @@ class DatabaseAPI {
       console.log("User cannot be found:", error);
     }
   }
+  updateUser(username, data) {
+    return fetch(`${API_URL}/users/${username}`, {
+      method: "put",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  }
   getChat(id, chatId) {
     return fetch(`${API_URL}/users/${id}/${chatId}`);
   }
