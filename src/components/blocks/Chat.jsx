@@ -22,10 +22,9 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             console.log("seen")
           );
           chat.unreadCount = 0;
-          chat.updated = "ddd";
           console.log(dataUser, chat.id);
-          DatabaseAPI.updateUser("albert", { chatsCount: 31 }).then((res) =>
-            console.log(res.status)
+          DatabaseAPI.updateUser("albert", { chats: dataUser.chats }).then(
+            (res) => console.log(res.status)
           );
         }
       }}
