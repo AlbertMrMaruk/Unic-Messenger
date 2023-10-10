@@ -304,7 +304,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                         event: "send",
                         timestamp: Date.now(),
                       },
-                      ...chats[chatIndex].messages,
+                      ...chats[chatIndex].messages.reverse(),
                     ];
                     DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
                   });
