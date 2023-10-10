@@ -88,7 +88,7 @@ function Chats({ messages, setMessages }) {
                 chats: res.slice(0, 30),
               };
               let allSize = 0;
-              res.slice(0, 30).forEach((el, index) => {
+              data.chats.forEach((el, index) => {
                 ChatsApi.getMessages(el.id._serialized, 30, session)
                   .then((res) => res.json())
                   .then((res) => {
@@ -104,8 +104,8 @@ function Chats({ messages, setMessages }) {
                     });
                     console.log("wtf", index, data.chats.length);
                     setMessagesDFinished(messagesDFinished + 1);
-                    console.log(messagesDFinished.length);
-                    if (messagesDFinished.length === 30) {
+                    console.log(messagesDFinished);
+                    if (messagesDFinished === 30) {
                       console.log(allSize);
                       data.allSize = allSize;
 
