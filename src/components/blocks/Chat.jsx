@@ -26,7 +26,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           />
         )}
       </div>
-      <div className="flex flex-col gap-1 text-[#e9e9e9] text-left max-w-[75%]">
+      <div className="flex flex-col gap-1 text-[#e9e9e9] text-left max-w-[50%]">
         <h3 className="text-md">{chat.name}</h3>
         <p className="text-[0.85rem] text-[#777779]">
           {chat.lastMessage.fromMe ? "Вы: " : ""}
@@ -35,6 +35,11 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             : chat.lastMessage.body}
         </p>
       </div>
+      {chat.unreadCount !== 0 && (
+        <div className="bg-[#44a0ff] text-white m-auto text-center p-4 ">
+          {chat.unreadCount}
+        </div>
+      )}
     </div>
   );
 }
