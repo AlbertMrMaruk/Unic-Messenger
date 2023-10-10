@@ -36,7 +36,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         </p>
       </div>
       {chat.unreadCount !== 0 && (
-        <div className="bg-[#44a0ff] text-white m-auto text-center px-[.6rem] py-[.2rem] rounded-full text-[14px]  font-bold">
+        <div className="bg-[#44a0ff] text-white m-auto text-center px-[.6rem] py-[.2rem] rounded-full text-[14px]  font-bold justify-end">
           {chat.unreadCount}
         </div>
       )}
