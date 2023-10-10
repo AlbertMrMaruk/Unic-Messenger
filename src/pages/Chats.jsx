@@ -87,14 +87,14 @@ function Chats({ messages, setMessages }) {
                 chats: res.slice(0, 30),
               };
               let allSize = 0;
-              res.forEach((el, index) => {
+              res.slice(0, 30).forEach((el, index) => {
                 ChatsApi.getMessages(el.id._serialized, 50, session)
                   .then((res) => res.json())
                   .then((res) => {
                     data.chats[index].messages = res.map((el) => {
                       delete el.vCards;
                       if (el.hasMedia) {
-                        console.log(el._data.size);
+                        console.log(el._data.size, allSize);
                         el.size = el._data.size;
                         allSize += +el._data.size;
                       }
