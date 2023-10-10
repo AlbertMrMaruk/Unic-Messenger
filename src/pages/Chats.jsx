@@ -151,7 +151,8 @@ function Chats({ messages, setMessages }) {
   }, [state]);
   useEffect(() => {
     console.log("changed?");
-    DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
+    if (dataUser !== [])
+      DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
   }, [dataUser]);
   return (
     <div className="bg-[#050505] flex  h-[100vh]">
