@@ -10,21 +10,24 @@ function Chat({ chat, session, dataUser }) {
 border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#1f2022]"
       data-id={chat.id._serialized}
       onClick={() => {
-        navigate("/", {
-          state: {
-            id: chat.id._serialized,
-            name: chat.name,
-            img: chat.img ?? "",
-          },
-        });
         if (chat.unreadCount) {
           ChatsApi.sendSeen(chat.id._serialized, session).then(
             console.log("seen")
           );
           chat.unreadCount = 0;
+          chat.updated = "sss";
           console.log(dataUser, chat.id);
           DatabaseAPI.updateUser("albert", { chats: dataUser.chats }).then(
-            (res) => console.log(res.status)
+            (res) => {
+              console.log(res.status);
+              navigate("/", {
+                state: {
+                  id: chat.id._serialized,
+                  name: chat.name,
+                  img: chat.img ?? "",
+                },
+              });
+            }
           );
         }
       }}
