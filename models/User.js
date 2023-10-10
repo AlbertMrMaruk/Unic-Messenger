@@ -7,6 +7,7 @@ const userSchema = new Schema({
   accounts: Array,
   chats: Array,
   allSize: Number,
+  chatsCount: Number,
 });
 
 mongoose.model("users", userSchema);

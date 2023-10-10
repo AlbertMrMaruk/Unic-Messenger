@@ -86,6 +86,7 @@ function Chats({ messages, setMessages }) {
                 username: "albert",
                 accounts: [session],
                 chats: res.slice(0, 30),
+                chatsCount: 0,
               };
               let allSize = 0;
               data.chats.forEach((el, index) => {
@@ -103,12 +104,11 @@ function Chats({ messages, setMessages }) {
                       return el;
                     });
                     console.log("wtf", index, data.chats.length);
-                    setMessagesDFinished(messagesDFinished + 1);
-                    console.log(messagesDFinished);
-                    if (messagesDFinished === 30) {
+                    data.chatsCount += 1;
+                    console.log(data.chatsCount);
+                    if (data.chatsCount === 30) {
                       console.log(allSize);
                       data.allSize = allSize;
-
                       DatabaseAPI.addUser(data)
                         .then((res) => res.json())
                         .then((res) => console.log(res));
