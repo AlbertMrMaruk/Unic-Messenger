@@ -1,21 +1,26 @@
 import { useNavigate } from "react-router-dom";
+import ChatsApi from "../../api/ChatsApi";
 
-function Chat({ chat }) {
+function Chat({ chat, session }) {
   const navigate = useNavigate();
   return (
     <div
       className="p-[1rem]  
 border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#1f2022]"
       data-id={chat.id._serialized}
-      onClick={() =>
+      onClick={() => {
         navigate("/", {
           state: {
             id: chat.id._serialized,
             name: chat.name,
             img: chat.img ?? "",
           },
-        })
-      }
+        });
+        ChatsApi.sendSeen(chat.id._serialized, session).then(
+          console.log("seen")
+        );
+        chat.unreadCount = 0;
+      }}
     >
       <div className="bg-[#ababab] rounded-full w-[40px] h-[40px]">
         {chat.img && (

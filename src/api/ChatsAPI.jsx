@@ -26,6 +26,20 @@ class ChatsAPI {
       `http://89.111.131.15/api/${session}/chats/${id}/messages?downloadMedia=true&limit=${limit}`
     );
   }
+  sendSeen(phone, session) {
+    return fetch(`http://89.111.131.15/api/sendSeen`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        session,
+        chatId: `${phone}`,
+      }),
+    });
+  }
 }
 
 export default new ChatsAPI();

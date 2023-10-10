@@ -210,7 +210,9 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           {showSpinner ? (
             <Spinner />
           ) : (
-            chats.map((el, index) => <Chat chat={el} key={index} />)
+            chats.map((el, index) => (
+              <Chat chat={el} key={index} session={session} />
+            ))
           )}
         </div>
       </div>
