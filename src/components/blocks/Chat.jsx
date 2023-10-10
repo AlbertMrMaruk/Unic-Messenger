@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ChatsApi from "../../api/ChatsApi";
 import DatabaseAPI from "../../api/DatabaseAPI";
 
-function Chat({ chat, session }) {
+function Chat({ chat, session, dataUser }) {
   const navigate = useNavigate();
   return (
     <div
@@ -21,8 +21,12 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           ChatsApi.sendSeen(chat.id._serialized, session).then(
             console.log("seen")
           );
-          DatabaseAPI.updateUser("albert", { chatsCount: 31 });
           chat.unreadCount = 0;
+          chat.updated = "ddd";
+          console.log(dataUser, chat.id);
+          DatabaseAPI.updateUser("albert", { chatsCount: 31 }).then((res) =>
+            console.log(res.status)
+          );
         }
       }}
     >
