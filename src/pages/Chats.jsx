@@ -234,11 +234,14 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
       >
         {/* Top Menu Contact Name */}
         {state && (
-          <div className="bg-inherit h-[10vh] border-b-[1px] border-[#2a2a2a]">
-            <div className="block md:hidden" onClick={() => showChats(true)}>
-              <FaArrowLeft className="w-[25px] h-[25px] m-auto " />
+          <div className="bg-inherit flex justify-center items-center gap-2 md:block h-[10vh] border-b-[1px] border-[#2a2a2a]">
+            <div
+              className="block ml-2 md:hidden"
+              onClick={() => showChats(true)}
+            >
+              <FaArrowLeft className="w-[25px] h-[25px] m-auto text-white" />
             </div>
-            <div className="flex  items-center py-[.8rem] w-[90%] md:w-[100%] px-[3rem] ml-1 md:ml-0">
+            <div className="flex  items-center py-0 md:py-[.8rem] w-[90%] md:w-[100%] px-[3rem] ml-1 md:ml-0">
               <div className="bg-white rounded-full w-[40px] h-[40px]">
                 <img
                   src={state?.img}
