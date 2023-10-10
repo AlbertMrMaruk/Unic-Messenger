@@ -16,7 +16,6 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           );
           chat.unreadCount = 0;
           chat.updated = "sss";
-          console.log(dataUser, chat.id);
           DatabaseAPI.updateUser("albert", { chats: dataUser.chats }).then(
             (res) => {
               console.log(res.status);
@@ -29,6 +28,14 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               });
             }
           );
+        } else {
+          navigate("/", {
+            state: {
+              id: chat.id._serialized,
+              name: chat.name,
+              img: chat.img ?? "",
+            },
+          });
         }
       }}
     >
