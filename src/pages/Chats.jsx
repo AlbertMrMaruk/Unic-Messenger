@@ -237,7 +237,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           <div className="bg-inherit flex justify-center items-center gap-2 md:block h-[10vh] border-b-[1px] border-[#2a2a2a]">
             <div
               className="block ml-2 md:hidden"
-              onClick={() => showChats(true)}
+              onClick={() => setShowChats(true)}
             >
               <FaArrowLeft className="w-[25px] h-[25px] m-auto text-white" />
             </div>
