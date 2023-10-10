@@ -10,7 +10,10 @@ function Chat({ chat, session, dataUser, setShowChats }) {
 border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#1f2022]"
       data-id={chat.id._serialized}
       onClick={() => {
-        setShowChats(false);
+        if (window.innerWidth < 768) {
+          setShowChats(false);
+        }
+
         if (chat.unreadCount) {
           ChatsApi.sendSeen(chat.id._serialized, session).then(
             console.log("seen")
