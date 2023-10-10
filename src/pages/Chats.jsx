@@ -22,6 +22,7 @@ function Chats({ messages, setMessages }) {
   const [file, setFile] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [showModalAccount, setShowModalAccount] = useState(false);
+  const [sizeUser, setSizeUser] = useState(0);
   const [currentUser, setCurrentUser] = useState();
   const { state } = useLocation();
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
@@ -108,7 +109,8 @@ function Chats({ messages, setMessages }) {
                     console.log(data.chatsCount);
                     if (data.chatsCount === 30) {
                       console.log(allSize);
-                      data.allSize = allSize;
+                      data.allSize = allSize / (1024 * 1024);
+                      setSizeUser(data.allSize);
                       DatabaseAPI.addUser(data)
                         .then((res) => res.json())
                         .then((res) => console.log(res));
@@ -119,6 +121,7 @@ function Chats({ messages, setMessages }) {
             } else {
               setDataUser(mda2[0]);
               setChats(mda2[0].chats);
+              setSizeUser(mda2[0].allSize);
               setShowSpinner(false);
               setMessages(
                 mda2[0].chats
@@ -151,6 +154,7 @@ function Chats({ messages, setMessages }) {
           </div>
           <h3 className="font-bold text-white text-xl ml-[1.5rem]">
             {currentUser?.pushName ?? ""}
+            {sizeUser ?? ""}
           </h3>
         </div>
 
