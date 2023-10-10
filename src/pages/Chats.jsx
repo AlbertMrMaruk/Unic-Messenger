@@ -13,6 +13,7 @@ import DatabaseAPI from "../api/DatabaseAPI";
 function Chats({ messages, setMessages }) {
   const [session, setSession] = useState("default");
   const [accounts, setAccounts] = useState(["default"]);
+  const [messagesDFinished, setMessagesDFinished] = useState(0);
   const [dataUser, setDataUser] = useState();
   const [text, setText] = useState("");
   const [showSpinner, setShowSpinner] = useState(true);
@@ -102,15 +103,18 @@ function Chats({ messages, setMessages }) {
                       return el;
                     });
                     console.log("wtf", index, data.chats.length);
-                    if (index === data.chats.length - 1) {
-                      console.log(allSize);
-                      data.allSize = allSize;
-                      DatabaseAPI.addUser(data)
-                        .then((res) => res.json())
-                        .then((res) => console.log(res));
-                    }
+                    setMessagesDFinished((prev) => prev + 1);
                   });
               });
+              if (messagesDFinished === 30) {
+                console.log(allSize);
+                data.allSize = allSize;
+
+                DatabaseAPI.addUser(data)
+                  .then((res) => res.json())
+                  .then((res) => console.log(res));
+                setMessagesDFinished(0);
+              }
             } else {
               setDataUser(mda2[0]);
               setChats(mda2[0].chats);
