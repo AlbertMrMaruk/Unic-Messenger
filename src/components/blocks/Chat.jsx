@@ -16,9 +16,11 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             img: chat.img ?? "",
           },
         });
-        ChatsApi.sendSeen(chat.id._serialized, session).then(
-          console.log("seen")
-        );
+        if (chat.unreadCount) {
+          ChatsApi.sendSeen(chat.id._serialized, session).then(
+            console.log("seen")
+          );
+        }
         chat.unreadCount = 0;
       }}
     >
