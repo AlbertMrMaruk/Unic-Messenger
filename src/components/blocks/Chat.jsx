@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ChatsApi from "../../api/ChatsApi";
 import DatabaseAPI from "../../api/DatabaseAPI";
 
-function Chat({ chat, session, dataUser }) {
+function Chat({ chat, session, dataUser, setShowChats }) {
   const navigate = useNavigate();
   return (
     <div
@@ -10,6 +10,7 @@ function Chat({ chat, session, dataUser }) {
 border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#1f2022]"
       data-id={chat.id._serialized}
       onClick={() => {
+        setShowChats(false);
         if (chat.unreadCount) {
           ChatsApi.sendSeen(chat.id._serialized, session).then(
             console.log("seen")

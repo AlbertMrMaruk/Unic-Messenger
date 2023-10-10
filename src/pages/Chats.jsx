@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ChatsApi from "../api/ChatsApi";
-import { FaWhatsapp, FaPlus } from "react-icons/fa";
+import { FaWhatsapp, FaPlus, FaArrowLeft } from "react-icons/fa";
 import Message from "../components/blocks/Message";
 import Spinner from "../components/blocks/Spinner";
 import { useLocation } from "react-router-dom";
@@ -18,6 +18,7 @@ function Chats({ messages, setMessages }) {
   const [text, setText] = useState("");
   const [showSpinner, setShowSpinner] = useState(true);
   const [showSpinnerMessages, setShowSpinnerMessages] = useState(true);
+  const [showChats, setShowChats] = useState(true);
   const [chats, setChats] = useState([]);
   const [file, setFile] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -154,8 +155,10 @@ function Chats({ messages, setMessages }) {
       {/* Left Sidebar */}
 
       <div
-        className="w-[100%] block md:w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] h-[100vh] p-[1rem] 
-       "
+        className={`w-[100%] ${
+          showChats ? "block" : "hidden"
+        } md:w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] h-[100vh] p-[1rem] 
+       `}
       >
         {/* Top menu */}
         <div className="flex  items-center pt-[.5rem] w-[100%] px-[1rem]">
@@ -214,6 +217,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               <Chat
                 chat={el}
                 key={index}
+                setShowChats={setShowChats}
                 session={session}
                 dataUser={dataUser}
               />
@@ -223,13 +227,18 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
       </div>
       {/* Main Part */}
       <div
-        className="w-[100%] hidden md:block md:w-[72%] bg-inherit h-[100vh]
-       "
+        className={`w-[100%] ${
+          !showChats ? "block" : "hidden"
+        } md:block md:w-[72%] bg-inherit h-[100vh]
+            `}
       >
         {/* Top Menu Contact Name */}
         {state && (
           <div className="bg-inherit h-[10vh] border-b-[1px] border-[#2a2a2a]">
-            <div className="flex  items-center py-[.8rem] w-[100%] px-[3rem]">
+            <div className="block md:hidden">
+              <FaArrowLeft className="w-[25px] h-[25px] m-auto " />
+            </div>
+            <div className="flex  items-center py-[.8rem] w-[90%] md:w-[100%] px-[3rem] ml-1 md:ml-0">
               <div className="bg-white rounded-full w-[40px] h-[40px]">
                 <img
                   src={state?.img}
