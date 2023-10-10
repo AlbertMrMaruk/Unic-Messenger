@@ -26,12 +26,12 @@ module.exports = (app) => {
     const { username } = req.params;
     let user = await User.findOneAndUpdate(
       { username },
-      req.body,
-      { upsert: false },
-      function (err, doc) {
-        if (err) return res.send(500, { error: err });
-        return res.send("Succesfully saved.");
-      }
+      req.body
+      //   { upsert: false },
+      //   function (err, doc) {
+      //     if (err) return res.send(500, { error: err });
+      //     return res.send("Succesfully saved.");
+      //   }
     );
     return res.status(202).send({
       error: false,
