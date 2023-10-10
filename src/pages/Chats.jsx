@@ -86,7 +86,7 @@ function Chats({ messages, setMessages }) {
       setMessages(
         data.chats
           .find((el) => el.id._serialized === state?.id)
-          .messages.reverse()
+          .messages.toReversed()
       );
       setShowSpinnerMessages(false);
     };
@@ -304,7 +304,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                         event: "send",
                         timestamp: Date.now(),
                       },
-                      ...chats[chatIndex].messages.reverse(),
+                      ...chats[chatIndex].messages,
                     ];
                     DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
                   });
