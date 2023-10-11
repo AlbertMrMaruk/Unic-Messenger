@@ -64,8 +64,10 @@ function Chats() {
     }
   };
   useEffect(() => {
-    console.log("New Message", newMessage);
-    gettingMessage(newMessage);
+    if (newMessage) {
+      console.log("New Message", newMessage);
+      gettingMessage(newMessage);
+    }
   }, [newMessage]);
   useEffect(() => {
     console.log("Started");
