@@ -46,7 +46,11 @@ export const Tooltip = ({
           !show ? "hidden" : null
         }`}
       >
-        <span className="relative z-10 p-4 text-xs leading-none text-white whitespace-no-wrap bg-[#1c1d1f] shadow-lg rounded-md flex gap-3">
+        <span
+          className={`relative z-10 ${
+            !emoji ? "p-4" : ""
+          } p-4 text-xs leading-none text-white whitespace-no-wrap bg-[#1c1d1f] shadow-lg rounded-md flex gap-3`}
+        >
           {emoji ? (
             <EmojiPicker
               onEmojiClick={onEmojiClick}
