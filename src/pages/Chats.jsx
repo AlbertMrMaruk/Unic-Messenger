@@ -54,7 +54,10 @@ function Chats() {
           (el) => el.id._serialized === currentChat
         );
         chats[chatIndex].messages = [...chats[chatIndex].messages, message];
-        chats[chatIndex].lastMessage = message;
+        chats[chatIndex].lastMessage = {
+          body: message.payload.body,
+          ...message,
+        };
         console.log(chats[chatIndex]);
         DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
       } else {
@@ -62,7 +65,10 @@ function Chats() {
           (el) => el.id._serialized === message.payload.from
         );
         chats[chatIndex].unreadCount += 1;
-        chats[chatIndex].lastMessage = message;
+        chats[chatIndex].lastMessage = {
+          body: message.payload.body,
+          ...message,
+        };
         chats[chatIndex].messages = [...chats[chatIndex].messages, message];
         console.log(chats[chatIndex]);
         DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
