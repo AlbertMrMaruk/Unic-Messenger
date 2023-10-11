@@ -276,7 +276,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
       >
         {/* Top Menu Contact Name */}
         {state && (
-          <div className="bg-inherit flex justify-center items-center gap-2 md:block h-[12vh] md:h-[10vh] border-b-[1px] border-[#2a2a2a]">
+          <div className="bg-inherit flex justify-center items-center gap-2 md:block h-[11vh] md:h-[10vh] border-b-[1px] border-[#2a2a2a]">
             <div
               className="block mr-[1.5rem]  ml-[1rem] md:hidden"
               onClick={() => setShowChats(true)}
@@ -298,7 +298,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           </div>
         )}
         {/* Messages in chat */}
-        <div className="w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[60vh] mt-2">
+        <div className="w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[70vh] mt-2">
           {showSpinnerMessages ? (
             <Spinner />
           ) : (
