@@ -7,6 +7,7 @@ import {
   FaMicrophone,
   FaFile,
   FaArrowCircleUp,
+  FaSmile,
 } from "react-icons/fa";
 import clickChat from "../api/controlers/ChatsController";
 import Message from "../components/blocks/Message";
@@ -326,6 +327,14 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
+            <Tooltip setText={setText} emoji={true}>
+              <button
+                class="bg-[#1c1d1f]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
+                type="button"
+              >
+                <FaSmile className="text-white w-[18px] h-[18px] m-auto" />
+              </button>
+            </Tooltip>
             <button
               class="bg-[#1c1d1f]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
               type="button"
