@@ -345,7 +345,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                       (el) => el.id._serialized === currentChat
                     );
                     chats[chatIndex].lastMessage = {
-                      payload: { body: text },
+                      body: text,
                       event: "send",
                       fromMe: true,
                       timestamp: Date.now(),
