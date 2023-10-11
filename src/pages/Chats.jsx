@@ -61,6 +61,7 @@ function Chats() {
         console.log(chats[chatIndex]);
         DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
       } else {
+        setMessages((prev) => prev);
         const chatIndex = chats.findIndex(
           (el) => el.id._serialized === message.payload.from
         );
@@ -333,15 +334,6 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               class="bg-[#44a0ff]  p-1 text-xs z-[2] inline-block rounded-r-xl  w-[95px] h-[45px] text-white font-bold uppercase"
               type="button"
               onClick={async () => {
-                setMessages((prev) => [
-                  {
-                    payload: { body: text },
-                    event: "send",
-                    timestamp: Date.now(),
-                  },
-                  ...prev,
-                ]);
-
                 await ChatsApi.sendSeen(currentChat, session);
                 await ChatsApi.startTyping(currentChat, session);
                 setTimeout(async () => {
@@ -364,6 +356,14 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                         timestamp: Date.now(),
                       },
                     ];
+                    setMessages((prev) => [
+                      {
+                        payload: { body: text },
+                        event: "send",
+                        timestamp: Date.now(),
+                      },
+                      ...prev,
+                    ]);
                     DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
                   });
                 }, 1000);
