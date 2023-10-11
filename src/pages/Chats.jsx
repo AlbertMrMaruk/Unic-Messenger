@@ -42,7 +42,10 @@ function Chats() {
   //   //     setShowSpinnerMessages(false);
   //   //   });
   // }, [state]);
-  useEffect(() => clickChat(setMessages), [setMessages]);
+  useEffect(() => {
+    console.log("Started");
+    clickChat(setMessages);
+  }, [setMessages]);
   useEffect(() => {
     //Изменить активный чат
     setCurrentChat(state?.id);
@@ -307,7 +310,6 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 setTimeout(async () => {
                   await ChatsApi.stopTyping(currentChat, session);
                   ChatsApi.sendText(text, currentChat, session).then((res) => {
-                    console.log("sended:" + res);
                     const chatIndex = chats.findIndex(
                       (el) => el.id._serialized === currentChat
                     );
