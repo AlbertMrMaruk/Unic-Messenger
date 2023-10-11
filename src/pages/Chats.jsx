@@ -284,14 +284,14 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               <FaArrowLeft className="w-[25px] h-[25px] m-auto text-white" />
             </div>
             <div className="flex  items-center py-0 md:py-[.8rem] w-[90%] md:w-[100%] px-0 md:px-[3rem] ml-1 md:ml-0">
-              <div className="bg-white rounded-full md:w-[40px] md:h-[40px] w-[30px] h-[30px]">
+              <div className="bg-white rounded-full w-[40px] h-[40px] ">
                 <img
                   src={state?.img}
                   className="rounded-full w-[100%]"
                   alt={state?.name}
                 />
               </div>
-              <h3 className="font-bold text-white  ml-[1.5rem] text-[1rem] md:text-[1.3rem]">
+              <h3 className="font-bold text-white  ml-[1.5rem]  text-[1.3rem]">
                 {state?.name}
               </h3>
             </div>
