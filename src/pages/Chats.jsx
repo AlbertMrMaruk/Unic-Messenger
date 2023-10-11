@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ChatsApi from "../api/ChatsApi";
-import { FaWhatsapp, FaPlus, FaArrowLeft } from "react-icons/fa";
+import {
+  FaWhatsapp,
+  FaPlus,
+  FaArrowLeft,
+  FaFileUpload,
+  FaArrowCircleUp,
+} from "react-icons/fa";
 import clickChat from "../api/controlers/ChatsController";
 import Message from "../components/blocks/Message";
 import Spinner from "../components/blocks/Spinner";
@@ -308,7 +314,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         </div>
         {/* Input and buttons for send messages */}
         <div className="w-[100%] h-[7h]  justify-center items-center">
-          <div className="relative flex flex-wrap items-stretch m-auto w-[95%] md:w-[100%]">
+          <div className="relative flex flex-wrap items-stretch m-auto w-[95%] md:w-[90%]">
             <input
               type="text"
               className="
@@ -328,7 +334,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 class="bg-[#44a0ff]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[65px] h-[45px]"
                 type="button"
               >
-                Файл
+                <FaFileUpload className="text-white w-[45px] h-[45px] m-auto" />
               </button>
             </Tooltip>
             <button
@@ -371,7 +377,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 setText("");
               }}
             >
-              Отправить
+              <FaArrowCircleUp className="text-white w-[45px] h-[45px] m-auto" />
             </button>
           </div>
 
