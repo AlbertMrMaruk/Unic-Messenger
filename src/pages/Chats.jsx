@@ -4,7 +4,8 @@ import {
   FaWhatsapp,
   FaPlus,
   FaArrowLeft,
-  FaFileUpload,
+  FaMicrophone,
+  FaFile,
   FaArrowCircleUp,
 } from "react-icons/fa";
 import clickChat from "../api/controlers/ChatsController";
@@ -325,6 +326,12 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
+            <button
+              class="bg-[#1c1d1f]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[45px] h-[45px]"
+              type="button"
+            >
+              <FaMicrophone className="text-white w-[18px]  m-auto" />
+            </button>
             <Tooltip
               setFile={setFile}
               setShowModal={setShowModal}
@@ -334,7 +341,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 class="bg-[#1c1d1f]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[45px] h-[45px]"
                 type="button"
               >
-                <FaFileUpload className="text-white w-[18px]  m-auto" />
+                <FaFile className="text-white w-[18px]  m-auto" />
               </button>
             </Tooltip>
             <button
