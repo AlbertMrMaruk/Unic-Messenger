@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ChatsApi from "../../api/ChatsApi";
 import DatabaseAPI from "../../api/DatabaseAPI";
 
-function Chat({ chat, session, dataUser, setShowChats }) {
+function Chat({ chat, session, dataUser, setShowChats, index }) {
   const navigate = useNavigate();
   return (
     <div
@@ -58,9 +58,9 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             : chat.lastMessage.body}
         </p>
       </div>
-      {chat.unreadCount !== 0 && (
+      {dataUser.chats[index].unreadCount !== 0 && (
         <div className="bg-[#44a0ff] text-white m-auto text-center px-[.6rem] py-[.2rem] rounded-full text-[14px]  font-bold justify-end">
-          {chat.unreadCount}
+          {dataUser.chats[index].unreadCount}
         </div>
       )}
     </div>
