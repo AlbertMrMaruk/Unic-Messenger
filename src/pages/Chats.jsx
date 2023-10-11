@@ -331,14 +331,14 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               showModal={showModal}
             >
               <button
-                class="bg-[#44a0ff]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[65px] h-[45px]"
+                class="bg-[#1c1d1f]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[45px] h-[45px]"
                 type="button"
               >
-                <FaFileUpload className="text-white w-[45px] h-[45px] m-auto" />
+                <FaFileUpload className="text-white w-[18px]  m-auto" />
               </button>
             </Tooltip>
             <button
-              class="bg-[#44a0ff]  p-1 text-xs z-[2] inline-block rounded-r-xl  w-[95px] h-[45px] text-white font-bold uppercase"
+              class="bg-[#44a0ff]  p-1 text-xs z-[2] inline-block rounded-r-xl  w-[55px] h-[45px] text-white font-bold uppercase"
               type="button"
               onClick={async () => {
                 await ChatsApi.sendSeen(currentChat, session);
@@ -377,7 +377,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 setText("");
               }}
             >
-              <FaArrowCircleUp className="text-white w-[45px] h-[45px] m-auto" />
+              <FaArrowCircleUp className="text-white w-[25px]  m-auto" />
             </button>
           </div>
 
