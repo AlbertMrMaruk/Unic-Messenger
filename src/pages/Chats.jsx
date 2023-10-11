@@ -66,7 +66,8 @@ function Chats() {
           body: message.payload.body,
           ...message,
         };
-        console.log(chats[chatIndex]);
+        setDataUser((prev) => ({ ...prev, chats }));
+
         DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
       } else {
         setMessages((prev) => prev);
@@ -79,7 +80,8 @@ function Chats() {
           ...message,
         };
         chats[chatIndex].messages = [...chats[chatIndex].messages, message];
-        console.log(chats[chatIndex]);
+
+        setDataUser((prev) => ({ ...prev, chats }));
         DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
       }
     };
