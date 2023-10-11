@@ -299,7 +299,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           </div>
         )}
         {/* Messages in chat */}
-        <div className="w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[70vh] md-[80vh] mt-2">
+        <div className="w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[70vh] md:h-[80vh] mt-2">
           {showSpinnerMessages ? (
             <Spinner />
           ) : (
