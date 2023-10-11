@@ -276,7 +276,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
       >
         {/* Top Menu Contact Name */}
         {state && (
-          <div className="bg-inherit flex justify-center items-center gap-2 md:block h-[10vh] border-b-[1px] border-[#2a2a2a]">
+          <div className="bg-inherit flex justify-center items-center gap-2 md:block h-[12vh] md:h-[10vh] border-b-[1px] border-[#2a2a2a]">
             <div
               className="block mr-[1.5rem]  ml-[1rem] md:hidden"
               onClick={() => setShowChats(true)}
@@ -284,21 +284,21 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               <FaArrowLeft className="w-[25px] h-[25px] m-auto text-white" />
             </div>
             <div className="flex  items-center py-0 md:py-[.8rem] w-[90%] md:w-[100%] px-0 md:px-[3rem] ml-1 md:ml-0">
-              <div className="bg-white rounded-full w-[40px] h-[40px]">
+              <div className="bg-white rounded-full md:w-[40px] md:h-[40px] w-[30px] h-[30px]">
                 <img
                   src={state?.img}
                   className="rounded-full w-[100%]"
                   alt={state?.name}
                 />
               </div>
-              <h3 className="font-bold text-white  ml-[1.5rem] text-[1.3rem]">
+              <h3 className="font-bold text-white  ml-[1.5rem] text-[1rem] md:text-[1.3rem]">
                 {state?.name}
               </h3>
             </div>
           </div>
         )}
         {/* Messages in chat */}
-        <div className="w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[2.5rem] overflow-scroll h-[80vh] mt-2">
+        <div className="w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[80vh] mt-2">
           {showSpinnerMessages ? (
             <Spinner />
           ) : (
@@ -307,7 +307,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         </div>
         {/* Input and buttons for send messages */}
         <div className="w-[100%] h-[7h]  justify-center items-center">
-          <div className="relative flex flex-wrap items-stretch m-auto w-[90%]">
+          <div className="relative flex flex-wrap items-stretch m-auto w-[95%] md:w-[100%]">
             <input
               type="text"
               className="
