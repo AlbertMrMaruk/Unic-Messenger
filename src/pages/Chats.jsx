@@ -42,28 +42,32 @@ function Chats() {
   //   //     setShowSpinnerMessages(false);
   //   //   });
   // }, [state]);
+
   const [newMessage, setNewMessage] = useState();
-  const gettingMessage = (message) => {
-    console.log(message, currentChat, chats);
-    if (message.payload.from === currentChat) {
-      setMessages((prev) => [message, ...prev]);
-      const chatIndex = chats.findIndex(
-        (el) => el.id._serialized === currentChat
-      );
-      chats[chatIndex].messages = [...chats[chatIndex].messages, message];
-      console.log(chats[chatIndex]);
-      DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
-    } else {
-      const chatIndex = chats.findIndex(
-        (el) => el.id._serialized === message.payload.from
-      );
-      chats[chatIndex].unreadCount += 1;
-      chats[chatIndex].messages = [...chats[chatIndex].messages, message];
-      console.log(chats[chatIndex]);
-      DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
-    }
-  };
+  //Функция получения сообщения
   useEffect(() => {
+    const gettingMessage = (message) => {
+      console.log(message, currentChat, chats);
+      if (message.payload.from === currentChat) {
+        setMessages((prev) => [message, ...prev]);
+        const chatIndex = chats.findIndex(
+          (el) => el.id._serialized === currentChat
+        );
+        chats[chatIndex].messages = [...chats[chatIndex].messages, message];
+        chats[chatIndex].lastMessage = message;
+        console.log(chats[chatIndex]);
+        DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
+      } else {
+        const chatIndex = chats.findIndex(
+          (el) => el.id._serialized === message.payload.from
+        );
+        chats[chatIndex].unreadCount += 1;
+        chats[chatIndex].lastMessage = message;
+        chats[chatIndex].messages = [...chats[chatIndex].messages, message];
+        console.log(chats[chatIndex]);
+        DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
+      }
+    };
     if (newMessage) {
       console.log("New Message", newMessage);
       gettingMessage(newMessage);
@@ -340,6 +344,12 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                     const chatIndex = chats.findIndex(
                       (el) => el.id._serialized === currentChat
                     );
+                    chats[chatIndex].lastMessage = {
+                      payload: { body: text },
+                      event: "send",
+                      fromMe: true,
+                      timestamp: Date.now(),
+                    };
                     chats[chatIndex].messages = [
                       ...chats[chatIndex].messages,
                       {
