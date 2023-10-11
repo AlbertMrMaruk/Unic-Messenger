@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ChatsApi from "../api/ChatsApi";
 import { FaWhatsapp, FaPlus, FaArrowLeft } from "react-icons/fa";
+import clickChat from "../api/controlers/ChatsController";
 import Message from "../components/blocks/Message";
 import Spinner from "../components/blocks/Spinner";
 import { useLocation } from "react-router-dom";
@@ -10,10 +11,11 @@ import Modal from "../components/Modal";
 import ModalAccount from "../components/ModalAccount";
 import DatabaseAPI from "../api/DatabaseAPI";
 
-function Chats({ messages, setMessages }) {
+function Chats() {
   const [session, setSession] = useState("default");
   const [accounts, setAccounts] = useState(["default"]);
-  const [messagesDFinished, setMessagesDFinished] = useState(0);
+  const [messages, setMessages] = useState([]);
+
   const [dataUser, setDataUser] = useState();
   const [text, setText] = useState("");
   const [showSpinner, setShowSpinner] = useState(true);
@@ -40,7 +42,7 @@ function Chats({ messages, setMessages }) {
   //   //     setShowSpinnerMessages(false);
   //   //   });
   // }, [state]);
-
+  useEffect(() => clickChat(setMessages), [setMessages]);
   useEffect(() => {
     //Изменить активный чат
     setCurrentChat(state?.id);
@@ -137,7 +139,6 @@ function Chats({ messages, setMessages }) {
                       DatabaseAPI.addUser(data)
                         .then((res) => res.json())
                         .then((res) => console.log(res));
-                      setMessagesDFinished(0);
                     }
                   });
               });
@@ -234,7 +235,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
       >
         {/* Top Menu Contact Name */}
         {state && (
-          <div className="bg-inherit flex justify-center items-center gap-2 md:block :h-[10vh] border-b-[1px] border-[#2a2a2a]">
+          <div className="bg-inherit flex justify-center items-center gap-2 md:block h-[10vh] border-b-[1px] border-[#2a2a2a]">
             <div
               className="block mr-[1.5rem]  ml-[1rem] md:hidden"
               onClick={() => setShowChats(true)}
