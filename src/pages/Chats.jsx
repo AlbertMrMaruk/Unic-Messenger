@@ -327,10 +327,10 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               onChange={(e) => setText(e.target.value)}
             />
             <button
-              class="bg-[#1c1d1f]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[45px] h-[45px]"
+              class="bg-[#1c1d1f]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
               type="button"
             >
-              <FaMicrophone className="text-white w-[18px]  m-auto" />
+              <FaMicrophone className="text-white w-[18px] h-[18px] m-auto" />
             </button>
             <Tooltip
               setFile={setFile}
@@ -338,10 +338,10 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               showModal={showModal}
             >
               <button
-                class="bg-[#1c1d1f]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[45px] h-[45px]"
+                class="bg-[#1c1d1f]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[40px] h-[45px]"
                 type="button"
               >
-                <FaFile className="text-white w-[18px]  m-auto" />
+                <FaFile className="text-white w-[18px] h-[18px] m-auto" />
               </button>
             </Tooltip>
             <button
@@ -384,7 +384,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 setText("");
               }}
             >
-              <FaArrowCircleUp className="text-white w-[25px]  m-auto" />
+              <FaArrowCircleUp className="text-white w-[25px] h-[25px] m-auto" />
             </button>
           </div>
 
