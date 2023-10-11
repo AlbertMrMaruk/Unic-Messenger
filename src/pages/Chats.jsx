@@ -42,9 +42,29 @@ function Chats() {
   //   //     setShowSpinnerMessages(false);
   //   //   });
   // }, [state]);
+  const gettingMessage = (message) => {
+    if (message.payload.from === currentChat) {
+      setMessages((prev) => [message, ...prev]);
+      const chatIndex = chats.findIndex(
+        (el) => el.id._serialized === currentChat
+      );
+      chats[chatIndex].messages = [...chats[chatIndex].messages, message];
+      console.log(chats[chatIndex]);
+      DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
+    } else {
+      const chatIndex = chats.findIndex(
+        (el) => el.id._serialized === message.payload.from
+      );
+      chats[chatIndex].unreadCount += 1;
+      chats[chatIndex].messages = [...chats[chatIndex].messages, message];
+      console.log(chats[chatIndex]);
+      DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
+    }
+  };
+
   useEffect(() => {
     console.log("Started");
-    clickChat(setMessages);
+    clickChat(gettingMessage);
   }, [setMessages]);
   useEffect(() => {
     //Изменить активный чат

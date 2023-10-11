@@ -1,4 +1,4 @@
-function clickChat(setMessages) {
+function clickChat(gettingMessage) {
   try {
     let socket = new WebSocket(`ws://89.111.131.15/`);
     socket.addEventListener("open", () => {
@@ -13,11 +13,11 @@ function clickChat(setMessages) {
       }
       console.log(`Код: ${event.code} | Причина: ${event.reason}`);
 
-      clickChat(setMessages);
+      clickChat(gettingMessage);
     });
 
     socket.addEventListener("message", (event) => {
-      setMessages((prev) => [JSON.parse(event.data), ...prev]);
+      gettingMessage(JSON.parse(event.data));
     });
 
     socket.addEventListener("error", (event) => {
