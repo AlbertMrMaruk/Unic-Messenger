@@ -43,6 +43,7 @@ function Chats() {
   //   //   });
   // }, [state]);
   const gettingMessage = (message) => {
+    console.log(message, currentChat, chats);
     if (message.payload.from === currentChat) {
       setMessages((prev) => [message, ...prev]);
       const chatIndex = chats.findIndex(
