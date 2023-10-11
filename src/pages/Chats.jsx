@@ -42,6 +42,7 @@ function Chats() {
   //   //     setShowSpinnerMessages(false);
   //   //   });
   // }, [state]);
+  const [newMessage, setNewMessage] = useState();
   const gettingMessage = (message) => {
     console.log(message, currentChat, chats);
     if (message.payload.from === currentChat) {
@@ -62,11 +63,14 @@ function Chats() {
       DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
     }
   };
-
+  useEffect(() => {
+    console.log("New Message", newMessage);
+    gettingMessage(newMessage);
+  }, [newMessage]);
   useEffect(() => {
     console.log("Started");
-    clickChat(gettingMessage);
-  }, [setMessages]);
+    clickChat(setNewMessage);
+  }, [setNewMessage]);
   useEffect(() => {
     //Изменить активный чат
     setCurrentChat(state?.id);
