@@ -110,6 +110,7 @@ export default function ModalAccount({
                     ...prev,
                     accounts: [...prev.accounts, session],
                   }));
+                  setSession(session);
                   setShowModal(false);
                 }}
               >
