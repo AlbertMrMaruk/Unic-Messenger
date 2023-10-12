@@ -162,7 +162,7 @@ function Chats() {
       userData[0].accounts.length > 0 &&
       userData[0].chats.length === 0
     ) {
-      fetch(`http://89.111.131.15/api/${session}/chats`)
+      fetch(`http://89.111.131.15/api/${userData[0].accounts[0]}/chats`)
         .then((resp) => resp.json())
         .then((res) => {
           console.log("Starting");
@@ -175,15 +175,17 @@ function Chats() {
           };
           let allSize = 0;
           data.chats.forEach((el, index) => {
-            ChatsApi.getMessages(el.id._serialized, 30, session)
+            ChatsApi.getMessages(el.id._serialized, 30, userData[0].accounts[0])
               .then((res) => res.json())
               .then((res) => {
                 data.chats[index].messages = res.map((el) => {
                   delete el.vCards;
                   if (el.hasMedia) {
                     console.log(el._data.size, allSize);
-                    el.size = el._data.size;
-                    allSize += +el._data.size;
+                    if (el.size > 0) {
+                      el.size = el._data.size;
+                      allSize += +el._data.size;
+                    }
                   }
                   delete el._data;
                   return el;
