@@ -103,13 +103,20 @@ function Chats() {
   // Загрузка базы данных
   useEffect(async () => {
     //Изменить активный чат
+
     const resp = await DatabaseAPI.verifyToken();
     const data = await resp.json();
-    setDataUser(data);
+    if (!data) {
+      navigate("/sign-up");
+    }
+    const respUser = await DatabaseAPI.getUser(data.username);
+    const userData = await respUser.json();
+    setDataUser(userData);
+    console.log(userData);
 
     setCurrentChat(state?.id);
     //Загрузка информации о пользователе
-    setCurrentUser({ pushName: data.name });
+    setCurrentUser({ pushName: userData.name });
 
     //Старый код
     /* const newChat = res.slice(0, 10);
@@ -145,10 +152,10 @@ function Chats() {
     //Включается спиннер
     setShowSpinnerMessages(true);
     //Проверка аккаунтов пользователя
-    if (data.accounts.length === 0) {
+    if (userData.accounts.length === 0) {
       console.log("Add Account Maaan");
       setShowSpinnerMessages(false);
-    } else if (data.accounts.length > 0 && data.chats.length === 0) {
+    } else if (userData.accounts.length > 0 && userData.chats.length === 0) {
       fetch(`http://89.111.131.15/api/default/chats`)
         .then((resp) => resp.json())
         .then((res) => {
@@ -190,7 +197,7 @@ function Chats() {
           });
         });
     } else {
-      dataToApp(data);
+      dataToApp(userData);
     }
 
     // DatabaseAPI.getUser(dataUser)
