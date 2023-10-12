@@ -71,7 +71,7 @@ function Chats() {
         };
         setDataUser((prev) => ({ ...prev, chats }));
 
-        DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
+        DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
       } else {
         setMessages((prev) => prev);
         const chatIndex = chats.findIndex(
@@ -85,7 +85,7 @@ function Chats() {
         chats[chatIndex].messages = [...chats[chatIndex].messages, message];
 
         setDataUser((prev) => ({ ...prev, chats }));
-        DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
+        DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
       }
     };
     if (newMessage) {
@@ -321,7 +321,7 @@ function Chats() {
           ]);
         }
 
-        DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
+        DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
       });
     }, 1000);
     setText("");
@@ -507,6 +507,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               setSession={setSession}
               setShowModal={setShowModalAccount}
               session={session}
+              dataUser={dataUser}
               setAccounts={setAccounts}
             />
           )}

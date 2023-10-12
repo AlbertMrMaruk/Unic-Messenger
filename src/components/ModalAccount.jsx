@@ -1,9 +1,10 @@
+import DatabaseAPI from "../api/DatabaseAPI";
 import Spinner from "./blocks/Spinner";
 import { useState } from "react";
 
 export default function ModalAccount({
-  setSession,
   session,
+  dataUser,
   setAccounts,
   setShowModal,
   setDataUser,
@@ -110,7 +111,10 @@ export default function ModalAccount({
                     ...prev,
                     accounts: [...prev.accounts, session],
                   }));
-                  setSession(session);
+                  DatabaseAPI.updateUser(dataUser.username, {
+                    accounts: [...dataUser.accounts, session],
+                  });
+
                   setShowModal(false);
                 }}
               >
