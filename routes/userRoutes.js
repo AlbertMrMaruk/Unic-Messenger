@@ -27,7 +27,7 @@ module.exports = (app) => {
   });
 
   //AUTHENTICATION METHOODD!!!
-  app.post("/database/users/signup", async (req, res) => {
+  app.post("/database/users/signup", jsonParser, async (req, res) => {
     // geting our data from frontend
     const { username, password: plainTextPassword } = req.body;
     // encrypting our password to store in database
@@ -70,7 +70,7 @@ module.exports = (app) => {
     }
   };
 
-  app.post("/database/users/login", async (req, res) => {
+  app.post("/database/users/login", jsonParser, async (req, res) => {
     const { username, password } = req.body;
     // we made a function to verify our user login
     const response = await verifyUserLogin(username, password);
