@@ -54,8 +54,8 @@ function Chats() {
 
   const [newMessage, setNewMessage] = useState();
   // Проверка зайден пользователь или нет
-  useEffect(() => {
-    DatabaseAPI.verifyToken()
+  useEffect(async () => {
+    await DatabaseAPI.verifyToken()
       .then((el) => el.json())
       .then((el) => {
         if (!el) {
