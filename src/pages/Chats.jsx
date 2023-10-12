@@ -266,12 +266,14 @@ function Chats() {
   }, []);
 
   useEffect(() => {
+    setShowSpinnerMessages(true);
     setCurrentChat(state?.id);
     setMessages(
       dataUser.chats
         .find((el) => el.id._serialized === state?.id)
         .messages.toReversed()
     );
+    setShowSpinnerMessages(false);
   }, [state]);
 
   //Функция отправки сообщения
