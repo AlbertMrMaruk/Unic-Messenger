@@ -115,7 +115,7 @@ export default function ModalAccount({
                   }));
                   DatabaseAPI.updateUser(dataUser.username, {
                     accounts: [...dataUser.accounts, account],
-                  });
+                  }).then();
                   setShowModal(false);
                 }}
               >

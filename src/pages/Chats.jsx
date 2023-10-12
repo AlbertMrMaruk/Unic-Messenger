@@ -139,9 +139,9 @@ function Chats() {
     const dataToApp = (data) => {
       setDataUser(data);
       setAccounts(data.accounts);
-      if (data.accounts.length !== 0) {
-        setSession(data.accounts[0]);
-      }
+      // if (data.accounts.length !== 0) {
+      //   setSession(data.accounts[0]);
+      // }
       setChats(data.chats);
       setSizeUser(data.allSize / (1024 * 1024));
       setShowSpinner(false);
@@ -194,7 +194,9 @@ function Chats() {
                 if (data.chatsCount === 30) {
                   console.log(allSize);
                   data.allSize = allSize;
-                  DatabaseAPI.updateUser(userData[0].username, data)
+                  DatabaseAPI.updateUser(userData[0].username, {
+                    chats: data.chats,
+                  })
                     .then((res) => res.json())
                     .then((res) => {
                       console.log(res);
