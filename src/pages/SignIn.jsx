@@ -17,9 +17,9 @@ function SignIn() {
       .then((el) => el.json())
       .then((el) => console.log(el));
 
-    DatabaseAPI.signInUser(formData)
-      .then((res) => res.json())
-      .then((el) => console.log(el));
+    // DatabaseAPI.signInUser(formData)
+    //   .then((res) => res.json())
+    //   .then((el) => console.log(el));
   };
 
   const navigate = useNavigate();
