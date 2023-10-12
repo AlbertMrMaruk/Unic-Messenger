@@ -93,18 +93,26 @@ module.exports = (app) => {
   //Auth End
 
   app.get(`/database/users/login/verifyToken`, async (req, res) => {
-    const token = req.headers.cookie;
-    console.log(req.headers.cookie, req.headers.cookie.split("="), "dd");
-    try {
-      const verify = jwt.verify(token, JWT_SECRET);
-      console.log(verify.username, verify);
-      if (verify.type === "user") {
-        res.status(200).send(true);
-      } else {
+    if (req.headers.cookie) {
+      const token = req.headers.cookie.split("=")[1];
+      console.log(
+        req.headers.cookie.split("=")[1],
+        req.headers.cookie.split("="),
+        "dd"
+      );
+      try {
+        const verify = jwt.verify(token, JWT_SECRET);
+        console.log(verify.username, verify);
+        if (verify.type === "user") {
+          res.status(200).send(true);
+        } else {
+          res.status(200).send(false);
+        }
+      } catch (error) {
+        console.log(JSON.stringify(error), "error");
         res.status(200).send(false);
       }
-    } catch (error) {
-      console.log(JSON.stringify(error), "error");
+    } else {
       res.status(200).send(false);
     }
   });
