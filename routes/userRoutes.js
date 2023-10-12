@@ -29,15 +29,17 @@ module.exports = (app) => {
   //AUTHENTICATION METHOODD!!!
   app.post("/database/users/signup", jsonParser, async (req, res) => {
     // geting our data from frontend
-    const { username, password: plainTextPassword } = req.body;
+    const { name, username, password: plainTextPassword } = req.body;
     // encrypting our password to store in database
     const password = await bcrypt.hash(plainTextPassword, salt);
     try {
       // storing our user data into database
       const response = await User.create({
+        name,
         username,
         password,
       });
+      console.log(response);
       return response;
     } catch (error) {
       console.log(JSON.stringify(error));

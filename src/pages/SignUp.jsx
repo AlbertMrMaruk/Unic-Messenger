@@ -17,7 +17,7 @@ function SignUp() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      DatabaseAPI.createUser(formData);
+      DatabaseAPI.createUser(formData).then((res) => console.log(res.json()));
       console.log(formData);
       //  navigate("/");
     } catch (error) {
