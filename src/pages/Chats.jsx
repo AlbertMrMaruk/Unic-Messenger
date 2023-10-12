@@ -103,23 +103,13 @@ function Chats() {
   // Загрузка базы данных
   useEffect(async () => {
     //Изменить активный чат
-    await DatabaseAPI.verifyToken()
-      .then((el) => el.json())
-      .then((el) => {
-        if (!el) {
-          navigate("/sign-up");
-        } else {
-          DatabaseAPI.getUser(el.username)
-            .then((el) => el.json())
-            .then((el) => {
-              console.log(el, "Data");
-              setDataUser(el);
-            });
-        }
-      });
+    const resp = await DatabaseAPI.verifyToken();
+    const data = await resp.json();
+    setDataUser(data);
+
     setCurrentChat(state?.id);
     //Загрузка информации о пользователе
-    setCurrentUser({ pushName: dataUser.name });
+    setCurrentUser({ pushName: data.name });
 
     //Старый код
     /* const newChat = res.slice(0, 10);
@@ -155,10 +145,10 @@ function Chats() {
     //Включается спиннер
     setShowSpinnerMessages(true);
     //Проверка аккаунтов пользователя
-    if (dataUser.accounts.length === 0) {
+    if (data.accounts.length === 0) {
       console.log("Add Account Maaan");
       setShowSpinnerMessages(false);
-    } else if (dataUser.accounts.length > 0 && dataUser.chats.length === 0) {
+    } else if (data.accounts.length > 0 && data.chats.length === 0) {
       fetch(`http://89.111.131.15/api/default/chats`)
         .then((resp) => resp.json())
         .then((res) => {
@@ -200,7 +190,7 @@ function Chats() {
           });
         });
     } else {
-      dataToApp(dataUser);
+      dataToApp(data);
     }
 
     // DatabaseAPI.getUser(dataUser)
