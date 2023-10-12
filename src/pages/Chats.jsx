@@ -162,14 +162,14 @@ function Chats() {
       userData[0].accounts.length > 0 &&
       userData[0].chats.length === 0
     ) {
-      fetch(`http://89.111.131.15/api/default/chats`)
+      fetch(`http://89.111.131.15/api/${session}/chats`)
         .then((resp) => resp.json())
         .then((res) => {
           console.log("Starting");
           const data = {
-            name: "Albert Marukyan",
-            username: "albert",
-            accounts: [session],
+            name: userData[0].name,
+            username: userData[0].username,
+            accounts: userData[0].accounts,
             chats: res.slice(0, 30),
             chatsCount: 0,
           };
