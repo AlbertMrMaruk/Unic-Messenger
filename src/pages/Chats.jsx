@@ -54,22 +54,7 @@ function Chats() {
 
   const [newMessage, setNewMessage] = useState();
   // Проверка зайден пользователь или нет
-  useEffect(async () => {
-    await DatabaseAPI.verifyToken()
-      .then((el) => el.json())
-      .then((el) => {
-        if (!el) {
-          navigate("/sign-up");
-        } else {
-          DatabaseAPI.getUser(el.username)
-            .then((el) => el.json())
-            .then((el) => {
-              console.log(el, "Data");
-              setDataUser(el);
-            });
-        }
-      });
-  }, []);
+  useEffect(() => {}, []);
   //Функция получения сообщения
 
   useEffect(() => {
@@ -116,8 +101,22 @@ function Chats() {
   }, [setNewMessage]);
 
   // Загрузка базы данных
-  useEffect(() => {
+  useEffect(async () => {
     //Изменить активный чат
+    await DatabaseAPI.verifyToken()
+      .then((el) => el.json())
+      .then((el) => {
+        if (!el) {
+          navigate("/sign-up");
+        } else {
+          DatabaseAPI.getUser(el.username)
+            .then((el) => el.json())
+            .then((el) => {
+              console.log(el, "Data");
+              setDataUser(el);
+            });
+        }
+      });
     setCurrentChat(state?.id);
     //Загрузка информации о пользователе
     setCurrentUser({ pushName: dataUser.name });
