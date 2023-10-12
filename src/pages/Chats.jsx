@@ -167,9 +167,6 @@ function Chats() {
         .then((res) => {
           console.log("Starting");
           const data = {
-            name: userData[0].name,
-            username: userData[0].username,
-            accounts: userData[0].accounts,
             chats: res.slice(0, 30),
             chatsCount: 0,
           };
@@ -197,7 +194,7 @@ function Chats() {
                   console.log(allSize);
                   data.allSize = allSize;
                   dataToApp(data);
-                  DatabaseAPI.addUser(data)
+                  DatabaseAPI.updateUser(userData[0].username, data)
                     .then((res) => res.json())
                     .then((res) => console.log(res));
                 }
