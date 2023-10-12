@@ -7,6 +7,17 @@ class DatabaseAPI {
       console.log("User cannot be found:", error);
     }
   }
+  createUser(data) {
+    console.log(data);
+    return fetch(`${API_URL}/users/signup`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  }
   updateUser(username, data) {
     return fetch(`${API_URL}/users/${username}`, {
       method: "put",
