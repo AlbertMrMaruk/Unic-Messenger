@@ -91,9 +91,10 @@ module.exports = (app) => {
 
   //Auth End
 
-  app.get(`/database/users/verifyToken`, (req, res) => {
+  app.get(`/database/users/verifyToken`, async (req, res) => {
+    console.log("ffff");
     const { token } = req.cookies;
-    console.log(token);
+
     try {
       const verify = jwt.verify(token, JWT_SECRET);
       console.log(verify.username, verify);
