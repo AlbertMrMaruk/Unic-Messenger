@@ -10,6 +10,7 @@ const JWT_SECRET = "sdkhcbshbf3125bx2";
 module.exports = (app) => {
   app.get(`/database/users`, async (req, res) => {
     let users = await User.find();
+    console.log("MFA");
     return res.status(200).send(users);
   });
   app.get(`/database/users/:user`, async (req, res) => {
@@ -107,6 +108,7 @@ module.exports = (app) => {
       console.log(JSON.stringify(error), "error");
       res.status(200).send(false);
     }
+    return res.status(200).send(token);
   });
 
   app.put(`/database/users/:username`, jsonParser, async (req, res) => {
