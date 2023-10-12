@@ -54,7 +54,6 @@ function Chats() {
 
   const [newMessage, setNewMessage] = useState();
   // Проверка зайден пользователь или нет
-  useEffect(() => {}, []);
   //Функция получения сообщения
 
   useEffect(() => {
@@ -111,12 +110,12 @@ function Chats() {
     }
     const respUser = await DatabaseAPI.getUser(data.username);
     const userData = await respUser.json();
-    setDataUser(userData);
-    console.log(userData);
+    setDataUser(userData[0]);
+    console.log(userData[0][0]);
 
     setCurrentChat(state?.id);
     //Загрузка информации о пользователе
-    setCurrentUser({ pushName: userData.name });
+    setCurrentUser({ pushName: userData[0].name });
 
     //Старый код
     /* const newChat = res.slice(0, 10);
@@ -152,10 +151,13 @@ function Chats() {
     //Включается спиннер
     setShowSpinnerMessages(true);
     //Проверка аккаунтов пользователя
-    if (userData.accounts.length === 0) {
+    if (userData[0].accounts.length === 0) {
       console.log("Add Account Maaan");
       setShowSpinnerMessages(false);
-    } else if (userData.accounts.length > 0 && userData.chats.length === 0) {
+    } else if (
+      userData[0].accounts.length > 0 &&
+      userData[0].chats.length === 0
+    ) {
       fetch(`http://89.111.131.15/api/default/chats`)
         .then((resp) => resp.json())
         .then((res) => {
@@ -197,7 +199,7 @@ function Chats() {
           });
         });
     } else {
-      dataToApp(userData);
+      dataToApp(userData[0]);
     }
 
     // DatabaseAPI.getUser(dataUser)
