@@ -266,7 +266,7 @@ function Chats() {
   }, []);
 
   useEffect(() => {
-    if (state.id && dataUser.chats) {
+    if (state?.id && dataUser?.chats) {
       setShowSpinnerMessages(true);
       setCurrentChat(state?.id);
       setMessages(
