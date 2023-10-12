@@ -28,7 +28,7 @@ class DatabaseAPI {
     });
   }
   verifyToken() {
-    return fetch(`${API_URL}/users/verifyToken`);
+    return fetch(`${API_URL}/users/login/verifyToken`);
   }
   updateUser(username, data) {
     return fetch(`${API_URL}/users/${username}`, {

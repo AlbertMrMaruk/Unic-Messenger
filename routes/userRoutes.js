@@ -92,10 +92,9 @@ module.exports = (app) => {
 
   //Auth End
 
-  app.get(`/database/users/verifyToken`, async (req, res) => {
-    console.log("ffff");
+  app.get(`/database/users/login/verifyToken`, async (req, res) => {
     const { token } = req.cookies;
-
+    console.log(token);
     try {
       const verify = jwt.verify(token, JWT_SECRET);
       console.log(verify.username, verify);
@@ -108,7 +107,6 @@ module.exports = (app) => {
       console.log(JSON.stringify(error), "error");
       res.status(200).send(false);
     }
-    return res.status(200).send(token);
   });
 
   app.put(`/database/users/:username`, jsonParser, async (req, res) => {
