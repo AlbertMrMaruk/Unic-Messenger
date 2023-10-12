@@ -2,6 +2,7 @@ import { FaBullseye, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import Field from "../components/blocks/Field";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import DatabaseAPI from "../api/DatabaseAPI";
 
 function SignIn() {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ function SignIn() {
     e.preventDefault();
     try {
       console.log(formData);
+      DatabaseAPI.signInUser(formData).then((res) => console.log(res.status));
       //   if (userCreds.user) {
       //     navigate("/");
       //   }

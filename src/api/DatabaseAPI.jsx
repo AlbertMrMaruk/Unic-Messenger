@@ -8,8 +8,17 @@ class DatabaseAPI {
     }
   }
   createUser(data) {
-    console.log(data);
     return fetch(`${API_URL}/users/signup`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  }
+  signInUser(data) {
+    return fetch(`${API_URL}/users/signin`, {
       method: "post",
       headers: {
         Accept: "application/json",
