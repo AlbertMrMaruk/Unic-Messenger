@@ -22,6 +22,26 @@ module.exports = (app) => {
     });
   });
 
+  app.post("/database/users/login", jsonParser, async function (req, res) {
+    try {
+      // check if the user exists
+      const user = await User.findOne({ username: req.body.username });
+      if (user) {
+        //check if password matches
+        const result = req.body.password === user.password;
+        if (result) {
+          return result;
+        } else {
+          res.status(400).json({ error: "password doesn't match" });
+        }
+      } else {
+        res.status(400).json({ error: "User doesn't exist" });
+      }
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  });
+
   app.put(`/database/users/:username`, jsonParser, async (req, res) => {
     const { username } = req.params;
     let user = await User.findOneAndUpdate(
