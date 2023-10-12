@@ -144,11 +144,11 @@ function Chats() {
       setChats(data.chats);
       setSizeUser(data.allSize / (1024 * 1024));
       setShowSpinner(false);
-      setMessages(
-        data.chats
-          .find((el) => el.id._serialized === state?.id)
-          .messages.toReversed()
-      );
+      // setMessages(
+      //   data.chats
+      //     .find((el) => el.id._serialized === state?.id)
+      //     .messages.toReversed()
+      // );
       setShowSpinnerMessages(false);
     };
     //Включается спиннер
