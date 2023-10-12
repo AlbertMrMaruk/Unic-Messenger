@@ -93,7 +93,6 @@ export default function ModalAccount({
                       setQrCode(`http://89.111.131.15/api/${phone}/auth/qr`);
                       setShowSpinner(false);
                       setConfirm(true);
-                      setSession(phone);
                     }, 22000);
                   });
                 }}
