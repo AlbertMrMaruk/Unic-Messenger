@@ -13,8 +13,9 @@ function SignIn() {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    const isAuth = await DatabaseAPI.verifyToken();
-    console.log(isAuth);
+    DatabaseAPI.verifyToken()
+      .then((el) => el.json())
+      .then((el) => console.log(el));
 
     DatabaseAPI.signInUser(formData)
       .then((res) => res.json())
