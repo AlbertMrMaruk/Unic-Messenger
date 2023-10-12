@@ -3,8 +3,7 @@ import Spinner from "./blocks/Spinner";
 import { useState } from "react";
 
 export default function Modal({
-  setMessages,
-  setText,
+  sendMessage,
   session,
   file,
   text,
@@ -70,16 +69,17 @@ export default function Modal({
                   caption: text,
                   session,
                 }).then(() => {
-                  setMessages((prev) => [
-                    {
-                      payload: { body: text, userMediaUrl: file.file },
-                      event: "send",
-                      timestamp: Date.now(),
-                    },
-                    ,
-                    ...prev,
-                  ]);
-                  setText("");
+                  sendMessage(text, file.file);
+                  // setMessages((prev) => [
+                  //   {
+                  //     payload: { body: text, userMediaUrl: file.file },
+                  //     event: "send",
+                  //     timestamp: Date.now(),
+                  //   },
+                  //   ,
+                  //   ...prev,
+                  // ]);
+                  // setText("");
                   setShowSpinner(false);
                   setShowModal(false);
                 });

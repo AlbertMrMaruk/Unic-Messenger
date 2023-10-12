@@ -202,6 +202,71 @@ function Chats() {
         }
       });
   }, [state]);
+
+  //Функция отправки сообщения
+  const sendMessage = async (text, img) => {
+    await ChatsApi.sendSeen(currentChat, session);
+    await ChatsApi.startTyping(currentChat, session);
+    setTimeout(async () => {
+      await ChatsApi.stopTyping(currentChat, session);
+      ChatsApi.sendText(text, currentChat, session).then((res) => {
+        const chatIndex = chats.findIndex(
+          (el) => el.id._serialized === currentChat
+        );
+        if (img) {
+          chats[chatIndex].lastMessage = {
+            body: text,
+            userMediaUrl: img,
+            event: "send",
+            fromMe: true,
+            timestamp: Date.now(),
+          };
+          chats[chatIndex].messages = [
+            ...chats[chatIndex].messages,
+            {
+              payload: { body: text, userMediaUrl: img },
+              event: "send",
+              timestamp: Date.now(),
+            },
+          ];
+          setMessages((prev) => [
+            {
+              payload: { body: text, userMediaUrl: img },
+              event: "send",
+              timestamp: Date.now(),
+            },
+            ...prev,
+          ]);
+        } else {
+          chats[chatIndex].lastMessage = {
+            body: text,
+            event: "send",
+            fromMe: true,
+            timestamp: Date.now(),
+          };
+          chats[chatIndex].messages = [
+            ...chats[chatIndex].messages,
+            {
+              payload: { body: text },
+              event: "send",
+              timestamp: Date.now(),
+            },
+          ];
+          setMessages((prev) => [
+            {
+              payload: { body: text },
+              event: "send",
+              timestamp: Date.now(),
+            },
+            ...prev,
+          ]);
+        }
+
+        DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
+      });
+    }, 1000);
+    setText("");
+  };
   return (
     <div className="bg-[#050505] flex  h-[100vh]">
       {/* Left Sidebar */}
@@ -358,42 +423,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             <button
               class="bg-[#44a0ff]  p-1 text-xs z-[2] inline-block rounded-r-xl  w-[55px] h-[45px] text-white font-bold uppercase"
               type="button"
-              onClick={async () => {
-                await ChatsApi.sendSeen(currentChat, session);
-                await ChatsApi.startTyping(currentChat, session);
-                setTimeout(async () => {
-                  await ChatsApi.stopTyping(currentChat, session);
-                  ChatsApi.sendText(text, currentChat, session).then((res) => {
-                    const chatIndex = chats.findIndex(
-                      (el) => el.id._serialized === currentChat
-                    );
-                    chats[chatIndex].lastMessage = {
-                      body: text,
-                      event: "send",
-                      fromMe: true,
-                      timestamp: Date.now(),
-                    };
-                    chats[chatIndex].messages = [
-                      ...chats[chatIndex].messages,
-                      {
-                        payload: { body: text },
-                        event: "send",
-                        timestamp: Date.now(),
-                      },
-                    ];
-                    setMessages((prev) => [
-                      {
-                        payload: { body: text },
-                        event: "send",
-                        timestamp: Date.now(),
-                      },
-                      ...prev,
-                    ]);
-                    DatabaseAPI.updateUser("albert", { chats: dataUser.chats });
-                  });
-                }, 1000);
-                setText("");
-              }}
+              onClick={() => sendMessage(text)}
             >
               <FaArrowCircleUp className="text-white w-[25px] h-[25px] m-auto" />
             </button>
@@ -406,6 +436,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               session={session}
               setText={setText}
               setMessages={setMessages}
+              sendMessage={sendMessage}
               file={file}
               setShowModal={setShowModal}
             />
