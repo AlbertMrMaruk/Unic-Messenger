@@ -167,6 +167,7 @@ function Chats() {
         .then((res) => {
           console.log("Starting");
           const data = {
+            ...userData[0],
             chats: res.slice(0, 30),
             chatsCount: 0,
           };
