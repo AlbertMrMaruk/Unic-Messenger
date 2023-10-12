@@ -93,17 +93,18 @@ module.exports = (app) => {
 
   app.get(`/database/users/verifyToken`, async (req, res) => {
     const { token } = req.cookies;
+    console.log(token);
     try {
       const verify = jwt.verify(token, JWT_SECRET);
       console.log(verify.username, verify);
       if (verify.type === "user") {
-        return true;
+        res.send(true);
       } else {
-        return false;
+        res.send(false);
       }
     } catch (error) {
       console.log(JSON.stringify(error), "error");
-      return false;
+      res.send(false);
     }
   });
 
