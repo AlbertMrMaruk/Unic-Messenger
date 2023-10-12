@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const User = mongoose.model("users");
 const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json({ limit: "2000mb", extended: true });
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const salt = 10;
+const JWT_SECRET = "sdkhcbshbf3125bx2";
 
 module.exports = (app) => {
   app.get(`/database/users`, async (req, res) => {
@@ -22,25 +26,82 @@ module.exports = (app) => {
     });
   });
 
-  app.post("/database/users/login", jsonParser, async function (req, res) {
+  //AUTHENTICATION METHOODD!!!
+  app.post("/database/users/signup", async (req, res) => {
+    // geting our data from frontend
+    const { username, password: plainTextPassword } = req.body;
+    // encrypting our password to store in database
+    const password = await bcrypt.hash(plainTextPassword, salt);
     try {
-      // check if the user exists
-      const user = await User.findOne({ username: req.body.username });
-      if (user) {
-        //check if password matches
-        const result = req.body.password === user.password;
-        if (result) {
-          return result;
-        } else {
-          res.status(400).json({ error: "password doesn't match" });
-        }
-      } else {
-        res.status(400).json({ error: "User doesn't exist" });
-      }
+      // storing our user data into database
+      const response = await User.create({
+        username,
+        password,
+      });
+      return response;
     } catch (error) {
-      res.status(400).json({ error });
+      console.log(JSON.stringify(error));
+      if (error.code === 11000) {
+        return res.send({ status: "error", error: "username already exists" });
+      }
+      throw error;
     }
   });
+
+  const verifyUserLogin = async (username, password) => {
+    try {
+      const user = await User.findOne({ username }).lean();
+      if (!user) {
+        return { status: "error", error: "user not found" };
+      }
+      if (await bcrypt.compare(password, user.password)) {
+        // creating a JWT token
+        token = jwt.sign(
+          { id: user._id, username: user.username, type: "user" },
+          JWT_SECRET,
+          { expiresIn: "2h" }
+        );
+        return { status: "ok", data: token };
+      }
+      return { status: "error", error: "invalid password" };
+    } catch (error) {
+      console.log(error);
+      return { status: "error", error: "timed out" };
+    }
+  };
+
+  app.post("/database/users/login", async (req, res) => {
+    const { username, password } = req.body;
+    // we made a function to verify our user login
+    const response = await verifyUserLogin(username, password);
+    console.log(response);
+    if (response.status === "ok") {
+      // storing our JWT web token as a cookie in our browser
+      res.cookie("token", token, {
+        maxAge: 2 * 60 * 60 * 1000,
+        httpOnly: true,
+      }); // maxAge: 2 hours
+      return response;
+    } else {
+      res.json(response);
+    }
+  });
+
+  //Auth End
+
+  //   const verifyToken = (token) => {
+  //     try {
+  //       const verify = jwt.verify(token, JWT_SECRET);
+  //       if (verify.type === "user") {
+  //         return true;
+  //       } else {
+  //         return false;
+  //       }
+  //     } catch (error) {
+  //       console.log(JSON.stringify(error), "error");
+  //       return false;
+  //     }
+  //   };
 
   app.put(`/database/users/:username`, jsonParser, async (req, res) => {
     const { username } = req.params;

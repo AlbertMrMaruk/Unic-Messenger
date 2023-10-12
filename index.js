@@ -1,9 +1,16 @@
 const http = require("http");
 const Websocket = require("ws");
 const express = require("express");
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 const app = express();
+require("dotenv").config();
+const bcrypt = require("bcryptjs");
+const salt = 10;
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+
+const JWT_SECRET = "sdkhcbshbf3125bx2";
 
 console.log("Hello server");
 
@@ -27,6 +34,7 @@ db.once("open", () => {
   console.log("> successfully opened the database");
 });
 require(__dirname + "/routes/userRoutes")(app);
+app.use(cookieParser());
 app.use(express.static(__dirname + "/build/"));
 app.use(bodyParser.json({ limit: "2000mb", extended: true }));
 
