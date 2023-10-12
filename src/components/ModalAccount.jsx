@@ -6,6 +6,7 @@ export default function ModalAccount({
   session,
   setAccounts,
   setShowModal,
+  setDataUser,
 }) {
   const [showSpinner, setShowSpinner] = useState(false);
   const [qrCode, setQrCode] = useState(false);
@@ -106,6 +107,10 @@ export default function ModalAccount({
                 onClick={() => {
                   setShowSpinner(true);
                   setAccounts((prev) => [...prev, session]);
+                  setDataUser((prev) => ({
+                    ...prev,
+                    accounts: [...prev.accounts, session],
+                  }));
                   setShowModal(false);
                 }}
               >

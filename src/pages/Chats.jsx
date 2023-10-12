@@ -22,8 +22,8 @@ import { useNavigate } from "react-router-dom";
 
 function Chats() {
   const navigate = useNavigate();
-  const [session, setSession] = useState("default");
-  const [accounts, setAccounts] = useState(["default"]);
+  const [session, setSession] = useState();
+  const [accounts, setAccounts] = useState([]);
   const [messages, setMessages] = useState([]);
   const [dataUser, setDataUser] = useState();
   const [text, setText] = useState("");
@@ -111,7 +111,7 @@ function Chats() {
     const respUser = await DatabaseAPI.getUser(data.username);
     const userData = await respUser.json();
     setDataUser(userData[0]);
-    console.log(userData[0][0]);
+    console.log(userData[0]);
 
     setCurrentChat(state?.id);
     //Загрузка информации о пользователе
@@ -138,6 +138,10 @@ function Chats() {
     //ФУНКЦИЯ ДОБАВЛЕНИЯ ИНФОРМАЦИИ НА ПРИЛОЖЕНИЕ
     const dataToApp = (data) => {
       setDataUser(data);
+      setAccounts(data.accounts);
+      if (data.accounts.length !== 0) {
+        setSession(data.accounts[0]);
+      }
       setChats(data.chats);
       setSizeUser(data.allSize / (1024 * 1024));
       setShowSpinner(false);
@@ -256,7 +260,7 @@ function Chats() {
     //       dataToApp(mda2[0]);
     //     }
     //   });
-  }, [state]);
+  }, [session, state]);
 
   //Функция отправки сообщения
   const sendMessage = async (text, img) => {
@@ -499,6 +503,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           {/* Modal To Connect New Account */}
           {showModalAccount && (
             <ModalAccount
+              setDataUser={setDataUser}
               setSession={setSession}
               setShowModal={setShowModalAccount}
               session={session}
