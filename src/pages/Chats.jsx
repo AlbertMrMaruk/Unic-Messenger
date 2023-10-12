@@ -139,9 +139,9 @@ function Chats() {
     const dataToApp = (data) => {
       setDataUser(data);
       setAccounts(data.accounts);
-      // if (data.accounts.length !== 0) {
-      //   setSession(data.accounts[0]);
-      // }
+      if (data.accounts.length !== 0) {
+        setSession(data.accounts[0]);
+      }
       setChats(data.chats);
       setSizeUser(data.allSize / (1024 * 1024));
       setShowSpinner(false);
@@ -264,7 +264,7 @@ function Chats() {
     //       dataToApp(mda2[0]);
     //     }
     //   });
-  }, [session, state]);
+  }, [state]);
 
   //Функция отправки сообщения
   const sendMessage = async (text, img) => {
