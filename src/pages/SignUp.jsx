@@ -1,11 +1,20 @@
 import { FaBullseye, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Field from "../components/blocks/Field";
 import DatabaseAPI from "../api/DatabaseAPI";
 
 function SignUp() {
+  useEffect(() => {
+    DatabaseAPI.verifyToken()
+      .then((el) => el.json())
+      .then((el) => {
+        if (el) {
+          navigate("/");
+        }
+      });
+  }, []);
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -16,8 +25,12 @@ function SignUp() {
   const { name, username, password } = formData;
   const onSubmit = async (e) => {
     e.preventDefault();
-    const resp = await DatabaseAPI.createUser(formData);
-    console.log(resp);
+    DatabaseAPI.createUser(formData)
+      .then((el) => el.json)
+      .then((el) => {
+        console.log(el);
+        navigate("/");
+      });
   };
   return (
     <div className="bg-[#050505] h-screen pt-[10rem]">

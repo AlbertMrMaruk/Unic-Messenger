@@ -95,16 +95,10 @@ module.exports = (app) => {
   app.get(`/database/users/login/verifyToken`, async (req, res) => {
     if (req.headers.cookie) {
       const token = req.headers.cookie.split("=")[1];
-      console.log(
-        req.headers.cookie.split("=")[1],
-        req.headers.cookie.split("="),
-        "dd"
-      );
       try {
         const verify = jwt.verify(token, JWT_SECRET);
-        console.log(verify.username, verify);
         if (verify.type === "user") {
-          res.status(200).send(true);
+          res.status(200).send({ username: verify.username });
         } else {
           res.status(200).send(false);
         }

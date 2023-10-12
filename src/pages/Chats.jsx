@@ -18,12 +18,13 @@ import { Tooltip } from "../components/blocks/Tooltip";
 import Modal from "../components/Modal";
 import ModalAccount from "../components/ModalAccount";
 import DatabaseAPI from "../api/DatabaseAPI";
+import { useNavigate } from "react-router-dom";
 
 function Chats() {
+  const navigate = useNavigate();
   const [session, setSession] = useState("default");
   const [accounts, setAccounts] = useState(["default"]);
   const [messages, setMessages] = useState([]);
-
   const [dataUser, setDataUser] = useState();
   const [text, setText] = useState("");
   const [showSpinner, setShowSpinner] = useState(true);
@@ -53,6 +54,22 @@ function Chats() {
 
   const [newMessage, setNewMessage] = useState();
   //Функция получения сообщения
+  useEffect(() => {
+    DatabaseAPI.verifyToken()
+      .then((el) => el.json())
+      .then((el) => {
+        if (!el) {
+          navigate("/sign-up");
+        } else {
+          DatabaseAPI.getUser(el.username)
+            .then((el) => el.json())
+            .then((el) => {
+              console.log(el, "Data");
+              setDataUser(el);
+            });
+        }
+      });
+  }, []);
   useEffect(() => {
     const gettingMessage = (message) => {
       console.log(message, currentChat, chats);

@@ -1,10 +1,19 @@
 import { FaBullseye, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import Field from "../components/blocks/Field";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DatabaseAPI from "../api/DatabaseAPI";
 
 function SignIn() {
+  useEffect(() => {
+    DatabaseAPI.verifyToken()
+      .then((el) => el.json())
+      .then((el) => {
+        if (el) {
+          navigate("/");
+        }
+      });
+  }, []);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -13,13 +22,14 @@ function SignIn() {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    DatabaseAPI.verifyToken()
-      .then((el) => el.json())
-      .then((el) => console.log(el));
-
-    // DatabaseAPI.signInUser(formData)
-    //   .then((res) => res.json())
-    //   .then((el) => console.log(el));
+    DatabaseAPI.signInUser(formData)
+      .then((res) => res.json())
+      .then((el) => {
+        console.log(el);
+        if (el) {
+          navigate("/");
+        }
+      });
   };
 
   const navigate = useNavigate();
