@@ -13,9 +13,14 @@ function SignIn() {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    const resp = await DatabaseAPI.signInUser(formData);
-    console.log(resp);
-    return resp;
+    const isAuth = await DatabaseAPI.verifyToken();
+    console.log(isAuth);
+    if (isAuth) {
+    } else {
+      DatabaseAPI.signInUser(formData)
+        .then((res) => res.json())
+        .then((el) => console.log(el));
+    }
   };
 
   const navigate = useNavigate();

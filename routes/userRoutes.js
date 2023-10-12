@@ -40,7 +40,7 @@ module.exports = (app) => {
         password,
       });
       console.log(response);
-      return response;
+      return res.send(response);
     } catch (error) {
       console.log(JSON.stringify(error));
       if (error.code === 11000) {
@@ -83,7 +83,7 @@ module.exports = (app) => {
         maxAge: 2 * 60 * 60 * 1000,
         httpOnly: true,
       }); // maxAge: 2 hours
-      return response;
+      return res.send(response);
     } else {
       res.json(response);
     }
@@ -91,19 +91,21 @@ module.exports = (app) => {
 
   //Auth End
 
-  //   const verifyToken = (token) => {
-  //     try {
-  //       const verify = jwt.verify(token, JWT_SECRET);
-  //       if (verify.type === "user") {
-  //         return true;
-  //       } else {
-  //         return false;
-  //       }
-  //     } catch (error) {
-  //       console.log(JSON.stringify(error), "error");
-  //       return false;
-  //     }
-  //   };
+  app.get(`/database/users/verifyToken`, jsonParser, async (req, res) => {
+    const { token } = req.cookies;
+    try {
+      const verify = jwt.verify(token, JWT_SECRET);
+      console.log(verify.username, verify);
+      if (verify.type === "user") {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.log(JSON.stringify(error), "error");
+      return false;
+    }
+  });
 
   app.put(`/database/users/:username`, jsonParser, async (req, res) => {
     const { username } = req.params;

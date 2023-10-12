@@ -27,6 +27,9 @@ class DatabaseAPI {
       body: JSON.stringify(data),
     });
   }
+  verifyToken() {
+    return fetch(`${API_URL}/users/verifyToken`);
+  }
   updateUser(username, data) {
     return fetch(`${API_URL}/users/${username}`, {
       method: "put",
