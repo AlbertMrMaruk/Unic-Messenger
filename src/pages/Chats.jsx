@@ -53,7 +53,7 @@ function Chats() {
   // }, [state]);
 
   const [newMessage, setNewMessage] = useState();
-  //Функция получения сообщения
+  // Проверка зайден пользователь или нет
   useEffect(() => {
     DatabaseAPI.verifyToken()
       .then((el) => el.json())
@@ -70,6 +70,8 @@ function Chats() {
         }
       });
   }, []);
+  //Функция получения сообщения
+
   useEffect(() => {
     const gettingMessage = (message) => {
       console.log(message, currentChat, chats);
@@ -107,28 +109,18 @@ function Chats() {
       gettingMessage(newMessage);
     }
   }, [newMessage]);
+  // Запуск Вебсокета
   useEffect(() => {
     console.log("Started");
     clickChat(setNewMessage);
   }, [setNewMessage]);
+
+  // Загрузка базы данных
   useEffect(() => {
     //Изменить активный чат
     setCurrentChat(state?.id);
-    //Загрузка информации о пользователе TODO:Сделать подгрузку из базы данных
-    fetch(`http://89.111.131.15/api/sessions/${session}/me`)
-      .then((res) => res.json())
-      .then((res) => {
-        fetch(
-          `http://89.111.131.15/api/contacts/profile-picture?contactId=${res.id.slice(
-            0,
-            -5
-          )}&session=${session}`
-        )
-          .then((img) => img.json())
-          .then((img) => {
-            setCurrentUser({ ...res, img: img.profilePictureURL });
-          });
-      });
+    //Загрузка информации о пользователе
+    setCurrentUser({ pushName: dataUser.name });
 
     //Старый код
     /* const newChat = res.slice(0, 10);
@@ -163,61 +155,109 @@ function Chats() {
     };
     //Включается спиннер
     setShowSpinnerMessages(true);
-    //Проверка существует пользователь или нет
-    DatabaseAPI.getUser("albert")
-      .then((mda) => mda.json())
-      .then((mda2) => {
-        console.log(mda2, mda2.length === 0, mda2 ?? "yes");
-        if (mda2.length === 0) {
-          //ДОБАВЛЕНИЕ В БАЗУ ДАННЫХ
-          //Если юзера НЕТ на базы данных отправляются данные и добавляются в стейт приложения
-          fetch(`http://89.111.131.15/api/default/chats`)
-            .then((resp) => resp.json())
-            .then((res) => {
-              console.log("Starting");
-              const data = {
-                name: "Albert Marukyan",
-                username: "albert",
-                accounts: [session],
-                chats: res.slice(0, 30),
-                chatsCount: 0,
-              };
-              let allSize = 0;
-              data.chats.forEach((el, index) => {
-                ChatsApi.getMessages(el.id._serialized, 30, session)
-                  .then((res) => res.json())
-                  .then((res) => {
-                    data.chats[index].messages = res.map((el) => {
-                      delete el.vCards;
-                      if (el.hasMedia) {
-                        console.log(el._data.size, allSize);
-                        el.size = el._data.size;
-                        allSize += +el._data.size;
-                      }
-                      delete el._data;
-                      return el;
-                    });
-                    console.log("wtf", index, data.chats.length);
-                    data.chatsCount += 1;
-                    console.log(data.chatsCount);
-                    if (data.chatsCount === 30) {
-                      console.log(allSize);
-                      data.allSize = allSize;
-                      dataToApp(data);
-                      DatabaseAPI.addUser(data)
-                        .then((res) => res.json())
-                        .then((res) => console.log(res));
-                    }
-                  });
+    //Проверка аккаунтов пользователя
+    if (dataUser.accounts.length === 0) {
+      console.log("Add Account Maaan");
+      setShowSpinnerMessages(false);
+    } else if (dataUser.accounts.length > 0 && dataUser.chats.length === 0) {
+      fetch(`http://89.111.131.15/api/default/chats`)
+        .then((resp) => resp.json())
+        .then((res) => {
+          console.log("Starting");
+          const data = {
+            name: "Albert Marukyan",
+            username: "albert",
+            accounts: [session],
+            chats: res.slice(0, 30),
+            chatsCount: 0,
+          };
+          let allSize = 0;
+          data.chats.forEach((el, index) => {
+            ChatsApi.getMessages(el.id._serialized, 30, session)
+              .then((res) => res.json())
+              .then((res) => {
+                data.chats[index].messages = res.map((el) => {
+                  delete el.vCards;
+                  if (el.hasMedia) {
+                    console.log(el._data.size, allSize);
+                    el.size = el._data.size;
+                    allSize += +el._data.size;
+                  }
+                  delete el._data;
+                  return el;
+                });
+                console.log("wtf", index, data.chats.length);
+                data.chatsCount += 1;
+                console.log(data.chatsCount);
+                if (data.chatsCount === 30) {
+                  console.log(allSize);
+                  data.allSize = allSize;
+                  dataToApp(data);
+                  DatabaseAPI.addUser(data)
+                    .then((res) => res.json())
+                    .then((res) => console.log(res));
+                }
               });
-            });
-        } else {
-          //ЗАГРУЗКА С БАЗЫ ДАННЫХ
-          //Если юзер ЕСТЬ с базе данных берутся данные и добавляются в стейт приложения
+          });
+        });
+    } else {
+      dataToApp(dataUser);
+    }
 
-          dataToApp(mda2[0]);
-        }
-      });
+    // DatabaseAPI.getUser(dataUser)
+    //   .then((mda) => mda.json())
+    //   .then((mda2) => {
+    //     console.log(mda2, mda2.length === 0, mda2 ?? "yes");
+    //     if (mda2.length === 0) {
+    //       //ДОБАВЛЕНИЕ В БАЗУ ДАННЫХ
+    //       //Если юзера НЕТ на базы данных отправляются данные и добавляются в стейт приложения
+    //       fetch(`http://89.111.131.15/api/default/chats`)
+    //         .then((resp) => resp.json())
+    //         .then((res) => {
+    //           console.log("Starting");
+    //           const data = {
+    //             name: "Albert Marukyan",
+    //             username: "albert",
+    //             accounts: [session],
+    //             chats: res.slice(0, 30),
+    //             chatsCount: 0,
+    //           };
+    //           let allSize = 0;
+    //           data.chats.forEach((el, index) => {
+    //             ChatsApi.getMessages(el.id._serialized, 30, session)
+    //               .then((res) => res.json())
+    //               .then((res) => {
+    //                 data.chats[index].messages = res.map((el) => {
+    //                   delete el.vCards;
+    //                   if (el.hasMedia) {
+    //                     console.log(el._data.size, allSize);
+    //                     el.size = el._data.size;
+    //                     allSize += +el._data.size;
+    //                   }
+    //                   delete el._data;
+    //                   return el;
+    //                 });
+    //                 console.log("wtf", index, data.chats.length);
+    //                 data.chatsCount += 1;
+    //                 console.log(data.chatsCount);
+    //                 if (data.chatsCount === 30) {
+    //                   console.log(allSize);
+    //                   data.allSize = allSize;
+    //                   dataToApp(data);
+    //                   DatabaseAPI.addUser(data)
+    //                     .then((res) => res.json())
+    //                     .then((res) => console.log(res));
+    //                 }
+    //               });
+    //           });
+    //         });
+    //     } else {
+    //       //ЗАГРУЗКА С БАЗЫ ДАННЫХ
+    //       //Если юзер ЕСТЬ с базе данных берутся данные и добавляются в стейт приложения
+
+    //       dataToApp(mda2[0]);
+    //     }
+    //   });
   }, [state]);
 
   //Функция отправки сообщения
