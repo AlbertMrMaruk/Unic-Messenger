@@ -180,7 +180,7 @@ function Chats() {
                   delete el.vCards;
                   if (el.hasMedia) {
                     console.log(el._data.size, allSize);
-                    if (el.size > 0) {
+                    if (+el._data.size > 0) {
                       el.size = el._data.size;
                       allSize += +el._data.size;
                     }
@@ -194,10 +194,12 @@ function Chats() {
                 if (data.chatsCount === 30) {
                   console.log(allSize);
                   data.allSize = allSize;
-                  dataToApp(data);
                   DatabaseAPI.updateUser(userData[0].username, data)
                     .then((res) => res.json())
-                    .then((res) => console.log(res));
+                    .then((res) => {
+                      console.log(res);
+                      dataToApp(data);
+                    });
                 }
               });
           });
