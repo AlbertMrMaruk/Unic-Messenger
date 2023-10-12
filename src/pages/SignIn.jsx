@@ -12,15 +12,10 @@ function SignIn() {
   const { username, password } = formData;
   const onSubmit = async (e) => {
     e.preventDefault();
-    try {
-      console.log(formData);
-      DatabaseAPI.signInUser(formData).then((res) => console.log(res.status));
-      //   if (userCreds.user) {
-      //     navigate("/");
-      //   }
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(formData);
+    const resp = await DatabaseAPI.signInUser(formData);
+    console.log(resp);
+    return resp;
   };
 
   const navigate = useNavigate();

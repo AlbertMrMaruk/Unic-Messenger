@@ -72,7 +72,7 @@ module.exports = (app) => {
     }
   };
 
-  app.post("/database/users/login", jsonParser, async (req, res) => {
+  app.post("/database/users/signin", jsonParser, async (req, res) => {
     const { username, password } = req.body;
     // we made a function to verify our user login
     const response = await verifyUserLogin(username, password);

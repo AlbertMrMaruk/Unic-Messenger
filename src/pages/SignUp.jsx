@@ -16,13 +16,8 @@ function SignUp() {
   const { name, username, password } = formData;
   const onSubmit = async (e) => {
     e.preventDefault();
-    try {
-      DatabaseAPI.createUser(formData).then((res) => console.log(res.status));
-      console.log(formData);
-      //  navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
+    const resp = await DatabaseAPI.createUser(formData);
+    console.log(resp);
   };
   return (
     <div className="bg-[#050505] h-screen pt-[10rem]">
