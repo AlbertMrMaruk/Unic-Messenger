@@ -113,7 +113,6 @@ function Chats() {
     setDataUser(userData[0]);
     console.log(userData[0]);
 
-    setCurrentChat(state?.id);
     //Загрузка информации о пользователе
     setCurrentUser({ pushName: userData[0].name });
 
@@ -264,6 +263,15 @@ function Chats() {
     //       dataToApp(mda2[0]);
     //     }
     //   });
+  }, []);
+
+  useEffect(() => {
+    setCurrentChat(state?.id);
+    setMessages(
+      dataUser.chats
+        .find((el) => el.id._serialized === state?.id)
+        .messages.toReversed()
+    );
   }, [state]);
 
   //Функция отправки сообщения
