@@ -10,6 +10,7 @@ export default function ModalAccount({
   setDataUser,
 }) {
   const [showSpinner, setShowSpinner] = useState(false);
+  const [account, setAccount] = useState();
   const [qrCode, setQrCode] = useState(false);
   const [phone, setPhone] = useState("");
   const [confirm, setConfirm] = useState(false);
@@ -94,7 +95,8 @@ export default function ModalAccount({
                       setQrCode(`http://89.111.131.15/api/${phone}/auth/qr`);
                       setShowSpinner(false);
                       setConfirm(true);
-                    }, 22000);
+                      setAccount(phone);
+                    }, 14000);
                   });
                 }}
               >
@@ -106,15 +108,14 @@ export default function ModalAccount({
                 type="button"
                 onClick={() => {
                   setShowSpinner(true);
-                  setAccounts((prev) => [...prev, session]);
+                  setAccounts((prev) => [...prev, account]);
                   setDataUser((prev) => ({
                     ...prev,
-                    accounts: [...prev.accounts, session],
+                    accounts: [...prev.accounts, account],
                   }));
                   DatabaseAPI.updateUser(dataUser.username, {
-                    accounts: [...dataUser.accounts, session],
+                    accounts: [...dataUser.accounts, account],
                   });
-
                   setShowModal(false);
                 }}
               >
