@@ -13,7 +13,7 @@ function clickChat(setNewMessage, session) {
       }
       console.log(`Код: ${event.code} | Причина: ${event.reason}`);
 
-      clickChat(setNewMessage);
+      //   clickChat(setNewMessage);
     });
 
     socket.addEventListener("message", (event) => {
