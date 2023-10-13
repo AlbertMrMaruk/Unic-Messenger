@@ -1,6 +1,6 @@
-function clickChat(setNewMessage) {
+function clickChat(setNewMessage, session) {
   try {
-    let socket = new WebSocket(`ws://89.111.131.15/`);
+    let socket = new WebSocket(`ws://89.111.131.15?session=${session}`);
     socket.addEventListener("open", () => {
       console.log("Соединение установлено");
     });

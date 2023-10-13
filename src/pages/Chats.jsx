@@ -96,8 +96,9 @@ function Chats() {
   // Запуск Вебсокета
   useEffect(() => {
     console.log("Started");
-    clickChat(setNewMessage);
-  }, [setNewMessage]);
+    console.log(session);
+    clickChat(setNewMessage, session);
+  }, [session]);
 
   // Загрузка базы данных
   useEffect(async () => {

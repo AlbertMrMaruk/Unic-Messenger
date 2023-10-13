@@ -1,16 +1,12 @@
 const http = require("http");
 const Websocket = require("ws");
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const app = express();
+const url = require("url");
 require("dotenv").config();
-const bcrypt = require("bcryptjs");
-const salt = 10;
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-
-const JWT_SECRET = "sdkhcbshbf3125bx2";
 
 console.log("Hello server");
 
@@ -47,35 +43,34 @@ app.get("/*", (_, res) => {
 const server = http.createServer(app);
 const wss = new Websocket.Server({ server });
 // const connected_clients = new Map();
-const funcWs = function (ws) {
+const funcWs = function (ws, req) {
   // Клиент подключен
   console.log("Client ready");
-  // NOTE: only for demonstration, will cause collisions.  Use a UUID or some other identifier that's actually unique
-  // const this_stream_id = Array.from(connected_clients.values()).length;
+  const parameters = url.parse(req.url, true);
 
-  // connected_clients.set(this_stream_id, ws);
-  // ws.is_alive = true;
-  // ws.on("pong", () => {
-  //   ws.is_alive = true;
-  // });
-
-  ws.on("message", function (message) {
+  ws.session = parameters.query.session;
+  console.log(ws.session);
+  req.ws.on("message", function (message) {
     ws.send(message.toString());
     console.log("server receive message: ", message.toString());
   });
 
   ws.on("close", function (message) {
     console.log("连接断开", message);
-    // connected_clients.delete(this_stream_id);
   });
 };
 
 wss.on("connection", funcWs);
-app.post("/post", function (req, response) {
-  console.log("Hmmm");
+app.post("/post/:session", function (req, response) {
+  const { session } = req.params;
+  console.log("Hmmm", session);
   wss.clients.forEach((ws) => {
-    console.log("dhhd", ws);
-    ws.send(JSON.stringify(req.body));
+    if (ws.session === session) {
+      console.log("dhhd", ws.session);
+      ws.send(JSON.stringify(req.body));
+    } else {
+      console.log("cannot be found");
+    }
   });
 
   response.sendStatus(200);
