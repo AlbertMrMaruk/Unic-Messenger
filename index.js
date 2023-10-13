@@ -50,7 +50,7 @@ const funcWs = function (ws, req) {
 
   ws.session = parameters.query.session;
   console.log(ws.session);
-  req.ws.on("message", function (message) {
+  ws.on("message", function (message) {
     ws.send(message.toString());
     console.log("server receive message: ", message.toString());
   });
