@@ -97,7 +97,9 @@ function Chats() {
   useEffect(() => {
     console.log("Started");
     console.log(session);
-    clickChat(setNewMessage, session);
+    if (session) {
+      clickChat(setNewMessage, session);
+    }
   }, [session]);
 
   // Загрузка базы данных
