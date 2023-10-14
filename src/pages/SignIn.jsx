@@ -7,15 +7,15 @@ import DatabaseAPI from "../api/DatabaseAPI";
 function SignIn() {
   useEffect(() => {
     console.log("Sign-in");
-    DatabaseAPI.verifyToken()
-      .then((el) => el.json())
-      .then((el) => {
-        console.log(el);
-        if (el) {
-          navigate("/");
-          return;
-        }
-      });
+    // DatabaseAPI.verifyToken()
+    //   .then((el) => el.json())
+    //   .then((el) => {
+    //     console.log(el);
+    //     if (el) {
+    //       navigate("/");
+    //       return;
+    //     }
+    //   });
   }, []);
   const [formData, setFormData] = useState({
     username: "",
