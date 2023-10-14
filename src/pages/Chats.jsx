@@ -268,7 +268,12 @@ function Chats() {
     //   });
   }, []);
 
-  useEffect(() => {
+  useEffect(async () => {
+    const resp = await DatabaseAPI.verifyToken();
+    const data = await resp.json();
+    if (!data) {
+      navigate("/sign-in");
+    }
     if (state?.id && dataUser?.chats) {
       setShowSpinnerMessages(true);
       setCurrentChat(state?.id);
