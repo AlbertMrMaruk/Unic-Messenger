@@ -11,6 +11,7 @@ function SignIn() {
       .then((el) => {
         if (el) {
           navigate("/");
+          return;
         }
       });
   }, []);

@@ -12,6 +12,7 @@ function SignUp() {
       .then((el) => {
         if (el) {
           navigate("/");
+          return;
         }
       });
   }, []);

@@ -110,6 +110,7 @@ function Chats() {
     const data = await resp.json();
     if (!data) {
       navigate("/sign-up");
+      return;
     }
     const respUser = await DatabaseAPI.getUser(data.username);
     const userData = await respUser.json();
@@ -268,12 +269,7 @@ function Chats() {
     //   });
   }, []);
 
-  useEffect(async () => {
-    const resp = await DatabaseAPI.verifyToken();
-    const data = await resp.json();
-    if (!data) {
-      navigate("/sign-in");
-    }
+  useEffect(() => {
     if (state?.id && dataUser?.chats) {
       setShowSpinnerMessages(true);
       setCurrentChat(state?.id);
