@@ -30,7 +30,7 @@ export default function ModalAccount({
           proxy: null,
           webhooks: [
             {
-              url: "http://89.111.131.15/post",
+              url: `http://89.111.131.15/post?${session}`,
               events: ["message"],
               hmac: null,
               retries: null,
