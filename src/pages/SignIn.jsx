@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import DatabaseAPI from "../api/DatabaseAPI";
 
 function SignIn() {
+  console.log("Sign-in");
   useEffect(() => {
     DatabaseAPI.verifyToken()
       .then((el) => el.json())

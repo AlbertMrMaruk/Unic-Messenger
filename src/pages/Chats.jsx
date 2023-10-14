@@ -109,7 +109,7 @@ function Chats() {
     const resp = await DatabaseAPI.verifyToken();
     const data = await resp.json();
     if (!data) {
-      navigate("/sign-up");
+      navigate("/sign-in");
       return;
     }
     const respUser = await DatabaseAPI.getUser(data.username);
@@ -212,61 +212,6 @@ function Chats() {
     } else {
       dataToApp(userData[0]);
     }
-
-    // DatabaseAPI.getUser(dataUser)
-    //   .then((mda) => mda.json())
-    //   .then((mda2) => {
-    //     console.log(mda2, mda2.length === 0, mda2 ?? "yes");
-    //     if (mda2.length === 0) {
-    //       //ДОБАВЛЕНИЕ В БАЗУ ДАННЫХ
-    //       //Если юзера НЕТ на базы данных отправляются данные и добавляются в стейт приложения
-    //       fetch(`http://89.111.131.15/api/default/chats`)
-    //         .then((resp) => resp.json())
-    //         .then((res) => {
-    //           console.log("Starting");
-    //           const data = {
-    //             name: "Albert Marukyan",
-    //             username: "albert",
-    //             accounts: [session],
-    //             chats: res.slice(0, 30),
-    //             chatsCount: 0,
-    //           };
-    //           let allSize = 0;
-    //           data.chats.forEach((el, index) => {
-    //             ChatsApi.getMessages(el.id._serialized, 30, session)
-    //               .then((res) => res.json())
-    //               .then((res) => {
-    //                 data.chats[index].messages = res.map((el) => {
-    //                   delete el.vCards;
-    //                   if (el.hasMedia) {
-    //                     console.log(el._data.size, allSize);
-    //                     el.size = el._data.size;
-    //                     allSize += +el._data.size;
-    //                   }
-    //                   delete el._data;
-    //                   return el;
-    //                 });
-    //                 console.log("wtf", index, data.chats.length);
-    //                 data.chatsCount += 1;
-    //                 console.log(data.chatsCount);
-    //                 if (data.chatsCount === 30) {
-    //                   console.log(allSize);
-    //                   data.allSize = allSize;
-    //                   dataToApp(data);
-    //                   DatabaseAPI.addUser(data)
-    //                     .then((res) => res.json())
-    //                     .then((res) => console.log(res));
-    //                 }
-    //               });
-    //           });
-    //         });
-    //     } else {
-    //       //ЗАГРУЗКА С БАЗЫ ДАННЫХ
-    //       //Если юзер ЕСТЬ с базе данных берутся данные и добавляются в стейт приложения
-
-    //       dataToApp(mda2[0]);
-    //     }
-    //   });
   }, []);
 
   useEffect(() => {
