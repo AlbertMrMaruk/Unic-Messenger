@@ -5,11 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import DatabaseAPI from "../api/DatabaseAPI";
 
 function SignIn() {
-  console.log("Sign-in");
   useEffect(() => {
+    console.log("Sign-in");
     DatabaseAPI.verifyToken()
       .then((el) => el.json())
       .then((el) => {
+        console.log(el);
         if (el) {
           navigate("/");
           return;
