@@ -56,51 +56,51 @@ function Chats() {
   // Проверка зайден пользователь или нет
   //Функция получения сообщения
 
-  useEffect(() => {
-    const gettingMessage = (message) => {
-      console.log(message, currentChat, chats);
-      if (message.payload.from === currentChat) {
-        setMessages((prev) => [message, ...prev]);
-        const chatIndex = chats.findIndex(
-          (el) => el.id._serialized === currentChat
-        );
-        chats[chatIndex].messages = [...chats[chatIndex].messages, message];
-        chats[chatIndex].lastMessage = {
-          body: message.payload.body,
-          ...message,
-        };
-        setDataUser((prev) => ({ ...prev, chats }));
+  // useEffect(() => {
+  //   const gettingMessage = (message) => {
+  //     console.log(message, currentChat, chats);
+  //     if (message.payload.from === currentChat) {
+  //       setMessages((prev) => [message, ...prev]);
+  //       const chatIndex = chats.findIndex(
+  //         (el) => el.id._serialized === currentChat
+  //       );
+  //       chats[chatIndex].messages = [...chats[chatIndex].messages, message];
+  //       chats[chatIndex].lastMessage = {
+  //         body: message.payload.body,
+  //         ...message,
+  //       };
+  //       setDataUser((prev) => ({ ...prev, chats }));
 
-        DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
-      } else {
-        setMessages((prev) => prev);
-        const chatIndex = chats.findIndex(
-          (el) => el.id._serialized === message.payload.from
-        );
-        chats[chatIndex].unreadCount += 1;
-        chats[chatIndex].lastMessage = {
-          body: message.payload.body,
-          ...message,
-        };
-        chats[chatIndex].messages = [...chats[chatIndex].messages, message];
+  //       DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
+  //     } else {
+  //       setMessages((prev) => prev);
+  //       const chatIndex = chats.findIndex(
+  //         (el) => el.id._serialized === message.payload.from
+  //       );
+  //       chats[chatIndex].unreadCount += 1;
+  //       chats[chatIndex].lastMessage = {
+  //         body: message.payload.body,
+  //         ...message,
+  //       };
+  //       chats[chatIndex].messages = [...chats[chatIndex].messages, message];
 
-        setDataUser((prev) => ({ ...prev, chats }));
-        DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
-      }
-    };
-    if (newMessage) {
-      console.log("New Message", newMessage);
-      gettingMessage(newMessage);
-    }
-  }, [newMessage]);
-  // Запуск Вебсокета
-  useEffect(() => {
-    console.log("Started");
-    console.log(session);
-    if (session) {
-      clickChat(setNewMessage, session);
-    }
-  }, [session]);
+  //       setDataUser((prev) => ({ ...prev, chats }));
+  //       DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
+  //     }
+  //   };
+  //   if (newMessage) {
+  //     console.log("New Message", newMessage);
+  //     gettingMessage(newMessage);
+  //   }
+  // }, [newMessage]);
+  // // Запуск Вебсокета
+  // useEffect(() => {
+  //   console.log("Started");
+  //   console.log(session);
+  //   if (session) {
+  //     clickChat(setNewMessage, session);
+  //   }
+  // }, [session]);
 
   // Загрузка базы данных
   useEffect(async () => {

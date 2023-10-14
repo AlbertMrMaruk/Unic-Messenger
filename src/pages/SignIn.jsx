@@ -6,40 +6,38 @@ import DatabaseAPI from "../api/DatabaseAPI";
 
 function SignIn() {
   useEffect(() => {
-    console.log("Sign-in");
-    // DatabaseAPI.verifyToken()
-    //   .then((el) => el.json())
-    //   .then((el) => {
-    //     console.log(el);
-    //     if (el) {
-    //       navigate("/");
-    //       return;
-    //     }
-    //   });
+    DatabaseAPI.verifyToken()
+      .then((el) => el.json())
+      .then((el) => {
+        if (el) {
+          navigate("/");
+          return;
+        }
+      });
   }, []);
-  //   const [formData, setFormData] = useState({
-  //     username: "",
-  //     password: "",
-  //   });
-  //   const { username, password } = formData;
-  //   const onSubmit = async (e) => {
-  //     e.preventDefault();
-  //     console.log(formData);
-  //     DatabaseAPI.signInUser(formData)
-  //       .then((res) => res.json())
-  //       .then((el) => {
-  //         console.log(el);
-  //         if (el) {
-  //           navigate("/");
-  //         }
-  //       });
-  //   };
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+  const { username, password } = formData;
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formData);
+    DatabaseAPI.signInUser(formData)
+      .then((res) => res.json())
+      .then((el) => {
+        console.log(el);
+        if (el) {
+          navigate("/");
+        }
+      });
+  };
 
   const navigate = useNavigate();
 
   return (
     <div className="bg-[#050505] h-screen pt-[10rem]">
-      {/* <div className="static rounded-2xl bg-[#2c2e30] pt-6 px-3 pb-10 w-[90%] md:w-[55%] m-auto   shadow-xl shadow-[#00000047] ">
+      <div className="static rounded-2xl bg-[#2c2e30] pt-6 px-3 pb-10 w-[90%] md:w-[55%] m-auto   shadow-xl shadow-[#00000047] ">
         <div className="absolute bg-[#38dbe0] py-2  text-sm uppercase font-bold px-4 rounded-md top-[6.75rem] left-[50%] ml-[-60.5px] md:top-[9.25rem]  text-black flex gap-3 ">
           <FaUser className="my-auto text-lg" />
           Профиль
@@ -68,7 +66,7 @@ function SignIn() {
         <Link to="/sign-up" className="  text-[#1ad6dd]">
           Создать новый аккаунт
         </Link>
-      </div> */}
+      </div>
     </div>
   );
 }
