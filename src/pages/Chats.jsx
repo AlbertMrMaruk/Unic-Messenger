@@ -103,127 +103,132 @@ function Chats() {
   }, [session]);
 
   // Загрузка базы данных
-  // useEffect(async () => {
-  //   //Изменить активный чат
-
-  //   const resp = await DatabaseAPI.verifyToken();
-  //   const data = await resp.json();
-  //   if (!data) {
-  //     // navigate("/sign-in");
-  //     return;
-  //   }
-  //   const respUser = await DatabaseAPI.getUser(data.username);
-  //   const userData = await respUser.json();
-  //   setDataUser(userData[0]);
-  //   console.log(userData[0]);
-
-  //   //Загрузка информации о пользователе
-  //   setCurrentUser({ pushName: userData[0].name });
-
-  //   //Старый код
-  //   /* const newChat = res.slice(0, 10);
-  //   newChat.forEach((el, index) => {
-  //     fetch(
-  //       `http://89.111.131.15/api/contacts/profile-picture?contactId=${el?.id?.user}&session=${session}`
-  //     )
-  //       .then((el) => el.json())
-  //       .then((res) => {
-  //         el.img = res?.profilePictureURL;
-  //         if (index === 9) {
-  //           setChats(newChat);
-  //           setShowSpinner(false);
-  //         }
-  //       });
-  //   });
-
-  //   Adding to mongoose database */
-
-  //   //ФУНКЦИЯ ДОБАВЛЕНИЯ ИНФОРМАЦИИ НА ПРИЛОЖЕНИЕ
-  //   const dataToApp = (data) => {
-  //     setDataUser(data);
-  //     setAccounts(data.accounts);
-  //     if (data.accounts.length !== 0) {
-  //       setSession(data.accounts[0]);
-  //     }
-  //     setChats(data.chats);
-  //     setSizeUser(data.allSize / (1024 * 1024));
-  //     setShowSpinner(false);
-  //     // setMessages(
-  //     //   data.chats
-  //     //     .find((el) => el.id._serialized === state?.id)
-  //     //     .messages.toReversed()
-  //     // );
-  //     setShowSpinnerMessages(false);
-  //   };
-  //   //Включается спиннер
-  //   setShowSpinnerMessages(true);
-  //   //Проверка аккаунтов пользователя
-  //   if (userData[0].accounts.length === 0) {
-  //     console.log("Add Account Maaan");
-  //     setShowSpinnerMessages(false);
-  //   } else if (
-  //     userData[0].accounts.length > 0 &&
-  //     userData[0].chats.length === 0
-  //   ) {
-  //     fetch(`http://89.111.131.15/api/${userData[0].accounts[0]}/chats`)
-  //       .then((resp) => resp.json())
-  //       .then((res) => {
-  //         console.log("Starting");
-  //         const data = {
-  //           ...userData[0],
-  //           chats: res.slice(0, 30),
-  //           chatsCount: 0,
-  //         };
-  //         let allSize = 0;
-  //         data.chats.forEach((el, index) => {
-  //           ChatsApi.getMessages(el.id._serialized, 30, userData[0].accounts[0])
-  //             .then((res) => res.json())
-  //             .then((res) => {
-  //               data.chats[index].messages = res.map((el) => {
-  //                 delete el.vCards;
-  //                 if (el.hasMedia) {
-  //                   console.log(el._data.size, allSize);
-  //                   if (+el._data.size > 0) {
-  //                     el.size = el._data.size;
-  //                     allSize += +el._data.size;
-  //                   }
-  //                 }
-  //                 delete el._data;
-  //                 return el;
-  //               });
-  //               console.log("wtf", index, data.chats.length);
-  //               data.chatsCount += 1;
-  //               console.log(data.chatsCount);
-  //               if (data.chatsCount === 30) {
-  //                 console.log(allSize);
-  //                 data.allSize = allSize;
-  //                 DatabaseAPI.updateUser(userData[0].username, {
-  //                   chats: data.chats,
-  //                 })
-  //                   .then((res) => res.json())
-  //                   .then((res) => {
-  //                     console.log(res);
-  //                     dataToApp(data);
-  //                   });
-  //               }
-  //             });
-  //         });
-  //       });
-  //   } else {
-  //     dataToApp(userData[0]);
-  //   }
-  // }, []);
-
   useEffect(() => {
-    // navigate("/sign-in");
-    const changeState = async () => {
+    //Изменить активный чат
+    const onLoad = async () => {
       const resp = await DatabaseAPI.verifyToken();
       const data = await resp.json();
       if (!data) {
-        console.log("dd");
-        navigate("/sign-up");
+        navigate("/sign-in");
         return;
       }
+      const respUser = await DatabaseAPI.getUser(data.username);
+      const userData = await respUser.json();
+      setDataUser(userData[0]);
+      console.log(userData[0]);
+
+      //Загрузка информации о пользователе
+      setCurrentUser({ pushName: userData[0].name });
+
+      //Старый код
+      /* const newChat = res.slice(0, 10);
+    newChat.forEach((el, index) => {
+      fetch(
+        `http://89.111.131.15/api/contacts/profile-picture?contactId=${el?.id?.user}&session=${session}`
+      )
+        .then((el) => el.json())
+        .then((res) => {
+          el.img = res?.profilePictureURL;
+          if (index === 9) {
+            setChats(newChat);
+            setShowSpinner(false);
+          }
+        });
+    });
+
+    Adding to mongoose database */
+
+      //ФУНКЦИЯ ДОБАВЛЕНИЯ ИНФОРМАЦИИ НА ПРИЛОЖЕНИЕ
+      const dataToApp = (data) => {
+        setDataUser(data);
+        setAccounts(data.accounts);
+        if (data.accounts.length !== 0) {
+          setSession(data.accounts[0]);
+        }
+        setChats(data.chats);
+        setSizeUser(data.allSize / (1024 * 1024));
+        setShowSpinner(false);
+        // setMessages(
+        //   data.chats
+        //     .find((el) => el.id._serialized === state?.id)
+        //     .messages.toReversed()
+        // );
+        setShowSpinnerMessages(false);
+      };
+      //Включается спиннер
+      setShowSpinnerMessages(true);
+      //Проверка аккаунтов пользователя
+      if (userData[0].accounts.length === 0) {
+        console.log("Add Account Maaan");
+        setShowSpinnerMessages(false);
+      } else if (
+        userData[0].accounts.length > 0 &&
+        userData[0].chats.length === 0
+      ) {
+        fetch(`http://89.111.131.15/api/${userData[0].accounts[0]}/chats`)
+          .then((resp) => resp.json())
+          .then((res) => {
+            console.log("Starting");
+            const data = {
+              ...userData[0],
+              chats: res.slice(0, 30),
+              chatsCount: 0,
+            };
+            let allSize = 0;
+            data.chats.forEach((el, index) => {
+              ChatsApi.getMessages(
+                el.id._serialized,
+                30,
+                userData[0].accounts[0]
+              )
+                .then((res) => res.json())
+                .then((res) => {
+                  data.chats[index].messages = res.map((el) => {
+                    delete el.vCards;
+                    if (el.hasMedia) {
+                      console.log(el._data.size, allSize);
+                      if (+el._data.size > 0) {
+                        el.size = el._data.size;
+                        allSize += +el._data.size;
+                      }
+                    }
+                    delete el._data;
+                    return el;
+                  });
+                  console.log("wtf", index, data.chats.length);
+                  data.chatsCount += 1;
+                  console.log(data.chatsCount);
+                  if (data.chatsCount === 30) {
+                    console.log(allSize);
+                    data.allSize = allSize;
+                    DatabaseAPI.updateUser(userData[0].username, {
+                      chats: data.chats,
+                    })
+                      .then((res) => res.json())
+                      .then((res) => {
+                        console.log(res);
+                        dataToApp(data);
+                      });
+                  }
+                });
+            });
+          });
+      } else {
+        dataToApp(userData[0]);
+      }
+    };
+    onLoad();
+  }, []);
+
+  useEffect(() => {
+    const changeState = async () => {
+      // const resp = await DatabaseAPI.verifyToken();
+      // const data = await resp.json();
+      // if (!data) {
+      //   console.log("dd");
+      //   navigate("/sign-up");
+      //   return;
+      // }
       if (state?.id && dataUser?.chats) {
         setShowSpinnerMessages(true);
         setCurrentChat(state?.id);
