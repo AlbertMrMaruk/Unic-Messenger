@@ -218,7 +218,7 @@ function Chats() {
     const resp = await DatabaseAPI.verifyToken();
     const data = await resp.json();
     if (!data) {
-      navigate("/sign-in");
+      navigate("/");
       return;
     }
     if (state?.id && dataUser?.chats) {
