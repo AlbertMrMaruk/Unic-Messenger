@@ -148,11 +148,14 @@ function Chats() {
         setChats(data.chats);
         setSizeUser(data.allSize / (1024 * 1024));
         setShowSpinner(false);
-        // setMessages(
-        //   data.chats
-        //     .find((el) => el.id._serialized === state?.id)
-        //     .messages.toReversed()
-        // );
+        if (state?.id) {
+          setMessages(
+            data.chats
+              .find((el) => el.id._serialized === state?.id)
+              .messages.toReversed()
+          );
+        }
+
         setShowSpinnerMessages(false);
       };
       //Включается спиннер
@@ -222,13 +225,6 @@ function Chats() {
 
   useEffect(() => {
     const changeState = async () => {
-      // const resp = await DatabaseAPI.verifyToken();
-      // const data = await resp.json();
-      // if (!data) {
-      //   console.log("dd");
-      //   navigate("/sign-up");
-      //   return;
-      // }
       if (state?.id && dataUser?.chats) {
         setShowSpinnerMessages(true);
         setCurrentChat(state?.id);
