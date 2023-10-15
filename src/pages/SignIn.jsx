@@ -6,7 +6,8 @@ import DatabaseAPI from "../api/DatabaseAPI";
 
 function SignIn() {
   useEffect(() => {
-    navigate("/sign-in");
+    console.log("fff");
+    navigate("/sign-up");
     DatabaseAPI.verifyToken()
       .then((el) => el.json())
       .then((el) => {
