@@ -219,7 +219,7 @@ function Chats() {
     const data = await resp.json();
     if (!data) {
       console.log("dd");
-      // navigate("/sign-in");
+      navigate("/sign-in");
       return;
     }
     if (state?.id && dataUser?.chats) {
