@@ -214,24 +214,25 @@ function Chats() {
   //   }
   // }, []);
 
-  useEffect(async () => {
-    const resp = await DatabaseAPI.verifyToken();
-    const data = await resp.json();
-    if (!data) {
-      console.log("dd");
-      navigate("/sign-in");
-      return;
-    }
-    if (state?.id && dataUser?.chats) {
-      setShowSpinnerMessages(true);
-      setCurrentChat(state?.id);
-      setMessages(
-        dataUser.chats
-          .find((el) => el.id._serialized === state?.id)
-          .messages.toReversed()
-      );
-      setShowSpinnerMessages(false);
-    }
+  useEffect(() => {
+    navigate("/sign-in");
+    // const resp = await DatabaseAPI.verifyToken();
+    // const data = await resp.json();
+    // if (!data) {
+    //   console.log("dd");
+    //   navigate("/sign-in");
+    //   return;
+    // }
+    // if (state?.id && dataUser?.chats) {
+    //   setShowSpinnerMessages(true);
+    //   setCurrentChat(state?.id);
+    //   setMessages(
+    //     dataUser.chats
+    //       .find((el) => el.id._serialized === state?.id)
+    //       .messages.toReversed()
+    //   );
+    //   setShowSpinnerMessages(false);
+    // }
   }, [state]);
 
   //Функция отправки сообщения
