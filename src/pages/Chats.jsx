@@ -109,7 +109,7 @@ function Chats() {
     const resp = await DatabaseAPI.verifyToken();
     const data = await resp.json();
     if (!data) {
-      navigate("/sign-in");
+      // navigate("/sign-in");
       return;
     }
     const respUser = await DatabaseAPI.getUser(data.username);
@@ -214,11 +214,11 @@ function Chats() {
     }
   }, []);
 
-  useEffect(() => {
-    const resp = DatabaseAPI.verifyToken();
-    const data = resp.json();
+  useEffect(async () => {
+    const resp = await DatabaseAPI.verifyToken();
+    const data = await resp.json();
     if (!data) {
-      navigate("/sign-in");
+      // navigate("/sign-in");
       return;
     }
     if (state?.id && dataUser?.chats) {
