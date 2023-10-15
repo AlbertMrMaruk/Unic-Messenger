@@ -218,6 +218,7 @@ function Chats() {
     const resp = await DatabaseAPI.verifyToken();
     const data = await resp.json();
     if (!data) {
+      console.log("dd");
       navigate("/");
       return;
     }
