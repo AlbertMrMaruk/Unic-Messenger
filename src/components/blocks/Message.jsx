@@ -23,16 +23,16 @@ function Message({ message }) {
   const isPdf = (url, message) => {
     return (
       url?.split(".").at(-1) === "pdf" ||
-      message?.fileType === "application/pdf"
+      message?.payload?.fileType === "application/pdf"
     );
   };
   const isVideo = (url, message) => {
     return (
-      url?.split(".").at(-1) === "mp4" || message?.fileType === "video/mp4"
+      url?.split(".").at(-1) === "mp4" ||
+      message?.payload?.fileType === "video/mp4"
     );
   };
   const isImg = (url, message) => {
-    console.log(url, message);
     return url && !isVideo(url, message) && !isPdf(url, message);
   };
   return (
