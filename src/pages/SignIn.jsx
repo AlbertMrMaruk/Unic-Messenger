@@ -60,7 +60,7 @@ function SignIn() {
           Войти
         </div>
       </div>
-      <div className=" text-center mt-10 font-bold cursor-pointer md:mt-15 ">
+      <div className=" text-center mt-12 font-bold cursor-pointer md:mt-16 ">
         <Link to="/sign-up" className="  text-primary">
           Создать новый аккаунт
         </Link>
