@@ -20,6 +20,20 @@ function Message({ message }) {
 
     return h + ":" + m;
   };
+  const isPdf = (url, message) => {
+    return (
+      url?.split(".").at(-1) === "pdf" ||
+      message?.fileType === "application/pdf"
+    );
+  };
+  const isVideo = (url, message) => {
+    return (
+      url?.split(".").at(-1) === "mp4" || message?.fileType === "video/mp4"
+    );
+  };
+  const isImg = (url, message) => {
+    return url && !isVideo(url, message) && !isPdf(url, message);
+  };
   return (
     <div
       className={`mx-3 mb-2 rounded-xl  text-white pr-2 pl-3 min-w-[9%] py-2 max-w-[45%] w-fit flex flex-col gap-1 ${
@@ -28,29 +42,27 @@ function Message({ message }) {
           : "bg-primary self-end"
       }`}
     >
-      {url &&
-        (url?.split(".").at(-1) !== "pdf" ||
-          message?.fileType !== "application/pdf") &&
-        (url?.split(".").at(-1) !== "mp4" ||
-        message?.fileType !== "video/mp4" ? (
-          <img
-            src={
-              message?.payload?.userMediaUrl ||
-              "http://89.111.131.15" + url.slice(21)
-            }
-            alt="Image from user"
-            className="max-w-[300px]"
-          />
-        ) : (
-          <video
-            controls
-            className="max-w-[300px]"
-            src={
-              message?.payload?.userMediaUrl ||
-              "http://89.111.131.15" + url.slice(21)
-            }
-          />
-        ))}
+      {/* Проверка файла на тип если пдф или видео */}
+      {isVideo(url, message) && (
+        <video
+          controls
+          className="max-w-[300px]"
+          src={
+            message?.payload?.userMediaUrl ||
+            "http://89.111.131.15" + url.slice(21)
+          }
+        />
+      )}
+      {isImg(url, message) && (
+        <img
+          src={
+            message?.payload?.userMediaUrl ||
+            "http://89.111.131.15" + url.slice(21)
+          }
+          alt="Image from user"
+          className="max-w-[300px]"
+        />
+      )}
       {text && (
         <span
           className={` ${
@@ -59,8 +71,7 @@ function Message({ message }) {
               : "text-right mr-[2rem]"
           } `}
         >
-          {url?.split(".").at(-1) === "pdf" ||
-          message?.fileType === "application/pdf" ? (
+          {isPdf(url, message) ? (
             <a
               href={
                 message?.payload?.userMediaUrl ||
