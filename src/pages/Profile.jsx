@@ -9,7 +9,7 @@ function Profile() {
     DatabaseAPI.verifyToken()
       .then((el) => el.json())
       .then((el) => {
-        if (el) {
+        if (!el) {
           navigate("/");
           return;
         }
