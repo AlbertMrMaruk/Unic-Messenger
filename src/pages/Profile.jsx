@@ -29,6 +29,10 @@ function Profile() {
 
   const navigate = useNavigate();
 
+  const logOut = () => {
+    document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    navigate("/sign-in");
+  };
   return (
     <div className="bg-secondary h-[100vh]">
       <Navbar />
@@ -51,9 +55,9 @@ function Profile() {
         ></Field>
       </div>
       <div className=" text-center mt-9 font-bold cursor-pointer md:mt-14 ">
-        <Link to="/" className="text-red-500">
+        <span className="text-red-500" onClick={logOut}>
           Выйти
-        </Link>
+        </span>
       </div>
     </div>
   );

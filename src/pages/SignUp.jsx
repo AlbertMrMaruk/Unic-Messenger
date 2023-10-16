@@ -31,7 +31,7 @@ function SignUp() {
       .then((el) => el.json)
       .then((el) => {
         console.log(el);
-        navigate("/");
+        navigate("/sign-in");
       });
   };
   return (
