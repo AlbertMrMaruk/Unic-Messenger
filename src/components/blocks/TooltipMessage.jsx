@@ -18,7 +18,7 @@ export const TooltipMessage = ({ message, children }) => {
         }`}
       >
         <span
-          className={`relative z-10 p-[.8rem] text-[.85rem] text-xs leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3`}
+          className={`relative z-10 p-[.8rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3`}
         >
           <div className="flex flex-col gap-2 ">
             <span>Ответить на сообщение</span>
