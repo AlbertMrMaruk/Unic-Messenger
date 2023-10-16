@@ -1,3 +1,5 @@
+import { FaFilePdf } from "react-icons/fa";
+
 function Message({ message }) {
   const url =
     message?.payload?.mediaUrl ??
@@ -26,16 +28,27 @@ function Message({ message }) {
           : "bg-primary self-end"
       }`}
     >
-      {url && (
-        <img
-          src={
-            message?.payload?.userMediaUrl ||
-            "http://89.111.131.15" + url.slice(21)
-          }
-          alt="Image from user"
-          className="max-w-[300px]"
-        />
-      )}
+      {url &&
+        url?.split(".").at(-1) !== "pdf" &&
+        (url?.split(".").at(-1) !== "mp4" ? (
+          <img
+            src={
+              message?.payload?.userMediaUrl ||
+              "http://89.111.131.15" + url.slice(21)
+            }
+            alt="Image from user"
+            className="max-w-[300px]"
+          />
+        ) : (
+          <video
+            controls
+            className="max-w-[300px]"
+            src={
+              message?.payload?.userMediaUrl ||
+              "http://89.111.131.15" + url.slice(21)
+            }
+          />
+        ))}
       {text && (
         <span
           className={` ${
@@ -44,7 +57,20 @@ function Message({ message }) {
               : "text-right mr-[2rem]"
           } `}
         >
-          {text}
+          {url?.split(".").at(-1) === "pdf" ? (
+            <a
+              href={
+                message?.payload?.userMediaUrl ||
+                "http://89.111.131.15" + url.slice(21)
+              }
+              target="_blank"
+            >
+              <FaFilePdf className="text-primary text-2xl my-auto" />
+              {text}
+            </a>
+          ) : (
+            text
+          )}
         </span>
       )}
       <span
