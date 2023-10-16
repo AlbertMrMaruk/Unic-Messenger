@@ -8,7 +8,8 @@ import {
   FaFile,
   FaArrowCircleUp,
   FaSmile,
-  FaXing,
+  FaWindowClose,
+  FaReply,
 } from "react-icons/fa";
 import clickChat from "../api/controlers/ChatsController";
 import Message from "../components/blocks/Message";
@@ -470,11 +471,12 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         {/* Input and buttons for send messages */}
         <div className="w-[100%] h-[7h]  justify-center items-center">
           {replyMessage && (
-            <div className="w-[95%] md:w-[90%] flex bg-secondary bg-opacity-10 rounded-t-xl">
-              <span className="text-xl">
+            <div className="w-[95%] md:w-[90%] flex bg-secondarylight bg-opacity-20 rounded-t-xl m-auto py-2 px-4">
+              <FaReply className="w-[35px] mr-3" />
+              <span className="text-sm">
                 {replyMessage.body ?? replyMessage.payload.body}
               </span>
-              <FaXing className="w-[35px] m-auto" />
+              <FaWindowClose className="w-[35px]  justify-end " />
             </div>
           )}
           <div className="relative flex flex-wrap items-stretch m-auto w-[95%] md:w-[90%]">
