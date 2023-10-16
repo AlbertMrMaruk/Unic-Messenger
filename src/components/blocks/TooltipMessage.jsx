@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const TooltipMessage = ({ message, children }) => {
+export const TooltipMessage = ({ message, children, setReplyMessage }) => {
   const [show, setShow] = useState(false);
   console.log(message);
   const fromMe = message?.event === "send" || message?.fromMe;
@@ -28,7 +28,14 @@ export const TooltipMessage = ({ message, children }) => {
           className={`relative z-10 p-[.9rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3`}
         >
           <div className="flex flex-col gap-3  font-bold ">
-            <span className=" cursor-pointer">Ответить на сообщение</span>
+            <span
+              className=" cursor-pointer"
+              onClick={() => {
+                setReplyMessage(message);
+              }}
+            >
+              Ответить на сообщение
+            </span>
             <span className="text-red-500 cursor-pointer">
               Удалить сообщение
             </span>

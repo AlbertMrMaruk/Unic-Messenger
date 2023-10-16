@@ -8,6 +8,7 @@ import {
   FaFile,
   FaArrowCircleUp,
   FaSmile,
+  FaXing,
 } from "react-icons/fa";
 import clickChat from "../api/controlers/ChatsController";
 import Message from "../components/blocks/Message";
@@ -24,6 +25,7 @@ import { TooltipMessage } from "../components/blocks/TooltipMessage";
 function Chats() {
   const navigate = useNavigate();
   const [session, setSession] = useState();
+  const [replyMessage, setReplyMessage] = useState();
   const [accounts, setAccounts] = useState([]);
   const [messages, setMessages] = useState([]);
   const [dataUser, setDataUser] = useState();
@@ -459,7 +461,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             <Spinner />
           ) : (
             messages.map((el, index) => (
-              <TooltipMessage message={el}>
+              <TooltipMessage message={el} setReplyMessage={setReplyMessage}>
                 <Message message={el} key={index} />
               </TooltipMessage>
             ))
@@ -467,6 +469,14 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         </div>
         {/* Input and buttons for send messages */}
         <div className="w-[100%] h-[7h]  justify-center items-center">
+          {replyMessage && (
+            <div className="w-[95%] md:w-[90%] flex bg-secondary bg-opacity-10 rounded-t-xl">
+              <span className="text-xl">
+                {replyMessage.body ?? replyMessage.payload.body}
+              </span>
+              <FaXing className="w-[35px] m-auto" />
+            </div>
+          )}
           <div className="relative flex flex-wrap items-stretch m-auto w-[95%] md:w-[90%]">
             <input
               type="text"
