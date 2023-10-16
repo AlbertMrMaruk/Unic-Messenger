@@ -64,8 +64,9 @@ function Message({ message }) {
                 "http://89.111.131.15" + url.slice(21)
               }
               target="_blank"
+              className="flex"
             >
-              <FaFilePdf className="text-primary text-2xl my-auto" />
+              <FaFilePdf className="text-primary text-[1.4rem] my-auto mr-[.5rem]" />
               {text}
             </a>
           ) : (
