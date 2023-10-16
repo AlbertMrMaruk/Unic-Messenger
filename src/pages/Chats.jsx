@@ -459,9 +459,9 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             <Spinner />
           ) : (
             messages.map((el, index) => (
-              <Tooltip message={el}>
+              <TooltipMessage message={el}>
                 <Message message={el} key={index} />
-              </Tooltip>
+              </TooltipMessage>
             ))
           )}
         </div>
