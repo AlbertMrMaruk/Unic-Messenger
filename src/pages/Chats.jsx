@@ -471,22 +471,22 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         {/* Input and buttons for send messages */}
         <div className="w-[100%] h-[8h]  justify-center items-center">
           {replyMessage && (
-            <div className="w-[95%] md:w-[90%] flex bg-secondarylight bg-opacity-50 rounded-t-xl m-auto py-2 px-4 justify-between items-center">
+            <div className="w-[95%] md:w-[90%] flex bg-[#b5b5b566] rounded-t-xl m-auto py-2 px-3 justify-between items-center">
               <div className="flex justify-center items-center">
                 <FaReply className="w-[30px] mr-3" />
                 <span className="text-md">
                   {replyMessage.body ?? replyMessage.payload.body}
                 </span>
               </div>
-              <FaWindowClose className="w-[40px]" />
+              <FaWindowClose className="w-[50px]" />
             </div>
           )}
           <div className="relative flex flex-wrap items-stretch m-auto w-[95%] md:w-[90%]">
             <input
               type="text"
               className={`
-              bg-secondarylight text-white rounded-l-xl   ${
-                replyMessage ? "rounded-tl-xl" : "rounded-l-xl"
+              bg-secondarylight text-white    ${
+                replyMessage ? "rounded-bl-xl" : "rounded-l-xl"
               }
               p-2 px-4 h-[45px] 
               relative  -mr-0.5 block w-[1px] min-w-0 flex-auto  outline-none `}
@@ -522,7 +522,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             </Tooltip>
             <button
               class={`bg-primary  p-1 text-xs z-[2] inline-block   ${
-                replyMessage ? "rounded-tr-xl" : "rounded-r-xl"
+                replyMessage ? "rounded-br-xl" : "rounded-r-xl"
               } w-[55px] h-[45px] text-white font-bold uppercase`}
               type="button"
               onClick={() => sendMessage(text)}
