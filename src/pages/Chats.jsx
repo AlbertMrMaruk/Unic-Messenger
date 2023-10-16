@@ -261,14 +261,14 @@ function Chats() {
           chats[chatIndex].messages = [
             ...chats[chatIndex].messages,
             {
-              payload: { body: text, userMediaUrl: img },
+              payload: { body: text, userMediaUrl: img, fileType: fileType },
               event: "send",
               timestamp: Date.now(),
             },
           ];
           setMessages((prev) => [
             {
-              payload: { body: text, userMediaUrl: img },
+              payload: { body: text, userMediaUrl: img, fileType: fileType },
               event: "send",
               timestamp: Date.now(),
             },
