@@ -203,7 +203,7 @@ function Chats() {
                   data.chatsCount += 1;
                   console.log(data.chatsCount);
                   if (data.chatsCount === 30) {
-                    console.log(allSize);
+                    console.log(allSize, "and nooooowwww");
                     data.allSize = allSize;
                     DatabaseAPI.updateUser(userData[0].username, {
                       chats: data.chats,
@@ -220,6 +220,7 @@ function Chats() {
             });
           });
       } else {
+        console.log("Rende ", userData[0]);
         dataToApp(userData[0]);
       }
     };
