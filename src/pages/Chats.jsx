@@ -146,6 +146,7 @@ function Chats() {
           setSession(data.accounts[0]);
         }
         setChats(data.chats);
+        console.log(+data.allSize, +data.allSize / (1024 * 1024));
         setSizeUser(+data.allSize / (1024 * 1024));
         setShowSpinner(false);
         if (state?.id) {
