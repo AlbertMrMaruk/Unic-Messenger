@@ -43,9 +43,9 @@ class DatabaseAPI {
       body: JSON.stringify(data),
     });
   }
-  getChat(id, chatId) {
-    return fetch(`${API_URL}/users/${id}/${chatId}`);
-  }
+  //   getChat(id, chatId) {
+  //     return fetch(`${API_URL}/users/${id}/${chatId}`);
+  //   }
   addUser(data) {
     return fetch(`${API_URL}/users`, {
       method: "post",
