@@ -12,7 +12,7 @@ export const TooltipMessage = ({ message, children }) => {
         e.preventDefault();
         const onClick = () => {
           console.log("gmm");
-          setShow(!show);
+          setShow(false);
           window.removeEventListener("click", onClick);
         };
         window.addEventListener("click", onClick);
