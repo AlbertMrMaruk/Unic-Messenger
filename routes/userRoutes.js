@@ -100,7 +100,7 @@ module.exports = (app) => {
     });
     res
       .status(200)
-      .send({ success: true, message: "User logged out successfully" });
+      .json({ success: true, message: "User logged out successfully" });
   });
 
   app.get(`/database/users/login/verifyToken`, async (req, res) => {
