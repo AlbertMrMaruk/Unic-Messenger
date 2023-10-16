@@ -30,6 +30,9 @@ class DatabaseAPI {
   verifyToken() {
     return fetch(`${API_URL}/users/login/verifyToken`);
   }
+  logOut() {
+    return fetch(`${API_URL}/users/login/logout`);
+  }
   updateUser(username, data) {
     return fetch(`${API_URL}/users/${username}`, {
       method: "put",

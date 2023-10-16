@@ -30,8 +30,12 @@ function Profile() {
   const navigate = useNavigate();
 
   const logOut = () => {
-    document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    navigate("/sign-in");
+    DatabaseAPI.logOut()
+      .then((el) => el.json())
+      .then((el) => {
+        console.log(el);
+        navigate("/sign-in");
+      });
   };
   return (
     <div className="bg-secondary h-[100vh]">
