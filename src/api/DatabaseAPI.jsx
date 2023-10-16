@@ -31,7 +31,13 @@ class DatabaseAPI {
     return fetch(`${API_URL}/users/login/verifyToken`);
   }
   logOut() {
-    return fetch(`${API_URL}/login/logout`);
+    return fetch(`${API_URL}/login/logout`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
   }
   updateUser(username, data) {
     return fetch(`${API_URL}/users/${username}`, {
