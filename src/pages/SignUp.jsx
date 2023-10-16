@@ -35,13 +35,9 @@ function SignUp() {
       });
   };
   return (
-    <div className="bg-secondary h-screen">
+    <div className="bg-secondary">
       <Navbar />
       <div className="static rounded-2xl bg-[#2c2e30] pt-6 px-3 pb-10 w-[90%] md:w-[55%] m-auto  shadow-xl shadow-[#00000047]  mt-[10rem] md:mt-[5rem]">
-        <div className="absolute bg-primary py-2  text-sm uppercase font-bold px-4 rounded-md top-[6.75rem] left-[50%] ml-[-60.5px] md:top-[9.25rem]  text-black flex gap-3 ">
-          <FaUser className="my-auto text-lg" />
-          Профиль
-        </div>
         <Field
           icon={<FaUser className="text-primary text-4xl my-auto" />}
           placeholder={"Имя"}
@@ -68,7 +64,7 @@ function SignUp() {
           Создать аккаунт
         </div>
       </div>
-      <div className=" text-center mt-9 font-bold cursor-pointer md:mt-12 ">
+      <div className=" text-center mt-12 font-bold cursor-pointer md:mt-16 ">
         <Link to="/sign-in" className="  text-primary">
           Уже есть аккаунт? Войти
         </Link>
