@@ -329,8 +329,8 @@ function Chats() {
           DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
         });
       }
-      setChats(
-        data.chats.sort((chat1, chat2) => {
+      setChats((prev) =>
+        prev.sort((chat1, chat2) => {
           const chat1time =
             +chat1?.lastMessage?.timestamp ||
             +(chat1?.lastMessage?.payload?.timestamp + "000");
