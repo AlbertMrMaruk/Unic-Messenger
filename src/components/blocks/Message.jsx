@@ -9,10 +9,10 @@ function Message({ message }) {
   const timestamp = message?.payload?.timestamp ?? message?.timestamp;
   const calcDate = (timestamp) => {
     let h = new Date(
-      message?.payload?.userMediaUrl ? +timestamp : +(timestamp + "000")
+      message?.event === "send" ? +timestamp : +(timestamp + "000")
     ).getHours();
     let m = new Date(
-      message?.payload?.userMediaUrl ? +timestamp : +(timestamp + "000")
+      message?.event === "send" ? +timestamp : +(timestamp + "000")
     ).getMinutes();
 
     h = h < 10 ? "0" + h : h;
