@@ -240,7 +240,7 @@ function Chats() {
   }, [state]);
 
   //Функция отправки сообщения
-  const sendMessage = async (text, img) => {
+  const sendMessage = async (text, img, fileType) => {
     await ChatsApi.sendSeen(currentChat, session);
     await ChatsApi.startTyping(currentChat, session);
     setTimeout(async () => {
@@ -253,6 +253,7 @@ function Chats() {
           chats[chatIndex].lastMessage = {
             body: text,
             userMediaUrl: img,
+            fileType: fileType,
             event: "send",
             fromMe: true,
             timestamp: Date.now(),

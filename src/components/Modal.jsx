@@ -69,7 +69,7 @@ export default function Modal({
                   caption: text,
                   session,
                 }).then(() => {
-                  sendMessage(text, file.file);
+                  sendMessage(text, file.file, file.type);
                   setShowSpinner(false);
                   setShowModal(false);
                 });

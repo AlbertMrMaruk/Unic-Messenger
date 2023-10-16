@@ -29,8 +29,10 @@ function Message({ message }) {
       }`}
     >
       {url &&
-        url?.split(".").at(-1) !== "pdf" &&
-        (url?.split(".").at(-1) !== "mp4" ? (
+        (url?.split(".").at(-1) !== "pdf" ||
+          message?.fileType !== "application/pdf") &&
+        (url?.split(".").at(-1) !== "mp4" ||
+        message?.fileType !== "video/mp4" ? (
           <img
             src={
               message?.payload?.userMediaUrl ||
@@ -57,7 +59,8 @@ function Message({ message }) {
               : "text-right mr-[2rem]"
           } `}
         >
-          {url?.split(".").at(-1) === "pdf" ? (
+          {url?.split(".").at(-1) === "pdf" ||
+          message?.fileType === "application/pdf" ? (
             <a
               href={
                 message?.payload?.userMediaUrl ||
