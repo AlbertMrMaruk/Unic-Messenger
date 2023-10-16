@@ -32,7 +32,7 @@ function Profile() {
   return (
     <div className="bg-secondary h-[100vh]">
       <Navbar />
-      <div className="static rounded-2xl bg-[#2c2e30] pt-6 px-3 pb-10 w-[90%] md:w-[55%] m-auto   shadow-xl shadow-[#00000047] mt-[2.5rem] md:mt-5rem">
+      <div className="static rounded-2xl bg-[#2c2e30] pt-6 px-3 pb-10 w-[90%] md:w-[55%] m-auto   shadow-xl shadow-[#00000047] mt-[2.5rem] md:mt-[5rem]">
         <div className="absolute bg-primary py-2  text-sm uppercase font-bold px-4 rounded-md top-[6.75rem] left-[50%] ml-[-68.5px] md:top-[9.25rem]  text-black flex gap-3 ">
           <FaUser className="my-auto text-lg" />
           Профиль
