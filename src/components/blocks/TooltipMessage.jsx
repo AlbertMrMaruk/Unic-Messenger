@@ -8,7 +8,7 @@ export const TooltipMessage = ({ message, children }) => {
       className="relative flex flex-col items-center group"
       onContextMenu={() => setShow(!show)}
     >
-      <span className="flex justify-center">{children}</span>
+      <div>{children}</div>
       <div
         className={`absolute whitespace-nowrap bottom-full flex flex-col items-center   ${
           !show ? "hidden" : null
