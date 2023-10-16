@@ -5,7 +5,7 @@ export const TooltipMessage = ({ message, children }) => {
   console.log(message);
   return (
     <div
-      className="relative flex flex-col items-center group"
+      className="relative flex flex-col items-center group w-[100%]"
       onContextMenu={() => setShow(!show)}
     >
       <div>{children}</div>
