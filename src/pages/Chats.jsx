@@ -19,6 +19,7 @@ import Modal from "../components/Modal";
 import ModalAccount from "../components/ModalAccount";
 import DatabaseAPI from "../api/DatabaseAPI";
 import { useNavigate } from "react-router-dom";
+import { TooltipMessage } from "../components/blocks/TooltipMessage";
 
 function Chats() {
   const navigate = useNavigate();
@@ -457,7 +458,11 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           {showSpinnerMessages ? (
             <Spinner />
           ) : (
-            messages.map((el, index) => <Message message={el} key={index} />)
+            messages.map((el, index) => (
+              <Tooltip message={el}>
+                <Message message={el} key={index} />
+              </Tooltip>
+            ))
           )}
         </div>
         {/* Input and buttons for send messages */}

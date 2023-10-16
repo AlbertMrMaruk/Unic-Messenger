@@ -106,7 +106,6 @@ module.exports = (app) => {
   app.get(`/database/users/login/verifyToken`, async (req, res) => {
     if (req.headers.cookie) {
       const cookies = req.headers.cookie.split(";");
-
       const tokenCookie = cookies.find((el) => el.split("=")[0] === "token");
       const token = tokenCookie.split("=")[1];
       try {
