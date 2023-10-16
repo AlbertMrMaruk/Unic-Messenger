@@ -86,7 +86,7 @@ export const Tooltip = ({
                   onChange={(e) => {
                     getBase64(e.target.files[0]);
                   }}
-                  accept="image/png, image/jpeg"
+                  accept="image/png, image/jpeg, application/pdf, image/gif, video/*, audio/*, image/*"
                 />
               </div>{" "}
             </>

@@ -70,16 +70,6 @@ export default function Modal({
                   session,
                 }).then(() => {
                   sendMessage(text, file.file);
-                  // setMessages((prev) => [
-                  //   {
-                  //     payload: { body: text, userMediaUrl: file.file },
-                  //     event: "send",
-                  //     timestamp: Date.now(),
-                  //   },
-                  //   ,
-                  //   ...prev,
-                  // ]);
-                  // setText("");
                   setShowSpinner(false);
                   setShowModal(false);
                 });
