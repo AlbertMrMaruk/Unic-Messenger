@@ -6,9 +6,12 @@ export const TooltipMessage = ({ message, children }) => {
   return (
     <div
       className="relative flex flex-col  group w-[100%]"
-      onContextMenu={() => setShow(!show)}
+      onContextMenu={() => {
+        setShow(!show);
+        return false;
+      }}
     >
-      <div>{children}</div>
+      {children}
       <div
         className={`absolute whitespace-nowrap bottom-full flex flex-col items-center   ${
           !show ? "hidden" : null
