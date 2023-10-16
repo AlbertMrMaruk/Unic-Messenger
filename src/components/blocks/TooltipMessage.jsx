@@ -10,11 +10,12 @@ export const TooltipMessage = ({ message, children }) => {
       className="relative flex flex-col  group w-[100%]"
       onContextMenu={(e) => {
         e.preventDefault();
-        window.addEventListener("click", () => {
+        const onClick = () => {
           console.log("gmm");
           setShow(!show);
-          window.removeEventListener("click");
-        });
+          window.removeEventListener("click", onClick);
+        };
+        window.addEventListener("click", onClick);
         setShow(!show);
       }}
     >
