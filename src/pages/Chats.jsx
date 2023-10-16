@@ -115,7 +115,6 @@ function Chats() {
       const respUser = await DatabaseAPI.getUser(data.username);
       const userData = await respUser.json();
       setDataUser(userData[0]);
-      console.log(userData[0]);
 
       //Загрузка информации о пользователе
       setCurrentUser({ pushName: userData[0].name });
@@ -145,8 +144,19 @@ function Chats() {
         if (data.accounts.length !== 0) {
           setSession(data.accounts[0]);
         }
-        setChats(data.chats);
-        console.log(data, data.allSize, +data.allSize / (1024 * 1024));
+        setChats(
+          data.chats.sort((chat1, chat2) => {
+            const chat1time =
+              +chat1?.lastMessage?.timestamp ||
+              +(chat1?.lastMessage?.payload?.timestamp + "000");
+            const chat2time =
+              +chat2?.lastMessage?.timestamp ||
+              +(chat2?.lastMessage?.payload?.timestamp + "000");
+
+            return chat1time > chat2time ? -1 : 1;
+          })
+        );
+
         setSizeUser(+data.allSize / (1024 * 1024));
         setShowSpinner(false);
         if (state?.id) {
@@ -220,7 +230,6 @@ function Chats() {
             });
           });
       } else {
-        console.log("Rende ", userData[0]);
         dataToApp(userData[0]);
       }
     };
