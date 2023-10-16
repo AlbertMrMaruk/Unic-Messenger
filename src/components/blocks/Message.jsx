@@ -21,6 +21,7 @@ function Message({ message }) {
     return h + ":" + m;
   };
   const isPdf = (url, message) => {
+    console.log(url, message);
     return (
       url?.split(".").at(-1) === "pdf" ||
       message?.payload?.fileType === "application/pdf"
