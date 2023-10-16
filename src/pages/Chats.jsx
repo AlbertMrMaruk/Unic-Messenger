@@ -350,7 +350,7 @@ function Chats() {
       <div
         className={`w-[100%] ${
           showChats ? "block" : "hidden"
-        } md:w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] h-[100vh] p-[1rem] 
+        } overflow-hidden md:w-[28%] bg-inherit  border-r-[1px] border-[#2a2a2a] h-[100vh] p-[1rem] 
        `}
       >
         {/* Top menu */}
