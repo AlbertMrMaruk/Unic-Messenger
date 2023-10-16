@@ -11,7 +11,6 @@ export const TooltipMessage = ({ message, children }) => {
       onContextMenu={(e) => {
         e.preventDefault();
         const onClick = () => {
-          console.log("gmm");
           setShow(false);
           window.removeEventListener("click", onClick);
         };
