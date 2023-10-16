@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-export const TooltipMessage = ({ children }) => {
+export const TooltipMessage = ({ message, children }) => {
   const [show, setShow] = useState(false);
-
+  console.log(message);
   return (
     <div
       className="relative flex flex-col items-center group"
