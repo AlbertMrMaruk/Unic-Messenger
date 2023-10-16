@@ -32,6 +32,7 @@ function Message({ message }) {
     );
   };
   const isImg = (url, message) => {
+    console.log(url, message);
     return url && !isVideo(url, message) && !isPdf(url, message);
   };
   return (
