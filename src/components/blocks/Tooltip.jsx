@@ -65,7 +65,7 @@ export const Tooltip = ({
           ) : (
             <>
               <div className="flex flex-col gap-2 ">
-                <FaFile color="#44a0ff" className="m-auto w-[25px] h-[25px]" />
+                <FaFile className=" text-primary m-auto w-[25px] h-[25px]" />
                 <span className="text-sm font-bold">Файл</span>
                 <input
                   type="file"
@@ -75,7 +75,7 @@ export const Tooltip = ({
                 />
               </div>
               <div className="flex flex-col gap-2 ">
-                <FaImage color="#44a0ff" className="m-auto w-[25px] h-[25px]" />
+                <FaImage className="m-auto text-primary w-[25px] h-[25px]" />
                 <span className="text-sm font-bold">Фото</span>
 
                 <input
