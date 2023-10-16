@@ -207,6 +207,8 @@ function Chats() {
                     data.allSize = allSize;
                     DatabaseAPI.updateUser(userData[0].username, {
                       chats: data.chats,
+                      allSize: data.allSize,
+                      accounts: data.accounts,
                     })
                       .then((res) => res.json())
                       .then((res) => {
