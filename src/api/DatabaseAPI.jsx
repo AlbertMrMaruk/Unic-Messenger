@@ -31,7 +31,7 @@ class DatabaseAPI {
     return fetch(`${API_URL}/users/login/verifyToken`);
   }
   logOut() {
-    return fetch(`${API_URL}/users/login/logout`);
+    return fetch(`${API_URL}/login/logout`);
   }
   updateUser(username, data) {
     return fetch(`${API_URL}/users/${username}`, {
@@ -43,9 +43,6 @@ class DatabaseAPI {
       body: JSON.stringify(data),
     });
   }
-  //   getChat(id, chatId) {
-  //     return fetch(`${API_URL}/users/${id}/${chatId}`);
-  //   }
   addUser(data) {
     return fetch(`${API_URL}/users`, {
       method: "post",
