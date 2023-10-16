@@ -3,6 +3,7 @@ import Field from "../components/blocks/Field";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DatabaseAPI from "../api/DatabaseAPI";
+import Navbar from "../components/blocks/Navbar";
 
 function Profile() {
   useEffect(() => {
@@ -29,8 +30,9 @@ function Profile() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-secondary h-screen pt-[10rem]">
-      <div className="static rounded-2xl bg-[#2c2e30] pt-6 px-3 pb-10 w-[90%] md:w-[55%] m-auto   shadow-xl shadow-[#00000047] ">
+    <div className="bg-secondary h-screen">
+      <Navbar />
+      <div className="static rounded-2xl bg-[#2c2e30] pt-6 px-3 pb-10 w-[90%] md:w-[55%] m-auto   shadow-xl shadow-[#00000047] mt-4rem">
         <div className="absolute bg-primary py-2  text-sm uppercase font-bold px-4 rounded-md top-[6.75rem] left-[50%] ml-[-60.5px] md:top-[9.25rem]  text-black flex gap-3 ">
           <FaUser className="my-auto text-lg" />
           Профиль
