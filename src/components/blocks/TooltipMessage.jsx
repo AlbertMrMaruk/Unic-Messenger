@@ -20,9 +20,11 @@ export const TooltipMessage = ({ message, children }) => {
         <span
           className={`relative z-10 p-[.8rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3`}
         >
-          <div className="flex flex-col gap-2 ">
-            <span>Ответить на сообщение</span>
-            <span className="text-red-500">Удалить сообщение</span>
+          <div className="flex flex-col gap-3  font-bold ">
+            <span className=" cursor-pointer">Ответить на сообщение</span>
+            <span className="text-red-500 cursor-pointer">
+              Удалить сообщение
+            </span>
           </div>
         </span>
         <div className="w-3 h-3 -mt-2 rotate-45 bg-secondarylight mb-2" />
