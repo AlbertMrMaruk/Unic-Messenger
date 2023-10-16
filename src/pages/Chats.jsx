@@ -354,7 +354,10 @@ function Chats() {
        `}
       >
         {/* Top menu */}
-        <div className="flex  items-center pt-[.5rem] w-[100%] px-[1rem]">
+        <div
+          className="flex  items-center pt-[.5rem] w-[100%] px-[1rem]"
+          onClick={() => navigate("/profile")}
+        >
           <div className="bg-white rounded-full w-[40px] h-[40px]">
             {currentUser?.img && (
               <img
