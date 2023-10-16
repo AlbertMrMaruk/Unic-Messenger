@@ -4,12 +4,18 @@ export const TooltipMessage = ({ message, children }) => {
   const [show, setShow] = useState(false);
   console.log(message);
   const fromMe = message?.event === "send" || message?.fromMe;
+
   return (
     <div
       className="relative flex flex-col  group w-[100%]"
-      onContextMenu={() => {
+      onContextMenu={(e) => {
+        e.preventDefault();
+        window.addEventListener("click", () => {
+          console.log("gmm");
+          setShow(!show);
+          window.removeEventListener("click");
+        });
         setShow(!show);
-        return false;
       }}
     >
       {children}
