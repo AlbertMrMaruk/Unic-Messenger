@@ -302,14 +302,6 @@ function Chats() {
           ]);
         });
       } else {
-        setMessages((prev) => [
-          {
-            payload: { body: text },
-            event: "send",
-            timestamp: Date.now(),
-          },
-          ...prev,
-        ]);
         ChatsApi.sendText(text, currentChat, session).then(() => {
           chats[chatIndex].lastMessage = {
             body: text,
@@ -325,7 +317,14 @@ function Chats() {
               timestamp: Date.now(),
             },
           ];
-
+          setMessages((prev) => [
+            {
+              payload: { body: text },
+              event: "send",
+              timestamp: Date.now(),
+            },
+            ...prev,
+          ]);
           setChats((prev) =>
             prev.sort((chat1, chat2) => {
               const chat1time =
