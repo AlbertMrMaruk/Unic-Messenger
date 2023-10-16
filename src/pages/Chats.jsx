@@ -325,6 +325,7 @@ function Chats() {
             {
               payload: { body: text },
               event: "send",
+
               timestamp: Date.now(),
             },
             ...prev,
@@ -457,7 +458,11 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           </div>
         )}
         {/* Messages in chat */}
-        <div className="w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[70vh] md:h-[78vh] mt-2">
+        <div
+          className={`w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[70vh] ${
+            replyMessage ? "md:h-[75vh]" : "md:h-[80vh]"
+          }  mt-2`}
+        >
           {showSpinnerMessages ? (
             <Spinner />
           ) : (
@@ -478,7 +483,10 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                   {replyMessage.body ?? replyMessage.payload.body}
                 </span>
               </div>
-              <FaWindowClose className="w-[50px]" />
+              <FaWindowClose
+                className="w-[50px]"
+                onClick={() => setReplyMessage()}
+              />
             </div>
           )}
           <div className="relative flex flex-wrap items-stretch m-auto w-[95%] md:w-[90%]">
