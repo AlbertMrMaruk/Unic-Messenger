@@ -3,6 +3,7 @@ import React, { useState } from "react";
 export const TooltipMessage = ({ message, children }) => {
   const [show, setShow] = useState(false);
   console.log(message);
+  const fromMe = message?.event === "true" || message?.fromMe;
   return (
     <div
       className="relative flex flex-col  group w-[100%]"
@@ -14,10 +15,8 @@ export const TooltipMessage = ({ message, children }) => {
       {children}
       <div
         className={`absolute whitespace-nowrap bottom-full flex flex-col  items-center ${
-          message?.event === "message" || message?.fromMe
-            ? "right-[-1rem]"
-            : "left-[-1rem]"
-        }  ${!show ? "hidden" : null}`}
+          fromMe ? "right-[-1rem]" : "left-[-1rem]"
+        }  ${!show ? "hidden" : ""}`}
       >
         <span
           className={`relative z-10 p-[.9rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3`}
