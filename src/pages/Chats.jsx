@@ -304,7 +304,7 @@ function Chats() {
     setText("");
   };
   return (
-    <div className="bg-secondary flex  h-[100vh]">
+    <div className="bg-secondary text-white flex  h-[100vh]">
       {/* Left Sidebar */}
 
       <div
@@ -330,7 +330,7 @@ function Chats() {
         </div>
 
         {/* Choose messenger Block */}
-        <div className="flex flex-col px-3 py-3 rounded-xl bg-[#1c1d1f] gap-1 mt-[1.5rem]">
+        <div className="flex flex-col px-3 py-3 rounded-xl bg-secondarylight gap-1 mt-[1.5rem]">
           <h3 className="font-bold text-white text-xl text-center">
             Размер: {(sizeUser + " ").slice(0, 4) ?? ""} Мб
           </h3>
@@ -351,7 +351,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             </div>
           ))}
           <div
-            className="m-auto rounded-full bg-[#44a0ff] p-[0.65rem] mt-[.5rem] cursor-pointer"
+            className="m-auto rounded-full bg-primary p-[0.65rem] mt-[.5rem] cursor-pointer"
             onClick={() => setShowModalAccount(true)}
           >
             <FaPlus className="color-white bg-inherit w-[15px] h-[15px]" />
