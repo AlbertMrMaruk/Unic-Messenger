@@ -50,7 +50,7 @@ export const Tooltip = ({
         <span
           className={`relative z-10 ${
             !emoji ? "p-4" : ""
-          } text-xs leading-none text-white whitespace-no-wrap bg-[#1c1d1f] shadow-lg rounded-md flex gap-3`}
+          } text-xs leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3`}
         >
           {emoji ? (
             <EmojiPicker
@@ -92,7 +92,7 @@ export const Tooltip = ({
             </>
           )}
         </span>
-        <div className="w-3 h-3 -mt-2 rotate-45 bg-[#1c1d1f] mb-2" />
+        <div className="w-3 h-3 -mt-2 rotate-45 bg-secondarylight mb-2" />
       </div>
     </div>
   );
