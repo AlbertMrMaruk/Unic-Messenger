@@ -98,7 +98,7 @@ module.exports = (app) => {
       expires: new Date(Date.now(), 1000),
       httpOnly: true,
     });
-    res
+    return res
       .status(200)
       .json({ success: true, message: "User logged out successfully" });
   });
