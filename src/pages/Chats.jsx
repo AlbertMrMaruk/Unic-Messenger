@@ -304,7 +304,7 @@ function Chats() {
     setText("");
   };
   return (
-    <div className="bg-[#050505] flex  h-[100vh]">
+    <div className="bg-secondary flex  h-[100vh]">
       {/* Left Sidebar */}
 
       <div
@@ -423,7 +423,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             <input
               type="text"
               className="
-              bg-[#1c1d1f] text-white rounded-l-xl   
+              bg-secondarylight text-white rounded-l-xl   
               p-2 px-4 h-[45px] 
               relative  -mr-0.5 block w-[1px] min-w-0 flex-auto  outline-none "
               placeholder="Ваше сообщение"
@@ -432,14 +432,14 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             />
             <Tooltip setText={setText} emoji={true}>
               <button
-                class="bg-[#1c1d1f]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
+                class="bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
                 type="button"
               >
                 <FaSmile className="text-white w-[18px] h-[18px] m-auto" />
               </button>
             </Tooltip>
             <button
-              class="bg-[#1c1d1f]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
+              class="bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
               type="button"
             >
               <FaMicrophone className="text-white w-[18px] h-[18px] m-auto" />
@@ -450,14 +450,14 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               showModal={showModal}
             >
               <button
-                class="bg-[#1c1d1f]  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[40px] h-[45px]"
+                class="bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[40px] h-[45px]"
                 type="button"
               >
                 <FaFile className="text-white w-[18px] h-[18px] m-auto" />
               </button>
             </Tooltip>
             <button
-              class="bg-[#44a0ff]  p-1 text-xs z-[2] inline-block rounded-r-xl  w-[55px] h-[45px] text-white font-bold uppercase"
+              class="bg-primary  p-1 text-xs z-[2] inline-block rounded-r-xl  w-[55px] h-[45px] text-white font-bold uppercase"
               type="button"
               onClick={() => sendMessage(text)}
             >

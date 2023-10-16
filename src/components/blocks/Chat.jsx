@@ -7,7 +7,7 @@ function Chat({ chat, session, dataUser, setShowChats, index }) {
   return (
     <div
       className="p-[1rem]  
-border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#1f2022]"
+border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-secondarylight"
       data-id={chat.id._serialized}
       onClick={() => {
         if (window.innerWidth < 768) {
