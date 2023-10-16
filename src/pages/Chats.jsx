@@ -240,16 +240,16 @@ function Chats() {
   }, [state]);
 
   //Функция отправки сообщения
-  const sendMessage = async (text, img, fileType) => {
+  const sendMessage = async (text, img, fileType, data) => {
     await ChatsApi.sendSeen(currentChat, session);
     await ChatsApi.startTyping(currentChat, session);
     setTimeout(async () => {
       await ChatsApi.stopTyping(currentChat, session);
-      ChatsApi.sendText(text, currentChat, session).then((res) => {
-        const chatIndex = chats.findIndex(
-          (el) => el.id._serialized === currentChat
-        );
-        if (img) {
+      const chatIndex = chats.findIndex(
+        (el) => el.id._serialized === currentChat
+      );
+      if (img) {
+        ChatsApi.sendImage(data).then(() => {
           chats[chatIndex].lastMessage = {
             body: text,
             userMediaUrl: img,
@@ -274,7 +274,9 @@ function Chats() {
             },
             ...prev,
           ]);
-        } else {
+        });
+      } else {
+        ChatsApi.sendText(text, currentChat, session).then(() => {
           chats[chatIndex].lastMessage = {
             body: text,
             event: "send",
@@ -297,10 +299,10 @@ function Chats() {
             },
             ...prev,
           ]);
-        }
 
-        DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
-      });
+          DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
+        });
+      }
     }, 1000);
     setText("");
   };

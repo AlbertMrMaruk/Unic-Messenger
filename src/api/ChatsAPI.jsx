@@ -49,6 +49,18 @@ class ChatsAPI {
       }),
     });
   }
+  sendImage(data) {
+    return fetch(`http://89.111.131.15/api/sendImage`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+
+      //make sure to serialize your JSON body
+      body: JSON.stringify(data),
+    });
+  }
   sendSeen(phone, session) {
     return fetch(`http://89.111.131.15/api/sendSeen`, {
       method: "post",

@@ -11,18 +11,6 @@ export default function Modal({
 }) {
   const { state } = useLocation();
   const [showSpinner, setShowSpinner] = useState(false);
-  const sendImage = (data) => {
-    return fetch(`http://89.111.131.15/api/sendImage`, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-
-      //make sure to serialize your JSON body
-      body: JSON.stringify(data),
-    });
-  };
   return (
     <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-[rgba(0,0,0,.7)]">
       <div className="relative my-6 mx-auto w-[50%]">
@@ -59,7 +47,7 @@ export default function Modal({
               type="button"
               onClick={() => {
                 setShowSpinner(true);
-                sendImage({
+                sendMessage(text, file.file, file.type, {
                   chatId: state?.id,
                   file: {
                     mimetype: file.type,
@@ -69,7 +57,6 @@ export default function Modal({
                   caption: text,
                   session,
                 }).then(() => {
-                  sendMessage(text, file.file, file.type);
                   setShowSpinner(false);
                   setShowModal(false);
                 });
