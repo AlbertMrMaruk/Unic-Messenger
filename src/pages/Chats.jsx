@@ -325,22 +325,21 @@ function Chats() {
             },
             ...prev,
           ]);
+          setChats((prev) =>
+            prev.sort((chat1, chat2) => {
+              const chat1time =
+                +chat1?.lastMessage?.timestamp ||
+                +(chat1?.lastMessage?.payload?.timestamp + "000");
+              const chat2time =
+                +chat2?.lastMessage?.timestamp ||
+                +(chat2?.lastMessage?.payload?.timestamp + "000");
 
+              return chat1time > chat2time ? -1 : 1;
+            })
+          );
           DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
         });
       }
-      setChats((prev) =>
-        prev.sort((chat1, chat2) => {
-          const chat1time =
-            +chat1?.lastMessage?.timestamp ||
-            +(chat1?.lastMessage?.payload?.timestamp + "000");
-          const chat2time =
-            +chat2?.lastMessage?.timestamp ||
-            +(chat2?.lastMessage?.payload?.timestamp + "000");
-
-          return chat1time > chat2time ? -1 : 1;
-        })
-      );
     }, 1000);
     setText("");
   };
