@@ -3,6 +3,19 @@ import ChatsApi from "../../api/ChatsApi";
 import DatabaseAPI from "../../api/DatabaseAPI";
 
 function Chat({ chat, session, dataUser, setShowChats, index }) {
+  const calcDate = (timestamp) => {
+    let h = new Date(
+      chat.lastMessage.event === "send" ? +timestamp : +(timestamp + "000")
+    ).getHours();
+    let m = new Date(
+      chat.lastMessage.event === "send" ? +timestamp : +(timestamp + "000")
+    ).getMinutes();
+
+    h = h < 10 ? "0" + h : h;
+    m = m < 10 ? "0" + m : m;
+
+    return h + ":" + m;
+  };
   const navigate = useNavigate();
   return (
     <div
@@ -14,21 +27,21 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           setShowChats(false);
         }
 
-        if (chat.unreadCount) {
+        if (chat?.unreadCount > 0) {
           ChatsApi.sendSeen(chat.id._serialized, session);
           chat.unreadCount = 0;
-          DatabaseAPI.updateUser("albert", { chats: dataUser.chats }).then(
-            (res) => {
-              console.log(res.status);
-              navigate("/", {
-                state: {
-                  id: chat.id._serialized,
-                  name: chat.name,
-                  img: chat.img ?? "",
-                },
-              });
-            }
-          );
+          DatabaseAPI.updateUser(dataUser.username, {
+            chats: dataUser.chats,
+          }).then((res) => {
+            console.log(res.status);
+            navigate("/", {
+              state: {
+                id: chat.id._serialized,
+                name: chat.name,
+                img: chat.img ?? "",
+              },
+            });
+          });
         } else {
           navigate("/", {
             state: {
@@ -58,11 +71,16 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             : chat.lastMessage.body}
         </p>
       </div>
-      {dataUser.chats[index].unreadCount !== 0 && (
-        <div className="bg-[#44a0ff] text-white m-auto text-center px-[.6rem] py-[.2rem] rounded-full text-[14px]  font-bold justify-end">
-          {dataUser.chats[index].unreadCount}
-        </div>
-      )}
+      <div className="m-auto">
+        <p className="text-[1rem] md:text-[0.85rem] text-[#777779]">
+          {calcDate(chat.lastMessage.timestamp)}
+        </p>
+        {dataUser.chats[index].unreadCount !== 0 && (
+          <div className="bg-[#44a0ff] text-white m-auto text-center px-[.6rem] py-[.2rem] rounded-full text-[14px]  font-bold justify-end">
+            {dataUser.chats[index].unreadCount}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
