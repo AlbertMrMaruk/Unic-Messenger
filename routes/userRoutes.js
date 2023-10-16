@@ -94,8 +94,8 @@ module.exports = (app) => {
 
   app.post("/database/login/logout", async (req, res) => {
     // Set token to none and expire after 5 seconds
-    res.cookie("token", "none", {
-      expires: new Date(Date.now(), 1000),
+    res.cookie("token2", "none", {
+      maxAge: 2 * 10 * 1000,
       httpOnly: true,
     });
     return res
