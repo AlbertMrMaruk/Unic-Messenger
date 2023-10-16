@@ -13,12 +13,12 @@ export const TooltipMessage = ({ message, children }) => {
     >
       {children}
       <div
-        className={`absolute whitespace-nowrap bottom-full flex flex-col  items-center   ${
-          !show ? "hidden" : null
-        }`}
+        className={`absolute whitespace-nowrap bottom-full flex flex-col  items-center ${
+          message.fromMe ? "right-[-1rem]" : "left-[-1rem]"
+        }  ${!show ? "hidden" : null}`}
       >
         <span
-          className={`relative z-10 p-[.8rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3`}
+          className={`relative z-10 p-[.9rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3`}
         >
           <div className="flex flex-col gap-3  font-bold ">
             <span className=" cursor-pointer">Ответить на сообщение</span>
