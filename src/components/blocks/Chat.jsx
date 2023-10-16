@@ -71,12 +71,12 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             : chat.lastMessage.body}
         </p>
       </div>
-      <div className="m-auto">
+      <div className="m-auto flex flex-col gap-[.4rem]">
         <p className="text-[1rem] md:text-[0.85rem] text-[#777779]">
           {calcDate(chat.lastMessage.timestamp)}
         </p>
         {dataUser.chats[index].unreadCount !== 0 && (
-          <div className="bg-[#44a0ff] text-white m-auto text-center px-[.6rem] py-[.2rem] rounded-full text-[14px]  font-bold justify-end">
+          <div className="bg-[#44a0ff] text-white m-auto text-center px-[.6rem] py-[.1rem] ml-[.4rem] rounded-full text-[14px]  font-bold justify-end">
             {dataUser.chats[index].unreadCount}
           </div>
         )}
