@@ -62,7 +62,6 @@ function Chats() {
 
   useEffect(() => {
     const gettingMessage = (message) => {
-      console.log(message, currentChat, chats);
       if (message.event === "message.any") {
         if (message.payload.fromMe) {
           console.log(message.payload.fromMe);
@@ -138,7 +137,6 @@ function Chats() {
       );
     };
     if (newMessage) {
-      console.log(newMessage);
       gettingMessage(newMessage);
     }
   }, [newMessage]);
