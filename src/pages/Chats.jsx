@@ -307,7 +307,11 @@ function Chats() {
       if (img) {
         ChatsApi.sendImage(data, replyMessage);
       } else {
-        ChatsApi.sendText(text, currentChat, session, replyMessage);
+        if (replyMessage) {
+          ChatsApi.sendText(text, currentChat, session);
+        } else {
+          ChatsApi.replyTo(text, currentChat, session, replyMessage);
+        }
       }
     }, 1000);
     setText("");

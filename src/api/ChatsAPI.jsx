@@ -7,7 +7,7 @@ class ChatsAPI {
       text: message,
       reply_to: replyMessage.id,
     };
-    fetch(`${API_URL}/api/sendText`, {
+    fetch(`${API_URL}/api/reply`, {
       method: "post",
       headers: {
         Accept: "application/json",
