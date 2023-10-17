@@ -311,6 +311,7 @@ function Chats() {
           ChatsApi.sendText(text, currentChat, session);
         } else {
           ChatsApi.replyTo(text, currentChat, session, replyMessage);
+          setReplyMessage("");
         }
       }
     }, 1000);
