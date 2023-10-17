@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 export const TooltipMessage = ({ message, children, setReplyMessage }) => {
   const [show, setShow] = useState(false);
-  const fromMe = message?.event === "send" || message?.fromMe;
 
   return (
     <div
@@ -20,7 +19,7 @@ export const TooltipMessage = ({ message, children, setReplyMessage }) => {
       {children}
       <div
         className={`absolute whitespace-nowrap bottom-full flex flex-col  items-center ${
-          fromMe ? "right-[-1rem]" : "left-[-1rem]"
+          message?.fromMe ? "right-[-1rem]" : "left-[-1rem]"
         }  ${!show ? "hidden" : ""}`}
       >
         <span

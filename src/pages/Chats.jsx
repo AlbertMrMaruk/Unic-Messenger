@@ -305,9 +305,9 @@ function Chats() {
     setTimeout(async () => {
       await ChatsApi.stopTyping(currentChat, session);
       if (img) {
-        ChatsApi.sendImage(data);
+        ChatsApi.sendImage(data, replyMessage);
       } else {
-        ChatsApi.sendText(text, currentChat, session);
+        ChatsApi.sendText(text, currentChat, session, replyMessage);
       }
     }, 1000);
     setText("");
