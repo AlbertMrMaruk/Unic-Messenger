@@ -307,7 +307,7 @@ function Chats() {
       if (img) {
         ChatsApi.sendImage(data, replyMessage);
       } else {
-        if (replyMessage) {
+        if (!replyMessage) {
           ChatsApi.sendText(text, currentChat, session);
         } else {
           ChatsApi.replyTo(text, currentChat, session, replyMessage);
