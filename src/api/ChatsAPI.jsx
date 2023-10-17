@@ -1,14 +1,29 @@
 const API_URL = "http://89.111.131.15";
 class ChatsAPI {
-  async sendText(message, phone, session, replyMessage) {
+  replyTo(message, phone, session, replyMessage) {
+    const data = {
+      session,
+      chatId: `${phone}`,
+      text: message,
+      reply_to: replyMessage.id,
+    };
+    fetch(`${API_URL}/api/sendText`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(data),
+    });
+  }
+  async sendText(message, phone, session) {
     try {
       const data = {
         session,
         chatId: `${phone}`,
         text: message,
       };
-      if (replyMessage) data.reply_to = replyMessage.id;
-      console.log(data);
       await fetch(`${API_URL}/api/sendText`, {
         method: "post",
         headers: {
@@ -16,12 +31,7 @@ class ChatsAPI {
           "Content-Type": "application/json",
         },
 
-        body: JSON.stringify({
-          session,
-          chatId: `${phone}`,
-          text: message,
-          replyMessage,
-        }),
+        body: JSON.stringify(data),
       }).then((response) => {
         return response;
       });
@@ -57,8 +67,7 @@ class ChatsAPI {
       }),
     });
   }
-  sendImage(data, replyMessage) {
-    if (replyMessage) data.reply_to = replyMessage.id;
+  sendImage(data) {
     return fetch(`http://89.111.131.15/api/sendImage`, {
       method: "post",
       headers: {
