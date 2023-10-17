@@ -57,6 +57,7 @@ class ChatsAPI {
     });
   }
   sendImage(data, replyMessage) {
+    if (replyMessage) data.reply_to = replyMessage.id;
     return fetch(`http://89.111.131.15/api/sendImage`, {
       method: "post",
       headers: {
