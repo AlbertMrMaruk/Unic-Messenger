@@ -8,6 +8,7 @@ class ChatsAPI {
         text: message,
       };
       if (replyMessage) data.reply_to = replyMessage.id;
+      console.log(data);
       await fetch(`${API_URL}/api/sendText`, {
         method: "post",
         headers: {
