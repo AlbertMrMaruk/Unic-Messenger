@@ -65,6 +65,7 @@ function Chats() {
       console.log(message, currentChat, chats);
       if (message.event === "message.any") {
         if (message.payload.fromMe) {
+          console.log(message.payload.fromMe);
           const chatIndex = chats.findIndex(
             (el) => el.id._serialized === currentChat
           );
