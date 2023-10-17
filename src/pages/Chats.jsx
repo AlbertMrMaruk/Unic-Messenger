@@ -69,9 +69,12 @@ function Chats() {
           const chatIndex = chats.findIndex(
             (el) => el.id._serialized === currentChat
           );
-          chats[chatIndex].lastMessage = message;
-          chats[chatIndex].messages = [...chats[chatIndex].messages, message];
-          setMessages((prev) => [message, ...prev]);
+          chats[chatIndex].lastMessage = message.payload;
+          chats[chatIndex].messages = [
+            ...chats[chatIndex].messages,
+            message.payload,
+          ];
+          setMessages((prev) => [message.payload, ...prev]);
           setChats((prev) =>
             prev.sort((chat1, chat2) => {
               const chat1time =

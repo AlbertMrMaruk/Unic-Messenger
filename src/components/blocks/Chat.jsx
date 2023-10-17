@@ -65,10 +65,10 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
       <div className="flex flex-col gap-1 text-[#e9e9e9] text-left w-[60%]">
         <h3 className="text-lg md:text-md">{chat.name}</h3>
         <p className="text-[1rem] md:text-[0.85rem] text-[#777779]">
-          {chat.lastMessage.fromMe ? "Вы: " : ""}
-          {chat.lastMessage.body.length > 20
-            ? chat.lastMessage.body.slice(0, 20) + "..."
-            : chat.lastMessage.body}
+          {chat?.lastMessage?.fromMe ? "Вы: " : ""}
+          {chat?.lastMessage?.body.length > 20
+            ? chat?.lastMessage?.body.slice(0, 20) + "..."
+            : chat?.lastMessage?.body}
         </p>
       </div>
       <div className="m-auto flex flex-col gap-[.4rem]">
