@@ -135,6 +135,7 @@ function Chats() {
       );
     };
     if (newMessage) {
+      console.log(newMessage);
       gettingMessage(newMessage);
     }
   }, [newMessage]);
