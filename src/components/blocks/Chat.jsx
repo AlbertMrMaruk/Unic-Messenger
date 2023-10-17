@@ -3,6 +3,7 @@ import ChatsApi from "../../api/ChatsApi";
 import DatabaseAPI from "../../api/DatabaseAPI";
 
 function Chat({ chat, session, dataUser, setShowChats, index }) {
+  console.log(chat);
   const calcDate = (timestamp) => {
     let h = new Date(
       chat.lastMessage.event === "send" ? +timestamp : +(timestamp + "000")
