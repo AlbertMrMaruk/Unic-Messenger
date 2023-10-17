@@ -58,13 +58,12 @@ function Chats() {
 
   const [newMessage, setNewMessage] = useState();
   // Проверка зайден пользователь или нет
-  //Функция получения сообщения
+  // Функция получения сообщения
 
   useEffect(() => {
     const gettingMessage = (message) => {
       if (message.event === "message.any") {
         if (message.payload.fromMe) {
-          console.log(message.payload.fromMe);
           const chatIndex = chats.findIndex(
             (el) => el.id._serialized === currentChat
           );
@@ -305,76 +304,10 @@ function Chats() {
     await ChatsApi.startTyping(currentChat, session);
     setTimeout(async () => {
       await ChatsApi.stopTyping(currentChat, session);
-      // const chatIndex = chats.findIndex(
-      //   (el) => el.id._serialized === currentChat
-      // );
-
       if (img) {
         ChatsApi.sendImage(data);
-        // .then(() => {
-        // chats[chatIndex].lastMessage = {
-        //   body: text,
-        //   userMediaUrl: img,
-        //   fileType: fileType,
-        //   event: "send",
-        //   fromMe: true,
-        //   timestamp: Date.now(),
-        // };
-        // chats[chatIndex].messages = [
-        //   ...chats[chatIndex].messages,
-        //   {
-        //     payload: { body: text, userMediaUrl: img, fileType: fileType },
-        //     event: "send",
-        //     timestamp: Date.now(),
-        //   },
-        // ];
-        // setMessages((prev) => [
-        //   {
-        //     payload: { body: text, userMediaUrl: img, fileType: fileType },
-        //     event: "send",
-        //     timestamp: Date.now(),
-        //   },
-        //   ...prev,
-        // ]);
-        // });
       } else {
         ChatsApi.sendText(text, currentChat, session);
-        // .then(() => {
-        // chats[chatIndex].lastMessage = {
-        //   body: text,
-        //   event: "send",
-        //   fromMe: true,
-        //   timestamp: Date.now(),
-        // };
-        // chats[chatIndex].messages = [
-        //   ...chats[chatIndex].messages,
-        //   {
-        //     payload: { body: text },
-        //     event: "send",
-        //     timestamp: Date.now(),
-        //   },
-        // ];
-        // setMessages((prev) => [
-        //   {
-        //     payload: { body: text },
-        //     event: "send",
-        //     timestamp: Date.now(),
-        //   },
-        //   ...prev,
-        // ]);
-        // setChats((prev) =>
-        //   prev.sort((chat1, chat2) => {
-        //     const chat1time =
-        //       +chat1?.lastMessage?.timestamp ||
-        //       +(chat1?.lastMessage?.payload?.timestamp + "000");
-        //     const chat2time =
-        //       +chat2?.lastMessage?.timestamp ||
-        //       +(chat2?.lastMessage?.payload?.timestamp + "000");
-        //     return chat1time > chat2time ? -1 : 1;
-        //   })
-        // );
-        // DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
-        // });
       }
     }, 1000);
     setText("");
