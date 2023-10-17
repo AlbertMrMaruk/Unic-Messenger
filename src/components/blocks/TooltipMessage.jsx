@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 export const TooltipMessage = ({ message, children, setReplyMessage }) => {
   const [show, setShow] = useState(false);
-  console.log(message);
   const fromMe = message?.event === "send" || message?.fromMe;
 
   return (
@@ -31,6 +30,7 @@ export const TooltipMessage = ({ message, children, setReplyMessage }) => {
             <span
               className=" cursor-pointer"
               onClick={() => {
+                console.log(message);
                 setReplyMessage(message);
               }}
             >
