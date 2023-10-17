@@ -1,7 +1,6 @@
 import { FaFilePdf } from "react-icons/fa";
 
 function Message({ message }) {
-  console.log(message, "hmmmmmmmmm");
   const url =
     message?.payload?.mediaUrl ??
     message?.mediaUrl ??
