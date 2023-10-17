@@ -63,34 +63,63 @@ function Chats() {
   useEffect(() => {
     const gettingMessage = (message) => {
       console.log(message, currentChat, chats);
-      if (message.payload.from === currentChat) {
-        setMessages((prev) => [message, ...prev]);
-        const chatIndex = chats.findIndex(
-          (el) => el.id._serialized === currentChat
-        );
-        chats[chatIndex].messages = [...chats[chatIndex].messages, message];
-        chats[chatIndex].lastMessage = {
-          body: message.payload.body,
-          ...message,
-        };
-        setDataUser((prev) => ({ ...prev, chats }));
+      if (message.event === "message.any") {
+        if (message.payload.fromMe) {
+          const chatIndex = chats.findIndex(
+            (el) => el.id._serialized === currentChat
+          );
+          chats[chatIndex].lastMessage = message;
+          chats[chatIndex].messages = [...chats[chatIndex].messages, message];
+          setMessages((prev) => [message, ...prev]);
+          setChats((prev) =>
+            prev.sort((chat1, chat2) => {
+              const chat1time =
+                +chat1?.lastMessage?.timestamp ||
+                +(chat1?.lastMessage?.payload?.timestamp + "000");
+              const chat2time =
+                +chat2?.lastMessage?.timestamp ||
+                +(chat2?.lastMessage?.payload?.timestamp + "000");
 
-        DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
-      } else {
-        setMessages((prev) => prev);
-        const chatIndex = chats.findIndex(
-          (el) => el.id._serialized === message.payload.from
-        );
-        chats[chatIndex].unreadCount += 1;
-        chats[chatIndex].lastMessage = {
-          body: message.payload.body,
-          ...message,
-        };
-        chats[chatIndex].messages = [...chats[chatIndex].messages, message];
+              return chat1time > chat2time ? -1 : 1;
+            })
+          );
+          DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
+        } else {
+          if (message.payload.from === currentChat) {
+            setMessages((prev) => [message, ...prev]);
+            const chatIndex = chats.findIndex(
+              (el) => el.id._serialized === currentChat
+            );
+            chats[chatIndex].messages = [...chats[chatIndex].messages, message];
+            chats[chatIndex].lastMessage = {
+              body: message.payload.body,
+              ...message,
+            };
+            setDataUser((prev) => ({ ...prev, chats }));
 
-        setDataUser((prev) => ({ ...prev, chats }));
-        DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
+            DatabaseAPI.updateUser(dataUser.username, {
+              chats: dataUser.chats,
+            });
+          } else {
+            setMessages((prev) => prev);
+            const chatIndex = chats.findIndex(
+              (el) => el.id._serialized === message.payload.from
+            );
+            chats[chatIndex].unreadCount += 1;
+            chats[chatIndex].lastMessage = {
+              body: message.payload.body,
+              ...message,
+            };
+            chats[chatIndex].messages = [...chats[chatIndex].messages, message];
+
+            setDataUser((prev) => ({ ...prev, chats }));
+            DatabaseAPI.updateUser(dataUser.username, {
+              chats: dataUser.chats,
+            });
+          }
+        }
       }
+
       setChats((prev) =>
         prev.sort((chat1, chat2) => {
           const chat1time =
@@ -105,7 +134,6 @@ function Chats() {
       );
     };
     if (newMessage) {
-      console.log("New Message", newMessage);
       gettingMessage(newMessage);
     }
   }, [newMessage]);
@@ -274,76 +302,76 @@ function Chats() {
     await ChatsApi.startTyping(currentChat, session);
     setTimeout(async () => {
       await ChatsApi.stopTyping(currentChat, session);
-      const chatIndex = chats.findIndex(
-        (el) => el.id._serialized === currentChat
-      );
+      // const chatIndex = chats.findIndex(
+      //   (el) => el.id._serialized === currentChat
+      // );
 
       if (img) {
-        ChatsApi.sendImage(data).then(() => {
-          chats[chatIndex].lastMessage = {
-            body: text,
-            userMediaUrl: img,
-            fileType: fileType,
-            event: "send",
-            fromMe: true,
-            timestamp: Date.now(),
-          };
-          chats[chatIndex].messages = [
-            ...chats[chatIndex].messages,
-            {
-              payload: { body: text, userMediaUrl: img, fileType: fileType },
-              event: "send",
-              timestamp: Date.now(),
-            },
-          ];
-          setMessages((prev) => [
-            {
-              payload: { body: text, userMediaUrl: img, fileType: fileType },
-              event: "send",
-              timestamp: Date.now(),
-            },
-            ...prev,
-          ]);
-        });
+        ChatsApi.sendImage(data);
+        // .then(() => {
+        // chats[chatIndex].lastMessage = {
+        //   body: text,
+        //   userMediaUrl: img,
+        //   fileType: fileType,
+        //   event: "send",
+        //   fromMe: true,
+        //   timestamp: Date.now(),
+        // };
+        // chats[chatIndex].messages = [
+        //   ...chats[chatIndex].messages,
+        //   {
+        //     payload: { body: text, userMediaUrl: img, fileType: fileType },
+        //     event: "send",
+        //     timestamp: Date.now(),
+        //   },
+        // ];
+        // setMessages((prev) => [
+        //   {
+        //     payload: { body: text, userMediaUrl: img, fileType: fileType },
+        //     event: "send",
+        //     timestamp: Date.now(),
+        //   },
+        //   ...prev,
+        // ]);
+        // });
       } else {
-        ChatsApi.sendText(text, currentChat, session).then(() => {
-          chats[chatIndex].lastMessage = {
-            body: text,
-            event: "send",
-            fromMe: true,
-            timestamp: Date.now(),
-          };
-          chats[chatIndex].messages = [
-            ...chats[chatIndex].messages,
-            {
-              payload: { body: text },
-              event: "send",
-              timestamp: Date.now(),
-            },
-          ];
-          setMessages((prev) => [
-            {
-              payload: { body: text },
-              event: "send",
-
-              timestamp: Date.now(),
-            },
-            ...prev,
-          ]);
-          setChats((prev) =>
-            prev.sort((chat1, chat2) => {
-              const chat1time =
-                +chat1?.lastMessage?.timestamp ||
-                +(chat1?.lastMessage?.payload?.timestamp + "000");
-              const chat2time =
-                +chat2?.lastMessage?.timestamp ||
-                +(chat2?.lastMessage?.payload?.timestamp + "000");
-
-              return chat1time > chat2time ? -1 : 1;
-            })
-          );
-          DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
-        });
+        ChatsApi.sendText(text, currentChat, session);
+        // .then(() => {
+        // chats[chatIndex].lastMessage = {
+        //   body: text,
+        //   event: "send",
+        //   fromMe: true,
+        //   timestamp: Date.now(),
+        // };
+        // chats[chatIndex].messages = [
+        //   ...chats[chatIndex].messages,
+        //   {
+        //     payload: { body: text },
+        //     event: "send",
+        //     timestamp: Date.now(),
+        //   },
+        // ];
+        // setMessages((prev) => [
+        //   {
+        //     payload: { body: text },
+        //     event: "send",
+        //     timestamp: Date.now(),
+        //   },
+        //   ...prev,
+        // ]);
+        // setChats((prev) =>
+        //   prev.sort((chat1, chat2) => {
+        //     const chat1time =
+        //       +chat1?.lastMessage?.timestamp ||
+        //       +(chat1?.lastMessage?.payload?.timestamp + "000");
+        //     const chat2time =
+        //       +chat2?.lastMessage?.timestamp ||
+        //       +(chat2?.lastMessage?.payload?.timestamp + "000");
+        //     return chat1time > chat2time ? -1 : 1;
+        //   })
+        // );
+        // DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
+        // });
       }
     }, 1000);
     setText("");
