@@ -168,12 +168,27 @@ function Chats() {
             const newChats = res.slice(0, 30);
 
             userData[0].chats.forEach((el) => {
-              console.log(
+              if (
                 newChats.find((el2) => el.id._serialized === el2.id._serialized)
-                  ?.timestamp,
-                el.lastMessage.timestamp
-              );
-              // if(newChats.find(el2 => el.id === el2.id) el.lastMessage.timestamp )
+                  ?.timestamp > el.lastMessage.timestamp
+              ) {
+                console.log("OH YEAAA");
+                ChatsApi.getMessages(
+                  el.id._serialized,
+                  20,
+                  userData[0].accounts[0]
+                )
+                  .then((el) => el.json())
+                  .then((messages) => {
+                    console.log(
+                      messages,
+                      messages.find(
+                        (message) =>
+                          el.lastMessage.timestamp === message.timestamp
+                      )
+                    );
+                  });
+              }
             });
           });
       }
