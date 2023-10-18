@@ -189,14 +189,14 @@ function Chats() {
                     console.log(el.messages, superNew);
                     el.messages = [...el.messages, ...superNew];
                     el.lastMessage = superNew.at(-1);
-                    console.log(el.messages);
+                    console.log(el);
+                    //TODO: Убрать количество обновления базы данных
+                    DatabaseAPI.updateUser(userData[0].username, {
+                      chats: userData[0].chats,
+                    });
                   });
               }
             });
-            DatabaseAPI.updateUser(userData[0].username, {
-              chats: userData[0].chats,
-            });
-            console.log(userData[0].chats);
           });
       }
       //Загрузка информации о пользователе
