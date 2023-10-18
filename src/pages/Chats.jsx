@@ -180,15 +180,15 @@ function Chats() {
                 )
                   .then((el) => el.json())
                   .then((messages) => {
-                    el.messages = [
-                      ...messages,
-                      ...messages.slice(
-                        messages.findIndex(
-                          (message) =>
-                            el.lastMessage.timestamp === message.timestamp
-                        )
-                      ),
-                    ];
+                    const superNew = messages.slice(
+                      messages.findIndex(
+                        (message) =>
+                          el.lastMessage.timestamp === message.timestamp
+                      )
+                    );
+                    console.log(el.messages, superNew);
+                    el.messages = [...messages, ...superNew];
+                    console.log(el.messages);
                   });
               }
             });
