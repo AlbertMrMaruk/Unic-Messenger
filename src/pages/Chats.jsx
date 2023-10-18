@@ -316,7 +316,6 @@ function Chats() {
               }
             });
           });
-        dataToApp(userData[0]);
       }
     };
     onLoad();
