@@ -169,10 +169,8 @@ function Chats() {
 
             userData[0].chats.forEach((el) => {
               console.log(
-                newChats.find(
-                  (el2) => el.id._serialized === el2.id._serialized
-                ),
-                el.lastMessage.timestamp
+                newChats.find((el2) => el.id._serialized === el2.id._serialized)
+                  .timestamp > el.lastMessage.timestamp
               );
               // if(newChats.find(el2 => el.id === el2.id) el.lastMessage.timestamp )
             });
