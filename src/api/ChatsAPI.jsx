@@ -98,6 +98,9 @@ class ChatsAPI {
       `http://89.111.131.15/api/${session}/chats/${id}/messages?downloadMedia=true&limit=${limit}`
     );
   }
+  getChats(session) {
+    return fetch(`http://89.111.131.15/api/${session}/chats`);
+  }
 }
 
 export default new ChatsAPI();

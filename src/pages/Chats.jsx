@@ -57,9 +57,8 @@ function Chats() {
   // }, [state]);
 
   const [newMessage, setNewMessage] = useState();
-  // Проверка зайден пользователь или нет
-  // Функция получения сообщения
 
+  // Функция получения сообщения
   useEffect(() => {
     const gettingMessage = (message) => {
       if (message.event === "message.any") {
@@ -161,7 +160,21 @@ function Chats() {
       const respUser = await DatabaseAPI.getUser(data.username);
       const userData = await respUser.json();
       setDataUser(userData[0]);
-
+      if (userData[0]?.chats?.length > 0) {
+        console.log("Download and fetching");
+        ChatsApi.getChats(userData[0]?.accounts[0])
+          .then((el) => el.json())
+          .then((res) => {
+            const newChats = res.slice(0, 30);
+            chats.forEach((el) => {
+              console.log(
+                newChats.find((el2) => el.id === el2.id),
+                el.lastMessage.timestamp
+              );
+              // if(newChats.find(el2 => el.id === el2.id) el.lastMessage.timestamp )
+            });
+          });
+      }
       //Загрузка информации о пользователе
       setCurrentUser({ pushName: userData[0].name });
 
@@ -219,13 +232,12 @@ function Chats() {
       setShowSpinnerMessages(true);
       //Проверка аккаунтов пользователя
       if (userData[0].accounts.length === 0) {
-        console.log("Add Account Maaan");
         setShowSpinnerMessages(false);
       } else if (
         userData[0].accounts.length > 0 &&
         userData[0].chats.length === 0
       ) {
-        fetch(`http://89.111.131.15/api/${userData[0].accounts[0]}/chats`)
+        ChatsApi.getChats(userData[0].accounts[0])
           .then((resp) => resp.json())
           .then((res) => {
             console.log("Starting");
@@ -255,7 +267,6 @@ function Chats() {
                     delete el._data;
                     return el;
                   });
-                  console.log("wtf", index, data.chats.length);
                   data.chatsCount += 1;
                   console.log(data.chatsCount);
                   if (data.chatsCount === 30) {
@@ -282,6 +293,7 @@ function Chats() {
     onLoad();
   }, []);
 
+  // Смена чата
   useEffect(() => {
     const changeState = async () => {
       if (state?.id && dataUser?.chats) {
