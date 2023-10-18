@@ -160,45 +160,6 @@ function Chats() {
       const respUser = await DatabaseAPI.getUser(data.username);
       const userData = await respUser.json();
       setDataUser(userData[0]);
-      if (userData[0]?.chats?.length > 0) {
-        console.log("Download and fetching", userData[0].accounts[0]);
-        ChatsApi.getChats(userData[0].accounts[0])
-          .then((el) => el.json())
-          .then((res) => {
-            const newChats = res.slice(0, 30);
-
-            userData[0].chats.forEach((el) => {
-              if (
-                newChats.find((el2) => el.id._serialized === el2.id._serialized)
-                  ?.lastMessage?.timestamp > el.lastMessage.timestamp
-              ) {
-                console.log("OH YEAAA");
-                ChatsApi.getMessages(
-                  el.id._serialized,
-                  20,
-                  userData[0].accounts[0]
-                )
-                  .then((el) => el.json())
-                  .then((messages) => {
-                    const superNew = messages.slice(
-                      messages.findIndex(
-                        (message) =>
-                          el.lastMessage.timestamp === message.timestamp
-                      ) + 1
-                    );
-                    console.log(el.messages, superNew);
-                    el.messages = [...el.messages, ...superNew];
-                    el.lastMessage = superNew.at(-1);
-                    console.log(el);
-                    //TODO: Убрать количество обновления базы данных
-                    DatabaseAPI.updateUser(userData[0].username, {
-                      chats: userData[0].chats,
-                    });
-                  });
-              }
-            });
-          });
-      }
       //Загрузка информации о пользователе
       setCurrentUser({ pushName: userData[0].name });
 
@@ -311,6 +272,50 @@ function Chats() {
             });
           });
       } else {
+        console.log("Download and fetching", userData[0].accounts[0]);
+        ChatsApi.getChats(userData[0].accounts[0])
+          .then((el) => el.json())
+          .then((res) => {
+            const newChats = res.slice(0, 30);
+
+            userData[0].chats.forEach((el) => {
+              let countChatsUpdate = 0;
+              let countChatsUpdated = 0;
+              if (
+                newChats.find((el2) => el.id._serialized === el2.id._serialized)
+                  ?.lastMessage?.timestamp > el.lastMessage.timestamp
+              ) {
+                countChatsUpdate++;
+                console.log("OH YEAAA");
+                ChatsApi.getMessages(
+                  el.id._serialized,
+                  20,
+                  userData[0].accounts[0]
+                )
+                  .then((el) => el.json())
+                  .then((messages) => {
+                    const superNew = messages.slice(
+                      messages.findIndex(
+                        (message) =>
+                          el.lastMessage.timestamp === message.timestamp
+                      ) + 1
+                    );
+                    console.log(el.messages, superNew);
+                    el.messages = [...el.messages, ...superNew];
+                    el.lastMessage = superNew.at(-1);
+                    console.log(el);
+                    countChatsUpdated++;
+                    if (countChatsUpdate === countChatsUpdated) {
+                      DatabaseAPI.updateUser(userData[0].username, {
+                        chats: userData[0].chats,
+                      });
+                      dataToApp(userData[0]);
+                    }
+                    //TODO: Убрать количество обновления базы данных
+                  });
+              }
+            });
+          });
         dataToApp(userData[0]);
       }
     };
