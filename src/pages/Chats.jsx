@@ -161,14 +161,17 @@ function Chats() {
       const userData = await respUser.json();
       setDataUser(userData[0]);
       if (userData[0]?.chats?.length > 0) {
-        console.log("Download and fetching");
-        ChatsApi.getChats(userData[0]?.accounts[0])
+        console.log("Download and fetching", userData[0].accounts[0]);
+        ChatsApi.getChats(userData[0].accounts[0])
           .then((el) => el.json())
           .then((res) => {
             const newChats = res.slice(0, 30);
-            chats.forEach((el) => {
+
+            userData[0].chats.forEach((el) => {
               console.log(
-                newChats.find((el2) => el.id === el2.id),
+                newChats.find(
+                  (el2) => el.id._serialized === el2.id._serialized
+                ),
                 el.lastMessage.timestamp
               );
               // if(newChats.find(el2 => el.id === el2.id) el.lastMessage.timestamp )
