@@ -309,6 +309,7 @@ function Chats() {
                       DatabaseAPI.updateUser(userData[0].username, {
                         chats: userData[0].chats,
                       });
+                      console.log("ddd");
                       dataToApp(userData[0]);
                     }
                     //TODO: Убрать количество обновления базы данных
@@ -316,6 +317,7 @@ function Chats() {
               }
             });
           });
+        dataToApp(userData[0]);
       }
     };
     onLoad();
