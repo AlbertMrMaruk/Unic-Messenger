@@ -184,7 +184,7 @@ function Chats() {
                       messages.findIndex(
                         (message) =>
                           el.lastMessage.timestamp === message.timestamp
-                      )
+                      ) + 1
                     );
                     console.log(el.messages, superNew);
                     el.messages = [...el.messages, ...superNew];
@@ -192,6 +192,10 @@ function Chats() {
                   });
               }
             });
+            DatabaseAPI.updateUser(userData[0].username, {
+              chats: userData[0].chats,
+            });
+            console.log(userData[0].chats);
           });
       }
       //Загрузка информации о пользователе
