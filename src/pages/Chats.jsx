@@ -170,7 +170,7 @@ function Chats() {
             userData[0].chats.forEach((el) => {
               if (
                 newChats.find((el2) => el.id._serialized === el2.id._serialized)
-                  ?.timestamp > el.lastMessage.timestamp
+                  ?.lastMessage?.timestamp > el.lastMessage.timestamp
               ) {
                 console.log("OH YEAAA");
                 ChatsApi.getMessages(
@@ -187,7 +187,7 @@ function Chats() {
                       )
                     );
                     console.log(el.messages, superNew);
-                    el.messages = [...messages, ...superNew];
+                    el.messages = [...el.messages, ...superNew];
                     console.log(el.messages);
                   });
               }
