@@ -188,6 +188,7 @@ function Chats() {
                     );
                     console.log(el.messages, superNew);
                     el.messages = [...el.messages, ...superNew];
+                    el.lastMessage = superNew.at(-1);
                     console.log(el.messages);
                   });
               }
