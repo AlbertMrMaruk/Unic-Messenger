@@ -56,7 +56,23 @@ export const TooltipChats = ({
             >
               Удалить все сообщения в чате
             </span>
-            <span className="text-red-500 cursor-pointer">Удалить чат</span>
+            <span
+              className="text-red-500 cursor-pointer"
+              onClick={() => {
+                ChatsApi.deleteChat(session, chatId).then(() => {
+                  const newChats = chats.filter(
+                    (el) => el.id._serialized !== chatId
+                  );
+                  dataUser.chats = newChats;
+                  setChats(newChats);
+                  DatabaseAPI.updateUser(dataUser.username, {
+                    chats: dataUser.chats,
+                  });
+                });
+              }}
+            >
+              Удалить чат
+            </span>
           </div>
         </span>
       </div>

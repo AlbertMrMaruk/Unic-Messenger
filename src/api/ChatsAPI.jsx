@@ -110,7 +110,7 @@ class ChatsAPI {
       },
     });
   }
-  deleteChat(chatId, session) {
+  deleteChat(session, chatId) {
     return fetch(`${API_URL}/api/${session}/chats/${chatId}`, {
       method: "delete",
       headers: {
