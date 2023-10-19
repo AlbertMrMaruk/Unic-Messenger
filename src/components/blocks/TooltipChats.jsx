@@ -20,7 +20,7 @@ export const TooltipChats = ({ children }) => {
       {children}
 
       <div
-        className={`absolute whitespace-nowrap bottom-full flex flex-col  items-center right-[-1rem]  ${
+        className={`absolute whitespace-nowrap top-full flex flex-col  items-center right-[-1rem]  ${
           !show ? "hidden" : ""
         }`}
       >
