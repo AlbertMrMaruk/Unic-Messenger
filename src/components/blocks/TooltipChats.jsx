@@ -5,7 +5,7 @@ export const TooltipChats = ({ children }) => {
 
   return (
     <div
-      className="relative flex flex-col  group w-[100%]"
+      className="relative flex flex-col  group "
       onClick={(e) => {
         e.preventDefault();
         const onClick = () => {
