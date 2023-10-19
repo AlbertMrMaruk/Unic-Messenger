@@ -268,7 +268,7 @@ function Chats() {
                     const superNew = messages.slice(
                       messages.findIndex(
                         (message) =>
-                          el.lastMessage.timestamp === message.timestamp
+                          el?.lastMessage?.timestamp === message?.timestamp
                       ) + 1
                     );
                     console.log(el.messages, superNew);

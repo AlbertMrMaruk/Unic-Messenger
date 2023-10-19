@@ -5,10 +5,10 @@ import DatabaseAPI from "../../api/DatabaseAPI";
 function Chat({ chat, session, dataUser, setShowChats, index }) {
   const calcDate = (timestamp) => {
     let h = new Date(
-      chat.lastMessage.event === "send" ? +timestamp : +(timestamp + "000")
+      chat?.lastMessage?.event === "send" ? +timestamp : +(timestamp + "000")
     ).getHours();
     let m = new Date(
-      chat.lastMessage.event === "send" ? +timestamp : +(timestamp + "000")
+      chat?.lastMessage?.event === "send" ? +timestamp : +(timestamp + "000")
     ).getMinutes();
 
     h = h < 10 ? "0" + h : h;
@@ -78,9 +78,9 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               chat?.lastMessage?.payload?.timestamp
           )}
         </p>
-        {dataUser.chats[index].unreadCount !== 0 && (
+        {dataUser.chats[index]?.unreadCount !== 0 && (
           <div className="bg-[#44a0ff] text-white m-auto text-center px-[.6rem] py-[.1rem] ml-[.4rem] rounded-full text-[14px]  font-bold justify-end">
-            {dataUser.chats[index].unreadCount}
+            {dataUser.chats[index]?.unreadCount}
           </div>
         )}
       </div>
