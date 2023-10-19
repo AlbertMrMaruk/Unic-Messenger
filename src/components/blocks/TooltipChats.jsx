@@ -40,7 +40,7 @@ export const TooltipChats = ({
               className="text-red-500 cursor-pointer"
               onClick={() => {
                 ChatsApi.deleteMessages(session, chatId).then((el) => {
-                  const chatIndex = chats.find(
+                  const chatIndex = chats.findIndex(
                     (el) => el.id._serialized === chatId
                   );
                   chats[chatIndex].lastMessage = {};
