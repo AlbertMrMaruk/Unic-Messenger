@@ -23,7 +23,7 @@ export const TooltipChats = ({ children }) => {
           !show ? "hidden" : ""
         }`}
       >
-        <div className="w-3 h-3 -mb-[1.5rem] rotate-45 bg-secondarylight mt-[1rem] ml-[12rem]" />
+        <div className="w-3 h-3 -mb-[1.5rem] rotate-45 bg-secondarylight mt-[.5rem] ml-[11.5rem]" />
         <span
           className={`relative z-10 p-[.9rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3 mt-[1rem]`}
         >
