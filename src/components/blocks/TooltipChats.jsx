@@ -23,8 +23,9 @@ export const TooltipChats = ({ children }) => {
           !show ? "hidden" : ""
         }`}
       >
+        <div className="w-3 h-3 -mb-[1.5rem] rotate-45 bg-secondarylight mt-[1rem] ml-[12rem]" />
         <span
-          className={`relative z-10 p-[.9rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3`}
+          className={`relative z-10 p-[.9rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3 mt-[1rem]`}
         >
           <div className="flex flex-col gap-3  font-bold ">
             <span className="text-red-500 cursor-pointer">
@@ -33,7 +34,6 @@ export const TooltipChats = ({ children }) => {
             <span className="text-red-500 cursor-pointer">Удалить чат</span>
           </div>
         </span>
-        <div className="w-3 h-3 -mb-2 rotate-90 bg-secondarylight mt-2" />
       </div>
     </div>
   );
