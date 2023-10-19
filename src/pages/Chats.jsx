@@ -423,20 +423,20 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             >
               <FaArrowLeft className="w-[25px] h-[25px] m-auto text-white" />
             </div>
-            <div className="flex  items-center py-0 md:py-[.8rem] w-[90%] md:w-[100%] px-0 md:px-[3rem] ml-1 md:ml-0">
-              <div className="bg-white rounded-full w-[40px] h-[40px] ">
-                <img
-                  src={state?.img}
-                  className="rounded-full w-[100%]"
-                  alt={state?.name}
-                />
-              </div>
-              <h3 className="font-bold text-white  ml-[1.5rem]  text-[1.3rem]">
-                {state?.name}
-              </h3>
+            <div className="flex  items-center py-0 md:py-[.8rem] justify-between w-[90%] md:w-[100%] px-[.5rem] md:px-[3rem] ml-1 md:ml-0">
               <div>
-                <FaEllipsisV className="w-[35px] h-[35px] m-auto justify-self-end self-end text-white" />
+                <div className="bg-white rounded-full w-[40px] h-[40px] ">
+                  <img
+                    src={state?.img}
+                    className="rounded-full w-[100%]"
+                    alt={state?.name}
+                  />
+                </div>
+                <h3 className="font-bold text-white  ml-[1.5rem]  text-[1.3rem]">
+                  {state?.name}
+                </h3>
               </div>
+              <FaEllipsisV className="w-[20px] h-[20px]   text-white" />
             </div>
           </div>
         )}
