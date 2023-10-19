@@ -10,6 +10,7 @@ import {
   FaSmile,
   FaWindowClose,
   FaReply,
+  FaEllipsisV,
 } from "react-icons/fa";
 import clickChat from "../api/controlers/ChatsController";
 import Message from "../components/blocks/Message";
@@ -42,20 +43,6 @@ function Chats() {
   const [currentUser, setCurrentUser] = useState();
   const { state } = useLocation();
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
-  //Старый код
-  // useEffect(() => {
-  //   // ChatsApi.getMessages(state?.id, 20, session)
-  //   //   .then((resp) => {
-  //   //     if (resp.ok) {
-  //   //       return resp.json(); // then consume it again, the error happens
-  //   //     }
-  //   //   })
-  //   //   .then((res) => {
-  //   //     setMessages(res.reverse());
-  //   //     setShowSpinnerMessages(false);
-  //   //   });
-  // }, [state]);
-
   const [newMessage, setNewMessage] = useState();
 
   // Функция получения сообщения
@@ -163,26 +150,9 @@ function Chats() {
       //Загрузка информации о пользователе
       setCurrentUser({ pushName: userData[0].name });
 
-      //Старый код
-      /* const newChat = res.slice(0, 10);
-    newChat.forEach((el, index) => {
-      fetch(
-        `http://89.111.131.15/api/contacts/profile-picture?contactId=${el?.id?.user}&session=${session}`
-      )
-        .then((el) => el.json())
-        .then((res) => {
-          el.img = res?.profilePictureURL;
-          if (index === 9) {
-            setChats(newChat);
-            setShowSpinner(false);
-          }
-        });
-    });
-
-    Adding to mongoose database */
-
       //ФУНКЦИЯ ДОБАВЛЕНИЯ ИНФОРМАЦИИ НА ПРИЛОЖЕНИЕ
       const dataToApp = (data) => {
+        console.log("and what next");
         setDataUser(data);
         setAccounts(data.accounts);
         if (data.accounts.length !== 0) {
@@ -362,7 +332,6 @@ function Chats() {
   return (
     <div className="bg-secondary text-white flex  h-[100vh]">
       {/* Left Sidebar */}
-
       <div
         className={`w-[100%] ${
           showChats ? "block" : "hidden"
@@ -465,6 +434,9 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               <h3 className="font-bold text-white  ml-[1.5rem]  text-[1.3rem]">
                 {state?.name}
               </h3>
+              <div>
+                <FaEllipsisV className="w-[35px] h-[35px] m-auto justify-self-end self-end text-white" />
+              </div>
             </div>
           </div>
         )}
