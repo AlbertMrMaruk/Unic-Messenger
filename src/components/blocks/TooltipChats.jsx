@@ -7,6 +7,7 @@ export const TooltipChats = ({ children }) => {
     <div
       className="relative flex flex-col  group "
       onClick={(e) => {
+        console.log("gmgmg");
         e.preventDefault();
         const onClick = () => {
           setShow(false);
