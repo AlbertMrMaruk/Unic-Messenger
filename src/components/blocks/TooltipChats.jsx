@@ -1,10 +1,12 @@
 import { useState } from "react";
 import ChatsApi from "../../api/ChatsApi";
+import DatabaseAPI from "../../api/DatabaseAPI";
 
 export const TooltipChats = ({
   children,
   session,
   chatId,
+  dataUser,
   setChats,
   chats,
   setMessages,
@@ -46,6 +48,9 @@ export const TooltipChats = ({
                   chats[chatIndex].lastMessage = {};
                   chats[chatIndex].messages = [];
                   setMessages([]);
+                  DatabaseAPI.updateUser(dataUser.username, {
+                    chats: dataUser.chats,
+                  });
                 });
               }}
             >
