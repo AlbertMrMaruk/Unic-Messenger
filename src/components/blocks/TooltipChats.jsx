@@ -6,15 +6,14 @@ export const TooltipChats = ({ children }) => {
   return (
     <div
       className="relative flex flex-col  group "
-      onClick={(e) => {
+      onClick={() => {
         console.log("gmgmg");
-        e.preventDefault();
+        setShow(!show);
         const onClick = () => {
           setShow(false);
           window.removeEventListener("click", onClick);
         };
         window.addEventListener("click", onClick);
-        setShow(!show);
       }}
     >
       {children}
