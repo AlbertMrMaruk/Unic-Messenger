@@ -424,7 +424,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               <FaArrowLeft className="w-[25px] h-[25px] m-auto text-white" />
             </div>
             <div className="flex  items-center py-0 md:py-[.8rem] justify-between w-[90%] md:w-[100%] px-[.5rem] md:px-[3rem] ml-1 md:ml-0">
-              <div>
+              <div className="flex items-center">
                 <div className="bg-white rounded-full w-[40px] h-[40px] ">
                   <img
                     src={state?.img}
