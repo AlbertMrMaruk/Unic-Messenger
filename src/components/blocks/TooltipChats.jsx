@@ -6,6 +6,7 @@ export const TooltipChats = ({
   session,
   chatId,
   setChats,
+  chats,
   setMessages,
 }) => {
   const [show, setShow] = useState(false);
@@ -38,8 +39,14 @@ export const TooltipChats = ({
             <span
               className="text-red-500 cursor-pointer"
               onClick={() => {
-                ChatsApi.deleteMessages(session, chatId);
-                setChats();
+                ChatsApi.deleteMessages(session, chatId).then((el) => {
+                  const chatIndex = chats.find(
+                    (el) => el.id._serialized === chatId
+                  );
+                  chats[chatIndex].lastMessage = {};
+                  chats[chatIndex].messages = [];
+                  setMessages([]);
+                });
               }}
             >
               Удалить все сообщения в чате
