@@ -1,6 +1,13 @@
 import { useState } from "react";
+import ChatsApi from "../../api/ChatsApi";
 
-export const TooltipChats = ({ children }) => {
+export const TooltipChats = ({
+  children,
+  session,
+  chatId,
+  setChats,
+  setMessages,
+}) => {
   const [show, setShow] = useState(false);
 
   return (
@@ -28,7 +35,13 @@ export const TooltipChats = ({ children }) => {
           className={`relative z-10 p-[.9rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3 mt-[1rem]`}
         >
           <div className="flex flex-col gap-3  font-bold ">
-            <span className="text-red-500 cursor-pointer">
+            <span
+              className="text-red-500 cursor-pointer"
+              onClick={() => {
+                ChatsApi.deleteMessages(session, chatId);
+                setChats();
+              }}
+            >
               Удалить все сообщения в чате
             </span>
             <span className="text-red-500 cursor-pointer">Удалить чат</span>

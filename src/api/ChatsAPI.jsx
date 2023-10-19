@@ -40,7 +40,7 @@ class ChatsAPI {
     }
   }
   startTyping(phone, session) {
-    return fetch(`http://89.111.131.15/api/startTyping`, {
+    return fetch(`${API_URL}/api/startTyping`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -54,7 +54,7 @@ class ChatsAPI {
     });
   }
   stopTyping(phone, session) {
-    return fetch(`http://89.111.131.15/api/stopTyping`, {
+    return fetch(`${API_URL}/api/stopTyping`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -68,7 +68,7 @@ class ChatsAPI {
     });
   }
   sendImage(data) {
-    return fetch(`http://89.111.131.15/api/sendImage`, {
+    return fetch(`${API_URL}/api/sendImage`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -80,7 +80,7 @@ class ChatsAPI {
     });
   }
   sendSeen(phone, session) {
-    return fetch(`http://89.111.131.15/api/sendSeen`, {
+    return fetch(`${API_URL}/api/sendSeen`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -95,11 +95,29 @@ class ChatsAPI {
   }
   getMessages(id, limit, session) {
     return fetch(
-      `http://89.111.131.15/api/${session}/chats/${id}/messages?downloadMedia=true&limit=${limit}`
+      `${API_URL}/api/${session}/chats/${id}/messages?downloadMedia=true&limit=${limit}`
     );
   }
   getChats(session) {
-    return fetch(`http://89.111.131.15/api/${session}/chats`);
+    return fetch(`${API_URL}/api/${session}/chats`);
+  }
+  deleteMessages(chatId, session) {
+    return fetch(`${API_URL}/api/${session}/chats/${chatId}/messages`, {
+      method: "delete",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+  }
+  deleteChat(chatId, session) {
+    return fetch(`${API_URL}/api/${session}/chats/${chatId}`, {
+      method: "delete",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
   }
 }
 

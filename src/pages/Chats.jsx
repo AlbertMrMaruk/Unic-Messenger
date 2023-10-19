@@ -437,7 +437,12 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                   {state?.name}
                 </h3>
               </div>
-              <TooltipChats>
+              <TooltipChats
+                session={session}
+                chatId={state?.id}
+                setChats={setChats}
+                setMessages={setMessages}
+              >
                 <FaEllipsisV className="w-[20px] h-[20px] cursor-pointer  text-white" />
               </TooltipChats>
             </div>
