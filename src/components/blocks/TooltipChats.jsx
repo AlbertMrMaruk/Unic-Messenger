@@ -33,7 +33,7 @@ export const TooltipChats = ({ children }) => {
             <span className="text-red-500 cursor-pointer">Удалить чат</span>
           </div>
         </span>
-        <div className="w-3 h-3 -mt-2 rotate-45 bg-secondarylight mb-2" />
+        <div className="w-3 h-3 -mb-2 rotate-90 bg-secondarylight mt-2" />
       </div>
     </div>
   );
