@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-export const TooltipMessage = ({ message, children, setReplyMessage }) => {
+export const TooltipChats = ({ children }) => {
   const [show, setShow] = useState(false);
 
   return (
     <div
       className="relative flex flex-col  group w-[100%]"
-      onContextMenu={(e) => {
+      onClick={(e) => {
         e.preventDefault();
         const onClick = () => {
           setShow(false);
@@ -19,26 +19,18 @@ export const TooltipMessage = ({ message, children, setReplyMessage }) => {
       {children}
 
       <div
-        className={`absolute whitespace-nowrap bottom-full flex flex-col  items-center ${
-          message?.fromMe ? "right-[-1rem]" : "left-[-1rem]"
-        }  ${!show ? "hidden" : ""}`}
+        className={`absolute whitespace-nowrap bottom-full flex flex-col  items-center right-[-1rem]  ${
+          !show ? "hidden" : ""
+        }`}
       >
         <span
           className={`relative z-10 p-[.9rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3`}
         >
           <div className="flex flex-col gap-3  font-bold ">
-            <span
-              className=" cursor-pointer"
-              onClick={() => {
-                console.log(message);
-                setReplyMessage(message);
-              }}
-            >
-              Ответить на сообщение
-            </span>
             <span className="text-red-500 cursor-pointer">
-              Удалить сообщение
+              Удалить все сообщения в чате
             </span>
+            <span className="text-red-500 cursor-pointer">Удалить чат</span>
           </div>
         </span>
         <div className="w-3 h-3 -mt-2 rotate-45 bg-secondarylight mb-2" />

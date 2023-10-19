@@ -23,6 +23,7 @@ import ModalAccount from "../components/ModalAccount";
 import DatabaseAPI from "../api/DatabaseAPI";
 import { useNavigate } from "react-router-dom";
 import { TooltipMessage } from "../components/blocks/TooltipMessage";
+import { TooltipChats } from "../components/blocks/TooltipChats";
 
 function Chats() {
   const navigate = useNavigate();
@@ -436,7 +437,9 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                   {state?.name}
                 </h3>
               </div>
-              <FaEllipsisV className="w-[20px] h-[20px]   text-white" />
+              <TooltipChats>
+                <FaEllipsisV className="w-[20px] h-[20px] cursor-pointer  text-white" />
+              </TooltipChats>
             </div>
           </div>
         )}
