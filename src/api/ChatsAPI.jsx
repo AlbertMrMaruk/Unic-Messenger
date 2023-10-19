@@ -101,7 +101,7 @@ class ChatsAPI {
   getChats(session) {
     return fetch(`${API_URL}/api/${session}/chats`);
   }
-  deleteMessages(chatId, session) {
+  deleteMessages(session, chatId) {
     return fetch(`${API_URL}/api/${session}/chats/${chatId}/messages`, {
       method: "delete",
       headers: {
