@@ -9,11 +9,11 @@ export const TooltipChats = ({ children }) => {
       onClick={() => {
         console.log("gmgmg");
         setShow(!show);
-        const onClick = () => {
-          setShow(false);
-          window.removeEventListener("click", onClick);
-        };
-        window.addEventListener("click", onClick);
+        // const onClick = () => {
+        //   setShow(false);
+        //   window.removeEventListener("click", onClick);
+        // };
+        // window.addEventListener("click", onClick);
       }}
     >
       {children}
