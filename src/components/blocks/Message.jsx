@@ -1,18 +1,15 @@
 import { FaFilePdf } from "react-icons/fa";
 
 function Message({ message }) {
-  const url =
-    message?.payload?.mediaUrl ??
-    message?.mediaUrl ??
-    message?.payload?.userMediaUrl;
-  const text = message?.payload?.body ?? message?.body;
-  const timestamp = message?.payload?.timestamp ?? message?.timestamp;
+  const url = message?.mediaUrl;
+  const text = message?.body;
+  const timestamp = message?.timestamp;
   const calcDate = (timestamp) => {
     let h = new Date(
-      message?.event === "send" ? +timestamp : +(timestamp + "000")
+      message?.fromMe ? +timestamp : +(timestamp + "000")
     ).getHours();
     let m = new Date(
-      message?.event === "send" ? +timestamp : +(timestamp + "000")
+      message?.fromMe ? +timestamp : +(timestamp + "000")
     ).getMinutes();
 
     h = h < 10 ? "0" + h : h;
@@ -38,9 +35,7 @@ function Message({ message }) {
   return (
     <div
       className={`mx-3 mb-2 rounded-xl  text-white pr-2 pl-3 min-w-[9%] py-2 max-w-[45%] w-fit flex flex-col gap-1 ${
-        message?.event === "message" ||
-        message?.fromMe === false ||
-        message?.payload?.fromMe === false
+        message?.fromMe === false
           ? "bg-[#2a2a2e] self-start"
           : "bg-primary self-end"
       }`}
@@ -69,7 +64,7 @@ function Message({ message }) {
       {text && (
         <span
           className={` ${
-            message?.event === "message" || message?.fromMe === false
+            message?.fromMe === false
               ? "text-left mr-[2.5rem]"
               : "text-right mr-[2rem]"
           } `}

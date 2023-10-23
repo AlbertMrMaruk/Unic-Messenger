@@ -73,7 +73,10 @@ function Chats() {
             const chatIndex = chats.findIndex(
               (el) => el.id._serialized === currentChat
             );
-            chats[chatIndex].messages = [...chats[chatIndex].messages, message];
+            chats[chatIndex].messages = [
+              ...chats[chatIndex].messages,
+              message.payload,
+            ];
             chats[chatIndex].lastMessage = {
               body: message.payload.body,
               ...message,
@@ -93,7 +96,10 @@ function Chats() {
               body: message.payload.body,
               ...message,
             };
-            chats[chatIndex].messages = [...chats[chatIndex].messages, message];
+            chats[chatIndex].messages = [
+              ...chats[chatIndex].messages,
+              message.payload,
+            ];
 
             setDataUser((prev) => ({ ...prev, chats }));
             DatabaseAPI.updateUser(dataUser.username, {
@@ -312,7 +318,7 @@ function Chats() {
     setTimeout(async () => {
       await ChatsApi.stopTyping(currentChat, session);
       if (img) {
-        ChatsApi.sendImage(data, replyMessage);
+        ChatsApi.sendImage(data);
       } else {
         if (!replyMessage) {
           ChatsApi.sendText(text, currentChat, session);
