@@ -17,6 +17,7 @@ function clickChat(setNewMessage, session) {
     });
 
     socket.addEventListener("message", (event) => {
+      console.log(JSON.parse(event.data));
       setNewMessage(JSON.parse(event.data));
     });
 
