@@ -1,10 +1,11 @@
 import DatabaseAPI from "../api/DatabaseAPI";
 import Spinner from "./blocks/Spinner";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ModalAccount({
   session,
   dataUser,
+  newMessage,
   setAccounts,
   setShowModal,
   setDataUser,
@@ -14,6 +15,23 @@ export default function ModalAccount({
   const [qrCode, setQrCode] = useState(false);
   const [phone, setPhone] = useState("");
   const [confirm, setConfirm] = useState(false);
+  useEffect(() => {
+    const gettingStatus = (message) => {
+      if (message.event === "session.status") {
+        console.log(message);
+        if (message.payload.status === "SCAN_QR_CODE") {
+          console.log("scaaaan");
+          setQrCode(`http://89.111.131.15/api/${phone}/auth/qr`);
+          setShowSpinner(false);
+          setConfirm(true);
+          setAccount(phone);
+        }
+      }
+    };
+    if (newMessage) {
+      gettingStatus(newMessage);
+    }
+  }, [newMessage]);
   const startSession = (phone) => {
     console.log(phone);
     return fetch(`http://89.111.131.15/api/sessions/start`, {
@@ -31,7 +49,7 @@ export default function ModalAccount({
           webhooks: [
             {
               url: `http://89.111.131.15/post/${phone}`,
-              events: ["message.any"],
+              events: ["message.any", "session.status"],
               hmac: null,
               retries: null,
               customHeaders: null,
@@ -90,14 +108,7 @@ export default function ModalAccount({
                 type="button"
                 onClick={() => {
                   setShowSpinner(true);
-                  startSession(phone).then(() => {
-                    setTimeout(() => {
-                      setQrCode(`http://89.111.131.15/api/${phone}/auth/qr`);
-                      setShowSpinner(false);
-                      setConfirm(true);
-                      setAccount(phone);
-                    }, 14000);
-                  });
+                  startSession(phone);
                 }}
               >
                 Далее
