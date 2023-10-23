@@ -40,7 +40,7 @@ export default function ModalAccount({
           webhooks: [
             {
               url: `http://89.111.131.15/post/${phone}`,
-              events: ["message.any", "session.status"],
+              events: ["session.status"],
               hmac: null,
               retries: {
                 delaySeconds: 2,
