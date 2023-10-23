@@ -531,31 +531,30 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               <FaArrowCircleUp className="text-white w-[25px] h-[25px] m-auto" />
             </button>
           </div>
-
-          {/* Modal  */}
-          {showModal && (
-            <Modal
-              text={text}
-              session={session}
-              setText={setText}
-              setMessages={setMessages}
-              sendMessage={sendMessage}
-              file={file}
-              setShowModal={setShowModal}
-            />
-          )}
-          {/* Modal To Connect New Account */}
-          {showModalAccount && (
-            <ModalAccount
-              setDataUser={setDataUser}
-              setSession={setSession}
-              setShowModal={setShowModalAccount}
-              session={session}
-              dataUser={dataUser}
-              setAccounts={setAccounts}
-            />
-          )}
-        </div>
+        </div>{" "}
+        {/* Modal  */}
+        {showModal && (
+          <Modal
+            text={text}
+            session={session}
+            setText={setText}
+            setMessages={setMessages}
+            sendMessage={sendMessage}
+            file={file}
+            setShowModal={setShowModal}
+          />
+        )}
+        {/* Modal To Connect New Account */}
+        {showModalAccount && (
+          <ModalAccount
+            setDataUser={setDataUser}
+            setSession={setSession}
+            setShowModal={setShowModalAccount}
+            session={session}
+            dataUser={dataUser}
+            setAccounts={setAccounts}
+          />
+        )}
       </div>
     </div>
   );
