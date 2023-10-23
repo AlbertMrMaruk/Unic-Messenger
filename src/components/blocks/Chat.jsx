@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ChatsApi from "../../api/ChatsApi";
 import DatabaseAPI from "../../api/DatabaseAPI";
 
-function Chat({ chat, session, dataUser, setShowChats, index }) {
+function Chat({ chat, session, dataUser, setShowChats, index, currentChat }) {
   const calcDate = (timestamp) => {
     let h = new Date(
       chat?.lastMessage?.event === "send" ? +timestamp : +(timestamp + "000")
@@ -19,8 +19,11 @@ function Chat({ chat, session, dataUser, setShowChats, index }) {
   const navigate = useNavigate();
   return (
     <div
-      className="p-[1rem]  
-border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-secondarylight"
+      className={`p-[1rem]  
+border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-secondarylight ${
+        currentChat.id._serialized === chat.id._serialized &&
+        "bg-secondarylight"
+      }`}
       data-id={chat.id._serialized}
       onClick={() => {
         if (window.innerWidth < 768) {
