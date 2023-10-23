@@ -51,16 +51,18 @@ function Chats() {
     const gettingMessage = (message) => {
       if (message.event === "message.any") {
         if (message.payload.fromMe) {
+          setMessages((prev) => [message.payload, ...prev]);
           const chatIndex = chats.findIndex(
             (el) => el.id._serialized === currentChat
           );
-          chats[chatIndex].lastMessage = message.payload;
           chats[chatIndex].messages = [
             ...chats[chatIndex].messages,
             message.payload,
           ];
+          chats[chatIndex].lastMessage = message.payload;
+
           setDataUser((prev) => ({ ...prev, chats }));
-          setMessages((prev) => [message.payload, ...prev]);
+
           DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
         } else {
           if (message.payload.from === currentChat) {

@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/static/css/main.f4b5939f.css",
-    "main.js": "/static/js/main.5f7c5f77.js",
+    "main.js": "/static/js/main.a60e4afd.js",
     "static/media/logoMessenger.png": "/static/media/logoMessenger.c1040cc64acc5fc41b3b.png",
     "static/media/785-4.gif": "/static/media/785-4.0fad339909b2f57555be.gif",
     "index.html": "/index.html"
   },
   "entrypoints": [
     "static/css/main.f4b5939f.css",
-    "static/js/main.5f7c5f77.js"
+    "static/js/main.a60e4afd.js"
   ]
 }
