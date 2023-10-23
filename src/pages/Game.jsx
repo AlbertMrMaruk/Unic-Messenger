@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import words from "./wordList.json";
+import Keyboard from "../components/game/Keyboard";
 import HangmanDraw from "../components/game/HangmanDraw";
 import HangmanWord from "../components/game/HangmanWord";
-import Keyboard from "../components/game/Keyboard";
-import { Toaster, toast } from "react-hot-toast";
 
 function Game() {
   const [wordToGuess, setWordToGuess] = useState(() => {
@@ -55,25 +54,17 @@ function Game() {
 
   useEffect(() => {
     if (isWinner) {
-      toast("Congratulations, you won!", {
-        icon: "👏",
-        duration: 5000,
-      });
     }
   }, [isWinner]);
 
   useEffect(() => {
     if (isLoser) {
-      toast.error("You lost, please refresh the page!", {
-        duration: 5000,
-      });
     }
   }, [isLoser, wordToGuess]);
 
   return (
     <div className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-100 via-indigo-100 to-purple-200 h-screen">
       <div className="font-adlam max-w-3xl flex items-center flex-col gap-8 mx-auto pt-12">
-        <Toaster />
         {/* I want to know how many times I chose the wrong letter */}
         <HangmanDraw numberOfGuess={incorrectLetters.length} />
         <HangmanWord
