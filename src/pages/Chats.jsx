@@ -108,7 +108,7 @@ function Chats() {
           const chat2time =
             +chat2?.lastMessage?.timestamp ||
             +(chat2?.lastMessage?.payload?.timestamp + "000");
-
+          console.log(chat1, chat2, chat1time, chat2time);
           return chat1time > chat2time ? -1 : 1;
         })
       );
