@@ -69,7 +69,7 @@ function Chats() {
           DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
         } else {
           if (message.payload.from === currentChat) {
-            setMessages((prev) => [message, ...prev]);
+            setMessages((prev) => [message.payload, ...prev]);
             const chatIndex = chats.findIndex(
               (el) => el.id._serialized === currentChat
             );
@@ -87,7 +87,7 @@ function Chats() {
               chats: dataUser.chats,
             });
           } else {
-            setMessages((prev) => prev);
+            setMessages((prev) => [message.payload, ...prev]);
             const chatIndex = chats.findIndex(
               (el) => el.id._serialized === message.payload.from
             );
