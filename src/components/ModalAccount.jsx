@@ -42,7 +42,10 @@ export default function ModalAccount({
               url: `http://89.111.131.15/post/${phone}`,
               events: ["message.any", "session.status"],
               hmac: null,
-              retries: null,
+              retries: {
+                delaySeconds: 2,
+                attempts: 15,
+              },
               customHeaders: null,
             },
           ],
