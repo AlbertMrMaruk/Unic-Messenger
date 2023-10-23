@@ -482,17 +482,15 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               />
             </div>
           )}
-          <div
-            className="relative flex flex-wrap items-stretch m-auto w-[95%] md:w-[90%]"
-            onKeyDown={(e) => {
-              console.log(e.key);
-              if (e.key === 13) {
-                sendMessage(text);
-              }
-            }}
-          >
+          <div className="relative flex flex-wrap items-stretch m-auto w-[95%] md:w-[90%]">
             <input
               type="text"
+              onKeyDown={(e) => {
+                console.log(e.key);
+                if (e.key === 13) {
+                  sendMessage(text);
+                }
+              }}
               className={`
               bg-secondarylight text-white    ${
                 replyMessage ? "rounded-bl-xl" : "rounded-l-xl"
