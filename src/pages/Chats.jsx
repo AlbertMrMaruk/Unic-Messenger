@@ -38,6 +38,7 @@ function Chats() {
   const [showChats, setShowChats] = useState(true);
   const [chats, setChats] = useState([]);
   const [file, setFile] = useState("");
+  const [qrCode, setQrCode] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showModalAccount, setShowModalAccount] = useState(false);
   const [sizeUser, setSizeUser] = useState(0);
@@ -106,6 +107,12 @@ function Chats() {
               chats: dataUser.chats,
             });
           }
+        }
+      }
+      if (message.event === "session.status") {
+        if (message.payload.status === "SCAN_QR_CODE") {
+          console.log("scaaaan");
+          setQrCode(`http://89.111.131.15/api/${message.session}/auth/qr`);
         }
       }
 
@@ -557,7 +564,8 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         <ModalAccount
           setDataUser={setDataUser}
           setSession={setSession}
-          newMessage={newMessage}
+          qrCode={qrCode}
+          setQrCode={setQrCode}
           setShowModal={setShowModalAccount}
           session={session}
           dataUser={dataUser}

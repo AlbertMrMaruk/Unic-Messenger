@@ -9,29 +9,20 @@ export default function ModalAccount({
   setAccounts,
   setShowModal,
   setDataUser,
+  qrCode,
+  setQrCode,
 }) {
   const [showSpinner, setShowSpinner] = useState(false);
   const [account, setAccount] = useState();
-  const [qrCode, setQrCode] = useState(false);
   const [phone, setPhone] = useState("");
   const [confirm, setConfirm] = useState(false);
-  useEffect(() => {
-    const gettingStatus = (message) => {
-      console.log(message);
-      if (message.event === "session.status") {
-        if (message.payload.status === "SCAN_QR_CODE") {
-          console.log("scaaaan");
-          setQrCode(`http://89.111.131.15/api/${phone}/auth/qr`);
-          setShowSpinner(false);
-          setConfirm(true);
-          setAccount(phone);
-        }
-      }
-    };
-    if (newMessage) {
-      gettingStatus(newMessage);
-    }
-  }, [newMessage]);
+
+  if (qrCode) {
+    console.log("scanning yeee");
+    setShowSpinner(false);
+    setConfirm(true);
+    setAccount(phone);
+  }
   const startSession = (phone) => {
     console.log(phone);
     return fetch(`http://89.111.131.15/api/sessions/start`, {
