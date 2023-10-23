@@ -109,12 +109,12 @@ function Chats() {
           }
         }
       }
-      if (message.event === "session.status") {
-        if (message.payload.status === "SCAN_QR_CODE") {
-          console.log("scaaaan");
-          setQrCode(`http://89.111.131.15/api/${message.session}/auth/qr`);
-        }
-      }
+      // if (message.event === "session.status") {
+      //   if (message.payload.status === "SCAN_QR_CODE") {
+      //     console.log("scaaaan");
+      //     setQrCode(`http://89.111.131.15/api/${message.session}/auth/qr`);
+      //   }
+      // }
 
       setChats((prev) =>
         prev.sort((chat1, chat2) => {

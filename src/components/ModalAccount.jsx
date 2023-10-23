@@ -17,12 +17,12 @@ export default function ModalAccount({
   const [phone, setPhone] = useState("");
   const [confirm, setConfirm] = useState(false);
 
-  if (qrCode) {
-    console.log("scanning yeee");
-    setShowSpinner(false);
-    setConfirm(true);
-    setAccount(phone);
-  }
+  // if (qrCode) {
+  //   console.log("scanning yeee");
+  //   setShowSpinner(false);
+  //   setConfirm(true);
+  //   setAccount(phone);
+  // }
   const startSession = (phone) => {
     console.log(phone);
     return fetch(`http://89.111.131.15/api/sessions/start`, {
@@ -102,7 +102,14 @@ export default function ModalAccount({
                 type="button"
                 onClick={() => {
                   setShowSpinner(true);
-                  startSession(phone);
+                  startSession(phone).then(() => {
+                    setTimeout(() => {
+                      setQrCode(`http://89.111.131.15/api/${phone}/auth/qr`);
+                      setShowSpinner(false);
+                      setConfirm(true);
+                      setAccount(phone);
+                    }, 15000);
+                  });
                 }}
               >
                 Далее
