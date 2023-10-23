@@ -4,6 +4,7 @@ function Message({ message }) {
   const url = message?.mediaUrl;
   const text = message?.body;
   const timestamp = message?.timestamp;
+  // const isGroup = message.
   const calcDate = (timestamp) => {
     let h = new Date(+timestamp).getHours();
     let m = new Date(+timestamp).getMinutes();
@@ -13,10 +14,10 @@ function Message({ message }) {
 
     return h + ":" + m;
   };
-  const isPdf = (url, message) => {
+  const isPdf = (url) => {
     return url?.split(".").at(-1) === "pdf";
   };
-  const isVideo = (url, message) => {
+  const isVideo = (url) => {
     return url?.split(".").at(-1) === "mp4";
   };
   const isImg = (url, message) => {
@@ -63,6 +64,7 @@ function Message({ message }) {
           )}
         </span>
       )}
+      {/* <span className={`font-bold`}></span> */}
       <span
         className={`text-right  mt-[-1.1rem] text-[10px]  ${
           url && !text

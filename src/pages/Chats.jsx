@@ -87,7 +87,7 @@ function Chats() {
               chats: dataUser.chats,
             });
           } else {
-            setMessages((prev) => [message.payload, ...prev]);
+            setMessages((prev) => prev);
             const chatIndex = chats.findIndex(
               (el) => el.id._serialized === message.payload.from
             );
