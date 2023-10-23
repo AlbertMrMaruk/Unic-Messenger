@@ -486,8 +486,8 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             <input
               type="text"
               onKeyDown={(e) => {
-                console.log(e.key);
-                if (e.key === 13) {
+                // console.log(e.key);
+                if (e.key === "Enter") {
                   sendMessage(text);
                 }
               }}
