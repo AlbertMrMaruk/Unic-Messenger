@@ -59,6 +59,7 @@ function Chats() {
             ...chats[chatIndex].messages,
             message.payload,
           ];
+          setDataUser((prev) => ({ ...prev, chats }));
           setMessages((prev) => [message.payload, ...prev]);
           DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
         } else {
