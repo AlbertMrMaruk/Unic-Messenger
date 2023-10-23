@@ -17,8 +17,8 @@ export default function ModalAccount({
   const [confirm, setConfirm] = useState(false);
   useEffect(() => {
     const gettingStatus = (message) => {
+      console.log(message);
       if (message.event === "session.status") {
-        console.log(message);
         if (message.payload.status === "SCAN_QR_CODE") {
           console.log("scaaaan");
           setQrCode(`http://89.111.131.15/api/${phone}/auth/qr`);
