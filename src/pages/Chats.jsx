@@ -102,10 +102,12 @@ function Chats() {
 
       setChats((prev) =>
         prev.sort((chat1, chat2) => {
-          const chat1time = +chat1?.lastMessage?.timestamp;
-
-          const chat2time = +chat2?.lastMessage?.timestamp;
-
+          const chat1time =
+            +(chat1?.lastMessage?.timestamp + "000") ||
+            +chat1?.lastMessage?.payload?.timestamp;
+          const chat2time =
+            +(chat2?.lastMessage?.timestamp + "000") ||
+            +chat2?.lastMessage?.payload?.timestamp;
           console.log(chat1, chat2, chat1time, chat2time);
           return chat1time > chat2time ? -1 : 1;
         })
