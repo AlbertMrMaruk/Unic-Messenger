@@ -398,6 +398,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             chats.map((el, index) => (
               <Chat
                 chat={el}
+                currentChat={currentChat}
                 key={index}
                 index={index}
                 setShowChats={setShowChats}
