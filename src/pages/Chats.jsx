@@ -42,8 +42,7 @@ function Chats() {
   const [qrCode, setQrCode] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showModalAccount, setShowModalAccount] = useState(false);
-  const [setShowModalDownload, setShowModalDownlsetShowModalDownload] =
-    useState(false);
+  const [showModalDownload, setShowModalDownload] = useState(false);
   const [sizeUser, setSizeUser] = useState(0);
   const [currentUser, setCurrentUser] = useState();
   const { state } = useLocation();
@@ -578,7 +577,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         />
       )}
       {/* Modal To Download Chats */}
-      {showModalAccount && <ModalDownload percentage={percentage} />}
+      {showModalDownload && <ModalDownload percentage={percentage} />}
     </div>
   );
 }
