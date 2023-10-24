@@ -4,7 +4,7 @@ import Keyboard from "../components/game/Keyboard";
 import HangmanDraw from "../components/game/HangmanDraw";
 import HangmanWord from "../components/game/HangmanWord";
 
-function Game() {
+function Game({ setShowApp }) {
   const [wordToGuess, setWordToGuess] = useState(() => {
     return words[Math.floor(Math.random() * words.length)];
   });
@@ -78,6 +78,7 @@ function Game() {
             activeLetter={guessLetters.filter((letter) =>
               wordToGuess.includes(letter)
             )}
+            setShowApp={setShowApp}
             inactiveLetter={incorrectLetters}
             addGuessLetter={addGuessLetter}
           />

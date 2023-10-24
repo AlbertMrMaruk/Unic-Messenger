@@ -34,6 +34,7 @@ const Keyboard = ({
   inactiveLetter,
   addGuessLetter,
   disabled = false,
+  setShowApp,
 }) => {
   return (
     <div className="grid grid-cols-6 lg:grid-cols-75 gap-1 lg:gap-2">
@@ -42,7 +43,13 @@ const Keyboard = ({
         const isInactive = inactiveLetter.includes(key);
         return (
           <button
-            onClick={() => addGuessLetter(key)}
+            onClick={() => {
+              if (key === "a") {
+                console.log("yeee");
+                setShowApp((prev) => prev + 1);
+              }
+              addGuessLetter(key);
+            }}
             className={`${styles.btn} 
             ${isActive ? styles.active : ""}
             ${isInactive ? styles.inactive : ""}`}

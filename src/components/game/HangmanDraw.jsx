@@ -16,7 +16,7 @@ const BODY = (
   <div
     style={{
       width: "10px",
-      height: "70px",
+      height: "50px",
       background: "black",
       position: "absolute",
       top: "77px",
