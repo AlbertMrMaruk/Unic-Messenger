@@ -234,31 +234,49 @@ function Chats() {
                   return el;
                 });
                 setPercentage((prev) => +prev + 2);
-                ChatsApi.getAvatar(el.id.user, userData[0].accounts[0])
-                  .then((el) => el.json())
-                  .then((el) => {
-                    console.log(el?.profilePictureURL);
-                    data.chats[index].avatar = el?.profilePictureURL;
-                    data.chatsCount += 1;
-                    setPercentage((prev) => +prev + 1);
-                    if (data.chatsCount === 30) {
-                      console.log(allSize, "and nooooowwww");
-                      data.allSize = allSize;
-                      setPercentage(100);
-                      DatabaseAPI.updateUser(userData[0].username, {
-                        chats: data.chats,
-                        allSize: data.allSize,
-                        accounts: data.accounts,
-                      })
-                        .then((res) => res.json())
-                        .then((res) => {
-                          console.log(res);
-                          dataToApp(data);
+                data.chatsCount += 1;
+                if (data.chatsCount === 30) {
+                  console.log(allSize, "and nooooowwww");
+                  data.allSize = allSize;
+                  setPercentage(100);
+                  DatabaseAPI.updateUser(userData[0].username, {
+                    chats: data.chats,
+                    allSize: data.allSize,
+                    accounts: data.accounts,
+                  })
+                    .then((res) => res.json())
+                    .then((res) => {
+                      console.log(res);
+                      dataToApp(data);
 
-                          setShowModalDownload(false);
-                        });
-                    }
-                  });
+                      setShowModalDownload(false);
+                    });
+                }
+                // setPercentage((prev) => +prev + 1);
+                // ChatsApi.getAvatar(el.id.user, userData[0].accounts[0])
+                //   .then((el) => el.json())
+                //   .then((el) => {
+                //     console.log(el?.profilePictureURL);
+                //     data.chats[index].avatar = el?.profilePictureURL;
+
+                //     if (data.chatsCount === 30) {
+                //       console.log(allSize, "and nooooowwww");
+                //       data.allSize = allSize;
+                //       setPercentage(100);
+                //       DatabaseAPI.updateUser(userData[0].username, {
+                //         chats: data.chats,
+                //         allSize: data.allSize,
+                //         accounts: data.accounts,
+                //       })
+                //         .then((res) => res.json())
+                //         .then((res) => {
+                //           console.log(res);
+                //           dataToApp(data);
+
+                //           setShowModalDownload(false);
+                //         });
+                //     }
+                //   });
               });
           };
           for (let i = 0; i < 30; i++) {
