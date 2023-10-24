@@ -24,6 +24,7 @@ import DatabaseAPI from "../api/DatabaseAPI";
 import { useNavigate } from "react-router-dom";
 import { TooltipMessage } from "../components/blocks/TooltipMessage";
 import { TooltipChats } from "../components/blocks/TooltipChats";
+import ModalDownload from "../components/ModalDownload";
 
 function Chats() {
   const navigate = useNavigate();
@@ -41,11 +42,14 @@ function Chats() {
   const [qrCode, setQrCode] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showModalAccount, setShowModalAccount] = useState(false);
+  const [setShowModalDownload, setShowModalDownlsetShowModalDownload] =
+    useState(false);
   const [sizeUser, setSizeUser] = useState(0);
   const [currentUser, setCurrentUser] = useState();
   const { state } = useLocation();
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
   const [newMessage, setNewMessage] = useState();
+  const [percentage, setPercentage] = useState();
 
   // Функция получения сообщения
   useEffect(() => {
@@ -198,6 +202,7 @@ function Chats() {
       userData[0].accounts.length > 0 &&
       userData[0].chats.length === 0
     ) {
+      setShowModalDownload(true);
       ChatsApi.getChats(userData[0].accounts[0])
         .then((resp) => resp.json())
         .then((res) => {
@@ -225,10 +230,12 @@ function Chats() {
                   return el;
                 });
                 data.chatsCount += 1;
+                setPercentage((prev) => prev + 3.2);
                 console.log(data.chatsCount);
                 if (data.chatsCount === 30) {
                   console.log(allSize, "and nooooowwww");
                   data.allSize = allSize;
+                  setPercentage(100);
                   DatabaseAPI.updateUser(userData[0].username, {
                     chats: data.chats,
                     allSize: data.allSize,
@@ -238,6 +245,8 @@ function Chats() {
                     .then((res) => {
                       console.log(res);
                       dataToApp(data);
+
+                      setShowModalDownload(true);
                     });
                 }
               });
@@ -568,6 +577,8 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           setAccounts={setAccounts}
         />
       )}
+      {/* Modal To Download Chats */}
+      {showModalAccount && <ModalDownload percentage={percentage} />}
     </div>
   );
 }
