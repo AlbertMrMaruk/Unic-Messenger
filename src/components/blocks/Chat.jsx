@@ -52,9 +52,9 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
       }}
     >
       <div className="bg-[#ababab] rounded-full md:w-[40px] md:h-[40px] w-[45px] h-[45px]">
-        {chat.img && (
+        {chat.avatar && (
           <img
-            src={chat.img}
+            src={chat.avatar}
             className="rounded-full w-[100%]"
             alt={chat.name}
           />
