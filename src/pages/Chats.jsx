@@ -207,12 +207,12 @@ function Chats() {
           console.log("Starting");
           const data = {
             ...userData[0],
-            chats: res.slice(0, 70),
+            chats: res.slice(0, 30),
             chatsCount: 0,
           };
           let allSize = 0;
           // FETCH FUNCTION
-
+          const delay = (ms) => new Promise((res) => setTimeout(res, ms));
           const fetchChat = async (el, index) => {
             await ChatsApi.getMessages(
               el.id._serialized,
@@ -288,12 +288,12 @@ function Chats() {
                 }
               });
           };
-          for (let i = 0; i < 30; i++) {
+          for (let i = 0; i < 40; i++) {
             await fetchChat(data.chats[i], i);
+            if (i === 20) {
+              await delay(5000);
+            }
           }
-          // await data.chats.slice(0, 30).forEach((el, index) => {
-          //   fetchChat(el, index);
-          // });
         });
     } else {
       console.log("Download and fetching", userData[0].accounts[0]);
