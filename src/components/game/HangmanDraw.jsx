@@ -1,13 +1,13 @@
 const HEAD = (
   <div
     style={{
-      width: "50px",
-      height: "50px",
+      width: "35px",
+      height: "35px",
       borderRadius: "100%",
       border: "7px solid black",
       position: "absolute",
       top: "45px",
-      right: "-20px",
+      right: "-13px",
     }}
   />
 );
@@ -16,10 +16,10 @@ const BODY = (
   <div
     style={{
       width: "10px",
-      height: "130px",
+      height: "70px",
       background: "black",
       position: "absolute",
-      top: "90px",
+      top: "77px",
       right: "0",
     }}
   />
@@ -28,12 +28,12 @@ const BODY = (
 const RIGHT_ARM = (
   <div
     style={{
-      width: "90px",
+      width: "39px",
       height: "10px",
       background: "black",
       position: "absolute",
-      top: "150px",
-      right: "-90px",
+      top: "98px",
+      right: "-38px",
       rotate: "-30deg",
       transformOrigin: "left bottom",
       borderRadius: "12px",
@@ -44,11 +44,11 @@ const RIGHT_ARM = (
 const LEFT_ARM = (
   <div
     style={{
-      width: "90px",
+      width: "39px",
       height: "10px",
       background: "black",
       position: "absolute",
-      top: "150px",
+      top: "98px",
       right: "10px",
       rotate: "30deg",
       transformOrigin: "right bottom",
@@ -60,13 +60,13 @@ const LEFT_ARM = (
 const RIGHT_LEG = (
   <div
     style={{
-      width: "100px",
+      width: "45px",
       height: "10px",
       background: "black",
       position: "absolute",
-      top: "210px",
-      right: "-90px",
-      rotate: "60deg",
+      top: "112px",
+      right: "-33px",
+      rotate: "40deg",
       transformOrigin: "left bottom",
       borderRadius: "12px",
     }}
@@ -76,13 +76,13 @@ const RIGHT_LEG = (
 const LEFT_LEG = (
   <div
     style={{
-      width: "100px",
+      width: "45px",
       height: "10px",
       background: "black",
       position: "absolute",
-      top: "210px",
+      top: "132px",
       right: 0,
-      rotate: "-60deg",
+      rotate: "-40deg",
       transformOrigin: "right bottom",
       borderRadius: "12px",
     }}
@@ -110,27 +110,28 @@ const HangmanDraw = ({ numberOfGuess }) => {
       <div
         style={{
           height: "10px",
-          width: "200px",
+          width: "100px",
           background: "black",
-          marginLeft: "120px",
+          marginLeft: "95px",
         }}
       />
 
       <div
         style={{
-          height: "400px",
+          height: "150px",
           width: "10px",
           background: "black",
-          marginLeft: "120px",
+          marginLeft: "95px",
         }}
       />
 
       <div
         style={{
           height: "10px",
-          width: "250px",
+          width: "150px",
           background: "black",
           borderRadius: "12px",
+          marginLeft: "25px",
         }}
       />
     </div>
