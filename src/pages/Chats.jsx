@@ -127,7 +127,6 @@ function Chats() {
           const chat2time =
             +(chat2?.lastMessage?.payload?.timestamp + "000") ||
             +chat2?.lastMessage?.timestamp;
-          console.log(chat1, chat2, chat1time, chat2time);
           return chat1time > chat2time ? -1 : 1;
         })
       );
@@ -208,7 +207,7 @@ function Chats() {
           console.log("Starting");
           const data = {
             ...userData[0],
-            chats: res.slice(0, 40),
+            chats: res.slice(0, 70),
             chatsCount: 0,
           };
           let allSize = 0;
@@ -236,7 +235,7 @@ function Chats() {
                     console.log(el?.profilePictureURL);
                     data.chats[index].avatar = el?.profilePictureURL;
                     data.chatsCount += 1;
-                    setPercentage((prev) => +prev + 1);
+                    setPercentage((prev) => +prev + 2);
                     if (data.chatsCount === 30) {
                       console.log(allSize, "and nooooowwww");
                       data.allSize = allSize;
