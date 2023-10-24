@@ -63,8 +63,8 @@ function Game({ setShowApp }) {
   }, [isLoser, wordToGuess]);
 
   return (
-    <div className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-100 via-indigo-100 to-purple-200 h-screen">
-      <div className="font-adlam max-w-3xl flex items-center flex-col gap-8 mx-auto pt-12">
+    <div className="bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-100 via-indigo-100 to-purple-200 py-3">
+      <div className="font-adlam max-w-3xl md:max-w-none md:w-[70%] flex items-center flex-col gap-8 mx-auto pt-12">
         {/* I want to know how many times I chose the wrong letter */}
         <HangmanDraw numberOfGuess={incorrectLetters.length} />
         <HangmanWord
