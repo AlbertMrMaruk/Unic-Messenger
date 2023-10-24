@@ -4,12 +4,8 @@ import DatabaseAPI from "../../api/DatabaseAPI";
 
 function Chat({ chat, session, dataUser, setShowChats, index, currentChat }) {
   const calcDate = (timestamp) => {
-    let h = new Date(
-      chat?.lastMessage?.event === "send" ? +timestamp : +(timestamp + "000")
-    ).getHours();
-    let m = new Date(
-      chat?.lastMessage?.event === "send" ? +timestamp : +(timestamp + "000")
-    ).getMinutes();
+    let h = new Date(+(timestamp + "000")).getHours();
+    let m = new Date(+(timestamp + "000")).getMinutes();
 
     h = h < 10 ? "0" + h : h;
     m = m < 10 ? "0" + m : m;

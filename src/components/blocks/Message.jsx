@@ -4,7 +4,7 @@ function Message({ message }) {
   const url = message?.mediaUrl;
   const text = message?.body;
   const timestamp =
-    +(message?.payload?.timestamp + "000") || +message?.timestamp;
+    +(message?.payload?.timestamp + "000") || +(message?.timestamp + "000");
   // const isGroup = message.
   const calcDate = (timestamp) => {
     let h = new Date(+timestamp).getHours();
