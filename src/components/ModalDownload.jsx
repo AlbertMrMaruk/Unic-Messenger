@@ -11,7 +11,7 @@ export default function ModalDownload({ percentage }) {
             </h3>
           </div>
           <CircularProgressbar
-            className="w-[20%] mx-auto my-[2rem] font-bold"
+            className="w-[40%] md:w-[20%] mx-auto my-[2rem] font-bold"
             value={percentage}
             text={`${percentage}%`}
             styles={{
