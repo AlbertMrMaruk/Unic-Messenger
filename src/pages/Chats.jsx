@@ -203,7 +203,7 @@ function Chats() {
       setShowModalDownload(true);
       ChatsApi.getChats(userData[0].accounts[0])
         .then((resp) => resp.json())
-        .then((res) => {
+        .then(async (res) => {
           console.log("Starting");
           const data = {
             ...userData[0],
@@ -211,7 +211,9 @@ function Chats() {
             chatsCount: 0,
           };
           let allSize = 0;
-          data.chats.forEach((el, index) => {
+          // FETCH FUNCTION
+
+          const fetchChat = (el, index) => {
             ChatsApi.getMessages(el.id._serialized, 30, userData[0].accounts[0])
               .then((res) => res.json())
               .then((res) => {
@@ -235,7 +237,7 @@ function Chats() {
                     data.chats[index].avatar = el?.profilePictureURL;
                     data.chatsCount += 1;
                     setPercentage((prev) => +prev + 1);
-                    if (data.chatsCount === 10) {
+                    if (data.chatsCount >= 10) {
                       console.log(allSize, "and nooooowwww");
                       data.allSize = allSize;
                       setPercentage(100);
@@ -254,7 +256,15 @@ function Chats() {
                     }
                   });
               });
+          };
+          await data.chats.slice(0, 30).forEach((el, index) => {
+            fetchChat(el, index);
           });
+          setTimeout(() => {
+            data.chats.slice(31, 60).forEach((el, index) => {
+              fetchChat(el, index);
+            });
+          }, 4000);
         });
     } else {
       console.log("Download and fetching", userData[0].accounts[0]);
