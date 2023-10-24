@@ -48,7 +48,7 @@ function Chats() {
   const { state } = useLocation();
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
   const [newMessage, setNewMessage] = useState();
-  const [percentage, setPercentage] = useState();
+  const [percentage, setPercentage] = useState(0);
 
   // Функция получения сообщения
   useEffect(() => {
@@ -229,7 +229,7 @@ function Chats() {
                   return el;
                 });
                 data.chatsCount += 1;
-                setPercentage((prev) => prev + 3.2);
+                setPercentage((prev) => +prev + 3);
                 console.log(data.chatsCount);
                 if (data.chatsCount === 30) {
                   console.log(allSize, "and nooooowwww");
