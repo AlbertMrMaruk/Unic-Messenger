@@ -227,16 +227,15 @@ function Chats() {
                   delete el._data;
                   return el;
                 });
-
-                console.log(data.chatsCount);
+                setPercentage((prev) => +prev + 2);
                 ChatsApi.getAvatar(el.id.user, userData[0].accounts[0])
                   .then((el) => el.json())
                   .then((el) => {
                     console.log(el?.profilePictureURL);
                     data.chats[index].avatar = el?.profilePictureURL;
                     data.chatsCount += 1;
-                    setPercentage((prev) => +prev + 2);
-                    if (data.chatsCount === 70) {
+                    setPercentage((prev) => +prev + 1);
+                    if (data.chatsCount === 10) {
                       console.log(allSize, "and nooooowwww");
                       data.allSize = allSize;
                       setPercentage(100);
