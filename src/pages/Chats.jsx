@@ -231,6 +231,7 @@ function Chats() {
                 data.chatsCount += 1;
                 setPercentage((prev) => +prev + 3);
                 console.log(data.chatsCount);
+                ChatsApi.getAvatar(el.id.user, userData[0].accounts[0]);
                 if (data.chatsCount === 30) {
                   console.log(allSize, "and nooooowwww");
                   data.allSize = allSize;

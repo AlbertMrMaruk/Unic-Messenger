@@ -17,6 +17,11 @@ class ChatsAPI {
       body: JSON.stringify(data),
     });
   }
+  getAvatar(chatId, session) {
+    return fetch(
+      `${API_URL}/api/contacts/profile-picture?contactId=${chatId}&session=${session}`
+    );
+  }
   async sendText(message, phone, session) {
     try {
       const data = {
