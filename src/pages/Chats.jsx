@@ -361,7 +361,7 @@ function Chats() {
           className="flex  items-center pt-[.5rem] w-[100%] px-[1rem]  cursor-pointer"
           onClick={() => navigate("/profile")}
         >
-          <div className="bg-white rounded-full w-[40px] h-[40px]">
+          <div className="bg-white rounded-full w-[41px] h-[40px]">
             {currentUser?.img && (
               <img
                 src={currentUser.img}

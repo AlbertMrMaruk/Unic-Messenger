@@ -36,7 +36,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               state: {
                 id: chat.id._serialized,
                 name: chat.name,
-                img: chat.img ?? "",
+                img: chat.avatar ?? "",
               },
             });
           });
@@ -45,13 +45,13 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             state: {
               id: chat.id._serialized,
               name: chat.name,
-              img: chat.img ?? "",
+              img: chat.avatar ?? "",
             },
           });
         }
       }}
     >
-      <div className="bg-[#ababab] rounded-full md:w-[40px] md:h-[40px] w-[45px] h-[45px]">
+      <div className="bg-[#ababab] rounded-full md:w-[41px] md:h-[40px] w-[45px] h-[45px]">
         {chat.avatar && (
           <img
             src={chat.avatar}
