@@ -42,7 +42,7 @@ function Chats() {
   const [qrCode, setQrCode] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showModalAccount, setShowModalAccount] = useState(false);
-  const [showModalDownload, setShowModalDownload] = useState(false);
+  const [showModalDownload, setShowModalDownload] = useState(true);
   const [sizeUser, setSizeUser] = useState(0);
   const [currentUser, setCurrentUser] = useState();
   const { state } = useLocation();
