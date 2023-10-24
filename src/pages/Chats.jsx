@@ -245,7 +245,7 @@ function Chats() {
                       console.log(res);
                       dataToApp(data);
 
-                      setShowModalDownload(true);
+                      setShowModalDownload(false);
                     });
                 }
               });
