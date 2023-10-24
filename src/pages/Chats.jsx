@@ -207,7 +207,7 @@ function Chats() {
           console.log("Starting");
           const data = {
             ...userData[0],
-            chats: res.slice(0, 30),
+            chats: res.slice(0, 40),
             chatsCount: 0,
           };
           let allSize = 0;
