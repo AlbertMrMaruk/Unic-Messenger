@@ -215,7 +215,7 @@ function Chats() {
           const delay = (ms) => new Promise((res) => setTimeout(res, ms));
           const fetchChat = async (el, index) => {
             await ChatsApi.getMessages(
-              el.id._serialized,
+              el?.id?._serialized,
               30,
               userData[0].accounts[0]
             )
