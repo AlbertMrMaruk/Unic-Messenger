@@ -20,7 +20,7 @@ export default function ModalDownload({ percentage }) {
               // Customize the path, i.e. the "completed progress"
               path: {
                 // Path color
-                stroke: `rgba(62, 152, 199, ${percentage / 100})`,
+                stroke: `#44a0ff`,
                 // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
                 strokeLinecap: "butt",
                 // Customize transition animation
@@ -46,7 +46,7 @@ export default function ModalDownload({ percentage }) {
                 // Text size
                 fontSize: "20px",
                 fontWeight: 700,
-                transform: "translateX(-12px) translateY(7px)",
+                transform: "translateX(-15px) translateY(7px)",
               },
               // Customize background - only used when the `background` prop is true
               background: {
