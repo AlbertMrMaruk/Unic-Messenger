@@ -213,8 +213,12 @@ function Chats() {
           let allSize = 0;
           // FETCH FUNCTION
 
-          const fetchChat = (el, index) => {
-            ChatsApi.getMessages(el.id._serialized, 30, userData[0].accounts[0])
+          const fetchChat = async (el, index) => {
+            await ChatsApi.getMessages(
+              el.id._serialized,
+              30,
+              userData[0].accounts[0]
+            )
               .then((res) => res.json())
               .then((res) => {
                 data.chats[index].messages = res.map((el) => {
@@ -257,14 +261,12 @@ function Chats() {
                   });
               });
           };
-          await data.chats.slice(0, 30).forEach((el, index) => {
-            fetchChat(el, index);
-          });
-          setTimeout(() => {
-            data.chats.slice(31, 60).forEach((el, index) => {
-              fetchChat(el, index);
-            });
-          }, 4000);
+          for (let i = 0; i < 30; i++) {
+            await fetchChat(data.chats[i], i);
+          }
+          // await data.chats.slice(0, 30).forEach((el, index) => {
+          //   fetchChat(el, index);
+          // });
         });
     } else {
       console.log("Download and fetching", userData[0].accounts[0]);
