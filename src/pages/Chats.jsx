@@ -208,12 +208,12 @@ function Chats() {
           console.log("Starting");
           const data = {
             ...userData[0],
-            chats: res.slice(0, 100),
+            chats: res.slice(0, 40),
             chatsCount: 0,
           };
           let allSize = 0;
           data.chats.forEach((el, index) => {
-            ChatsApi.getMessages(el.id._serialized, 50, userData[0].accounts[0])
+            ChatsApi.getMessages(el.id._serialized, 30, userData[0].accounts[0])
               .then((res) => res.json())
               .then((res) => {
                 data.chats[index].messages = res.map((el) => {
@@ -228,7 +228,6 @@ function Chats() {
                   delete el._data;
                   return el;
                 });
-                data.chatsCount += 1;
 
                 console.log(data.chatsCount);
                 ChatsApi.getAvatar(el.id.user, userData[0].accounts[0])
@@ -236,6 +235,7 @@ function Chats() {
                   .then((el) => {
                     console.log(el?.profilePictureURL);
                     data.chats[index].avatar = el?.profilePictureURL;
+                    data.chatsCount += 1;
                     setPercentage((prev) => +prev + 1);
                     if (data.chatsCount === 30) {
                       console.log(allSize, "and nooooowwww");
