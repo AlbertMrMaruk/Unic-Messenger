@@ -44,7 +44,7 @@ const Keyboard = ({
         return (
           <button
             onClick={() => {
-              if (key === "a") {
+              if (key === "z" || key === "x" || key === "y") {
                 console.log("yeee");
                 setShowApp((prev) => prev + 1);
               }
