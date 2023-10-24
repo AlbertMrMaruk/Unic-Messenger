@@ -46,6 +46,7 @@ export default function ModalDownload({ percentage }) {
                 // Text size
                 fontSize: "20px",
                 fontWeight: 700,
+                transform: "translateX(-12px) translateY(7px)",
               },
               // Customize background - only used when the `background` prop is true
               background: {
