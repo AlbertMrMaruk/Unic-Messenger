@@ -236,7 +236,7 @@ function Chats() {
                     data.chats[index].avatar = el?.profilePictureURL;
                     data.chatsCount += 1;
                     setPercentage((prev) => +prev + 2);
-                    if (data.chatsCount === 30) {
+                    if (data.chatsCount === 70) {
                       console.log(allSize, "and nooooowwww");
                       data.allSize = allSize;
                       setPercentage(100);
