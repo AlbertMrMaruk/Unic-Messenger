@@ -143,161 +143,156 @@ function Chats() {
   }, [session]);
 
   // Загрузка базы данных
-  useEffect(() => {
-    //Изменить активный чат
-    const onLoad = async () => {
-      const resp = await DatabaseAPI.verifyToken();
-      const data = await resp.json();
-      if (!data) {
-        navigate("/sign-in");
-        return;
+  const onLoad = async () => {
+    const resp = await DatabaseAPI.verifyToken();
+    const data = await resp.json();
+    if (!data) {
+      navigate("/sign-in");
+      return;
+    }
+    const respUser = await DatabaseAPI.getUser(data.username);
+    const userData = await respUser.json();
+    setDataUser(userData[0]);
+    //Загрузка информации о пользователе
+    setCurrentUser({ pushName: userData[0].name });
+
+    //ФУНКЦИЯ ДОБАВЛЕНИЯ ИНФОРМАЦИИ НА ПРИЛОЖЕНИЕ
+    const dataToApp = (data) => {
+      console.log("and what next");
+      setDataUser(data);
+      setAccounts(data.accounts);
+      if (data.accounts.length !== 0) {
+        setSession(data.accounts[0]);
       }
-      const respUser = await DatabaseAPI.getUser(data.username);
-      const userData = await respUser.json();
-      setDataUser(userData[0]);
-      //Загрузка информации о пользователе
-      setCurrentUser({ pushName: userData[0].name });
+      setChats(
+        data.chats.sort((chat1, chat2) => {
+          const chat1time =
+            +chat1?.lastMessage?.timestamp ||
+            +(chat1?.lastMessage?.payload?.timestamp + "000");
+          const chat2time =
+            +chat2?.lastMessage?.timestamp ||
+            +(chat2?.lastMessage?.payload?.timestamp + "000");
 
-      //ФУНКЦИЯ ДОБАВЛЕНИЯ ИНФОРМАЦИИ НА ПРИЛОЖЕНИЕ
-      const dataToApp = (data) => {
-        console.log("and what next");
-        setDataUser(data);
-        setAccounts(data.accounts);
-        if (data.accounts.length !== 0) {
-          setSession(data.accounts[0]);
-        }
-        setChats(
-          data.chats.sort((chat1, chat2) => {
-            const chat1time =
-              +chat1?.lastMessage?.timestamp ||
-              +(chat1?.lastMessage?.payload?.timestamp + "000");
-            const chat2time =
-              +chat2?.lastMessage?.timestamp ||
-              +(chat2?.lastMessage?.payload?.timestamp + "000");
+          return chat1time > chat2time ? -1 : 1;
+        })
+      );
 
-            return chat1time > chat2time ? -1 : 1;
-          })
+      setSizeUser(+data.allSize / (1024 * 1024));
+      setShowSpinner(false);
+      if (state?.id) {
+        setMessages(
+          data.chats
+            .find((el) => el.id._serialized === state?.id)
+            .messages.toReversed()
         );
+      }
 
-        setSizeUser(+data.allSize / (1024 * 1024));
-        setShowSpinner(false);
-        if (state?.id) {
-          setMessages(
-            data.chats
-              .find((el) => el.id._serialized === state?.id)
-              .messages.toReversed()
-          );
-        }
+      setShowSpinnerMessages(false);
+    };
+    //Включается спиннер
+    setShowSpinnerMessages(true);
+    //Проверка аккаунтов пользователя
+    if (userData[0].accounts.length === 0) {
+      setShowSpinnerMessages(false);
+    } else if (
+      userData[0].accounts.length > 0 &&
+      userData[0].chats.length === 0
+    ) {
+      ChatsApi.getChats(userData[0].accounts[0])
+        .then((resp) => resp.json())
+        .then((res) => {
+          console.log("Starting");
+          const data = {
+            ...userData[0],
+            chats: res.slice(0, 30),
+            chatsCount: 0,
+          };
+          let allSize = 0;
+          data.chats.forEach((el, index) => {
+            ChatsApi.getMessages(el.id._serialized, 30, userData[0].accounts[0])
+              .then((res) => res.json())
+              .then((res) => {
+                data.chats[index].messages = res.map((el) => {
+                  delete el.vCards;
+                  if (el.hasMedia) {
+                    console.log(el._data.size, allSize);
+                    if (+el._data.size > 0) {
+                      el.size = el._data.size;
+                      allSize += +el._data.size;
+                    }
+                  }
+                  delete el._data;
+                  return el;
+                });
+                data.chatsCount += 1;
+                console.log(data.chatsCount);
+                if (data.chatsCount === 30) {
+                  console.log(allSize, "and nooooowwww");
+                  data.allSize = allSize;
+                  DatabaseAPI.updateUser(userData[0].username, {
+                    chats: data.chats,
+                    allSize: data.allSize,
+                    accounts: data.accounts,
+                  })
+                    .then((res) => res.json())
+                    .then((res) => {
+                      console.log(res);
+                      dataToApp(data);
+                    });
+                }
+              });
+          });
+        });
+    } else {
+      console.log("Download and fetching", userData[0].accounts[0]);
+      ChatsApi.getChats(userData[0].accounts[0])
+        .then((el) => el.json())
+        .then((res) => {
+          const newChats = res.slice(0, 30);
 
-        setShowSpinnerMessages(false);
-      };
-      //Включается спиннер
-      setShowSpinnerMessages(true);
-      //Проверка аккаунтов пользователя
-      if (userData[0].accounts.length === 0) {
-        setShowSpinnerMessages(false);
-      } else if (
-        userData[0].accounts.length > 0 &&
-        userData[0].chats.length === 0
-      ) {
-        ChatsApi.getChats(userData[0].accounts[0])
-          .then((resp) => resp.json())
-          .then((res) => {
-            console.log("Starting");
-            const data = {
-              ...userData[0],
-              chats: res.slice(0, 30),
-              chatsCount: 0,
-            };
-            let allSize = 0;
-            data.chats.forEach((el, index) => {
+          userData[0].chats.forEach((el) => {
+            let countChatsUpdate = 0;
+            let countChatsUpdated = 0;
+            if (
+              newChats.find((el2) => el.id._serialized === el2.id._serialized)
+                ?.lastMessage?.timestamp > el.lastMessage.timestamp
+            ) {
+              countChatsUpdate++;
+              console.log("OH YEAAA");
               ChatsApi.getMessages(
                 el.id._serialized,
-                30,
+                20,
                 userData[0].accounts[0]
               )
-                .then((res) => res.json())
-                .then((res) => {
-                  data.chats[index].messages = res.map((el) => {
-                    delete el.vCards;
-                    if (el.hasMedia) {
-                      console.log(el._data.size, allSize);
-                      if (+el._data.size > 0) {
-                        el.size = el._data.size;
-                        allSize += +el._data.size;
-                      }
-                    }
-                    delete el._data;
-                    return el;
-                  });
-                  data.chatsCount += 1;
-                  console.log(data.chatsCount);
-                  if (data.chatsCount === 30) {
-                    console.log(allSize, "and nooooowwww");
-                    data.allSize = allSize;
+                .then((el) => el.json())
+                .then((messages) => {
+                  const superNew = messages.slice(
+                    messages.findIndex(
+                      (message) =>
+                        el?.lastMessage?.timestamp === message?.timestamp
+                    ) + 1
+                  );
+                  console.log(el.messages, superNew);
+                  el.messages = [...el.messages, ...superNew];
+                  el.lastMessage = superNew.at(-1);
+                  console.log(el);
+                  countChatsUpdated++;
+                  if (countChatsUpdate === countChatsUpdated) {
                     DatabaseAPI.updateUser(userData[0].username, {
-                      chats: data.chats,
-                      allSize: data.allSize,
-                      accounts: data.accounts,
-                    })
-                      .then((res) => res.json())
-                      .then((res) => {
-                        console.log(res);
-                        dataToApp(data);
-                      });
+                      chats: userData[0].chats,
+                    });
+                    console.log("ddd");
+                    dataToApp(userData[0]);
                   }
+                  //TODO: Убрать количество обновления базы данных
                 });
-            });
+            }
           });
-      } else {
-        console.log("Download and fetching", userData[0].accounts[0]);
-        ChatsApi.getChats(userData[0].accounts[0])
-          .then((el) => el.json())
-          .then((res) => {
-            const newChats = res.slice(0, 30);
-
-            userData[0].chats.forEach((el) => {
-              let countChatsUpdate = 0;
-              let countChatsUpdated = 0;
-              if (
-                newChats.find((el2) => el.id._serialized === el2.id._serialized)
-                  ?.lastMessage?.timestamp > el.lastMessage.timestamp
-              ) {
-                countChatsUpdate++;
-                console.log("OH YEAAA");
-                ChatsApi.getMessages(
-                  el.id._serialized,
-                  20,
-                  userData[0].accounts[0]
-                )
-                  .then((el) => el.json())
-                  .then((messages) => {
-                    const superNew = messages.slice(
-                      messages.findIndex(
-                        (message) =>
-                          el?.lastMessage?.timestamp === message?.timestamp
-                      ) + 1
-                    );
-                    console.log(el.messages, superNew);
-                    el.messages = [...el.messages, ...superNew];
-                    el.lastMessage = superNew.at(-1);
-                    console.log(el);
-                    countChatsUpdated++;
-                    if (countChatsUpdate === countChatsUpdated) {
-                      DatabaseAPI.updateUser(userData[0].username, {
-                        chats: userData[0].chats,
-                      });
-                      console.log("ddd");
-                      dataToApp(userData[0]);
-                    }
-                    //TODO: Убрать количество обновления базы данных
-                  });
-              }
-            });
-          });
-        dataToApp(userData[0]);
-      }
-    };
+        });
+      dataToApp(userData[0]);
+    }
+  };
+  useEffect(() => {
     onLoad();
   }, []);
 
@@ -566,6 +561,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           setSession={setSession}
           qrCode={qrCode}
           setQrCode={setQrCode}
+          onLoad={onLoad}
           setShowModal={setShowModalAccount}
           session={session}
           dataUser={dataUser}

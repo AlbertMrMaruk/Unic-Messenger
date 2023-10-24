@@ -8,6 +8,7 @@ export default function ModalAccount({
   newMessage,
   setAccounts,
   setShowModal,
+  onLoad,
   setDataUser,
   qrCode,
   setQrCode,
@@ -127,7 +128,9 @@ export default function ModalAccount({
                   }));
                   DatabaseAPI.updateUser(dataUser.username, {
                     accounts: [...dataUser.accounts, account],
-                  }).then();
+                  }).then(() => {
+                    onLoad();
+                  });
                   setShowModal(false);
                 }}
               >
