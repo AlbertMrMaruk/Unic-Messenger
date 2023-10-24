@@ -3,7 +3,8 @@ import { FaFilePdf } from "react-icons/fa";
 function Message({ message }) {
   const url = message?.mediaUrl;
   const text = message?.body;
-  const timestamp = message?.timestamp;
+  const timestamp =
+    +(message?.payload?.timestamp + "000") || +message?.timestamp;
   // const isGroup = message.
   const calcDate = (timestamp) => {
     let h = new Date(+timestamp).getHours();
