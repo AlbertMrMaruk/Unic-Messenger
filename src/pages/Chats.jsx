@@ -291,13 +291,15 @@ function Chats() {
       ChatsApi.getChats(userData[0].accounts[0])
         .then((el) => el.json())
         .then((res) => {
-          const newChats = res.slice(0, 30);
+          const newChats = res.slice(0, 40);
 
           userData[0].chats.forEach((el) => {
             let countChatsUpdate = 0;
             let countChatsUpdated = 0;
             console.log(
-              newChats.find((el2) => el.id._serialized === el2.id._serialized)
+              el,
+              newChats.find((el2) => el.id._serialized === el2.id._serialized),
+              "dd"
             );
             if (
               newChats.find((el2) => el.id._serialized === el2.id._serialized)
