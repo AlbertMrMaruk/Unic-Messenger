@@ -42,19 +42,21 @@ export const TooltipChats = ({
               className="text-red-500 cursor-pointer"
               onClick={() => {
                 ChatsApi.deleteMessages(session, chatId).then((el) => {
-                  const chatIndex = chats.findIndex(
-                    (el) => el.id._serialized === chatId
-                  );
-                  chats[chatIndex].lastMessage = {};
-                  chats[chatIndex].messages = [];
-                  setMessages([]);
-                  DatabaseAPI.updateUser(dataUser.username, {
-                    chats: dataUser.chats,
-                  });
+                  console.log(el, "Deleted success");
                 });
               }}
             >
               Удалить все сообщения в чате
+            </span>
+            <span
+              className="text-red-500 cursor-pointer"
+              onClick={() => {
+                ChatsApi.deleteChat(session, chatId).then((el) => {
+                  console.log(el, "Deleted success");
+                });
+              }}
+            >
+              Удалить чат
             </span>
             <span
               className="text-red-500 cursor-pointer"
@@ -71,7 +73,7 @@ export const TooltipChats = ({
                 });
               }}
             >
-              Удалить чат
+              Удалить все сообщения и чат в приложении
             </span>
           </div>
         </span>
