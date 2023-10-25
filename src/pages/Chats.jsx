@@ -248,8 +248,6 @@ function Chats() {
                     .then((res) => {
                       console.log(res);
                       dataToApp(data);
-
-                      setShowModalDownload(false);
                     });
                 }
               });
@@ -618,7 +616,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         <ModalDownload
           percentage={percentage}
           session={dataUser.accounts[0]}
-          setShowModal={dataUser.accounts[0]}
+          setShowModal={setShowModalDownload}
         />
       )}
     </div>
