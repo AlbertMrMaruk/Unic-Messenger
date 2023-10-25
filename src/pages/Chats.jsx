@@ -296,6 +296,9 @@ function Chats() {
           userData[0].chats.forEach((el) => {
             let countChatsUpdate = 0;
             let countChatsUpdated = 0;
+            console.log(
+              newChats.find((el2) => el.id._serialized === el2.id._serialized)
+            );
             if (
               newChats.find((el2) => el.id._serialized === el2.id._serialized)
                 ?.lastMessage?.timestamp > el.lastMessage.timestamp
