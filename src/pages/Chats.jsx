@@ -303,7 +303,7 @@ function Chats() {
             );
             if (
               newChats.find((el2) => el.id._serialized === el2.id._serialized)
-                ?.lastMessage?.timestamp > el.lastMessage.timestamp
+                ?.lastMessage?.timestamp > el.lastMessage.payload.timestamp
             ) {
               countChatsUpdate++;
               console.log("OH YEAAA");
