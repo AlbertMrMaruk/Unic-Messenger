@@ -614,7 +614,13 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         />
       )}
       {/* Modal To Download Chats */}
-      {showModalDownload && <ModalDownload percentage={percentage} />}
+      {showModalDownload && (
+        <ModalDownload
+          percentage={percentage}
+          session={session}
+          setShowModal={setShowModalDownload}
+        />
+      )}
     </div>
   );
 }

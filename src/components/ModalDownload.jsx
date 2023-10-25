@@ -1,6 +1,7 @@
 import { CircularProgressbar } from "react-circular-progressbar";
+import ChatsApi from "../api/ChatsApi";
 
-export default function ModalDownload({ percentage }) {
+export default function ModalDownload({ session, percentage, setShowModal }) {
   return (
     <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-[rgba(0,0,0,.7)]">
       <div className="relative my-6 mx-auto w-[90%] md:w-[50%]">
@@ -14,6 +15,7 @@ export default function ModalDownload({ percentage }) {
             className="w-[40%] md:w-[20%] mx-auto my-[2rem] font-bold"
             value={percentage}
             text={`${percentage}%`}
+            on
             styles={{
               // Customize the root svg element
               root: {},
@@ -54,6 +56,20 @@ export default function ModalDownload({ percentage }) {
               },
             }}
           />
+          {percentage === 100 && (
+            <button
+              className="text-white bg-primary  font-bold uppercase text-sm px-6 py-3 rounded-[5px] shadow hover:shadow-lg outline-none focus:outline-none my-3 mx-auto"
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                ChatsApi.stopSession(session).then(() =>
+                  ChatsApi.startSession(session).then(() => setShowModal(false))
+                );
+              }}
+            >
+              Перейти к чатам
+            </button>
+          )}
         </div>
       </div>
     </div>

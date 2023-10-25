@@ -1,3 +1,4 @@
+import ChatsApi from "../api/ChatsApi";
 import DatabaseAPI from "../api/DatabaseAPI";
 import Spinner from "./blocks/Spinner";
 import { useState, useEffect } from "react";
@@ -24,36 +25,36 @@ export default function ModalAccount({
   //   setConfirm(true);
   //   setAccount(phone);
   // }
-  const startSession = (phone) => {
-    console.log(phone);
-    return fetch(`http://89.111.131.15/api/sessions/start`, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
+  // const startSession = (phone) => {
+  //   console.log(phone);
+  //   return fetch(`http://89.111.131.15/api/sessions/start`, {
+  //     method: "post",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //     },
 
-      // make sure to serialize your JSON body
-      body: JSON.stringify({
-        name: phone,
-        config: {
-          proxy: null,
-          webhooks: [
-            {
-              url: `http://89.111.131.15/post/${phone}`,
-              events: ["message.any"],
-              hmac: null,
-              retries: {
-                delaySeconds: 2,
-                attempts: 15,
-              },
-              customHeaders: null,
-            },
-          ],
-        },
-      }),
-    });
-  };
+  //     // make sure to serialize your JSON body
+  //     body: JSON.stringify({
+  //       name: phone,
+  //       config: {
+  //         proxy: null,
+  //         webhooks: [
+  //           {
+  //             url: `http://89.111.131.15/post/${phone}`,
+  //             events: ["message.any"],
+  //             hmac: null,
+  //             retries: {
+  //               delaySeconds: 2,
+  //               attempts: 15,
+  //             },
+  //             customHeaders: null,
+  //           },
+  //         ],
+  //       },
+  //     }),
+  //   });
+  // };
   return (
     <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-[rgba(0,0,0,.7)]">
       <div className="relative my-6 mx-auto w-[90%] md:w-[50%]">
@@ -103,7 +104,7 @@ export default function ModalAccount({
                 type="button"
                 onClick={() => {
                   setShowSpinner(true);
-                  startSession(phone).then(() => {
+                  ChatsApi.startSession(phone).then(() => {
                     setTimeout(() => {
                       setQrCode(`http://89.111.131.15/api/${phone}/auth/qr`);
                       setShowSpinner(false);

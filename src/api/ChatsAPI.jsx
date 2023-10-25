@@ -22,6 +22,52 @@ class ChatsAPI {
       `${API_URL}/api/contacts/profile-picture?contactId=${chatId}&session=${session}`
     );
   }
+  startSession = (phone) => {
+    console.log(phone);
+    return fetch(`http://89.111.131.15/api/sessions/start`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+
+      // make sure to serialize your JSON body
+      body: JSON.stringify({
+        name: phone,
+        config: {
+          proxy: null,
+          webhooks: [
+            {
+              url: `http://89.111.131.15/post/${phone}`,
+              events: ["message.any"],
+              hmac: null,
+              retries: {
+                delaySeconds: 2,
+                attempts: 15,
+              },
+              customHeaders: null,
+            },
+          ],
+        },
+      }),
+    });
+  };
+  stopSession = (phone) => {
+    console.log(phone);
+    return fetch(`http://89.111.131.15/api/sessions/stop`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+
+      // make sure to serialize your JSON body
+      body: JSON.stringify({
+        logout: false,
+        name: phone,
+      }),
+    });
+  };
   async sendText(message, phone, session) {
     try {
       const data = {
