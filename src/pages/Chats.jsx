@@ -64,8 +64,7 @@ function Chats() {
             message.payload,
           ];
           chats[chatIndex].lastMessage = {
-            body: message.payload.body,
-            ...message,
+            ...message.payload,
           };
 
           setDataUser((prev) => ({ ...prev, chats }));
@@ -82,8 +81,7 @@ function Chats() {
               message.payload,
             ];
             chats[chatIndex].lastMessage = {
-              body: message.payload.body,
-              ...message,
+              ...message.payload,
             };
             setDataUser((prev) => ({ ...prev, chats }));
 
@@ -301,10 +299,10 @@ function Chats() {
               newChats.find((el2) => el.id._serialized === el2.id._serialized),
               "dd"
             );
-            if (
-              newChats.find((el2) => el.id._serialized === el2.id._serialized)
-                ?.lastMessage?.timestamp > el.lastMessage.payload.timestamp
-            ) {
+            const el2 = newChats.find(
+              (el2) => el.id._serialized === el2.id._serialized
+            );
+            if (el2?.lastMessage?.timestamp > el?.lastMessage?.timestamp) {
               countChatsUpdate++;
               console.log("OH YEAAA");
               ChatsApi.getMessages(
