@@ -13,6 +13,7 @@ function TooltipVoice({ children }) {
   const paused = useRef(false);
 
   const startRecording = () => {
+    console.log(navigator.mediaDevices);
     navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then((stream) => {
@@ -99,7 +100,7 @@ function TooltipVoice({ children }) {
       >
         <div
           className={`p-4 rounded-md border ${
-            recording ? "bg-red-200" : "bg-blue-200"
+            recording ? "bg-red-200" : "bg-inherit"
           }`}
         >
           <div className="flex items-center">
@@ -113,7 +114,7 @@ function TooltipVoice({ children }) {
             ) : (
               <button
                 onClick={startRecording}
-                className="text-4xl p-2 mr-4 text-blue-500"
+                className="text-4xl p-2 mr-4 text-primary"
               >
                 <FaMicrophone />
               </button>
