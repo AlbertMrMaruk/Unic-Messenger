@@ -100,7 +100,7 @@ function TooltipVoice({ children }) {
       >
         <div
           className={`p-4 rounded-md border ${
-            recording ? "bg-red-200" : "bg-inherit"
+            recording ? "bg-red-200" : "bg-secondarylight"
           }`}
         >
           <div className="flex items-center">
