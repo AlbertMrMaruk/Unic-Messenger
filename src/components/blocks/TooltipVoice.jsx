@@ -83,7 +83,7 @@ function TooltipVoice({ children }) {
       className="relative flex flex-col  group "
       onClick={() => {
         console.log("gmgmg");
-        setShow(!show);
+        setShow(false);
         // const onClick = () => {
         //   setShow(false);
         //   window.removeEventListener("click", onClick);
