@@ -25,6 +25,7 @@ import { useNavigate } from "react-router-dom";
 import { TooltipMessage } from "../components/blocks/TooltipMessage";
 import { TooltipChats } from "../components/blocks/TooltipChats";
 import ModalDownload from "../components/ModalDownload";
+import TooltipVoice from "../components/blocks/TooltipVoice";
 
 function Chats() {
   const navigate = useNavigate();
@@ -558,12 +559,14 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 <FaSmile className="text-white w-[18px] h-[18px] m-auto" />
               </button>
             </Tooltip>
-            <button
-              class="bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
-              type="button"
-            >
-              <FaMicrophone className="text-white w-[18px] h-[18px] m-auto" />
-            </button>
+            <TooltipVoice>
+              <button
+                class="bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
+                type="button"
+              >
+                <FaMicrophone className="text-white w-[18px] h-[18px] m-auto" />
+              </button>
+            </TooltipVoice>
             <Tooltip
               setFile={setFile}
               setShowModal={setShowModal}

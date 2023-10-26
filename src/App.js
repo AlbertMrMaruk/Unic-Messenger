@@ -5,14 +5,12 @@ import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
 import { useState } from "react";
 import Game from "./pages/Game";
-import VoiceRecorder from "./pages/Test";
 
 function App() {
   const [showApp, setShowApp] = useState(0);
   return (
     <>
-      <VoiceRecorder />
-      {/* {showApp === 3 ? (
+      {showApp === 3 ? (
         <Router>
           <Routes>
             <Route path="/" element={<Chats />} />
@@ -23,7 +21,7 @@ function App() {
         </Router>
       ) : (
         <Game setShowApp={setShowApp} />
-      )} */}
+      )}
     </>
   );
 }
