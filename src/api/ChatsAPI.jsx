@@ -1,4 +1,4 @@
-const API_URL = "http://89.111.131.15";
+const API_URL = "http://unicmessenger.ru";
 class ChatsAPI {
   replyTo(message, phone, session, replyMessage) {
     const data = {
@@ -24,7 +24,7 @@ class ChatsAPI {
   }
   startSession = (phone) => {
     console.log(phone);
-    return fetch(`http://89.111.131.15/api/sessions/start`, {
+    return fetch(`${API_URL}/api/sessions/start`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -38,7 +38,7 @@ class ChatsAPI {
           proxy: null,
           webhooks: [
             {
-              url: `http://89.111.131.15/post/${phone}`,
+              url: `http://unicmessenger.ru/post/${phone}`,
               events: ["message.any"],
               hmac: null,
               retries: {
@@ -54,7 +54,7 @@ class ChatsAPI {
   };
   stopSession = (phone) => {
     console.log(phone);
-    return fetch(`http://89.111.131.15/api/sessions/stop`, {
+    return fetch(`${API_URL}/api/sessions/stop`, {
       method: "post",
       headers: {
         Accept: "application/json",

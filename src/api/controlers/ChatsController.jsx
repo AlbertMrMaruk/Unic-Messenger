@@ -1,6 +1,6 @@
 function clickChat(setNewMessage, session) {
   try {
-    let socket = new WebSocket(`ws://89.111.131.15?session=${session}`);
+    let socket = new WebSocket(`ws://unicmessenger.ru?session=${session}`);
     socket.addEventListener("open", () => {
       console.log("Соединение установлено");
     });

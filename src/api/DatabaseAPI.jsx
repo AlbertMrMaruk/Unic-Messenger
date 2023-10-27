@@ -1,4 +1,4 @@
-const API_URL = "http://89.111.131.15/database";
+const API_URL = "http://unicmessenger.ru/database";
 class DatabaseAPI {
   getUser(username) {
     try {
