@@ -13,7 +13,7 @@ console.log("Hello server");
 require(__dirname + "/models/User");
 
 // mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://89.111.131.15:27017/users`, {
+mongoose.connect(`mongodb://unicmessenger.ru:27017/users`, {
   authSource: "admin",
   useNewUrlParser: true,
   user: "admin",
