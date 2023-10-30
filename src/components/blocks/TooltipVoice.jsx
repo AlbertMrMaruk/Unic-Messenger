@@ -99,15 +99,14 @@ function TooltipVoice({ children }) {
         }`}
       >
         <div
-          className={`p-2 rounded-md border ${
-            recording ? "bg-red-200" : "bg-secondarylight"
+          className={`p-2 rounded-md  bg-secondarylight
           }`}
         >
           <div className="flex items-center flex-col gap-2">
             {recording ? (
               <button
                 onClick={stopRecording}
-                className="text-4xl p-2 text-red-500"
+                className="text-2xl p-2 text-red-500"
               >
                 <FaMicrophone />
               </button>
