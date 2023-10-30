@@ -94,27 +94,27 @@ function TooltipVoice({ children }) {
     >
       {children}
       <div
-        className={`absolute whitespace-nowrap bottom-full flex flex-col items-center   ${
+        className={`absolute whitespace-nowrap bottom-full flex flex-col items-center left-[-1.2rem]   ${
           !show ? "hidden" : null
         }`}
       >
         <div
-          className={`p-4 rounded-md border ${
+          className={`p-2 rounded-md border ${
             recording ? "bg-red-200" : "bg-secondarylight"
           }`}
         >
-          <div className="flex items-center">
+          <div className="flex items-center flex-col gap-2">
             {recording ? (
               <button
                 onClick={stopRecording}
-                className="text-4xl p-2 mr-4 text-red-500"
+                className="text-4xl p-2 text-red-500"
               >
                 <FaMicrophone />
               </button>
             ) : (
               <button
                 onClick={startRecording}
-                className="text-4xl p-2 mr-4 text-primary"
+                className="text-4xl p-2 text-primary"
               >
                 <FaMicrophone />
               </button>
