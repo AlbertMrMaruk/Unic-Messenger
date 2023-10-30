@@ -135,7 +135,7 @@ function TooltipVoice({ children }) {
                   onEnded={() => {
                     paused.current = false;
                   }}
-                  className="audio-container custom-audio"
+                  className="mainaudio"
                 />
               </div>
             </div>
