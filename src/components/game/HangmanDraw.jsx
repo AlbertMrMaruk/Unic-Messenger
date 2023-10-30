@@ -80,7 +80,7 @@ const LEFT_LEG = (
       height: "10px",
       background: "black",
       position: "absolute",
-      top: "132px",
+      top: "112px",
       right: 0,
       rotate: "-40deg",
       transformOrigin: "right bottom",
