@@ -1,4 +1,4 @@
-const API_URL = "http://unicmessenger.ru";
+const API_URL = "https://unicmessenger.ru";
 class ChatsAPI {
   replyTo(message, phone, session, replyMessage) {
     const data = {
