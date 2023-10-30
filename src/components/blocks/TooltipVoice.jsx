@@ -73,8 +73,8 @@ function TooltipVoice({ children, setAudioUrl }) {
   const stopRecording = () => {
     if (mediaRecorder.current) {
       setRecording(false);
-      mediaRecorder.current.stop();
       setShow(false);
+      mediaRecorder.current.stop();
     }
   };
 
