@@ -142,7 +142,7 @@ class ChatsAPI {
       body: JSON.stringify({
         chatId: currentChat,
         file: {
-          mimetype: "audio/ogg; codecs=opus",
+          mimetype: "audio/webm;codecs=opus ",
           filename: "voice-message-" + Date.now(),
           data,
         },
