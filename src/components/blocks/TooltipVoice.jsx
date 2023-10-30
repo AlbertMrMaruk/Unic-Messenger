@@ -52,7 +52,9 @@ function TooltipVoice({ children, setAudioUrl }) {
     navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then((stream) => {
-        mediaRecorder.current = new MediaRecorder(stream);
+        mediaRecorder.current = new MediaRecorder(stream, {
+          mimeType: "audio/mpeg-3",
+        });
 
         mediaRecorder.current.ondataavailable = (event) => {
           chunks.current.push(event.data);
