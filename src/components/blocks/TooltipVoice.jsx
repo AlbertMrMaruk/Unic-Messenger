@@ -5,6 +5,7 @@ import { FaMicrophone } from "react-icons/fa";
 function TooltipVoice({ children, setAudioUrl }) {
   const [recording, setRecording] = useState(false);
   const [duration, setDuration] = useState(0);
+  const [show, setShow] = useState(false);
   const recorderRef = useRef(null);
   const timerRef = useRef(null);
 
@@ -52,6 +53,7 @@ function TooltipVoice({ children, setAudioUrl }) {
     } else {
       console.error("Recorder is not defined.");
     }
+    setShow(false);
   };
 
   // const toggleAudio = () => {
@@ -71,8 +73,6 @@ function TooltipVoice({ children, setAudioUrl }) {
       setDuration(0);
     }
   }, [recording]);
-
-  const [show, setShow] = useState(false);
 
   return (
     <div
