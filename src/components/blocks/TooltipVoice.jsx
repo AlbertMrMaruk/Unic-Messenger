@@ -65,7 +65,7 @@ function TooltipVoice({ children, setAudioUrl }) {
           chunks.current = [];
           const audioURL = URL.createObjectURL(blob);
           console.log(blob, audioURL);
-          getBase64(audioURL);
+          getBase64(blob);
         };
         setRecording(true);
         mediaRecorder.current.start();
