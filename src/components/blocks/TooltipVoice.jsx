@@ -74,6 +74,7 @@ function TooltipVoice({ children, setAudioUrl }) {
     if (mediaRecorder.current) {
       setRecording(false);
       mediaRecorder.current.stop();
+      setShow(false);
     }
   };
 
