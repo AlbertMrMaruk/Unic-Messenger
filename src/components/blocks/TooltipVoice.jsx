@@ -6,7 +6,6 @@ function TooltipVoice({ children, setAudioUrl }) {
   const [recording, setRecording] = useState(false);
   const [duration, setDuration] = useState(0);
   const [show, setShow] = useState(false);
-  const recorderRef = useRef(null);
   const timerRef = useRef(null);
 
   // const startRecording = () => {
@@ -73,9 +72,10 @@ function TooltipVoice({ children, setAudioUrl }) {
   const stopRecording = () => {
     if (mediaRecorder.current) {
       setRecording(false);
-      setShow(false);
+
       mediaRecorder.current.stop();
     }
+    setShow(false);
   };
 
   // const stopRecording = () => {
