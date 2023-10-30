@@ -33,7 +33,6 @@ audio.mainaudio {
 
 audio.mainaudio::-webkit-media-controls-current-time-display,
 audio.mainaudio::-webkit-media-controls-time-remaining-display {
-  color: white;
   font-size: 16px;
   opacity: 1;
   font-weight: 500;
@@ -50,10 +49,6 @@ audio.mainaudio::-webkit-media-controls-volume-control-container {
 
 audio::-internal-media-controls-overflow-button {
   display: none !important;
-}
-
-input[pseudo="-webkit-media-controls-timeline" i]::-internal-track-segment-highlight-before {
-  background: rgb(68 160 255 / var(--tw-bg-opacity));
 }
 
 audio.mainaudio::-webkit-media-controls-panel {

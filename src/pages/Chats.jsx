@@ -565,7 +565,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             )}
             <Tooltip setText={setText} emoji={true}>
               <button
-                class="bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
+                className="bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
                 type="button"
               >
                 <FaSmile className="text-white w-[18px] h-[18px] m-auto" />
@@ -573,7 +573,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             </Tooltip>
             <TooltipVoice setAudioUrl={setAudioUrl}>
               <button
-                class={`bg-secondarylight  text-white p-1 text-xs ${
+                className={`bg-secondarylight  text-white p-1 text-xs ${
                   audioUrl && "hidden"
                 }  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]
                 `}
@@ -583,13 +583,18 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               </button>
             </TooltipVoice>
             {audioUrl && (
-              <button
-                class={`bg-secondarylight  text-white p-1 text-xs mr-[0.5rem] z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]
-                `}
-                type="button"
+              <div
+                className="`bg-secondarylight  text-white px-2.5 z-[2] inline-block  rounded-none "
+                onClick={() => setAudioUrl(null)}
               >
-                <FaTrash className="text-white w-[18px] h-[18px] m-auto" />
-              </button>
+                <button
+                  className={` p-1 text-xs  inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]
+                `}
+                  type="button"
+                >
+                  <FaTrash className="text-white w-[18px] h-[18px] m-auto" />
+                </button>
+              </div>
             )}
             <Tooltip
               setFile={setFile}
@@ -597,7 +602,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               showModal={showModal}
             >
               <button
-                class={`bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[40px] h-[45px]   ${
+                className={`bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[40px] h-[45px]   ${
                   audioUrl && "hidden"
                 }`}
                 type="button"
