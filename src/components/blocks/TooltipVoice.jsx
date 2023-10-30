@@ -90,7 +90,7 @@ function TooltipVoice({ children, setAudioUrl }) {
     >
       {children}
       <div
-        className={`absolute whitespace-nowrap bottom-full flex flex-col items-center left-[-1.2rem]   ${
+        className={`absolute whitespace-nowrap bottom-full flex flex-col items-center left-[-.5rem]   ${
           !show ? "hidden" : null
         }`}
       >
