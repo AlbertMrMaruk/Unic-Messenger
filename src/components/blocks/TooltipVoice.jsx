@@ -42,10 +42,12 @@ function TooltipVoice({ children, setAudioUrl }) {
       recorderRef.current.stopRecording(() => {
         clearInterval(timerRef.current);
         const audioBlob = recorderRef.current.getBlob();
+        console.log(audioBlob, recorderRef.current);
         const url = URL.createObjectURL(audioBlob);
         setAudioUrl(url);
         recorderRef.current.getDataURL((dataURL) => {
           // You can save the dataURL to the server if needed.
+          console.log(dataURL);
         });
 
         setRecording(false);
@@ -80,11 +82,6 @@ function TooltipVoice({ children, setAudioUrl }) {
       onClick={() => {
         console.log("gmgmg");
         setShow(true);
-        // const onClick = () => {
-        //   setShow(false);
-        //   window.removeEventListener("click", onClick);
-        // };
-        // window.addEventListener("click", onClick);
       }}
     >
       {children}
@@ -108,7 +105,7 @@ function TooltipVoice({ children, setAudioUrl }) {
             ) : (
               <button
                 onClick={startRecording}
-                className="text-4xl p-2 text-primary"
+                className="text-2xl p-2 text-primary"
               >
                 <FaMicrophone />
               </button>
