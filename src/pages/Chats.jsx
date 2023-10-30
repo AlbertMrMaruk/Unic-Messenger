@@ -11,6 +11,7 @@ import {
   FaWindowClose,
   FaReply,
   FaEllipsisV,
+  FaTrash,
 } from "react-icons/fa";
 import clickChat from "../api/controlers/ChatsController";
 import Message from "../components/blocks/Message";
@@ -537,7 +538,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             {audioUrl ? (
               <div
                 className={`
-              bg-secondarylight text-white    rounded-l-xl
+              bg-primary text-white    rounded-l-xl
               py-[.5rem] h-[45px] 
               relative  -mr-0.5 block w-[1px] min-w-0 flex-auto  outline-none `}
               >
@@ -572,19 +573,33 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             </Tooltip>
             <TooltipVoice setAudioUrl={setAudioUrl}>
               <button
-                class="bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
+                class={`bg-secondarylight  text-white p-1 text-xs ${
+                  audioUrl && "hidden"
+                }  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]
+                `}
                 type="button"
               >
                 <FaMicrophone className="text-white w-[18px] h-[18px] m-auto" />
               </button>
             </TooltipVoice>
+            {audioUrl && (
+              <button
+                class={`bg-secondarylight  text-white p-1 text-xs mr-[0.5rem] z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]
+                `}
+                type="button"
+              >
+                <FaTrash className="text-white w-[18px] h-[18px] m-auto" />
+              </button>
+            )}
             <Tooltip
               setFile={setFile}
               setShowModal={setShowModal}
               showModal={showModal}
             >
               <button
-                class="bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[40px] h-[45px]"
+                class={`bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[40px] h-[45px]   ${
+                  audioUrl && "hidden"
+                }`}
                 type="button"
               >
                 <FaFile className="text-white w-[18px] h-[18px] m-auto" />
@@ -595,7 +610,9 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 replyMessage ? "rounded-br-xl" : "rounded-r-xl"
               } w-[55px] h-[45px] text-white font-bold uppercase`}
               type="button"
-              onClick={() => sendMessage(text)}
+              onClick={() => {
+                sendMessage(text);
+              }}
             >
               <FaArrowCircleUp className="text-white w-[25px] h-[25px] m-auto" />
             </button>
