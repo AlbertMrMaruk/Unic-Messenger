@@ -62,7 +62,7 @@ function TooltipVoice({ children, setAudioUrl }) {
         }, 1000);
         mediaRecorder.current.onstop = () => {
           const blob = new Blob(chunks.current, {
-            type: "audio/ogg; codecs=opus",
+            type: "audio/mp3; codecs=opus",
           });
           chunks.current = [];
           const audioURL = URL.createObjectURL(blob);
