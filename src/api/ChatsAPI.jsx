@@ -143,7 +143,7 @@ class ChatsAPI {
         chatId: currentChat,
         file: {
           mimetype: "audio/webm;codecs=opus ",
-          filename: "voice-message-" + Date.now(),
+          filename: "voice-message-" + Date.now() + ".mp3",
           data,
         },
         session,
