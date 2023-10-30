@@ -53,7 +53,7 @@ function TooltipVoice({ children, setAudioUrl }) {
       .getUserMedia({ audio: true })
       .then((stream) => {
         mediaRecorder.current = new MediaRecorder(stream, {
-          mimeType: "audio/mpeg-3",
+          mimeType: "audio/ogg; codecs=vorbis",
         });
 
         mediaRecorder.current.ondataavailable = (event) => {
