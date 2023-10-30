@@ -29,7 +29,7 @@ function TooltipVoice({ children, setAudioUrl }) {
   //     );
   // };
 
-  const getBase64 = (url) => {
+  const getBase64 = (url, dataURL) => {
     const reader = new FileReader();
     reader.readAsDataURL(url);
     reader.onload = () => {
@@ -37,7 +37,8 @@ function TooltipVoice({ children, setAudioUrl }) {
       if (encoded.length % 4 > 0) {
         encoded += "=".repeat(4 - (encoded.length % 4));
       }
-      setAudioUrl({ url, encoded });
+      console.log(encoded);
+      setAudioUrl({ url: dataURL, encoded });
     };
     reader.onerror = function (error) {
       console.log("Error: ", error);
@@ -65,7 +66,7 @@ function TooltipVoice({ children, setAudioUrl }) {
           chunks.current = [];
           const audioURL = URL.createObjectURL(blob);
           console.log(blob, audioURL);
-          getBase64(blob);
+          getBase64(blob, audioURL);
         };
         setRecording(true);
         mediaRecorder.current.start();
