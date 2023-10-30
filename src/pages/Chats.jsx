@@ -197,6 +197,8 @@ function Chats() {
     //Проверка аккаунтов пользователя
     if (userData[0].accounts.length === 0) {
       setShowSpinnerMessages(false);
+      setShowSpinner(false);
+      setShowModalAccount(true);
     } else if (
       userData[0].accounts.length > 0 &&
       userData[0].chats.length === 0

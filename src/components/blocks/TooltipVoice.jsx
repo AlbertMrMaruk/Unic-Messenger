@@ -49,11 +49,11 @@ function TooltipVoice({ children, setAudioUrl }) {
         });
 
         setRecording(false);
+        setShow(false);
       });
     } else {
       console.error("Recorder is not defined.");
     }
-    setShow(false);
   };
 
   // const toggleAudio = () => {
