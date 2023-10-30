@@ -547,7 +547,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               py-[.5rem] h-[45px] 
               relative  -mr-0.5 block w-[1px] min-w-0 flex-auto  outline-none `}
               >
-                <audio controls src={audioUrl} className="mainaudio" />
+                <audio controls src={audioUrl.url} className="mainaudio" />
               </div>
             ) : (
               <input
@@ -624,7 +624,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               type="button"
               onClick={() => {
                 if (audioUrl) {
-                  sendMessage(audioUrl, "voice");
+                  sendMessage(audioUrl.encoded, "voice");
                 } else {
                   sendMessage(text);
                 }
