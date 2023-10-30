@@ -108,6 +108,7 @@ function TooltipVoice({ children, setAudioUrl }) {
 
         recorderRef.current.getDataURL((dataURL) => {
           // You can save the dataURL to the server if needed.
+          console.log(dataURL);
           let encoded = dataURL.replace(/^data:(.*,)?/, "");
           if (encoded.length % 4 > 0) {
             encoded += "=".repeat(4 - (encoded.length % 4));
