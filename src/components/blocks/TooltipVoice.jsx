@@ -52,9 +52,7 @@ function TooltipVoice({ children, setAudioUrl }) {
     navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then((stream) => {
-        mediaRecorder.current = new MediaRecorder(stream, {
-          mimeType: "audio/mp3",
-        });
+        mediaRecorder.current = new MediaRecorder(stream);
 
         mediaRecorder.current.ondataavailable = (event) => {
           chunks.current.push(event.data);
@@ -63,7 +61,9 @@ function TooltipVoice({ children, setAudioUrl }) {
           setDuration((prevDuration) => prevDuration + 1);
         }, 1000);
         mediaRecorder.current.onstop = () => {
-          const blob = new Blob(chunks.current);
+          const blob = new Blob(chunks.current, {
+            type: "audio/mpeg-3'; codecs=opus",
+          });
           chunks.current = [];
           const audioURL = URL.createObjectURL(blob);
           console.log(blob, audioURL);
