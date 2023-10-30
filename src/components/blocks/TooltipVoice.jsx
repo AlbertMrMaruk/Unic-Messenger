@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import RecordRTC from "recordrtc";
+// import RecordRTC from "recordrtc";
 import { FaMicrophone } from "react-icons/fa";
 
 function TooltipVoice({ children, setAudioUrl }) {
@@ -9,25 +9,57 @@ function TooltipVoice({ children, setAudioUrl }) {
   const recorderRef = useRef(null);
   const timerRef = useRef(null);
 
+  // const startRecording = () => {
+  //   navigator.mediaDevices
+  //     .getUserMedia({ audio: true })
+  //     .then((stream) => {
+  //       recorderRef.current = RecordRTC(stream, {
+  //         type: "audio",
+  //         mimeType: "audio/ogg",
+  //       });
+
+  //       recorderRef.current.startRecording();
+  //       setRecording(true);
+
+  //       timerRef.current = setInterval(() => {
+  //         setDuration((prevDuration) => prevDuration + 1);
+  //       }, 1000);
+  //     })
+  //     .catch((error) =>
+  //       console.error("Error accessing the microphone:", error)
+  //     );
+  // };
+
+  const mediaRecorder = useRef(null);
+  const chunks = useRef([]);
+
   const startRecording = () => {
     navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then((stream) => {
-        recorderRef.current = RecordRTC(stream, {
-          type: "audio",
-          mimeType: "audio/ogg",
-        });
+        mediaRecorder.current = new MediaRecorder(stream);
 
-        recorderRef.current.startRecording();
-        setRecording(true);
-
+        mediaRecorder.current.ondataavailable = (event) => {
+          chunks.current.push(event.data);
+        };
         timerRef.current = setInterval(() => {
           setDuration((prevDuration) => prevDuration + 1);
         }, 1000);
+        mediaRecorder.current.onstop = () => {
+          const blob = new Blob(chunks.current, {
+            type: "audio/ogg; codecs=opus",
+          });
+          chunks.current = [];
+          const audioURL = URL.createObjectURL(blob);
+          console.log(blob, audioURL);
+          setAudioUrl(audioURL);
+        };
+        setRecording(true);
+        mediaRecorder.current.start();
       })
-      .catch((error) =>
-        console.error("Error accessing the microphone:", error)
-      );
+      .catch((err) => {
+        console.error("Error accessing the microphone:", err);
+      });
   };
 
   const calcDur = (dur) => {
@@ -39,29 +71,36 @@ function TooltipVoice({ children, setAudioUrl }) {
     return m + ":" + s;
   };
   const stopRecording = () => {
-    if (recorderRef.current) {
-      recorderRef.current.stopRecording(() => {
-        clearInterval(timerRef.current);
-        const audioBlob = recorderRef.current.getBlob();
-        console.log(audioBlob, recorderRef.current);
-        const url = URL.createObjectURL(audioBlob);
-
-        recorderRef.current.getDataURL((dataURL) => {
-          // You can save the dataURL to the server if needed.
-          let encoded = dataURL.replace(/^data:(.*,)?/, "");
-          if (encoded.length % 4 > 0) {
-            encoded += "=".repeat(4 - (encoded.length % 4));
-          }
-          setAudioUrl({ url, encoded });
-        });
-
-        setRecording(false);
-        setShow(false);
-      });
-    } else {
-      console.error("Recorder is not defined.");
+    if (mediaRecorder.current) {
+      setRecording(false);
+      mediaRecorder.current.stop();
     }
   };
+
+  // const stopRecording = () => {
+  //   if (recorderRef.current) {
+  //     recorderRef.current.stopRecording(() => {
+  //       clearInterval(timerRef.current);
+  //       const audioBlob = recorderRef.current.getBlob();
+  //       console.log(audioBlob, recorderRef.current);
+  //       const url = URL.createObjectURL(audioBlob);
+
+  //       recorderRef.current.getDataURL((dataURL) => {
+  //         // You can save the dataURL to the server if needed.
+  //         let encoded = dataURL.replace(/^data:(.*,)?/, "");
+  //         if (encoded.length % 4 > 0) {
+  //           encoded += "=".repeat(4 - (encoded.length % 4));
+  //         }
+  //         setAudioUrl({ url, encoded });
+  //       });
+
+  //       setRecording(false);
+  //       setShow(false);
+  //     });
+  //   } else {
+  //     console.error("Recorder is not defined.");
+  //   }
+  // };
 
   // const toggleAudio = () => {
   //   if (audioElement.current) {
