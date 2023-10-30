@@ -44,6 +44,7 @@ function Chats() {
   const [showModal, setShowModal] = useState(false);
   const [showModalAccount, setShowModalAccount] = useState(false);
   const [showModalDownload, setShowModalDownload] = useState(false);
+  const [audioUrl, setAudioUrl] = useState(null);
   const [sizeUser, setSizeUser] = useState(0);
   const [currentUser, setCurrentUser] = useState();
   const { state } = useLocation();
@@ -533,24 +534,34 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             </div>
           )}
           <div className="relative flex flex-wrap items-stretch m-auto w-[95%] md:w-[90%]">
-            <input
-              type="text"
-              onKeyDown={(e) => {
-                // console.log(e.key);
-                if (e.key === "Enter") {
-                  sendMessage(text);
-                }
-              }}
-              className={`
-              bg-secondarylight text-white    ${
-                replyMessage ? "rounded-bl-xl" : "rounded-l-xl"
-              }
+            {audioUrl ? (
+              <div
+                className={`
+              bg-secondarylight text-white    rounded-l-xl
               p-2 px-4 h-[45px] 
               relative  -mr-0.5 block w-[1px] min-w-0 flex-auto  outline-none `}
-              placeholder="Ваше сообщение"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
+              >
+                <audio controls src={audioUrl} className="mainaudio" />
+              </div>
+            ) : (
+              <input
+                type="text"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    sendMessage(text);
+                  }
+                }}
+                className={`
+            bg-secondarylight text-white    ${
+              replyMessage ? "rounded-bl-xl" : "rounded-l-xl"
+            }
+            p-2 px-4 h-[45px] 
+            relative  -mr-0.5 block w-[1px] min-w-0 flex-auto  outline-none `}
+                placeholder="Ваше сообщение"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+            )}
             <Tooltip setText={setText} emoji={true}>
               <button
                 class="bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
@@ -559,7 +570,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 <FaSmile className="text-white w-[18px] h-[18px] m-auto" />
               </button>
             </Tooltip>
-            <TooltipVoice>
+            <TooltipVoice setAudioUrl={setAudioUrl}>
               <button
                 class="bg-secondarylight  text-white p-1 text-xs  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]"
                 type="button"

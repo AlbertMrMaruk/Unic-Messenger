@@ -1,19 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import RecordRTC from "recordrtc";
-import { FaMicrophone, FaPause, FaPlay } from "react-icons/fa";
+import { FaMicrophone } from "react-icons/fa";
 
-function TooltipVoice({ children }) {
+function TooltipVoice({ children, setAudioUrl }) {
   const [recording, setRecording] = useState(false);
-  const [audioUrl, setAudioUrl] = useState(null);
   const [duration, setDuration] = useState(0);
   const recorderRef = useRef(null);
   const timerRef = useRef(null);
 
-  const audioElement = useRef(null);
-  const paused = useRef(false);
-
   const startRecording = () => {
-    console.log(navigator.mediaDevices);
     navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then((stream) => {
@@ -122,24 +117,6 @@ function TooltipVoice({ children }) {
               <div className="text-sm text-gray-600">{calcDur(duration)}</div>
             )}
           </div>
-          {audioUrl && (
-            <div className="flex items-center mt-4">
-              {/* <div className="text-4xl text-blue-500 mr-4" onClick={toggleAudio}>
-              {paused.current ? <FaPlay /> : <FaPause />}
-            </div> */}
-              <div className="flex flex-col">
-                <audio
-                  controls
-                  src={audioUrl}
-                  ref={audioElement}
-                  onEnded={() => {
-                    paused.current = false;
-                  }}
-                  className="mainaudio"
-                />
-              </div>
-            </div>
-          )}
         </div>
         <div className="w-3 h-3 -mt-2 rotate-45 bg-secondarylight mb-2" />
       </div>
