@@ -47,7 +47,7 @@ export default function Modal({
               type="button"
               onClick={() => {
                 setShowSpinner(true);
-                sendMessage(text, file.file, file.type, {
+                sendMessage(text, "img", {
                   chatId: state?.id,
                   file: {
                     mimetype: file.type,

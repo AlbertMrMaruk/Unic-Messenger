@@ -130,6 +130,26 @@ class ChatsAPI {
       body: JSON.stringify(data),
     });
   }
+  sendVoice(data, currentChat, session) {
+    return fetch(`${API_URL}/api/sendVoice`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+
+      //make sure to serialize your JSON body
+      body: JSON.stringify({
+        chatId: currentChat,
+        file: {
+          mimetype: "audio/ogg; codecs=opus",
+          filename: "voice-message-" + Date.now(),
+          data,
+        },
+        session,
+      }),
+    });
+  }
   sendSeen(phone, session) {
     return fetch(`${API_URL}/api/sendSeen`, {
       method: "post",

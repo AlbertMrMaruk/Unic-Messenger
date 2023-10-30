@@ -365,13 +365,16 @@ function Chats() {
   }, [state]);
 
   //Функция отправки сообщения
-  const sendMessage = async (text, img, fileType, data) => {
+  const sendMessage = async (text, type, fileType, data) => {
     await ChatsApi.sendSeen(currentChat, session);
     await ChatsApi.startTyping(currentChat, session);
     setTimeout(async () => {
       await ChatsApi.stopTyping(currentChat, session);
-      if (img) {
+      if (type === "img") {
         ChatsApi.sendImage(data);
+      } else if (type === "voice") {
+        console.log(text);
+        ChatsApi.sendVoice(text, currentChat, session);
       } else {
         if (!replyMessage) {
           ChatsApi.sendText(text, currentChat, session);
@@ -620,7 +623,11 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               } w-[55px] h-[45px] text-white font-bold uppercase`}
               type="button"
               onClick={() => {
-                sendMessage(text);
+                if (audioUrl) {
+                  sendMessage(audioUrl, "voice");
+                } else {
+                  sendMessage(text);
+                }
               }}
             >
               <FaArrowCircleUp className="text-white w-[25px] h-[25px] m-auto" />
