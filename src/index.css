@@ -31,7 +31,8 @@ audio.mainaudio {
   width: 100%;
 }
 
-audio.mainaudio::-webkit-media-controls-current-time-display {
+audio.mainaudio::-webkit-media-controls-current-time-display,
+audio.mainaudio::-webkit-media-controls-time-remaining-display {
   color: white;
   font-size: 16px;
   opacity: 1;
@@ -45,4 +46,12 @@ audio.mainaudio::-webkit-media-controls-enclosure {
 
 audio.mainaudio::-webkit-media-controls-volume-control-container {
   display: none;
+}
+
+audio.mainaudio::-internal-media-controls-overflow-button {
+  display: none;
+}
+
+audio.mainaudio::-webkit-media-controls-timeline[pseudo="-webkit-media-controls-timeline" i]::-internal-track-segment-highlight-before {
+  background: rgb(68 160 255 / var(--tw-bg-opacity));
 }

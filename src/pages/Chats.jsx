@@ -538,7 +538,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               <div
                 className={`
               bg-secondarylight text-white    rounded-l-xl
-              p-2 px-4 h-[45px] 
+              py-[.5rem] h-[45px] 
               relative  -mr-0.5 block w-[1px] min-w-0 flex-auto  outline-none `}
               >
                 <audio controls src={audioUrl} className="mainaudio" />
