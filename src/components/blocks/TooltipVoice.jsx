@@ -41,13 +41,17 @@ function TooltipVoice({ children, setAudioUrl }) {
     if (recorderRef.current) {
       recorderRef.current.stopRecording(() => {
         clearInterval(timerRef.current);
-        const audioBlob = recorderRef.current.getBlob();
-        console.log(audioBlob, recorderRef.current);
-        const url = URL.createObjectURL(audioBlob);
-        setAudioUrl(url);
+        // const audioBlob = recorderRef.current.getBlob();
+        // console.log(audioBlob, recorderRef.current);
+        // const url = URL.createObjectURL(audioBlob);
+        // setAudioUrl(url);
         recorderRef.current.getDataURL((dataURL) => {
           // You can save the dataURL to the server if needed.
-          console.log(dataURL);
+          let encoded = dataURL.replace(/^data:(.*,)?/, "");
+          if (encoded.length % 4 > 0) {
+            encoded += "=".repeat(4 - (encoded.length % 4));
+          }
+          setAudioUrl(encoded);
         });
 
         setRecording(false);
