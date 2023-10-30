@@ -1,4 +1,5 @@
 import { FaFilePdf } from "react-icons/fa";
+const API_URL = "https://unicmessenger.ru";
 
 function Message({ message }) {
   const url = message?.mediaUrl;
@@ -35,12 +36,12 @@ function Message({ message }) {
         <video
           controls
           className="max-w-[300px]"
-          src={"http://89.111.131.15" + url.slice(21)}
+          src={API_URL + url.slice(21)}
         />
       )}
       {isImg(url, message) && (
         <img
-          src={"http://89.111.131.15" + url.slice(21)}
+          src={API_URL + url.slice(21)}
           alt="Image from user"
           className="max-w-[300px]"
         />
@@ -52,11 +53,7 @@ function Message({ message }) {
           } `}
         >
           {isPdf(url, message) ? (
-            <a
-              href={"http://89.111.131.15" + url.slice(21)}
-              target="_blank"
-              className="flex"
-            >
+            <a href={API_URL + url.slice(21)} target="_blank" className="flex">
               <FaFilePdf className="text-primary text-[1.4rem] my-auto mr-[.5rem]" />
               {text}
             </a>

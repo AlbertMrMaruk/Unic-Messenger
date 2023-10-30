@@ -106,7 +106,9 @@ export default function ModalAccount({
                   setShowSpinner(true);
                   ChatsApi.startSession(phone).then(() => {
                     setTimeout(() => {
-                      setQrCode(`http://89.111.131.15/api/${phone}/auth/qr`);
+                      setQrCode(
+                        `https://unicmessenger.ru/api/${phone}/auth/qr`
+                      );
                       setShowSpinner(false);
                       setConfirm(true);
                       setAccount(phone);

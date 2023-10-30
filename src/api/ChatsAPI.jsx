@@ -38,7 +38,7 @@ class ChatsAPI {
           proxy: null,
           webhooks: [
             {
-              url: `http://unicmessenger.ru/post/${phone}`,
+              url: `${API_URL}/post/${phone}`,
               events: ["message.any"],
               hmac: null,
               retries: {
