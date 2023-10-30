@@ -29,6 +29,20 @@ function TooltipVoice({ children, setAudioUrl }) {
   //     );
   // };
 
+  const getBase64 = (url) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(url);
+    reader.onload = () => {
+      let encoded = reader.result.toString().replace(/^data:(.*,)?/, "");
+      if (encoded.length % 4 > 0) {
+        encoded += "=".repeat(4 - (encoded.length % 4));
+      }
+      setAudioUrl({ url, encoded });
+    };
+    reader.onerror = function (error) {
+      console.log("Error: ", error);
+    };
+  };
   const mediaRecorder = useRef(null);
   const chunks = useRef([]);
 
@@ -51,7 +65,7 @@ function TooltipVoice({ children, setAudioUrl }) {
           chunks.current = [];
           const audioURL = URL.createObjectURL(blob);
           console.log(blob, audioURL);
-          setAudioUrl({ url: audioURL });
+          getBase64(audioURL);
         };
         setRecording(true);
         mediaRecorder.current.start();
@@ -75,6 +89,7 @@ function TooltipVoice({ children, setAudioUrl }) {
 
       mediaRecorder.current.stop();
     }
+    console.log(show);
     setShow(false);
   };
 
