@@ -274,7 +274,7 @@ function Chats() {
                 }
               });
             // Загрузка иконки профиля
-            await ChatsApi.getAvatar(el.id.user, session)
+            await ChatsApi.getAvatar(el.id.user, currentSession)
               .then((el) => el.json())
               .then((el) => {
                 console.log(el?.profilePictureURL);
