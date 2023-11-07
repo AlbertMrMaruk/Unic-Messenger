@@ -33,6 +33,10 @@ audio.mainaudio {
 audio.secondaryaudio {
   width: 93% !important;
 }
+audio.secondaryaudio::-webkit-media-controls-current-time-display,
+audio.secondaryaudio::-webkit-media-controls-time-remaining-display {
+  color: white;
+}
 
 audio.mainaudio::-webkit-media-controls-current-time-display,
 audio.mainaudio::-webkit-media-controls-time-remaining-display {
