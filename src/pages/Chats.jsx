@@ -374,7 +374,7 @@ function Chats() {
         setShowSpinnerMessages(true);
         setCurrentChat(state?.id);
         setMessages(
-          dataUser.chats
+          dataUser.chats[session]
             .find((el) => el.id._serialized === state?.id)
             .messages.toReversed()
         );
