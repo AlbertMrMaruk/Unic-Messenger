@@ -119,13 +119,13 @@ class ChatsAPI {
     });
   }
   sendImage(data) {
+    console.log(data);
     return fetch(`${API_URL}/api/sendImage`, {
       method: "post",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-
       //make sure to serialize your JSON body
       body: JSON.stringify(data),
     });
