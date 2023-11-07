@@ -325,7 +325,7 @@ function Chats() {
                   );
                   console.log(el.messages, superNew);
                   el.messages = [...el.messages, ...superNew];
-                  el.lastMessage = superNew.at(-1);
+                  el.lastMessage = superNew.at(-1).payload;
                   console.log(el);
                   countChatsUpdated++;
                   if (countChatsUpdate === countChatsUpdated) {
@@ -335,7 +335,6 @@ function Chats() {
                     console.log("ddd");
                     dataToApp(userData[0]);
                   }
-                  //TODO: Убрать количество обновления базы данных
                 });
             }
           });
