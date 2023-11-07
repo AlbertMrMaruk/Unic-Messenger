@@ -30,6 +30,9 @@ code {
 audio.mainaudio {
   width: 100%;
 }
+audio.secondaryaudio {
+  width: 93% !important;
+}
 
 audio.mainaudio::-webkit-media-controls-current-time-display,
 audio.mainaudio::-webkit-media-controls-time-remaining-display {

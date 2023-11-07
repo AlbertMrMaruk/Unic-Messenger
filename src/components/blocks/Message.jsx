@@ -57,7 +57,7 @@ function Message({ message }) {
         <audio
           controls
           src={API_URL + url.slice(21)}
-          className="mainaudio secondaryaudio w-[95%]"
+          className="mainaudio secondaryaudio "
         />
       )}
       {text && (
@@ -78,11 +78,13 @@ function Message({ message }) {
       )}
       {/* <span className={`font-bold`}></span> */}
       <span
-        className={`text-right  mt-[-1.1rem] text-[10px]  ${
-          url && !text
+        className={`text-right text-[10px]  ${
+          isAudio(url)
+            ? "mt-[-2.5rem]"
+            : url && !text
             ? "mt-[-1.8rem] p-[0.4rem] bg-[#2a2a2e52]"
             : " mt-[-1.1rem]"
-        } ${isAudio(url) ? "mt-[2.5rem]" : ""}`}
+        } `}
       >
         {calcDate(timestamp)}
       </span>
