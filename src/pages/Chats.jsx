@@ -69,7 +69,7 @@ function Chats() {
           chats[chatIndex].lastMessage = {
             ...message.payload,
           };
-          console.log(message?._data?.size);
+          console.log(message?._data, message);
           // if(message?._data?.size)
 
           setDataUser((prev) => ({ ...prev, chats }));
