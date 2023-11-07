@@ -43,6 +43,10 @@ audio.mainaudio::-webkit-media-controls-enclosure {
   background: none;
 }
 
+audio.secondaryaudio::-webkit-media-controls-panel {
+  padding: none;
+}
+
 audio.mainaudio::-webkit-media-controls-volume-control-container {
   display: none;
 }

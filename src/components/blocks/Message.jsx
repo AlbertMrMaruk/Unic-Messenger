@@ -54,7 +54,11 @@ function Message({ message }) {
         />
       )}
       {isAudio(url) && (
-        <audio controls src={API_URL + url.slice(21)} className="mainaudio" />
+        <audio
+          controls
+          src={API_URL + url.slice(21)}
+          className="mainaudio secondaryaudio w-[95%]"
+        />
       )}
       {text && (
         <span
@@ -78,7 +82,7 @@ function Message({ message }) {
           url && !text
             ? "mt-[-1.8rem] p-[0.4rem] bg-[#2a2a2e52]"
             : " mt-[-1.1rem]"
-        }`}
+        } ${isAudio ? "mt-[2.5rem]" : ""}`}
       >
         {calcDate(timestamp)}
       </span>
