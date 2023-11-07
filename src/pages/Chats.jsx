@@ -325,7 +325,11 @@ function Chats() {
             if (el2?.lastMessage?.timestamp > el?.lastMessage?.timestamp) {
               countChatsUpdate++;
               console.log("OH YEAAA");
-              ChatsApi.getMessages(el.id._serialized, 20, session)
+              ChatsApi.getMessages(
+                el.id._serialized,
+                20,
+                userData[0].accounts[0]
+              )
                 .then((el) => el.json())
                 .then((messages) => {
                   const superNew = messages.slice(
