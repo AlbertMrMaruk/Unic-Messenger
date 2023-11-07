@@ -306,7 +306,7 @@ function Chats() {
         });
     } else {
       console.log("Download and fetching", session);
-      ChatsApi.getChats(session)
+      ChatsApi.getChats(dataUser.accounts[0])
         .then((el) => el.json())
         .then((res) => {
           const newChats = res.slice(0, 40);
@@ -346,7 +346,6 @@ function Chats() {
                     console.log("ddd");
                     dataToApp(userData[0]);
                   }
-                  //TODO: Убрать количество обновления базы данных
                 });
             }
           });
