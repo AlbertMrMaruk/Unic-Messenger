@@ -435,10 +435,15 @@ function Chats() {
           </h3>
           {accounts.map((el, index) => (
             <div
-              className="p-[1rem]  
-border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#3f4145]"
+              className={`p-[1rem]  
+border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#3f4145] ${
+                session === el ? "bg-[#3f4145]" : ""
+              }`}
               key={index}
-              onClick={() => setSession(el)}
+              onClick={() => {
+                setSession(el);
+                onLoad();
+              }}
             >
               <div className="rounded-full w-[40px] h-[40px] text-white ">
                 <FaWhatsapp className="w-[40px] h-[40px]" />
