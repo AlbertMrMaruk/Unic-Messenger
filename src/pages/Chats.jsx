@@ -78,7 +78,7 @@ function Chats() {
 
           DatabaseAPI.updateUser(dataUser.username, {
             chats: dataUser.chats,
-            allSize: dataUser.allSize,
+            allSize: allSize,
           });
         } else {
           if (message.payload.from === currentChat) {
