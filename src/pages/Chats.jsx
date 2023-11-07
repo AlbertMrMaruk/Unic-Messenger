@@ -77,7 +77,7 @@ function Chats() {
           setDataUser((prev) => ({ ...prev, chats, allSize }));
 
           DatabaseAPI.updateUser(dataUser.username, {
-            chats: dataUser.chats,
+            chats: { ...dataUser.chats, [session]: chats },
             allSize: allSize,
           });
         } else {
@@ -101,7 +101,7 @@ function Chats() {
             setDataUser((prev) => ({ ...prev, chats, allSize }));
 
             DatabaseAPI.updateUser(dataUser.username, {
-              chats: dataUser.chats,
+              chats: { ...dataUser.chats, [session]: chats },
               allSize: dataUser.allSize,
             });
           } else {
@@ -126,7 +126,7 @@ function Chats() {
             setSizeUser(+allSize / (1024 * 1024));
             setDataUser((prev) => ({ ...prev, chats, allSize }));
             DatabaseAPI.updateUser(dataUser.username, {
-              chats: dataUser.chats,
+              chats: { ...dataUser.chats, [session]: chats },
               allSize: dataUser.allSize,
             });
           }
@@ -179,15 +179,16 @@ function Chats() {
     setCurrentUser({ pushName: userData[0].name });
 
     //ФУНКЦИЯ ДОБАВЛЕНИЯ ИНФОРМАЦИИ НА ПРИЛОЖЕНИЕ
-    const dataToApp = (data) => {
+    const dataToApp = (data, session) => {
+      console.log(data);
       setDataUser(data);
       setAccounts(data.accounts);
       if (data.accounts.length !== 0) {
-        setSession(data.accounts[0]);
+        setSession(session);
         console.log("Session changed");
       }
       setChats(
-        data.chats.sort((chat1, chat2) => {
+        data.chats?.[session].sort((chat1, chat2) => {
           const chat1time =
             +chat1?.lastMessage?.timestamp ||
             +(chat1?.lastMessage?.payload?.timestamp + "000");
@@ -203,7 +204,7 @@ function Chats() {
       setShowSpinner(false);
       if (state?.id) {
         setMessages(
-          data.chats
+          data.chats?.[session]
             .find((el) => el.id._serialized === state?.id)
             .messages.toReversed()
         );
@@ -220,7 +221,7 @@ function Chats() {
       setShowModalAccount(true);
     } else if (
       userData[0].accounts.length > 0 &&
-      userData[0].chats.length === 0
+      userData[0].chats?.[session].lenght === 0
     ) {
       setShowModalDownload(true);
       ChatsApi.getChats(session)
@@ -229,7 +230,7 @@ function Chats() {
           console.log("Starting");
           const data = {
             ...userData[0],
-            chats: res.slice(0, 40),
+            chats: { ...userData[0].chats, [session]: res.slice(0, 40) },
             chatsCount: 0,
           };
           let allSize = 0;
@@ -239,7 +240,7 @@ function Chats() {
             await ChatsApi.getMessages(el?.id?._serialized, 30, session)
               .then((res) => res.json())
               .then((res) => {
-                data.chats[index].messages = res.map((el) => {
+                data.chats[session][index].messages = res.map((el) => {
                   delete el.vCards;
                   if (el.hasMedia) {
                     console.log(el._data.size, allSize);
@@ -265,7 +266,7 @@ function Chats() {
                     .then((res) => res.json())
                     .then((res) => {
                       console.log(res);
-                      dataToApp(data);
+                      dataToApp(data, session);
                     });
                 }
               });
@@ -274,10 +275,10 @@ function Chats() {
               .then((el) => el.json())
               .then((el) => {
                 console.log(el?.profilePictureURL);
-                data.chats[index].avatar = el?.profilePictureURL;
+                data.chats[session][index].avatar = el?.profilePictureURL;
                 setPercentage((prev) => +prev + 1);
                 data.chatsCount += 1;
-                if (data.chatsCount === 30) {
+                if (data.chatsCount === 40) {
                   console.log(allSize, "and nooooowwww");
                   data.allSize = allSize;
                   setPercentage(100);
@@ -289,8 +290,7 @@ function Chats() {
                     .then((res) => res.json())
                     .then((res) => {
                       console.log(res);
-                      dataToApp(data);
-
+                      dataToApp(data, session);
                       setShowModalDownload(false);
                     });
                 }
@@ -304,58 +304,61 @@ function Chats() {
             }
           }
         });
-    } else {
-      console.log("Download and fetching", session);
-      ChatsApi.getChats(userData[0].accounts[0])
-        .then((el) => el.json())
-        .then((res) => {
-          const newChats = res.slice(0, 40);
-
-          userData[0].chats.forEach((el) => {
-            let countChatsUpdate = 0;
-            let countChatsUpdated = 0;
-            console.log(
-              el,
-              newChats.find((el2) => el.id._serialized === el2.id._serialized),
-              "dd"
-            );
-            const el2 = newChats.find(
-              (el2) => el.id._serialized === el2.id._serialized
-            );
-            if (el2?.lastMessage?.timestamp > el?.lastMessage?.timestamp) {
-              countChatsUpdate++;
-              console.log("OH YEAAA");
-              ChatsApi.getMessages(
-                el.id._serialized,
-                20,
-                userData[0].accounts[0]
-              )
-                .then((el) => el.json())
-                .then((messages) => {
-                  const superNew = messages.slice(
-                    messages.findIndex(
-                      (message) =>
-                        el?.lastMessage?.timestamp === message?.timestamp
-                    ) + 1
-                  );
-                  console.log(el.messages, superNew);
-                  el.messages = [...el.messages, ...superNew];
-                  el.lastMessage = superNew.at(-1);
-                  console.log(el);
-                  countChatsUpdated++;
-                  if (countChatsUpdate === countChatsUpdated) {
-                    DatabaseAPI.updateUser(userData[0].username, {
-                      chats: userData[0].chats,
-                    });
-                    console.log("ddd");
-                    dataToApp(userData[0]);
-                  }
-                });
-            }
-          });
-        });
-      dataToApp(userData[0]);
     }
+    // } else {
+    //   console.log("Download and fetching", session);
+    //   ChatsApi.getChats(userData[0].accounts[0])
+    //     .then((el) => el.json())
+    //     .then((res) => {
+    //       const newChats = res.slice(0, 40);
+
+    //       userData[0].chats?.[session].forEach((el) => {
+    //         let countChatsUpdate = 0;
+    //         let countChatsUpdated = 0;
+    //         console.log(
+    //           el,
+    //           newChats.find((el2) => el.id._serialized === el2.id._serialized),
+    //           "dd"
+    //         );
+    //         const el2 = newChats.find(
+    //           (el2) => el.id._serialized === el2.id._serialized
+    //         );
+    //         if (el2?.lastMessage?.timestamp > el?.lastMessage?.timestamp) {
+    //           countChatsUpdate++;
+    //           console.log("OH YEAAA");
+    //           ChatsApi.getMessages(
+    //             el.id._serialized,
+    //             20,
+    //             session
+    //           )
+    //             .then((el) => el.json())
+    //             .then((messages) => {
+    //               const superNew = messages.slice(
+    //                 messages.findIndex(
+    //                   (message) =>
+    //                     el?.lastMessage?.timestamp === message?.timestamp
+    //                 ) + 1
+    //               );
+    //               console.log(el.messages, superNew);
+    //               el.messages = [...el.messages, ...superNew];
+    //               el.lastMessage = superNew.at(-1);
+    //               console.log(el);
+    //               countChatsUpdated++;
+    //               if (countChatsUpdate === countChatsUpdated) {
+    //                 DatabaseAPI.updateUser(userData[0].username, {
+    //                   chats: { ...userData[0].chats,
+    //                     [session]: userData[0].chats?.[session]
+    //                   },
+    //                 });
+    //                 console.log("ddd");
+    //                 dataToApp(userData[0]);
+    //               }
+    //             });
+    //         }
+    //       });
+    //     });
+    //   dataToApp(userData[0]);
+    // }
   };
   useEffect(() => {
     onLoad();
