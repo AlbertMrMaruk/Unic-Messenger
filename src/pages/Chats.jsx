@@ -226,6 +226,7 @@ function Chats() {
         userData[0].chats?.length === 0)
     ) {
       setShowModalDownload(true);
+      console.log(session);
       ChatsApi.getChats(session)
         .then((resp) => resp.json())
         .then(async (res) => {
