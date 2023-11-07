@@ -99,7 +99,7 @@ function Chats() {
             chats[chatIndex].unreadCount += 1;
             chats[chatIndex].lastMessage = {
               body: message.payload.body,
-              ...message,
+              ...message.payload,
             };
             chats[chatIndex].messages = [
               ...chats[chatIndex].messages,
@@ -325,7 +325,7 @@ function Chats() {
                   );
                   console.log(el.messages, superNew);
                   el.messages = [...el.messages, ...superNew];
-                  el.lastMessage = superNew.at(-1).payload;
+                  el.lastMessage = superNew.at(-1);
                   console.log(el);
                   countChatsUpdated++;
                   if (countChatsUpdate === countChatsUpdated) {
@@ -335,6 +335,7 @@ function Chats() {
                     console.log("ddd");
                     dataToApp(userData[0]);
                   }
+                  //TODO: Убрать количество обновления базы данных
                 });
             }
           });
