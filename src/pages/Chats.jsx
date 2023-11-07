@@ -225,26 +225,27 @@ function Chats() {
         Object.keys(userData[0].chats).length === 0 ||
         userData[0].chats?.length === 0)
     ) {
-      setSession(session ?? userData[0].accounts[0]);
+      let currentSession = session ?? userData[0].accounts[0];
+      setSession(currentSession);
       setShowModalDownload(true);
-      console.log(session);
-      ChatsApi.getChats(session)
+      console.log(currentSession);
+      ChatsApi.getChats(currentSession)
         .then((resp) => resp.json())
         .then(async (res) => {
           console.log("Starting");
           const data = {
             ...userData[0],
-            chats: { ...userData[0].chats, [session]: res.slice(0, 40) },
+            chats: { ...userData[0].chats, [currentSession]: res.slice(0, 40) },
             chatsCount: 0,
           };
           let allSize = 0;
           // FETCH FUNCTION
           const delay = (ms) => new Promise((res) => setTimeout(res, ms));
           const fetchChat = async (el, index) => {
-            await ChatsApi.getMessages(el?.id?._serialized, 30, session)
+            await ChatsApi.getMessages(el?.id?._serialized, 30, currentSession)
               .then((res) => res.json())
               .then((res) => {
-                data.chats[session][index].messages = res.map((el) => {
+                data.chats[currentSession][index].messages = res.map((el) => {
                   delete el.vCards;
                   if (el.hasMedia) {
                     console.log(el._data.size, allSize);
@@ -270,7 +271,7 @@ function Chats() {
                     .then((res) => res.json())
                     .then((res) => {
                       console.log(res);
-                      dataToApp(data, session);
+                      dataToApp(data, currentSession);
                     });
                 }
               });
