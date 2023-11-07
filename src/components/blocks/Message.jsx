@@ -68,7 +68,11 @@ function Message({ message }) {
         >
           {isPdf(url, message) ? (
             <a href={API_URL + url.slice(21)} target="_blank" className="flex">
-              <FaFilePdf className="text-primary text-[1.4rem] my-auto mr-[.5rem]" />
+              <FaFilePdf
+                className={`text-primary text-[1.4rem] my-auto mr-[.5rem] ${
+                  message?.fromMe ? "text-white" : "text-primary"
+                }`}
+              />
               {text}
             </a>
           ) : (
