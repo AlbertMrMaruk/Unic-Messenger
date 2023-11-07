@@ -22,8 +22,15 @@ function Message({ message }) {
   const isVideo = (url) => {
     return url?.split(".").at(-1) === "mp4";
   };
-  const isImg = (url, message) => {
-    return url && !isVideo(url, message) && !isPdf(url, message);
+  const isAudio = (url) => {
+    return (
+      url?.split(".").at(-1) === "oga" ||
+      url?.split(".").at(-1) === "mp3" ||
+      url?.split(".").at(-1) === "mpga"
+    );
+  };
+  const isImg = (url) => {
+    return url && !isVideo(url) && !isPdf(url) && !isAudio(url);
   };
   return (
     <div
@@ -32,20 +39,21 @@ function Message({ message }) {
       }`}
     >
       {/* Проверка файла на тип если пдф или видео */}
-      {isVideo(url, message) && (
+      {isVideo(url) && (
         <video
           controls
           className="max-w-[300px]"
           src={API_URL + url.slice(21)}
         />
       )}
-      {isImg(url, message) && (
+      {isImg(url) && (
         <img
           src={API_URL + url.slice(21)}
           alt="Image from user"
           className="max-w-[300px]"
         />
       )}
+      {isAudio(url) && <audio controls src={url} className="mainaudio" />}
       {text && (
         <span
           className={` ${
