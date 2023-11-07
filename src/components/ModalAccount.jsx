@@ -7,6 +7,7 @@ export default function ModalAccount({
   session,
   dataUser,
   newMessage,
+  setSession,
   setAccounts,
   setShowModal,
   onLoad,
@@ -112,6 +113,7 @@ export default function ModalAccount({
                       setShowSpinner(false);
                       setConfirm(true);
                       setAccount(phone);
+                      setSession(phone);
                     }, 15000);
                   });
                 }}
