@@ -184,11 +184,11 @@ function Chats() {
       setDataUser(data);
       setAccounts(data.accounts);
       if (data.accounts.length !== 0) {
-        setSession(session ?? data.accounts[0]);
+        setSession(session);
         console.log("Session changed");
       }
       setChats(
-        data.chats[session ?? data.accounts[0]].sort((chat1, chat2) => {
+        data.chats[session]?.sort((chat1, chat2) => {
           const chat1time =
             +chat1?.lastMessage?.timestamp ||
             +(chat1?.lastMessage?.payload?.timestamp + "000");
@@ -221,7 +221,9 @@ function Chats() {
       setShowModalAccount(true);
     } else if (
       userData[0].accounts.length > 0 &&
-      userData[0].chats[session]?.length === 0
+      (userData[0].chats[session]?.length === 0 ||
+        Object.keys(userData[0].chats).length === 0 ||
+        userData[0].chats?.length === 0)
     ) {
       setShowModalDownload(true);
       ChatsApi.getChats(session)
@@ -356,7 +358,7 @@ function Chats() {
       //       }
       //     });
       //   });
-      dataToApp(userData[0]);
+      dataToApp(userData[0], userData[0].accounts[0]);
     }
   };
   useEffect(() => {
