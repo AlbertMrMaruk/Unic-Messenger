@@ -300,7 +300,7 @@ function Chats() {
               });
           };
           for (let i = 0; i < 40; i++) {
-            await fetchChat(data.chats?.[session]?.[i], i);
+            await fetchChat(data.chats[currentSession][i], i);
             if (i === 10) {
               console.log("Delay");
               await delay(3000);
