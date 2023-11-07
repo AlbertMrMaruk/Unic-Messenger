@@ -34,9 +34,9 @@ function Message({ message }) {
   };
   return (
     <div
-      className={`mx-3 mb-2 rounded-xl  text-white pr-2 pl-3 min-w-[9%] py-2  w-fit flex flex-col gap-1 ${
+      className={`mx-3 mb-2 rounded-xl  text-white pr-2 pl-3 min-w-[9%] py-2   flex flex-col gap-1 ${
         !message?.fromMe ? "bg-[#2a2a2e] self-start" : "bg-primary self-end"
-      } ${isAudio(url) ? "w-[50%]" : " max-w-[70%] md:max-w-[45%]"}`}
+      } ${isAudio(url) ? "w-[50%]" : " max-w-[70%] md:max-w-[45%] w-fit"}`}
     >
       {/* Проверка файла на тип если пдф или видео */}
       {isVideo(url) && (
