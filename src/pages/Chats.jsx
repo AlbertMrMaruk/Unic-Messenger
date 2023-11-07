@@ -278,7 +278,8 @@ function Chats() {
               .then((el) => el.json())
               .then((el) => {
                 console.log(el?.profilePictureURL);
-                data.chats[session][index].avatar = el?.profilePictureURL;
+                data.chats[currentSession][index].avatar =
+                  el?.profilePictureURL;
                 setPercentage((prev) => +prev + 1);
                 data.chatsCount += 1;
                 if (data.chatsCount === 40) {
@@ -293,7 +294,7 @@ function Chats() {
                     .then((res) => res.json())
                     .then((res) => {
                       console.log(res);
-                      dataToApp(data, session);
+                      dataToApp(data, currentSession);
                       setShowModalDownload(false);
                     });
                 }
