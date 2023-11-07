@@ -221,7 +221,7 @@ function Chats() {
       setShowModalAccount(true);
     } else if (
       userData[0].accounts.length > 0 &&
-      userData[0].chats?.[session].lenght === 0
+      userData[0].chats[session]?.length === 0
     ) {
       setShowModalDownload(true);
       ChatsApi.getChats(session)
