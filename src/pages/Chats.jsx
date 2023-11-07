@@ -188,7 +188,7 @@ function Chats() {
         console.log("Session changed");
       }
       setChats(
-        data.chats?.[session].sort((chat1, chat2) => {
+        data.chats[session ?? data.accounts[0]].sort((chat1, chat2) => {
           const chat1time =
             +chat1?.lastMessage?.timestamp ||
             +(chat1?.lastMessage?.payload?.timestamp + "000");
@@ -204,7 +204,7 @@ function Chats() {
       setShowSpinner(false);
       if (state?.id) {
         setMessages(
-          data.chats?.[session]
+          data.chats[session]
             .find((el) => el.id._serialized === state?.id)
             .messages.toReversed()
         );
