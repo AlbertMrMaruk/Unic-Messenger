@@ -306,7 +306,7 @@ function Chats() {
         });
     } else {
       console.log("Download and fetching", session);
-      ChatsApi.getChats(dataUser.accounts[0])
+      ChatsApi.getChats(userData[0].accounts[0])
         .then((el) => el.json())
         .then((res) => {
           const newChats = res.slice(0, 40);
