@@ -82,7 +82,7 @@ function Message({ message }) {
           url && !text
             ? "mt-[-1.8rem] p-[0.4rem] bg-[#2a2a2e52]"
             : " mt-[-1.1rem]"
-        } ${isAudio ? "mt-[2.5rem]" : ""}`}
+        } ${isAudio(url) ? "mt-[2.5rem]" : ""}`}
       >
         {calcDate(timestamp)}
       </span>
