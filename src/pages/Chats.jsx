@@ -225,6 +225,7 @@ function Chats() {
         Object.keys(userData[0].chats).length === 0 ||
         userData[0].chats?.length === 0)
     ) {
+      setSession(userData[0].accounts[0]);
       setShowModalDownload(true);
       console.log(session);
       ChatsApi.getChats(session)
