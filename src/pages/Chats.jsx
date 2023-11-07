@@ -180,11 +180,11 @@ function Chats() {
 
     //ФУНКЦИЯ ДОБАВЛЕНИЯ ИНФОРМАЦИИ НА ПРИЛОЖЕНИЕ
     const dataToApp = (data) => {
-      console.log("and what next");
       setDataUser(data);
       setAccounts(data.accounts);
       if (data.accounts.length !== 0) {
         setSession(data.accounts[0]);
+        console.log("Session changed");
       }
       setChats(
         data.chats.sort((chat1, chat2) => {
@@ -223,7 +223,7 @@ function Chats() {
       userData[0].chats.length === 0
     ) {
       setShowModalDownload(true);
-      ChatsApi.getChats(userData[0].accounts[0])
+      ChatsApi.getChats(session)
         .then((resp) => resp.json())
         .then(async (res) => {
           console.log("Starting");
@@ -236,11 +236,7 @@ function Chats() {
           // FETCH FUNCTION
           const delay = (ms) => new Promise((res) => setTimeout(res, ms));
           const fetchChat = async (el, index) => {
-            await ChatsApi.getMessages(
-              el?.id?._serialized,
-              30,
-              userData[0].accounts[0]
-            )
+            await ChatsApi.getMessages(el?.id?._serialized, 30, session)
               .then((res) => res.json())
               .then((res) => {
                 data.chats[index].messages = res.map((el) => {
@@ -274,31 +270,31 @@ function Chats() {
                 }
               });
             // Загрузка иконки профиля
-            // await ChatsApi.getAvatar(el.id.user, userData[0].accounts[0])
-            //   .then((el) => el.json())
-            //   .then((el) => {
-            //     console.log(el?.profilePictureURL);
-            //     data.chats[index].avatar = el?.profilePictureURL;
-            //     setPercentage((prev) => +prev + 1);
-            //     data.chatsCount += 1;
-            // if (data.chatsCount === 30) {
-            //   console.log(allSize, "and nooooowwww");
-            //   data.allSize = allSize;
-            //   setPercentage(100);
-            //   DatabaseAPI.updateUser(userData[0].username, {
-            //     chats: data.chats,
-            //     allSize: data.allSize,
-            //     accounts: data.accounts,
-            //   })
-            //     .then((res) => res.json())
-            //     .then((res) => {
-            //       console.log(res);
-            //       dataToApp(data);
+            await ChatsApi.getAvatar(el.id.user, session)
+              .then((el) => el.json())
+              .then((el) => {
+                console.log(el?.profilePictureURL);
+                data.chats[index].avatar = el?.profilePictureURL;
+                setPercentage((prev) => +prev + 1);
+                data.chatsCount += 1;
+                if (data.chatsCount === 30) {
+                  console.log(allSize, "and nooooowwww");
+                  data.allSize = allSize;
+                  setPercentage(100);
+                  DatabaseAPI.updateUser(userData[0].username, {
+                    chats: data.chats,
+                    allSize: data.allSize,
+                    accounts: data.accounts,
+                  })
+                    .then((res) => res.json())
+                    .then((res) => {
+                      console.log(res);
+                      dataToApp(data);
 
-            //       setShowModalDownload(false);
-            //     });
-            // }
-            // });
+                      setShowModalDownload(false);
+                    });
+                }
+              });
           };
           for (let i = 0; i < 40; i++) {
             await fetchChat(data.chats[i], i);
@@ -309,8 +305,8 @@ function Chats() {
           }
         });
     } else {
-      console.log("Download and fetching", userData[0].accounts[0]);
-      ChatsApi.getChats(userData[0].accounts[0])
+      console.log("Download and fetching", session);
+      ChatsApi.getChats(session)
         .then((el) => el.json())
         .then((res) => {
           const newChats = res.slice(0, 40);
@@ -329,11 +325,7 @@ function Chats() {
             if (el2?.lastMessage?.timestamp > el?.lastMessage?.timestamp) {
               countChatsUpdate++;
               console.log("OH YEAAA");
-              ChatsApi.getMessages(
-                el.id._serialized,
-                20,
-                userData[0].accounts[0]
-              )
+              ChatsApi.getMessages(el.id._serialized, 20, session)
                 .then((el) => el.json())
                 .then((messages) => {
                   const superNew = messages.slice(
@@ -684,7 +676,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
       {showModalDownload && (
         <ModalDownload
           percentage={percentage}
-          session={dataUser.accounts[0]}
+          session={session}
           setShowModal={setShowModalDownload}
         />
       )}
