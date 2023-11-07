@@ -221,9 +221,7 @@ function Chats() {
       setShowModalAccount(true);
     } else if (
       userData[0].accounts.length > 0 &&
-      (userData[0].chats?.[session]?.length === 0 ||
-        Object.keys(userData[0].chats)?.length === 0 ||
-        userData[0].chats?.length === 0)
+      (userData[0].chats?.[session]?.length === 0 || !userData[0].chats)
     ) {
       let currentSession = session ?? userData[0].accounts[0];
       setSession(currentSession);
