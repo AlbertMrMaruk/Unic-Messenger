@@ -69,16 +69,17 @@ function Chats() {
           chats[chatIndex].lastMessage = {
             ...message.payload,
           };
-          console.log(message?.payload?._data?.size);
           let allSize = dataUser.allSize;
           if (message?.payload?._data?.size) {
             allSize += message?.payload?._data?.size;
           }
-          console.log(allSize);
           setSizeUser(+allSize / (1024 * 1024));
           setDataUser((prev) => ({ ...prev, chats, allSize }));
 
-          DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
+          DatabaseAPI.updateUser(dataUser.username, {
+            chats: dataUser.chats,
+            allSize: dataUser.allSize,
+          });
         } else {
           if (message.payload.from === currentChat) {
             setMessages((prev) => [message.payload, ...prev]);
@@ -92,10 +93,16 @@ function Chats() {
             chats[chatIndex].lastMessage = {
               ...message.payload,
             };
-            setDataUser((prev) => ({ ...prev, chats }));
+            let allSize = dataUser.allSize;
+            if (message?.payload?._data?.size) {
+              allSize += message?.payload?._data?.size;
+            }
+            setSizeUser(+allSize / (1024 * 1024));
+            setDataUser((prev) => ({ ...prev, chats, allSize }));
 
             DatabaseAPI.updateUser(dataUser.username, {
               chats: dataUser.chats,
+              allSize: dataUser.allSize,
             });
           } else {
             setMessages((prev) => prev);
@@ -112,9 +119,15 @@ function Chats() {
               message.payload,
             ];
 
-            setDataUser((prev) => ({ ...prev, chats }));
+            let allSize = dataUser.allSize;
+            if (message?.payload?._data?.size) {
+              allSize += message?.payload?._data?.size;
+            }
+            setSizeUser(+allSize / (1024 * 1024));
+            setDataUser((prev) => ({ ...prev, chats, allSize }));
             DatabaseAPI.updateUser(dataUser.username, {
               chats: dataUser.chats,
+              allSize: dataUser.allSize,
             });
           }
         }
