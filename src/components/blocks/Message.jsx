@@ -53,7 +53,9 @@ function Message({ message }) {
           className="max-w-[300px]"
         />
       )}
-      {isAudio(url) && <audio controls src={url} className="mainaudio" />}
+      {isAudio(url) && (
+        <audio controls src={url} className="mainaudio min-w-[40%]" />
+      )}
       {text && (
         <span
           className={` ${
