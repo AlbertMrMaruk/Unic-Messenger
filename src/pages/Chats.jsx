@@ -365,7 +365,7 @@ function Chats() {
   }, [state]);
 
   //Функция отправки сообщения
-  const sendMessage = async (text, type, fileType, data) => {
+  const sendMessage = async (text, type, data) => {
     await ChatsApi.sendSeen(currentChat, session);
     await ChatsApi.startTyping(currentChat, session);
     setTimeout(async () => {
