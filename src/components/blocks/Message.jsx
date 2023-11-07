@@ -36,7 +36,7 @@ function Message({ message }) {
     <div
       className={`mx-3 mb-2 rounded-xl  text-white pr-2 pl-3 min-w-[9%] py-2 max-w-[70%] md:max-w-[45%] w-fit flex flex-col gap-1 ${
         !message?.fromMe ? "bg-[#2a2a2e] self-start" : "bg-primary self-end"
-      }`}
+      } ${isAudio(url) && "w-[50%]"}`}
     >
       {/* Проверка файла на тип если пдф или видео */}
       {isVideo(url) && (
@@ -54,7 +54,7 @@ function Message({ message }) {
         />
       )}
       {isAudio(url) && (
-        <audio controls src={url} className="mainaudio min-w-[40%]" />
+        <audio controls src={API_URL + url.slice(21)} className="mainaudio" />
       )}
       {text && (
         <span
