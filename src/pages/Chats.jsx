@@ -69,10 +69,14 @@ function Chats() {
           chats[chatIndex].lastMessage = {
             ...message.payload,
           };
-          console.log(message?._data, message);
-          // if(message?._data?.size)
-
-          setDataUser((prev) => ({ ...prev, chats }));
+          console.log(message?.payload?._data?.size);
+          let allSize = dataUser.allSize;
+          if (message?.payload?._data?.size) {
+            allSize += message?.payload?._data?.size;
+          }
+          console.log(allSize);
+          setSizeUser(+allSize / (1024 * 1024));
+          setDataUser((prev) => ({ ...prev, chats, allSize }));
 
           DatabaseAPI.updateUser(dataUser.username, { chats: dataUser.chats });
         } else {
