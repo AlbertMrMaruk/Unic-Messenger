@@ -28,6 +28,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         if (chat?.unreadCount > 0) {
           ChatsApi.sendSeen(chat.id._serialized, session);
           chat.unreadCount = 0;
+          console.log(dataUser.chats);
           DatabaseAPI.updateUser(dataUser.username, {
             chats: dataUser.chats,
           }).then((res) => {
@@ -35,6 +36,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             navigate("/", {
               state: {
                 id: chat.id._serialized,
+                session,
                 name: chat.name,
                 img: chat.avatar ?? "",
               },
@@ -76,9 +78,13 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               chat?.lastMessage?.payload?.timestamp
           )}
         </p>
-        {dataUser.chats[index]?.unreadCount !== 0 && (
+        {dataUser.chats[session ?? dataUser.accounts[0]][index]?.unreadCount !==
+          0 && (
           <div className="bg-[#44a0ff] text-white m-auto text-center px-[.6rem] py-[.1rem] ml-[.4rem] rounded-full text-[14px]  font-bold justify-end">
-            {dataUser.chats[index]?.unreadCount}
+            {
+              dataUser.chats[session ?? dataUser.accounts[0]][index]
+                ?.unreadCount
+            }
           </div>
         )}
       </div>
