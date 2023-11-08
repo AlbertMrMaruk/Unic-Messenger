@@ -171,7 +171,7 @@ function Chats() {
   // Запуск Вебсокета
   useEffect(() => {
     console.log("Started WEBSOCKET");
-    if (session && dataUser?.accounts?.length <= 1) {
+    if (session) {
       console.log(session);
       clickChat(setNewMessage, session);
     }
