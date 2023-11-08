@@ -12,7 +12,7 @@ function clickChat(setNewMessage, session) {
         console.log("Обрыв соединения");
       }
       console.log(`Код: ${event.code} | Причина: ${event.reason}`);
-      if (+event.code !== 777) {
+      if (+event.code !== 3333) {
         clickChat(setNewMessage, session);
       }
     });

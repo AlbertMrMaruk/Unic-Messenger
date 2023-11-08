@@ -177,7 +177,7 @@ function Chats() {
       setWebSocket(clickChat(setNewMessage, session));
     } else if (session && webSocket) {
       console.log(webSocket);
-      webSocket.close(777);
+      webSocket.close(3333);
       setWebSocket(clickChat(setNewMessage, session));
     }
   }, [session]);
