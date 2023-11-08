@@ -172,8 +172,8 @@ function Chats() {
   useEffect(() => {
     console.log("Started WEBSOCKET");
 
-    console.log(dataUser?.accounts?.length < 1);
-    if (session && dataUser?.accounts?.length < 1) {
+    console.log(dataUser?.accounts?.length <= 1);
+    if (session && dataUser?.accounts?.length <= 1) {
       console.log(session);
       clickChat(setNewMessage, session);
     }
