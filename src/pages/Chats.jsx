@@ -197,7 +197,7 @@ function Chats() {
             +(chat2?.lastMessage?.payload?.timestamp + "000");
 
           return chat1time > chat2time ? -1 : 1;
-        })
+        }) ?? []
       );
 
       setSizeUser(+data.allSize / (1024 * 1024));
@@ -460,7 +460,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           {showSpinner ? (
             <Spinner />
           ) : (
-            chats.map((el, index) => (
+            chats?.map((el, index) => (
               <Chat
                 chat={el}
                 currentChat={currentChat}
