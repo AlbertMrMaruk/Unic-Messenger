@@ -172,7 +172,8 @@ function Chats() {
   useEffect(() => {
     console.log("Started WEBSOCKET");
     console.log(session);
-    if (session) {
+    console.log(!(dataUser?.accounts?.length > 1));
+    if (session && !(dataUser?.accounts?.length > 1)) {
       clickChat(setNewMessage, session);
     }
   }, [session]);
@@ -193,7 +194,6 @@ function Chats() {
 
     //ФУНКЦИЯ ДОБАВЛЕНИЯ ИНФОРМАЦИИ НА ПРИЛОЖЕНИЕ
     const dataToApp = (data, session) => {
-      console.log(data);
       setDataUser(data);
       setAccounts(data.accounts);
       if (data.accounts.length !== 0) {
@@ -370,7 +370,7 @@ function Chats() {
       if (state?.id && dataUser?.chats) {
         setShowSpinnerMessages(true);
         setCurrentChat(state?.id);
-        console.log(dataUser, chats);
+
         setMessages(
           dataUser.chats[session ?? dataUser.accounts[0]]
             .find((el) => el.id._serialized === state?.id)
@@ -391,7 +391,6 @@ function Chats() {
       if (type === "img") {
         ChatsApi.sendImage(data);
       } else if (type === "voice") {
-        console.log(text);
         ChatsApi.sendVoice(text, currentChat, session);
       } else {
         if (!replyMessage) {

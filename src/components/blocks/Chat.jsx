@@ -28,7 +28,6 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         if (chat?.unreadCount > 0) {
           ChatsApi.sendSeen(chat.id._serialized, session);
           chat.unreadCount = 0;
-          console.log(dataUser.chats);
           DatabaseAPI.updateUser(dataUser.username, {
             chats: dataUser.chats,
           }).then((res) => {
