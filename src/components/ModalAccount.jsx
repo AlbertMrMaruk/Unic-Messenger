@@ -131,13 +131,13 @@ export default function ModalAccount({
                   }));
                   DatabaseAPI.updateUser(dataUser.username, {
                     accounts: [...dataUser.accounts, account],
-                    chats: { [account]: [] },
+                    chats: { ...dataUser.chats, [account]: [] },
                   }).then(() => {
                     setAccount(phone);
                     if (!session) {
                       setSession(phone);
+                      onLoad();
                     }
-                    onLoad();
                   });
                   setShowModal(false);
                 }}
