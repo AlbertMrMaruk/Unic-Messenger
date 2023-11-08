@@ -38,6 +38,7 @@ function Chats() {
   const [text, setText] = useState("");
   const [showSpinner, setShowSpinner] = useState(true);
   const [showSpinnerMessages, setShowSpinnerMessages] = useState(true);
+  const [webSocket, setWebSocket] = useState();
   const [showChats, setShowChats] = useState(true);
   const [chats, setChats] = useState([]);
   const [file, setFile] = useState("");
@@ -171,9 +172,13 @@ function Chats() {
   // Запуск Вебсокета
   useEffect(() => {
     console.log("Started WEBSOCKET");
-    if (session) {
+    if (session && !webSocket) {
       console.log(session);
-      clickChat(setNewMessage, session);
+      setWebSocket(clickChat(setNewMessage, session));
+    } else if (session && webSocket) {
+      console.log(webSocket);
+      webSocket.close(777);
+      setWebSocket(clickChat(setNewMessage, session));
     }
   }, [session]);
 

@@ -12,8 +12,9 @@ function clickChat(setNewMessage, session) {
         console.log("Обрыв соединения");
       }
       console.log(`Код: ${event.code} | Причина: ${event.reason}`);
-
-      clickChat(setNewMessage, session);
+      if (+event.code !== 777) {
+        clickChat(setNewMessage, session);
+      }
     });
 
     socket.addEventListener("message", (event) => {
@@ -24,6 +25,7 @@ function clickChat(setNewMessage, session) {
     socket.addEventListener("error", (event) => {
       console.log("Ошибка", event.message);
     });
+    return socket;
   } catch (err) {
     console.log(err);
   }
