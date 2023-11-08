@@ -157,7 +157,7 @@ function Chats() {
   }, [newMessage]);
   // Запуск Вебсокета
   useEffect(() => {
-    console.log("Started");
+    console.log("Started WEBSOCKET");
     console.log(session);
     if (session) {
       clickChat(setNewMessage, session);
@@ -233,7 +233,7 @@ function Chats() {
           console.log("Starting");
           const data = {
             ...userData[0],
-            chats: { ...userData[0].chats, [currentSession]: res.slice(0, 40) },
+            chats: { ...userData[0].chats, [currentSession]: res.slice(0, 20) },
             chatsCount: 0,
           };
           let allSize = 0;
@@ -255,23 +255,7 @@ function Chats() {
                   delete el._data;
                   return el;
                 });
-                setPercentage((prev) => +prev + 2);
-                data.chatsCount += 1;
-                if (data.chatsCount === 40) {
-                  console.log(allSize, "and nooooowwww");
-                  data.allSize = allSize;
-                  setPercentage(100);
-                  DatabaseAPI.updateUser(userData[0].username, {
-                    chats: data.chats,
-                    allSize: data.allSize,
-                    accounts: data.accounts,
-                  })
-                    .then((res) => res.json())
-                    .then((res) => {
-                      console.log(res);
-                      dataToApp(data, currentSession);
-                    });
-                }
+                setPercentage((prev) => +prev + 1);
               });
             // Загрузка иконки профиля
             await ChatsApi.getAvatar(el.id.user, currentSession)
@@ -282,7 +266,7 @@ function Chats() {
                   el?.profilePictureURL;
                 setPercentage((prev) => +prev + 1);
                 data.chatsCount += 1;
-                if (data.chatsCount === 40) {
+                if (data.chatsCount === 20) {
                   console.log(allSize, "and nooooowwww");
                   data.allSize = allSize;
                   setPercentage(100);
@@ -300,7 +284,7 @@ function Chats() {
                 }
               });
           };
-          for (let i = 0; i < 40; i++) {
+          for (let i = 0; i < 20; i++) {
             await fetchChat(data.chats[currentSession][i], i);
             if (i === 10) {
               console.log("Delay");
