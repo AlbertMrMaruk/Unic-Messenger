@@ -114,7 +114,7 @@ export default function ModalAccount({
                       setConfirm(true);
                       setAccount(phone);
                       if (!session) {
-                        setSession(account);
+                        setSession(phone);
                       }
                     }, 15000);
                   });
