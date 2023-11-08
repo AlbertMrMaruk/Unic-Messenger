@@ -6,7 +6,7 @@ const userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   accounts: Array,
-  chats: { default: Array },
+  chats: {},
   allSize: Number,
   chatsCount: Number,
 });
