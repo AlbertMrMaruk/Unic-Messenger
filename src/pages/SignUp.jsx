@@ -21,7 +21,6 @@ function SignUp() {
     name: "",
     username: "",
     password: "",
-    chats: {},
   });
   const navigate = useNavigate("");
 

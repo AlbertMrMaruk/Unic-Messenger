@@ -8,6 +8,7 @@ class DatabaseAPI {
     }
   }
   createUser(data) {
+    console.log(data);
     return fetch(`${API_URL}/users/signup`, {
       method: "post",
       headers: {
