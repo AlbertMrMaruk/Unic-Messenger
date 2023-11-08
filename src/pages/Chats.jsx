@@ -74,7 +74,11 @@ function Chats() {
             allSize += message?.payload?._data?.size;
           }
           setSizeUser(+allSize / (1024 * 1024));
-          setDataUser((prev) => ({ ...prev, chats, allSize }));
+          setDataUser((prev) => ({
+            ...prev,
+            chats: { [session]: chats, ...dataUser.chats },
+            allSize,
+          }));
 
           DatabaseAPI.updateUser(dataUser.username, {
             chats: { ...dataUser.chats, [session]: chats },
@@ -98,7 +102,11 @@ function Chats() {
               allSize += message?.payload?._data?.size;
             }
             setSizeUser(+allSize / (1024 * 1024));
-            setDataUser((prev) => ({ ...prev, chats, allSize }));
+            setDataUser((prev) => ({
+              ...prev,
+              chats: { [session]: chats, ...dataUser.chats },
+              allSize,
+            }));
 
             DatabaseAPI.updateUser(dataUser.username, {
               chats: { ...dataUser.chats, [session]: chats },
@@ -109,6 +117,7 @@ function Chats() {
             const chatIndex = chats.findIndex(
               (el) => el.id._serialized === message.payload.from
             );
+
             chats[chatIndex].unreadCount += 1;
             chats[chatIndex].lastMessage = {
               body: message.payload.body,
@@ -124,7 +133,11 @@ function Chats() {
               allSize += message?.payload?._data?.size;
             }
             setSizeUser(+allSize / (1024 * 1024));
-            setDataUser((prev) => ({ ...prev, chats, allSize }));
+            setDataUser((prev) => ({
+              ...prev,
+              chats: { [session]: chats, ...dataUser.chats },
+              allSize,
+            }));
             DatabaseAPI.updateUser(dataUser.username, {
               chats: { ...dataUser.chats, [session]: chats },
               allSize: dataUser.allSize,
