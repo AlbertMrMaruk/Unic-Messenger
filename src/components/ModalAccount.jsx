@@ -133,9 +133,9 @@ export default function ModalAccount({
                     accounts: [...dataUser.accounts, account],
                     chats: { ...dataUser.chats, [account]: [] },
                   }).then(() => {
-                    setAccount(phone);
+                    setAccount(account);
                     if (!session) {
-                      setSession(phone);
+                      setSession(account);
                       onLoad();
                     }
                   });

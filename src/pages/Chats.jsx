@@ -171,9 +171,10 @@ function Chats() {
   // Запуск Вебсокета
   useEffect(() => {
     console.log("Started WEBSOCKET");
-    console.log(session);
-    console.log(!(dataUser?.accounts?.length < 1));
-    if (session && !(dataUser?.accounts?.length < 1)) {
+
+    console.log(dataUser?.accounts?.length < 1);
+    if (session && dataUser?.accounts?.length < 1) {
+      console.log(session);
       clickChat(setNewMessage, session);
     }
   }, [session]);
@@ -246,7 +247,7 @@ function Chats() {
           console.log("Starting");
           const data = {
             ...userData[0],
-            chats: { ...userData[0].chats, [currentSession]: res.slice(0, 20) },
+            chats: { ...userData[0].chats, [currentSession]: res.slice(0, 5) },
             chatsCount: 0,
           };
           let allSize = 0;
@@ -279,10 +280,10 @@ function Chats() {
                   el?.profilePictureURL;
                 setPercentage((prev) => +prev + 1);
                 data.chatsCount += 1;
-                if (data.chatsCount === 20) {
+                if (data.chatsCount === 5) {
                   console.log(allSize, "and nooooowwww");
                   data.allSize = allSize;
-                  setPercentage(100);
+
                   DatabaseAPI.updateUser(userData[0].username, {
                     chats: data.chats,
                     allSize: data.allSize,
@@ -291,13 +292,13 @@ function Chats() {
                     .then((res) => res.json())
                     .then((res) => {
                       console.log(res);
+                      setPercentage(100);
                       dataToApp(data, currentSession);
-                      setShowModalDownload(false);
                     });
                 }
               });
           };
-          for (let i = 0; i < 20; i++) {
+          for (let i = 0; i < 5; i++) {
             await fetchChat(data.chats[currentSession][i], i);
             if (i === 10) {
               console.log("Delay");
