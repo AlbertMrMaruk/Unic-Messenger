@@ -112,6 +112,12 @@ export default function ModalAccount({
                       );
                       setShowSpinner(false);
                       setConfirm(true);
+
+                      if (!session) {
+                        console.log("No session");
+                        setAccount(phone);
+                        setSession(phone);
+                      }
                     }, 15000);
                   });
                 }}
@@ -133,9 +139,7 @@ export default function ModalAccount({
                     accounts: [...dataUser.accounts, account],
                     chats: { ...dataUser.chats, [account]: [] },
                   }).then(() => {
-                    setAccount(account);
                     if (!session) {
-                      setSession(account);
                       onLoad();
                     }
                   });
