@@ -23,7 +23,6 @@ class ChatsAPI {
     );
   }
   startSession = (phone) => {
-    console.log(phone);
     return fetch(`${API_URL}/api/sessions/start`, {
       method: "post",
       headers: {
