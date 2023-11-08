@@ -112,10 +112,9 @@ export default function ModalAccount({
                       );
                       setShowSpinner(false);
                       setConfirm(true);
-
+                      setAccount(phone);
                       if (!session) {
                         console.log("No session");
-                        setAccount(phone);
                         setSession(phone);
                       }
                     }, 15000);
