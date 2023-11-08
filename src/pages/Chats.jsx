@@ -200,10 +200,10 @@ function Chats() {
     const dataToApp = (data, session) => {
       setDataUser(data);
       setAccounts(data.accounts);
-      if (data.accounts.length !== 0) {
-        setSession(session);
-        console.log("Session changed");
-      }
+      // if (data.accounts.length !== 0) {
+      //   setSession(session);
+      //   console.log("Session changed");
+      // }
       setChats(
         data.chats[session]?.sort((chat1, chat2) => {
           const chat1time =
@@ -452,7 +452,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               }`}
               key={index}
               onClick={() => {
-                // setSession(el);
+                setSession(el);
                 onLoad(el);
               }}
             >
