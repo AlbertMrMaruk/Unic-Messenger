@@ -171,8 +171,6 @@ function Chats() {
   // Запуск Вебсокета
   useEffect(() => {
     console.log("Started WEBSOCKET");
-
-    console.log(dataUser?.accounts?.length <= 1);
     if (session && dataUser?.accounts?.length <= 1) {
       console.log(session);
       clickChat(setNewMessage, session);
@@ -180,7 +178,7 @@ function Chats() {
   }, [session]);
 
   // Загрузка базы данных
-  const onLoad = async () => {
+  const onLoad = async (currentSession) => {
     const resp = await DatabaseAPI.verifyToken();
     const data = await resp.json();
     if (!data) {
@@ -365,7 +363,7 @@ function Chats() {
       //       }
       //     });
       //   });
-      dataToApp(userData[0], userData[0].accounts[0]);
+      dataToApp(userData[0], currentSession ?? userData[0].accounts[0]);
     }
   };
   useEffect(() => {
@@ -452,8 +450,8 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               }`}
               key={index}
               onClick={() => {
-                setSession(el);
-                onLoad();
+                // setSession(el);
+                onLoad(el);
               }}
             >
               <div className="rounded-full w-[40px] h-[40px] text-white ">
