@@ -317,16 +317,14 @@ function Chats() {
           }
         });
     } else {
-      console.log(
-        "Download and fetching",
-        currentSession ?? userData[0].accounts[0]
-      );
-      ChatsApi.getChats(currentSession ?? userData[0].accounts[0])
+      const correctSession = currentSession ?? userData[0].accounts[0];
+      console.log("Download and fetching", correctSession);
+      ChatsApi.getChats(correctSession)
         .then((el) => el.json())
         .then((res) => {
           const newChats = res.slice(0, 5);
 
-          userData[0].chats?.[session].forEach((el) => {
+          userData[0].chats?.[correctSession].forEach((el) => {
             let countChatsUpdate = 0;
             let countChatsUpdated = 0;
             console.log(
@@ -340,7 +338,7 @@ function Chats() {
             if (el2?.lastMessage?.timestamp > el?.lastMessage?.timestamp) {
               countChatsUpdate++;
               console.log("OH YEAAA");
-              ChatsApi.getMessages(el.id._serialized, 20, session)
+              ChatsApi.getMessages(el.id._serialized, 20, correctSession)
                 .then((el) => el.json())
                 .then((messages) => {
                   const superNew = messages.slice(
@@ -358,14 +356,11 @@ function Chats() {
                     DatabaseAPI.updateUser(userData[0].username, {
                       chats: {
                         ...userData[0].chats,
-                        [session]: userData[0].chats?.[session],
+                        [correctSession]: userData[0].chats?.[correctSession],
                       },
                     });
                     console.log("ddd");
-                    dataToApp(
-                      userData[0],
-                      currentSession ?? userData[0].accounts[0]
-                    );
+                    dataToApp(userData[0], correctSession);
                   }
                 });
             }
