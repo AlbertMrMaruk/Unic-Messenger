@@ -200,10 +200,10 @@ function Chats() {
     const dataToApp = (data, session) => {
       setDataUser(data);
       setAccounts(data.accounts);
-      if (data.accounts.length !== 0) {
-        setSession(session);
-        console.log("Session changed");
-      }
+      // if (data.accounts.length !== 0) {
+      //   setSession(session);
+      //   console.log("Session changed");
+      // }
       setChats(
         data.chats[session]?.sort((chat1, chat2) => {
           const chat1time =
@@ -323,7 +323,7 @@ function Chats() {
       ChatsApi.getChats(correctSession)
         .then((el) => el.json())
         .then((res) => {
-          const newChats = res.slice(0, 5);
+          const newChats = res.slice(0, 4);
 
           userData[0].chats?.[correctSession].forEach((el) => {
             let countChatsUpdate = 0;
