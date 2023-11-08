@@ -357,6 +357,7 @@ function Chats() {
       if (state?.id && dataUser?.chats) {
         setShowSpinnerMessages(true);
         setCurrentChat(state?.id);
+        console.log(dataUser, chats);
         setMessages(
           dataUser.chats[session ?? dataUser.accounts[0]]
             .find((el) => el.id._serialized === state?.id)
