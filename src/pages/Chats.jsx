@@ -317,58 +317,60 @@ function Chats() {
           }
         });
     } else {
-      console.log("Download and fetching", session);
-      // ChatsApi.getChats(userData[0].accounts[0])
-      //   .then((el) => el.json())
-      //   .then((res) => {
-      //     const newChats = res.slice(0, 40);
+      console.log(
+        "Download and fetching",
+        currentSession ?? userData[0].accounts[0]
+      );
+      ChatsApi.getChats(currentSession ?? userData[0].accounts[0])
+        .then((el) => el.json())
+        .then((res) => {
+          const newChats = res.slice(0, 5);
 
-      //     userData[0].chats?.[session].forEach((el) => {
-      //       let countChatsUpdate = 0;
-      //       let countChatsUpdated = 0;
-      //       console.log(
-      //         el,
-      //         newChats.find((el2) => el.id._serialized === el2.id._serialized),
-      //         "dd"
-      //       );
-      //       const el2 = newChats.find(
-      //         (el2) => el.id._serialized === el2.id._serialized
-      //       );
-      //       if (el2?.lastMessage?.timestamp > el?.lastMessage?.timestamp) {
-      //         countChatsUpdate++;
-      //         console.log("OH YEAAA");
-      //         ChatsApi.getMessages(
-      //           el.id._serialized,
-      //           20,
-      //           session
-      //         )
-      //           .then((el) => el.json())
-      //           .then((messages) => {
-      //             const superNew = messages.slice(
-      //               messages.findIndex(
-      //                 (message) =>
-      //                   el?.lastMessage?.timestamp === message?.timestamp
-      //               ) + 1
-      //             );
-      //             console.log(el.messages, superNew);
-      //             el.messages = [...el.messages, ...superNew];
-      //             el.lastMessage = superNew.at(-1);
-      //             console.log(el);
-      //             countChatsUpdated++;
-      //             if (countChatsUpdate === countChatsUpdated) {
-      //               DatabaseAPI.updateUser(userData[0].username, {
-      //                 chats: { ...userData[0].chats,
-      //                   [session]: userData[0].chats?.[session]
-      //                 },
-      //               });
-      //               console.log("ddd");
-      //               dataToApp(userData[0]);
-      //             }
-      //           });
-      //       }
-      //     });
-      //   });
-      dataToApp(userData[0], currentSession ?? userData[0].accounts[0]);
+          userData[0].chats?.[session].forEach((el) => {
+            let countChatsUpdate = 0;
+            let countChatsUpdated = 0;
+            console.log(
+              el,
+              newChats.find((el2) => el.id._serialized === el2.id._serialized),
+              "dd"
+            );
+            const el2 = newChats.find(
+              (el2) => el.id._serialized === el2.id._serialized
+            );
+            if (el2?.lastMessage?.timestamp > el?.lastMessage?.timestamp) {
+              countChatsUpdate++;
+              console.log("OH YEAAA");
+              ChatsApi.getMessages(el.id._serialized, 20, session)
+                .then((el) => el.json())
+                .then((messages) => {
+                  const superNew = messages.slice(
+                    messages.findIndex(
+                      (message) =>
+                        el?.lastMessage?.timestamp === message?.timestamp
+                    ) + 1
+                  );
+                  console.log(el.messages, superNew);
+                  el.messages = [...el.messages, ...superNew];
+                  el.lastMessage = superNew.at(-1);
+                  console.log(el);
+                  countChatsUpdated++;
+                  if (countChatsUpdate === countChatsUpdated) {
+                    DatabaseAPI.updateUser(userData[0].username, {
+                      chats: {
+                        ...userData[0].chats,
+                        [session]: userData[0].chats?.[session],
+                      },
+                    });
+                    console.log("ddd");
+                    dataToApp(
+                      userData[0],
+                      currentSession ?? userData[0].accounts[0]
+                    );
+                  }
+                });
+            }
+          });
+        });
     }
   };
   useEffect(() => {
