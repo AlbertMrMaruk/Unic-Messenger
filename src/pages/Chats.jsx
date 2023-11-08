@@ -228,6 +228,11 @@ function Chats() {
     };
     //Включается спиннер
     setShowSpinnerMessages(true);
+    console.log(
+      userData[0].accounts.length > 0 &&
+        (userData[0].chats?.[session]?.length === 0 || !userData[0].chats),
+      userData[0].chats
+    );
     //Проверка аккаунтов пользователя
     if (userData[0].accounts.length === 0) {
       setShowSpinnerMessages(false);
