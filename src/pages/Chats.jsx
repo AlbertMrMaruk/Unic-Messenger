@@ -58,6 +58,25 @@ function Chats() {
   const [newMessage, setNewMessage] = useState();
   const [percentage, setPercentage] = useState(0);
 
+  //Расчет разницы во времени между timestamp
+  const timeDifference = (date1, date2) => {
+    let difference = +(date1 + "000") - +(date2 + "000");
+
+    let daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
+    // difference -= daysDifference*1000*60*60*24
+
+    // var hoursDifference = Math.floor(difference/1000/60/60);
+    // difference -= hoursDifference*1000*60*60
+
+    // var minutesDifference = Math.floor(difference/1000/60);
+    // difference -= minutesDifference*1000*60
+
+    // var secondsDifference = Math.floor(difference/1000);
+
+    console.log("difference = " + daysDifference + " day/s ");
+    return daysDifference;
+  };
+
   // Функция получения сообщения
   useEffect(() => {
     const gettingMessage = (message) => {
@@ -635,11 +654,17 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           {showSpinnerMessages ? (
             <Spinner />
           ) : (
-            messages.map((el, index) => (
-              <TooltipMessage message={el} setReplyMessage={setReplyMessage}>
-                <Message message={el} key={index} />
-              </TooltipMessage>
-            ))
+            messages.map((el, index) => {
+              console.log(timeDifference(new Date.now() / 1000, el?.timestamp));
+              if (el?.timestamp > messages[index - 1]?.timestamp) {
+              }
+
+              return (
+                <TooltipMessage message={el} setReplyMessage={setReplyMessage}>
+                  <Message message={el} key={index} />
+                </TooltipMessage>
+              );
+            })
           )}
         </div>
         {/* Input and buttons for send messages */}
