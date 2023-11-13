@@ -30,13 +30,13 @@ export default function ModalChats({ setShowModal, session }) {
             <Spinner />
           ) : (
             <div className="relative p-2 ml-2 flex-auto text-center">
-              {contacts.slice(0, 30).map(
+              {contacts?.slice(0, 30).map(
                 (el) =>
-                  el.isWAContact && (
+                  el?.isWAContact && (
                     <div
                       className={`p-[1rem]  
           border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-secondarylight ${
-            el.id === activeContact.id && "bg-secondarylight"
+            el?.id === activeContact?.id && "bg-secondarylight"
           }`}
                       onClick={() => {
                         setActiveContact(el);
@@ -47,7 +47,7 @@ export default function ModalChats({ setShowModal, session }) {
                     >
                       <div className="flex flex-col gap-1 text-[#e9e9e9] text-left w-[60%]">
                         <h3 className="text-lg md:text-md">
-                          {el.pushName ?? el.name}
+                          {el?.pushName ?? el?.name}
                         </h3>
                       </div>
                     </div>
