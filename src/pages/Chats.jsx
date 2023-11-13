@@ -29,6 +29,7 @@ import { TooltipChats } from "../components/blocks/TooltipChats";
 import ModalDownload from "../components/ModalDownload";
 import TooltipVoice from "../components/blocks/TooltipVoice";
 import ModalChats from "../components/ModalChats";
+import { formatDate } from "../utils/utils";
 
 function Chats() {
   const navigate = useNavigate();
@@ -57,18 +58,6 @@ function Chats() {
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
   const [newMessage, setNewMessage] = useState();
   const [percentage, setPercentage] = useState(0);
-
-  //Расчет разницы во времени между timestamp
-  const timeDifference = (date1, date2) => {
-    // let difference = +(date1 + "000") - +(date2 + "000");
-
-    console.log(
-      new Date(+(date1 + "000")).toLocaleString(),
-      new Date(+(date2 + "000")).toLocaleString()
-    );
-    // let daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
-    // return daysDifference;
-  };
 
   // Функция получения сообщения
   useEffect(() => {
@@ -648,7 +637,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             <Spinner />
           ) : (
             messages.map((el, index) => {
-              timeDifference(+(Date.now() + "").slice(0, -3), el?.timestamp);
+              console.log(formatDate(+(el?.timestamp + "000")));
 
               if (el?.timestamp > messages[index - 1]?.timestamp) {
               }
