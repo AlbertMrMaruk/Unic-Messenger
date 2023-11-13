@@ -106,6 +106,7 @@ function TooltipVoice({ children, setAudioUrl }) {
         const audioBlob = recorderRef.current.getBlob();
 
         const reader = new FileReader();
+        reader.readAsArrayBuffer(audioBlob);
         reader.onload = () => {
           let arrayBuffer = reader.result;
 
@@ -132,8 +133,6 @@ function TooltipVoice({ children, setAudioUrl }) {
           console.log(mp3Url);
           setAudioUrl(mp3Url);
         };
-
-        reader.readAsArrayBuffer(audioBlob);
 
         // const url = URL.createObjectURL(newBlob);
         // console.log(url);
