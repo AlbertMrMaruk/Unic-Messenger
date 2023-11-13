@@ -548,12 +548,14 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             </div>
             <div className="flex  items-center py-0 md:py-[.8rem] justify-between w-[90%] md:w-[100%] px-[.5rem] md:px-[3rem] ml-1 md:ml-0">
               <div className="flex items-center">
-                <div className="bg-white rounded-full w-[40px] h-[40px] ">
-                  <img
-                    src={state?.img}
-                    className="rounded-full w-[100%]"
-                    alt={state?.name}
-                  />
+                <div className="bg-[#ababab]  rounded-full w-[40px] h-[40px] ">
+                  {state?.img && (
+                    <img
+                      src={state?.img}
+                      className="rounded-full w-[100%]"
+                      alt={state?.name}
+                    />
+                  )}
                 </div>
                 <h3 className="font-bold text-white  ml-[1.5rem]  text-[1.3rem]">
                   {state?.name}
