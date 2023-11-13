@@ -642,10 +642,10 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               const formattedDate2 = formatDate(
                 +(messages[index - 1]?.timestamp + "000")
               );
-              if (formattedDate1 !== formattedDate2) {
+              if (formattedDate1 !== formattedDate2 && messages[index - 1]) {
                 return (
                   <>
-                    <div className="flex w-[100%] gap-[0.5rem] items-center px-3 my-1">
+                    <div className="flex w-[100%] gap-[0.5rem] items-center px-3 my-[1rem]">
                       <div className="bg-primary h-[2px] w-[49%]"></div>
                       <span className="text-[15px] font-semibold text-primary">
                         {formattedDate1}
