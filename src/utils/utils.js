@@ -23,6 +23,6 @@ const isSameDay = (date1, date2) => {
 };
 
 const formatFullDate = (date) => {
-  const options = { year: "numeric", month: "short", day: "numeric" };
+  const options = { month: "numeric", day: "numeric" };
   return date.toLocaleDateString("ru-RU", options);
 };
