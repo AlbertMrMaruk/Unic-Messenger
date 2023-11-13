@@ -446,7 +446,7 @@ function Chats() {
           </h3>
           {chats && (
             <div
-              className="ml-[10rem] rounded-full bg-primary p-[0.65rem] mt-[.5rem] cursor-pointer"
+              className="ml-[10rem] rounded-full bg-primary p-[0.65rem] cursor-pointer"
               onClick={() => setShowModalChats(true)}
             >
               <FaPen className="color-white bg-inherit w-[15px] h-[15px]" />
