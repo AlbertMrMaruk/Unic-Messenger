@@ -29,7 +29,7 @@ export default function ModalChats({ setShowModal, session }) {
           {showSpinner ? (
             <Spinner />
           ) : (
-            <div className="relative p-2 ml-2 flex-auto text-center">
+            <div className="relative p-2 ml-2 flex-auto text-center overflow-scroll h-[50vh]">
               {contacts?.slice(0, 30).map(
                 (el) =>
                   el?.isWAContact && (
@@ -46,7 +46,7 @@ export default function ModalChats({ setShowModal, session }) {
                       }}
                     >
                       <div className="flex flex-col gap-1 text-[#e9e9e9] text-left w-[60%]">
-                        <h3 className="text-lg md:text-md">
+                        <h3 className="text-lg md:text-md font-bold ml-[2rem]">
                           {el?.pushName ?? el?.name}
                         </h3>
                       </div>
