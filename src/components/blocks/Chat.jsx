@@ -72,7 +72,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         </p>
       </div>
       <div className="m-auto flex flex-col gap-[.4rem]">
-        <p className="text-[.9rem] md:text-[0.75rem] text-[#777779]">
+        <p className="text-[.9rem] md:text-[0.85rem] text-[#777779]">
           {formatDate(+(chat?.lastMessage?.timestamp + "000")) === "Сегодня"
             ? calcDate(chat?.lastMessage?.timestamp)
             : formatDate(+(chat?.lastMessage?.timestamp + "000"))}
