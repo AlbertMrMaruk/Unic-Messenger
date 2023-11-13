@@ -638,8 +638,26 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           ) : (
             messages.map((el, index) => {
               console.log(formatDate(+(el?.timestamp + "000")));
-
-              if (el?.timestamp > messages[index - 1]?.timestamp) {
+              const formattedDate1 = formatDate(+(el?.timestamp + "000"));
+              const formattedDate2 = formatDate(
+                +(messages[index - 1]?.timestamp + "000")
+              );
+              if (formattedDate1 !== formattedDate2) {
+                return (
+                  <>
+                    <div className="flex w-[100%] gap-[0.5rem]">
+                      <div className="bg-primary h-[5px] w-[45%]"></div>
+                      {formattedDate1}
+                      <div className="bg-primary h-[5px] w-[45%]"></div>
+                    </div>
+                    <TooltipMessage
+                      message={el}
+                      setReplyMessage={setReplyMessage}
+                    >
+                      <Message message={el} key={index} />
+                    </TooltipMessage>
+                  </>
+                );
               }
 
               return (
