@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import RecordRTC from "recordrtc";
 import { FaMicrophone } from "react-icons/fa";
+import lamejs from "lamejs";
 
 function TooltipVoice({ children, setAudioUrl }) {
   const [recording, setRecording] = useState(false);
@@ -107,18 +108,35 @@ function TooltipVoice({ children, setAudioUrl }) {
           type: "audio/mpeg-3;",
         });
 
-        console.log(newBlob, audioBlob, recorderRef.current);
-        const url = URL.createObjectURL(newBlob);
-        console.log(url);
-        recorderRef.current.getDataURL((dataURL) => {
-          // You can save the dataURL to the server if needed.
-          console.log(dataURL);
-          let encoded = dataURL.replace(/^data:(.*,)?/, "");
-          if (encoded.length % 4 > 0) {
-            encoded += "=".repeat(4 - (encoded.length % 4));
-          }
-          setAudioUrl({ url, encoded });
-        });
+        const reader = new FileReader();
+        reader.onload = () => {
+          const wavData = new Int16Array(reader.result);
+          const mp3Encoder = new lamejs.Mp3Encoder(1, 44100, 128);
+          const mp3Data = mp3Encoder.encodeBuffer(wavData);
+          mp3Encoder.flush();
+
+          const mp3Blob = new Blob([new Int8Array(mp3Data)], {
+            type: "audio/mpeg",
+          });
+          console.log(mp3Blob);
+          const mp3Url = URL.createObjectURL(mp3Blob);
+          setAudioUrl(mp3Url);
+          console.log(mp3Url);
+        };
+
+        reader.readAsArrayBuffer(audioBlob);
+
+        // const url = URL.createObjectURL(newBlob);
+        // console.log(url);
+        // recorderRef.current.getDataURL((dataURL) => {
+        //   // You can save the dataURL to the server if needed.
+        //   console.log(dataURL);
+        //   let encoded = dataURL.replace(/^data:(.*,)?/, "");
+        //   if (encoded.length % 4 > 0) {
+        //     encoded += "=".repeat(4 - (encoded.length % 4));
+        //   }
+        //   setAudioUrl({ url, encoded });
+        // });
 
         setRecording(false);
         setShow(false);
