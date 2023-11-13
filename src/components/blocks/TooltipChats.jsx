@@ -8,6 +8,7 @@ export const TooltipChats = ({
   chatId,
   dataUser,
   setChats,
+  setDataUser,
   chats,
   setMessages,
 }) => {
@@ -65,10 +66,14 @@ export const TooltipChats = ({
                   const newChats = chats.filter(
                     (el) => el.id._serialized !== chatId
                   );
-                  dataUser.chats = newChats;
+                  setDataUser((prev) => ({
+                    ...prev,
+                    chats: { [session]: newChats, ...dataUser.chats },
+                  }));
+
                   setChats(newChats);
                   DatabaseAPI.updateUser(dataUser.username, {
-                    chats: dataUser.chats,
+                    chats: { [session]: newChats, ...dataUser.chats },
                   });
                 });
               }}
