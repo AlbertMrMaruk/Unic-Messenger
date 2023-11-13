@@ -16,7 +16,7 @@ function TooltipVoice({ children, setAudioUrl }) {
       .then((stream) => {
         recorderRef.current = RecordRTC(stream, {
           type: "audio",
-          mimeType: "audio/oga",
+          mimeType: "audio/wav",
         });
 
         recorderRef.current.startRecording();
