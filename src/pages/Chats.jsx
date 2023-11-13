@@ -507,7 +507,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                       (el) =>
                         `${el?.name}`.includes(e.target.value) ||
                         `${el?.pushName}`.includes(e.target.value) ||
-                        `${el?.id._serialized.slice(0, -3)}`.includes(
+                        `${el?.id._serialized.slice(0, -4)}`.includes(
                           e.target.value
                         )
                     )
