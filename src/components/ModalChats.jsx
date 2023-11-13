@@ -73,6 +73,7 @@ export default function ModalChats({
               type="button"
               onClick={() => {
                 setShowSpinner(true);
+                console.log(+(Date.now() + "").slice(0, -3));
                 const newChat = {
                   id: {
                     _serialized: activeContact.id,
@@ -84,7 +85,7 @@ export default function ModalChats({
                   lastMessage: {
                     body: "",
                     fromMe: false,
-                    timestamp: Date.now(),
+                    timestamp: +(Date.now() + "").slice(0, -3),
                   },
                 };
 
