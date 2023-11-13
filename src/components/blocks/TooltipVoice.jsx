@@ -103,7 +103,7 @@ function TooltipVoice({ children, setAudioUrl }) {
       recorderRef.current.stopRecording(() => {
         clearInterval(timerRef.current);
         const audioBlob = recorderRef.current.getBlob();
-        let newBlob = new Blob(audioBlob, { type: "audio/mpeg-3" });
+        let newBlob = new Blob([audioBlob], { type: "audio/mpeg-3" });
 
         console.log(newBlob, audioBlob, recorderRef.current);
         const url = URL.createObjectURL(newBlob);
