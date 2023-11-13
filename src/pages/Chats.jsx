@@ -182,6 +182,7 @@ function Chats() {
     } else if (session && webSocket) {
       console.log(webSocket);
       webSocket.close(3333);
+      setFiltChats();
       setWebSocket(clickChat(setNewMessage, session));
     }
   }, [session]);
