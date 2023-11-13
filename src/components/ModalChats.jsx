@@ -94,7 +94,7 @@ export default function ModalChats({
               type="button"
               onClick={() => {
                 setShowSpinner(true);
-                console.log(+(Date.now() + "").slice(0, -3));
+
                 const newChat = {
                   id: {
                     _serialized: activeContact.id,
