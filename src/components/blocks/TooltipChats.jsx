@@ -68,12 +68,12 @@ export const TooltipChats = ({
                   );
                   setDataUser((prev) => ({
                     ...prev,
-                    chats: { [session]: newChats, ...dataUser.chats },
+                    chats: { ...dataUser.chats, [session]: newChats },
                   }));
 
                   setChats(newChats);
                   DatabaseAPI.updateUser(dataUser.username, {
-                    chats: { [session]: newChats, ...dataUser.chats },
+                    chats: { ...dataUser.chats, [session]: newChats },
                   });
                 });
               }}
