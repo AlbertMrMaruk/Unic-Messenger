@@ -14,11 +14,29 @@ function TooltipVoice({ children, setAudioUrl }) {
     navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then((stream) => {
-        recorderRef.current = RecordRTC(stream, {
-          mimeType: "audio/wav",
+        let chunks = [];
+        recorderRef.current = new MediaRecorder(stream, {
+          mimeType: "audio/webm",
         });
 
-        recorderRef.current.startRecording();
+        recorderRef.current.ondataavailable = function (e) {
+          chunks.push(e.data);
+        };
+
+        recorderRef.current.onstop = function (e) {
+          let blob = new Blob(chunks, { type: "audio/webm" });
+          chunks = [];
+          console.log(blob);
+          setRecording(false);
+          // use the blob...
+        };
+
+        recorderRef.current.start();
+        // recorderRef.current = RecordRTC(stream, {
+        //   mimeType: "audio/wav",
+        // });
+
+        // recorderRef.current.startRecording();
         setRecording(true);
 
         timerRef.current = setInterval(() => {
@@ -30,56 +48,6 @@ function TooltipVoice({ children, setAudioUrl }) {
       );
   };
 
-  const getBase64 = (url, dataURL) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(url);
-    reader.onload = () => {
-      console.log(url, reader.result.toString());
-      let encoded = reader.result.toString().replace(/^data:(.*,)?/, "");
-      if (encoded.length % 4 > 0) {
-        encoded += "=".repeat(4 - (encoded.length % 4));
-      }
-      console.log(encoded);
-      setAudioUrl({ url: dataURL, encoded });
-    };
-    reader.onerror = function (error) {
-      console.log("Error: ", error);
-    };
-  };
-  const mediaRecorder = useRef(null);
-  const chunks = useRef([]);
-
-  // const startRecording = () => {
-  //   navigator.mediaDevices
-  //     .getUserMedia({ audio: true })
-  //     .then((stream) => {
-  //       mediaRecorder.current = new MediaRecorder(stream, {
-  //         mimeType: "audio/ogg; codecs=vorbis",
-  //       });
-
-  //       mediaRecorder.current.ondataavailable = (event) => {
-  //         chunks.current.push(event.data);
-  //       };
-  //       timerRef.current = setInterval(() => {
-  //         setDuration((prevDuration) => prevDuration + 1);
-  //       }, 1000);
-  //       mediaRecorder.current.onstop = () => {
-  //         const blob = new Blob(chunks.current, {
-  //           type: "audio/mpeg-3'; codecs=opus",
-  //         });
-  //         chunks.current = [];
-  //         const audioURL = URL.createObjectURL(blob);
-  //         console.log(blob, audioURL);
-  //         getBase64(blob, audioURL);
-  //       };
-  //       setRecording(true);
-  //       mediaRecorder.current.start();
-  //     })
-  //     .catch((err) => {
-  //       console.error("Error accessing the microphone:", err);
-  //     });
-  // };
-
   const calcDur = (dur) => {
     let m = Math.floor(dur / 60);
     let s = dur - m * 60;
@@ -88,66 +56,58 @@ function TooltipVoice({ children, setAudioUrl }) {
     s = s < 10 ? "0" + s : s;
     return m + ":" + s;
   };
-  // const stopRecording = () => {
-  //   if (mediaRecorder.current) {
-  //     setRecording(false);
-
-  //     mediaRecorder.current.stop();
-  //   }
-  //   console.log(show);
-  //   setShow(false);
-  // };
 
   const stopRecording = () => {
     if (recorderRef.current) {
-      recorderRef.current.stopRecording(() => {
-        clearInterval(timerRef.current);
-        const audioBlob = recorderRef.current.getBlob();
+      // recorderRef.current.stopRecording(() => {
+      //   clearInterval(timerRef.current);
+      //   const audioBlob = recorderRef.current.getBlob();
 
-        // const reader = new FileReader();
-        // reader.onload = () => {
-        //   let arrayBuffer = reader.result;
+      //   // const reader = new FileReader();
+      //   // reader.onload = () => {
+      //   //   let arrayBuffer = reader.result;
 
-        //   // Pad the ArrayBuffer with a zero byte if it has an odd number of bytes
-        //   if (arrayBuffer.byteLength % 2 === 1) {
-        //     const paddedArrayBuffer = new ArrayBuffer(
-        //       arrayBuffer.byteLength + 1
-        //     );
-        //     const paddedView = new Uint8Array(paddedArrayBuffer);
-        //     paddedView.set(new Uint8Array(arrayBuffer));
-        //     paddedView[arrayBuffer.byteLength] = 0;
-        //     arrayBuffer = paddedArrayBuffer;
-        //   }
+      //   //   // Pad the ArrayBuffer with a zero byte if it has an odd number of bytes
+      //   //   if (arrayBuffer.byteLength % 2 === 1) {
+      //   //     const paddedArrayBuffer = new ArrayBuffer(
+      //   //       arrayBuffer.byteLength + 1
+      //   //     );
+      //   //     const paddedView = new Uint8Array(paddedArrayBuffer);
+      //   //     paddedView.set(new Uint8Array(arrayBuffer));
+      //   //     paddedView[arrayBuffer.byteLength] = 0;
+      //   //     arrayBuffer = paddedArrayBuffer;
+      //   //   }
 
-        //   const wavData = new Int16Array(arrayBuffer);
-        //   const mp3Encoder = new lamejs.Mp3Encoder(1, 44100, 128);
-        //   const mp3Data = mp3Encoder.encodeBuffer(wavData);
-        //   mp3Encoder.flush();
+      //   //   const wavData = new Int16Array(arrayBuffer);
+      //   //   const mp3Encoder = new lamejs.Mp3Encoder(1, 44100, 128);
+      //   //   const mp3Data = mp3Encoder.encodeBuffer(wavData);
+      //   //   mp3Encoder.flush();
 
-        //   const mp3Blob = new Blob([new Int8Array(mp3Data)], {
-        //     type: "audio/mpeg",
-        //   });
-        //   const mp3Url = URL.createObjectURL(mp3Blob);
-        //   setAudioUrl(mp3Url);
-        // };
+      //   //   const mp3Blob = new Blob([new Int8Array(mp3Data)], {
+      //   //     type: "audio/mpeg",
+      //   //   });
+      //   //   const mp3Url = URL.createObjectURL(mp3Blob);
+      //   //   setAudioUrl(mp3Url);
+      //   // };
 
-        // reader.readAsArrayBuffer(audioBlob);
+      //   // reader.readAsArrayBuffer(audioBlob);
 
-        // setRecording(false);
-        // setShow(false);
+      //   // setRecording(false);
+      //   // setShow(false);
 
-        const url = URL.createObjectURL(audioBlob);
-        console.log(url);
-        recorderRef.current.getDataURL((dataURL) => {
-          // You can save the dataURL to the server if needed.
-          console.log(dataURL);
-          let encoded = dataURL.replace(/^data:(.*,)?/, "");
-          if (encoded.length % 4 > 0) {
-            encoded += "=".repeat(4 - (encoded.length % 4));
-          }
-          setAudioUrl({ url, encoded });
-        });
-      });
+      //   // const url = URL.createObjectURL(audioBlob);
+      //   // console.log(url);
+      //   // recorderRef.current.getDataURL((dataURL) => {
+      //   //   // You can save the dataURL to the server if needed.
+      //   //   console.log(dataURL);
+      //   //   let encoded = dataURL.replace(/^data:(.*,)?/, "");
+      //   //   if (encoded.length % 4 > 0) {
+      //   //     encoded += "=".repeat(4 - (encoded.length % 4));
+      //   //   }
+      //   //   setAudioUrl({ url, encoded });
+      //   // });
+      // });
+      recorderRef.stop();
     } else {
       console.error("Recorder is not defined.");
     }
