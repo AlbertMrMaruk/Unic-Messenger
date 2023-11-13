@@ -718,7 +718,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           setShowModal={setShowModalChats}
           session={session}
           dataUser={dataUser}
-          setDataUser={dataUser}
+          setDataUser={setDataUser}
           setChats={setChats}
         />
       )}
