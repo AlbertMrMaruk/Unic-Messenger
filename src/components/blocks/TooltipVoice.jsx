@@ -24,9 +24,11 @@ function TooltipVoice({ children, setAudioUrl }) {
         };
 
         recorderRef.current.onstop = function (e) {
-          let blob = new Blob(chunks, { type: "audio/webm" });
-          chunks = [];
+          let blob = new Blob(chunks, { type: "audio/oga" });
+          console.log(chunks);
           console.log(blob);
+          chunks = [];
+
           setRecording(false);
           // use the blob...
         };
