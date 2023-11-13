@@ -655,7 +655,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             <Spinner />
           ) : (
             messages.map((el, index) => {
-              console.log(timeDifference(new Date.now() / 1000, el?.timestamp));
+              console.log(timeDifference(Date.now() / 1000, el?.timestamp));
               if (el?.timestamp > messages[index - 1]?.timestamp) {
               }
 
