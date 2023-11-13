@@ -425,11 +425,11 @@ function Chats() {
        `}
       >
         {/* Top menu */}
-        <div
-          className="flex  items-center pt-[.5rem] w-[100%] px-[1rem]  cursor-pointer"
-          onClick={() => navigate("/profile")}
-        >
-          <div className="bg-white rounded-full w-[41px] h-[40px]">
+        <div className="flex  items-center pt-[.5rem] w-[100%] px-[1rem]  cursor-pointer">
+          <div
+            className="bg-white rounded-full w-[41px] h-[40px]"
+            onClick={() => navigate("/profile")}
+          >
             {currentUser?.img && (
               <img
                 src={currentUser.img}
@@ -438,12 +438,15 @@ function Chats() {
               />
             )}
           </div>
-          <h3 className="font-bold text-white text-xl ml-[1.5rem]">
+          <h3
+            className="font-bold text-white text-xl ml-[1.5rem]"
+            onClick={() => navigate("/profile")}
+          >
             {currentUser?.pushName ?? ""}
           </h3>
           {chats && (
             <div
-              className="ml-[3rem] rounded-full bg-primary p-[0.65rem] mt-[.5rem] cursor-pointer"
+              className="ml-[10rem] rounded-full bg-primary p-[0.65rem] mt-[.5rem] cursor-pointer"
               onClick={() => setShowModalChats(true)}
             >
               <FaPen className="color-white bg-inherit w-[15px] h-[15px]" />
