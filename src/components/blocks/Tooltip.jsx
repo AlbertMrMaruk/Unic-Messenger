@@ -87,7 +87,7 @@ export const Tooltip = ({
                   }}
                   accept="image/png, image/jpeg, application/pdf, image/gif, video/*, audio/*, image/*"
                 />
-              </div>{" "}
+              </div>
             </>
           )}
         </span>
