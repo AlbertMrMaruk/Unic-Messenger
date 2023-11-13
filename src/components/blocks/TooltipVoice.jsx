@@ -108,6 +108,8 @@ function TooltipVoice({ children, setAudioUrl }) {
         const reader = new FileReader();
         reader.onload = () => {
           let arrayBuffer = reader.result;
+
+          // Pad the ArrayBuffer with a zero byte if it has an odd number of bytes
           if (arrayBuffer.byteLength % 2 === 1) {
             const paddedArrayBuffer = new ArrayBuffer(
               arrayBuffer.byteLength + 1
@@ -117,6 +119,7 @@ function TooltipVoice({ children, setAudioUrl }) {
             paddedView[arrayBuffer.byteLength] = 0;
             arrayBuffer = paddedArrayBuffer;
           }
+
           const wavData = new Int16Array(arrayBuffer);
           const mp3Encoder = new lamejs.Mp3Encoder(1, 44100, 128);
           const mp3Data = mp3Encoder.encodeBuffer(wavData);
@@ -125,10 +128,9 @@ function TooltipVoice({ children, setAudioUrl }) {
           const mp3Blob = new Blob([new Int8Array(mp3Data)], {
             type: "audio/mpeg",
           });
-          console.log(mp3Blob);
           const mp3Url = URL.createObjectURL(mp3Blob);
-          setAudioUrl(mp3Url);
           console.log(mp3Url);
+          setAudioUrl(mp3Url);
         };
 
         reader.readAsArrayBuffer(audioBlob);
