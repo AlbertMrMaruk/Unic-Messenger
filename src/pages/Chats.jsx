@@ -714,7 +714,13 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         />
       )}
       {showModalChats && (
-        <ModalChats setShowModal={setShowModalChats} session={session} />
+        <ModalChats
+          setShowModal={setShowModalChats}
+          session={session}
+          dataUser={dataUser}
+          setDataUser={dataUser}
+          setChats={setChats}
+        />
       )}
     </div>
   );

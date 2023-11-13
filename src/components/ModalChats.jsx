@@ -1,10 +1,15 @@
-import { useLocation } from "react-router-dom";
 import Spinner from "./blocks/Spinner";
 import { useEffect, useState } from "react";
 import ChatsApi from "../api/ChatsApi";
+import DatabaseAPI from "../api/DatabaseAPI";
 
-export default function ModalChats({ setShowModal, session }) {
-  const { state } = useLocation();
+export default function ModalChats({
+  setShowModal,
+  session,
+  setDataUser,
+  dataUser,
+  setChats,
+}) {
   const [showSpinner, setShowSpinner] = useState(true);
   const [contacts, setContacts] = useState([]);
   const [activeContact, setActiveContact] = useState();
@@ -35,8 +40,8 @@ export default function ModalChats({ setShowModal, session }) {
                   el?.isWAContact && (
                     <div
                       className={`p-[1rem]  
-          border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-secondarylight ${
-            el?.id === activeContact?.id && "bg-secondarylight"
+          border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hover:bg-[#59595f] ${
+            el?.id === activeContact?.id && "bg-[#59595f]"
           }`}
                       onClick={() => {
                         setActiveContact(el);
@@ -68,7 +73,76 @@ export default function ModalChats({ setShowModal, session }) {
               type="button"
               onClick={() => {
                 setShowSpinner(true);
-                console.log("Oh yes", activeContact);
+                console.log({
+                  id: {
+                    _serialized: activeContact.id,
+                  },
+                  name: activeContact.pushName ?? activeContact.name,
+                  isGroup: false,
+                  unreadCount: 0,
+                  lastMessage: {
+                    body: "",
+                    fromMe: false,
+                    timestamp: Date.now(),
+                  },
+                });
+                setDataUser((prev) => ({
+                  ...prev,
+                  chats: {
+                    ...prev.chats,
+                    [session]: [
+                      ...prev.chats[session],
+                      {
+                        id: {
+                          _serialized: activeContact.id,
+                        },
+                        name: activeContact.pushName ?? activeContact.name,
+                        isGroup: false,
+                        unreadCount: 0,
+                        lastMessage: {
+                          body: "",
+                          fromMe: false,
+                          timestamp: Date.now(),
+                        },
+                      },
+                    ],
+                  },
+                }));
+                DatabaseAPI.updateUser(dataUser.username, {
+                  chats: {
+                    ...dataUser.chats,
+                    [session]: [
+                      ...dataUser.chats[session],
+                      {
+                        id: {
+                          _serialized: activeContact.id,
+                        },
+                        name: activeContact.pushName ?? activeContact.name,
+                        isGroup: false,
+                        unreadCount: 0,
+                        lastMessage: {
+                          body: "",
+                          fromMe: false,
+                          timestamp: Date.now(),
+                        },
+                      },
+                    ],
+                  },
+                }).then(() => {
+                  console.log("New" + "chat");
+                  setChats(
+                    dataUser.chats[session]?.sort((chat1, chat2) => {
+                      const chat1time =
+                        +chat1?.lastMessage?.timestamp ||
+                        +(chat1?.lastMessage?.payload?.timestamp + "000");
+                      const chat2time =
+                        +chat2?.lastMessage?.timestamp ||
+                        +(chat2?.lastMessage?.payload?.timestamp + "000");
+
+                      return chat1time > chat2time ? -1 : 1;
+                    }) ?? []
+                  );
+                });
               }}
             >
               Создать
