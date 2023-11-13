@@ -37,7 +37,7 @@ export default function ModalChats({
             <input
               type="text"
               className="
-             bg-[#cdcdcd] text-black rounded-[5px]  font-bold  px-[.5rem] py-[.2rem] h-[35px]  relative  block w-[350px] mx-auto my-[1.5rem] text-[14px] outline-none  "
+             bg-[#cdcdcd] text-black rounded-[5px]  font-bold  px-[.5rem] py-[.2rem] h-[35px]  relative  block w-[90%] mx-auto my-[1.5rem] text-[14px] outline-none  "
               value={queryContact}
               onChange={(e) => {
                 setFiltContacts(
