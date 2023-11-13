@@ -36,9 +36,9 @@ export const TooltipMessage = ({ message, children, setReplyMessage }) => {
             >
               Ответить на сообщение
             </span>
-            <span className="text-red-500 cursor-pointer">
+            {/* <span className="text-red-500 cursor-pointer">
               Удалить сообщение
-            </span>
+            </span> */}
           </div>
         </span>
         <div className="w-3 h-3 -mt-2 rotate-45 bg-secondarylight mb-2" />
