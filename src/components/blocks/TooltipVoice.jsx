@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import RecordRTC from "recordrtc";
 import { FaMicrophone } from "react-icons/fa";
-import lamejs from "lamejs";
+import { bufferToWav, wavToMp3 } from "audiobuffer-to-wav";
 
 function TooltipVoice({ children, setAudioUrl }) {
   const [recording, setRecording] = useState(false);
@@ -15,19 +14,34 @@ function TooltipVoice({ children, setAudioUrl }) {
       .getUserMedia({ audio: true })
       .then((stream) => {
         let chunks = [];
-        recorderRef.current = new MediaRecorder(stream, {
-          mimeType: "audio/webm",
-        });
+        recorderRef.current = new (stream,
+        {
+          mimeType: "audio/",
+        })();
 
         recorderRef.current.ondataavailable = function (e) {
           chunks.push(e.data);
         };
 
         recorderRef.current.onstop = function (e) {
-          let blob = new Blob(chunks, { type: "audio/oga" });
+          let blob = new Blob(chunks, { type: "audio/webm" });
           console.log(chunks);
           console.log(blob);
+          const audioContext = new AudioContext();
+
           const url = URL.createObjectURL(blob);
+          fetch(url)
+            .then((response) => response.arrayBuffer())
+            .then((arrayBuffer) => audioContext.decodeAudioData(arrayBuffer))
+            .then((audioBuffer) => {
+              // Convert the audio buffer to a WAV buffer
+              const wavBuffer = bufferToWav(audioBuffer);
+              console.log(wavBuffer);
+              // Convert the WAV buffer to an MP3 buffer
+              const mp3Buffer = wavToMp3(wavBuffer);
+              console.log(mp3Buffer);
+              // Do something with the MP3 buffer...
+            });
           console.log(url);
           chunks = [];
 
