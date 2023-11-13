@@ -104,13 +104,20 @@ function TooltipVoice({ children, setAudioUrl }) {
       recorderRef.current.stopRecording(() => {
         clearInterval(timerRef.current);
         const audioBlob = recorderRef.current.getBlob();
-        let newBlob = new Blob([audioBlob], {
-          type: "audio/mpeg-3;",
-        });
 
         const reader = new FileReader();
         reader.onload = () => {
-          const wavData = new Int16Array(reader.result);
+          let arrayBuffer = reader.result;
+          if (arrayBuffer.byteLength % 2 === 1) {
+            const paddedArrayBuffer = new ArrayBuffer(
+              arrayBuffer.byteLength + 1
+            );
+            const paddedView = new Uint8Array(paddedArrayBuffer);
+            paddedView.set(new Uint8Array(arrayBuffer));
+            paddedView[arrayBuffer.byteLength] = 0;
+            arrayBuffer = paddedArrayBuffer;
+          }
+          const wavData = new Int16Array(arrayBuffer);
           const mp3Encoder = new lamejs.Mp3Encoder(1, 44100, 128);
           const mp3Data = mp3Encoder.encodeBuffer(wavData);
           mp3Encoder.flush();
