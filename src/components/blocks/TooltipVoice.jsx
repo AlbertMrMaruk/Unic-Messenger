@@ -27,6 +27,8 @@ function TooltipVoice({ children, setAudioUrl }) {
           let blob = new Blob(chunks, { type: "audio/oga" });
           console.log(chunks);
           console.log(blob);
+          const url = URL.createObjectURL(blob);
+          console.log(url);
           chunks = [];
 
           setRecording(false);
