@@ -105,7 +105,7 @@ function TooltipVoice({ children, setAudioUrl }) {
         const audioBlob = recorderRef.current.getBlob();
         console.log(audioBlob, recorderRef.current);
         const url = URL.createObjectURL(audioBlob);
-
+        console.log(url);
         recorderRef.current.getDataURL((dataURL) => {
           // You can save the dataURL to the server if needed.
           console.log(dataURL);
