@@ -500,7 +500,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               <input
                 type="text"
                 placeholder="Поиск чата..."
-                className=" pl-2 py-1 rounded-xl bg-secondarylight gap-1 mt-[1.5rem] h-[45px] w-[90%]"
+                className=" p-1 rounded-xl bg-secondarylight  mb-[.75rem]  w-[100%]"
                 onChange={(e) => {
                   setFiltChats(
                     chats.filter(
