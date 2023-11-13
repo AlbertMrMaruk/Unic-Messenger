@@ -132,7 +132,7 @@ function TooltipVoice({ children, setAudioUrl }) {
           setAudioUrl(mp3Url);
         };
 
-        reader.readAsArrayBuffer(audioBlob);
+        reader.readAsArrayBuffer([audioBlob]);
 
         setRecording(false);
         setShow(false);
