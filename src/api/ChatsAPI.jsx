@@ -169,7 +169,7 @@ class ChatsAPI {
     );
   }
   getContacts(session) {
-    return fetch(`${API_URL}/api/contacts/chats/all?session=${session}`);
+    return fetch(`${API_URL}/api/contacts/all?session=${session}`);
   }
   getChats(session) {
     return fetch(`${API_URL}/api/${session}/chats`);
