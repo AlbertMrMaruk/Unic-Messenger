@@ -107,7 +107,7 @@ function TooltipVoice({ children, setAudioUrl }) {
       //   //   setAudioUrl({ url, encoded });
       //   // });
       // });
-      recorderRef.stop();
+      recorderRef.current.stop();
     } else {
       console.error("Recorder is not defined.");
     }
