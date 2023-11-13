@@ -106,7 +106,6 @@ function TooltipVoice({ children, setAudioUrl }) {
         const audioBlob = recorderRef.current.getBlob();
 
         const reader = new FileReader();
-        reader.readAsArrayBuffer(audioBlob);
         reader.onload = () => {
           let arrayBuffer = reader.result;
 
@@ -130,9 +129,13 @@ function TooltipVoice({ children, setAudioUrl }) {
             type: "audio/mpeg",
           });
           const mp3Url = URL.createObjectURL(mp3Blob);
-          console.log(mp3Url);
           setAudioUrl(mp3Url);
         };
+
+        reader.readAsArrayBuffer(audioBlob);
+
+        setRecording(false);
+        setShow(false);
 
         // const url = URL.createObjectURL(newBlob);
         // console.log(url);
@@ -145,9 +148,6 @@ function TooltipVoice({ children, setAudioUrl }) {
         //   }
         //   setAudioUrl({ url, encoded });
         // });
-
-        setRecording(false);
-        setShow(false);
       });
     } else {
       console.error("Recorder is not defined.");
