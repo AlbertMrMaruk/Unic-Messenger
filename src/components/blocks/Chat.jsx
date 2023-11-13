@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import ChatsApi from "../../api/ChatsApi";
 import DatabaseAPI from "../../api/DatabaseAPI";
+import { formatDate } from "../../utils/utils";
 
 function Chat({ chat, session, dataUser, setShowChats, index, currentChat }) {
   const calcDate = (timestamp) => {
@@ -72,10 +73,9 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
       </div>
       <div className="m-auto flex flex-col gap-[.4rem]">
         <p className="text-[1rem] md:text-[0.85rem] text-[#777779]">
-          {calcDate(
-            chat?.lastMessage?.timestamp ??
-              chat?.lastMessage?.payload?.timestamp
-          )}
+          {formatDate(+(chat?.lastMessage?.timestamp + "000")) === "Сегодня"
+            ? calcDate(chat?.lastMessage?.timestamp)
+            : formatDate(+(chat?.lastMessage?.timestamp + "000"))}
         </p>
         {dataUser.chats[session ?? dataUser.accounts[0]][index]?.unreadCount !==
           0 && (
