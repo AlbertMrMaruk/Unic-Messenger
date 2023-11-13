@@ -12,6 +12,7 @@ import {
   FaReply,
   FaEllipsisV,
   FaTrash,
+  FaPen,
 } from "react-icons/fa";
 import clickChat from "../api/controlers/ChatsController";
 import Message from "../components/blocks/Message";
@@ -27,6 +28,7 @@ import { TooltipMessage } from "../components/blocks/TooltipMessage";
 import { TooltipChats } from "../components/blocks/TooltipChats";
 import ModalDownload from "../components/ModalDownload";
 import TooltipVoice from "../components/blocks/TooltipVoice";
+import ModalChats from "../components/ModalChats";
 
 function Chats() {
   const navigate = useNavigate();
@@ -44,6 +46,7 @@ function Chats() {
   const [file, setFile] = useState("");
   const [qrCode, setQrCode] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showModalChats, setShowModalChats] = useState(false);
   const [showModalAccount, setShowModalAccount] = useState(false);
   const [showModalDownload, setShowModalDownload] = useState(false);
   const [audioUrl, setAudioUrl] = useState(null);
@@ -438,6 +441,14 @@ function Chats() {
           <h3 className="font-bold text-white text-xl ml-[1.5rem]">
             {currentUser?.pushName ?? ""}
           </h3>
+          {chats && (
+            <div
+              className="ml-[3rem] rounded-full bg-primary p-[0.65rem] mt-[.5rem] cursor-pointer"
+              onClick={() => setShowModalChats(true)}
+            >
+              <FaPen className="color-white bg-inherit w-[15px] h-[15px]" />
+            </div>
+          )}
         </div>
 
         {/* Choose messenger Block */}
@@ -698,6 +709,9 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           session={session}
           setShowModal={setShowModalDownload}
         />
+      )}
+      {showModalChats && (
+        <ModalChats setShowModal={setShowModalChats} session={session} />
       )}
     </div>
   );

@@ -168,6 +168,9 @@ class ChatsAPI {
       `${API_URL}/api/${session}/chats/${id}/messages?downloadMedia=true&limit=${limit}`
     );
   }
+  getContacts(session) {
+    return fetch(`${API_URL}/api/contacts/chats/all?session=${session}`);
+  }
   getChats(session) {
     return fetch(`${API_URL}/api/${session}/chats`);
   }
