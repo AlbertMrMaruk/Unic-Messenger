@@ -60,21 +60,14 @@ function Chats() {
 
   //Расчет разницы во времени между timestamp
   const timeDifference = (date1, date2) => {
-    let difference = +(date1 + "000") - +(date2 + "000");
+    // let difference = +(date1 + "000") - +(date2 + "000");
 
-    let daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
-    // difference -= daysDifference*1000*60*60*24
-
-    // var hoursDifference = Math.floor(difference/1000/60/60);
-    // difference -= hoursDifference*1000*60*60
-
-    // var minutesDifference = Math.floor(difference/1000/60);
-    // difference -= minutesDifference*1000*60
-
-    // var secondsDifference = Math.floor(difference/1000);
-
-    console.log("difference = " + daysDifference + " day/s ");
-    return daysDifference;
+    console.log(
+      new Date(+(date1 + "000")).toLocaleString(),
+      new Date(+(date2 + "000")).toLocaleString()
+    );
+    // let daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
+    // return daysDifference;
   };
 
   // Функция получения сообщения
@@ -655,9 +648,8 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             <Spinner />
           ) : (
             messages.map((el, index) => {
-              console.log(
-                timeDifference(+(Date.now() + "").slice(0, -3), el?.timestamp)
-              );
+              timeDifference(+(Date.now() + "").slice(0, -3), el?.timestamp);
+
               if (el?.timestamp > messages[index - 1]?.timestamp) {
               }
 
