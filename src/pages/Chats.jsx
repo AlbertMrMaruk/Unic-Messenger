@@ -37,6 +37,7 @@ function Chats() {
   const [accounts, setAccounts] = useState([]);
   const [messages, setMessages] = useState([]);
   const [dataUser, setDataUser] = useState();
+  const [filtChats, setFiltChats] = useState();
   const [text, setText] = useState("");
   const [showSpinner, setShowSpinner] = useState(true);
   const [showSpinnerMessages, setShowSpinnerMessages] = useState(true);
@@ -495,17 +496,25 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           {showSpinner ? (
             <Spinner />
           ) : (
-            chats?.map((el, index) => (
-              <Chat
-                chat={el}
-                currentChat={currentChat}
-                key={index}
-                index={index}
-                setShowChats={setShowChats}
-                session={session}
-                dataUser={dataUser}
+            <>
+              <input
+                type="text"
+                placeholder="Поиск чата..."
+                className=" pl-2 py-1 rounded-xl bg-secondarylight gap-1 mt-[1.5rem] h-[45px] w-[90%]"
               />
-            ))
+
+              {(filtChats ?? chats)?.map((el, index) => (
+                <Chat
+                  chat={el}
+                  currentChat={currentChat}
+                  key={index}
+                  index={index}
+                  setShowChats={setShowChats}
+                  session={session}
+                  dataUser={dataUser}
+                />
+              ))}
+            </>
           )}
         </div>
       </div>
