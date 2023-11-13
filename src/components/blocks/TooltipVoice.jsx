@@ -14,10 +14,9 @@ function TooltipVoice({ children, setAudioUrl }) {
       .getUserMedia({ audio: true })
       .then((stream) => {
         let chunks = [];
-        recorderRef.current = new (stream,
-        {
+        recorderRef.current = new MediaRecorder(stream, {
           mimeType: "audio/webm",
-        })();
+        });
 
         recorderRef.current.ondataavailable = function (e) {
           chunks.push(e.data);
