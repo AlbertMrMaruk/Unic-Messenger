@@ -457,7 +457,9 @@ function Chats() {
       if (type === "img") {
         ChatsApi.sendImage(data);
       } else if (type === "voice") {
-        ChatsApi.sendVoice(text, currentChat, session);
+        ChatsApi.sendVoice(text, currentChat, session).then(() =>
+          setAudioUrl(null)
+        );
       } else {
         if (!replyMessage) {
           ChatsApi.sendText(text, currentChat, session);
