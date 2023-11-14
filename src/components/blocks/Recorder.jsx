@@ -72,15 +72,6 @@ export default class Recorder extends Component {
           )}
         </div>
       </div>
-      // <div className={"w-[40%]"} {...rest}>
-      //   <div
-      //     className={""}
-      //     onMouseDown={this._onMouseDown}
-      //     onMouseUp={this._onMouseUp}
-      //   >
-      //     <img src={""} width={24} height={24} />
-      //   </div>
-      // </div>
     );
   }
 
