@@ -13,7 +13,7 @@ async function convertWebmToMp3(webmBlob) {
 
   await ffmpeg.writeFile(
     inputName,
-    fetch(webmBlob).then((res) => res.arrayBuffer())
+    await fetch(webmBlob).then((res) => res.arrayBuffer())
   );
 
   await ffmpeg.exec("-i", inputName, outputName);
