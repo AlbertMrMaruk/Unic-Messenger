@@ -10,7 +10,7 @@ async function convertWebmToMp3(webmBlob) {
 
   const inputName = "input.webm";
   const outputName = "output.mp3";
-  console.log(webmBlob.arrayBuffer());
+  console.log(await webmBlob.arrayBuffer());
   await ffmpeg.writeFile(
     inputName,
     await fetch(webmBlob).then((res) => res.arrayBuffer())
