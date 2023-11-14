@@ -79,9 +79,7 @@ function Message({ message }) {
                   message?.fromMe ? "text-white" : "text-primary"
                 }`}
               />
-              {text.length > 30
-                ? text.slice(0, 30) + "..." + text.slice(0, -6)
-                : text}
+              {text}
             </a>
           ) : (
             text
