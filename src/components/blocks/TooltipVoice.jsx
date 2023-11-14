@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
+import Recorder from "react-mp3-recorder";
+
 // import * as createFFmpeg from "@ffmpeg/ffmpeg";
 // import * as FFmpeg from "@ffmpeg/ffmpeg";
 import { FaMicrophone } from "react-icons/fa";
@@ -133,6 +135,14 @@ function TooltipVoice({ children, setAudioUrl }) {
     }
   }, [recording]);
 
+  const onRecordingComplete = (blob) => {
+    console.log("recording", blob);
+  };
+
+  const onRecordingError = (err) => {
+    console.log("recording error", err);
+  };
+
   return (
     <div
       className="relative flex flex-col  group "
@@ -142,7 +152,11 @@ function TooltipVoice({ children, setAudioUrl }) {
       }}
     >
       {children}
-      <div
+      <Recorder
+        onRecordingComplete={onRecordingComplete}
+        onRecordingError={onRecordingError}
+      />
+      {/* <div
         className={`absolute whitespace-nowrap bottom-full flex flex-col items-center left-[-.7rem]   ${
           !show ? "hidden" : null
         }`}
@@ -173,7 +187,7 @@ function TooltipVoice({ children, setAudioUrl }) {
           </div>
         </div>
         <div className="w-3 h-3 -mt-2 rotate-45 bg-secondarylight mb-2" />
-      </div>
+      </div> */}
     </div>
   );
 }
