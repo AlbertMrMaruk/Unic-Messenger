@@ -1,4 +1,4 @@
-import { FaFilePdf } from "react-icons/fa";
+import { FaFile } from "react-icons/fa";
 const API_URL = "https://unicmessenger.ru";
 
 function Message({ message }) {
@@ -74,7 +74,7 @@ function Message({ message }) {
         >
           {isFile(url, message) ? (
             <a href={API_URL + url.slice(21)} target="_blank" className="flex">
-              <FaFilePdf
+              <FaFile
                 className={`text-primary text-[1.4rem] my-auto mr-[.5rem] ${
                   message?.fromMe ? "text-white" : "text-primary"
                 }`}
