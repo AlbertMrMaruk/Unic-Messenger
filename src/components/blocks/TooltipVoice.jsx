@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-// import { createFFmpeg } from "@ffmpeg/ffmpeg";
-import * as createFFmpeg from "@ffmpeg/ffmpeg";
+import { createFFmpeg } from "@ffmpeg/ffmpeg";
+// import * as createFFmpeg from "@ffmpeg/ffmpeg";
 // import * as FFmpeg from "@ffmpeg/ffmpeg";
 import { FaMicrophone } from "react-icons/fa";
 // Create a new WAV encoder
