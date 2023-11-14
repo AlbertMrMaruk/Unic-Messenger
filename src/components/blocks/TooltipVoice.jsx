@@ -1,6 +1,6 @@
+import lamejs from "lamejs";
 import React, { useState, useRef, useEffect } from "react";
 import { FaMicrophone } from "react-icons/fa";
-import { bufferToWav, wavToMp3 } from "audiobuffer-to-wav";
 
 function TooltipVoice({ children, setAudioUrl }) {
   const [recording, setRecording] = useState(false);
@@ -23,25 +23,26 @@ function TooltipVoice({ children, setAudioUrl }) {
         };
 
         recorderRef.current.onstop = function (e) {
-          let blob = new Blob(chunks, { type: "audio/webm" });
-          console.log(chunks);
-          console.log(blob);
-          const audioContext = new AudioContext();
+          const blob = new Blob(chunks, { type: "audio/webm" });
+          const mp3encoder = new lamejs.Mp3Encoder(1, 44100, 128);
 
-          const url = URL.createObjectURL(blob);
-          fetch(url)
-            .then((response) => response.arrayBuffer())
-            .then((arrayBuffer) => audioContext.decodeAudioData(arrayBuffer))
-            .then((audioBuffer) => {
-              // Convert the audio buffer to a WAV buffer
-              const wavBuffer = bufferToWav(audioBuffer);
-              console.log(wavBuffer);
-              // Convert the WAV buffer to an MP3 buffer
-              const mp3Buffer = wavToMp3(wavBuffer);
-              console.log(mp3Buffer);
-              // Do something with the MP3 buffer...
-            });
-          console.log(url);
+          // Convert the Blob of audio data to an MP3 file
+          const mp3Data = [];
+          mp3encoder.encodeBuffer(
+            blob.slice(0, blob.size, { type: "audio/mp3" })
+          );
+          mp3Data.push(new Int8Array(mp3encoder.flush()));
+
+          // Create a Blob of the MP3 data
+          const mp3Blob = new Blob(mp3Data, { type: "audio/mp3" });
+
+          console.log(mp3Blob);
+          // console.log(chunks);
+          // console.log(blob);
+
+          // const url = URL.createObjectURL(blob);
+
+          // console.log(url);
           chunks = [];
 
           setRecording(false);
