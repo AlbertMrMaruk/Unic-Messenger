@@ -81,9 +81,9 @@ module.exports = (app) => {
     if (response.status === "ok") {
       // storing our JWT web token as a cookie in our browser
       res.cookie("token", token, {
-        maxAge: 30 * 24 * 60 * 60 * 1000,
+        maxAge: 2629743,
         httpOnly: true,
-      }); // maxAge: 2 hours
+      });
       return res.send(response);
     } else {
       res.json(response);
