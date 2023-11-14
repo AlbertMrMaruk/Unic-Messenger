@@ -1,26 +1,24 @@
 import React, { useState, useRef, useEffect } from "react";
-import { createFFmpeg } from "@ffmpeg/ffmpeg";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
 // import * as createFFmpeg from "@ffmpeg/ffmpeg";
 // import * as FFmpeg from "@ffmpeg/ffmpeg";
 import { FaMicrophone } from "react-icons/fa";
 // Create a new WAV encoder
 async function convertWebmToMp3(webmBlob) {
-  console.log(createFFmpeg);
-  const ffmpeg = createFFmpeg({ log: false });
+  const ffmpeg = new FFmpeg();
   await ffmpeg.load();
 
   const inputName = "input.webm";
   const outputName = "output.mp3";
 
-  ffmpeg.FS(
-    "writeFile",
+  await ffmpeg.writeFile(
     inputName,
-    await fetch(webmBlob).then((res) => res.arrayBuffer())
+    fetch(webmBlob).then((res) => res.arrayBuffer())
   );
 
-  await ffmpeg.run("-i", inputName, outputName);
+  await ffmpeg.exec("-i", inputName, outputName);
 
-  const outputData = ffmpeg.FS("readFile", outputName);
+  const outputData = await ffmpeg.readFile(outputName);
   const outputBlob = new Blob([outputData.buffer], { type: "audio/mp3" });
   console.log(outputBlob, outputData);
   return outputBlob;

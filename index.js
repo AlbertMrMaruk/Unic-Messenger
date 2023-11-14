@@ -30,11 +30,6 @@ db.once("open", () => {
   console.log("> successfully opened the database");
 });
 require(__dirname + "/routes/userRoutes")(app);
-app.use((req, res, next) => {
-  res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
-  res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
-  next();
-});
 app.use(cookieParser());
 app.use(express.static(__dirname + "/build/"));
 app.use(bodyParser.json({ limit: "2000mb", extended: true }));
