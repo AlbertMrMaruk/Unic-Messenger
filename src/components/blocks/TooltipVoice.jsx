@@ -1,29 +1,29 @@
 import React, { useState, useRef, useEffect } from "react";
-import { createFFmpeg } from "@ffmpeg/ffmpeg";
+// import { createFFmpeg } from "@ffmpeg/ffmpeg";
+import * as createFFmpeg from "@ffmpeg/ffmpeg";
 // import * as FFmpeg from "@ffmpeg/ffmpeg";
 import { FaMicrophone } from "react-icons/fa";
-
+const ffmpeg = createFFmpeg();
 // Create a new WAV encoder
-// async function convertWebmToMp3(webmBlob) {
-//   // const ffmpeg = ({ log: false });
-//   await ffmpeg.load();
+async function convertWebmToMp3(webmBlob) {
+  await ffmpeg.load();
 
-//   const inputName = "input.webm";
-//   const outputName = "output.mp3";
+  const inputName = "input.webm";
+  const outputName = "output.mp3";
 
-//   ffmpeg.FS(
-//     "writeFile",
-//     inputName,
-//     await fetch(webmBlob).then((res) => res.arrayBuffer())
-//   );
+  ffmpeg.FS(
+    "writeFile",
+    inputName,
+    await fetch(webmBlob).then((res) => res.arrayBuffer())
+  );
 
-//   await ffmpeg.run("-i", inputName, outputName);
+  await ffmpeg.run("-i", inputName, outputName);
 
-//   const outputData = ffmpeg.FS("readFile", outputName);
-//   const outputBlob = new Blob([outputData.buffer], { type: "audio/mp3" });
-//   console.log(outputBlob, outputData);
-//   return outputBlob;
-// }
+  const outputData = ffmpeg.FS("readFile", outputName);
+  const outputBlob = new Blob([outputData.buffer], { type: "audio/mp3" });
+  console.log(outputBlob, outputData);
+  return outputBlob;
+}
 
 function TooltipVoice({ children, setAudioUrl }) {
   const [recording, setRecording] = useState(false);
