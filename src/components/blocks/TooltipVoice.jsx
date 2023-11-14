@@ -47,7 +47,7 @@ function TooltipVoice({ children, setAudioUrl }) {
 
         recorderRef.current.onstop = function (e) {
           const blob = new Blob(chunks, { type: "audio/webm" });
-
+          convertWebmToMp3(blob);
           chunks = [];
 
           setRecording(false);
