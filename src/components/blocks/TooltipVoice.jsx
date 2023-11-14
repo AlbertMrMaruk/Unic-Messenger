@@ -1,26 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FFmpeg } from "@ffmpeg/ffmpeg";
 import Recorder from "react-mp3-recorder";
 
-// import * as createFFmpeg from "@ffmpeg/ffmpeg";
-// import * as FFmpeg from "@ffmpeg/ffmpeg";
 import { FaMicrophone } from "react-icons/fa";
-// Create a new WAV encoder
-async function convertWebmToMp3(webmBlob) {
-  const ffmpeg = new FFmpeg();
-  await ffmpeg.load();
 
-  const inputName = "input.webm";
-  const outputName = "output.mp3";
-  console.log(await new Response(webmBlob).arrayBuffer());
-  await ffmpeg.writeFile(inputName, await new Response(webmBlob).arrayBuffer());
-
-  await ffmpeg.exec("-i", inputName, outputName);
-
-  const outputData = await ffmpeg.readFile(outputName);
-  const outputBlob = new Blob([outputData.buffer], { type: "audio/mp3" });
-  console.log(outputBlob, outputData);
-  return outputBlob;
+function blobToBase64(blob) {
+  return new Promise((resolve, _) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+  });
 }
 
 function TooltipVoice({ children, setAudioUrl }) {
@@ -45,7 +33,7 @@ function TooltipVoice({ children, setAudioUrl }) {
 
         recorderRef.current.onstop = function (e) {
           const blob = new Blob(chunks, { type: "audio/webm" });
-          convertWebmToMp3(blob);
+
           chunks = [];
 
           setRecording(false);
@@ -135,8 +123,11 @@ function TooltipVoice({ children, setAudioUrl }) {
     }
   }, [recording]);
 
-  const onRecordingComplete = (blob) => {
+  const onRecordingComplete = async (blob) => {
     console.log("recording", blob);
+    const url = URL.createObjectURL(blob);
+    console.log(url);
+    console.log(await blobToBase64(blob));
   };
 
   const onRecordingError = (err) => {
