@@ -17,8 +17,18 @@ export default class Recorder extends Component {
 
   state = {
     isRecording: false,
+    duration: 0,
   };
 
+  calcDur = (dur) => {
+    let m = Math.floor(dur / 60);
+    let s = dur - m * 60;
+
+    m = m < 10 ? "0" + m : m;
+    s = s < 10 ? "0" + s : s;
+    return m + ":" + s;
+  };
+  _timedur = null;
   _recorder = null;
 
   componentWillUnmount() {
@@ -56,7 +66,9 @@ export default class Recorder extends Component {
             </button>
           )}
           {this.state.isRecording && (
-            <div className="text-sm text-gray-600">00</div>
+            <div className="text-sm text-gray-600">
+              {this.calcDur(this.state.duration)}
+            </div>
           )}
         </div>
       </div>
@@ -85,6 +97,10 @@ export default class Recorder extends Component {
 
     this._cleanup();
 
+    this._timedur = setInterval(() => {
+      this.setState({ duration: this.state.duration + 1 });
+    }, 1000);
+
     this._recorder = new vmsg.Recorder({
       wasmURL,
       shimURL,
@@ -102,10 +118,13 @@ export default class Recorder extends Component {
 
   _onMouseUp = () => {
     if (this._recorder) {
+      clearInterval(this._timedur);
+
       this._recorder
         .stopRecording()
         .then((blob) => this.props.onRecordingComplete(blob))
         .catch((err) => this.props.onRecordingError(err));
+      this.setState({ isRecording: false, duration: 0 });
     }
   };
 }
