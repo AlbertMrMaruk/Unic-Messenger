@@ -1,6 +1,8 @@
-import lamejs from "lamejs";
 import React, { useState, useRef, useEffect } from "react";
 import { FaMicrophone } from "react-icons/fa";
+import { encode } from "audiobuffer-to-wav";
+
+// Create a new WAV encoder
 
 function TooltipVoice({ children, setAudioUrl }) {
   const [recording, setRecording] = useState(false);
@@ -24,19 +26,15 @@ function TooltipVoice({ children, setAudioUrl }) {
 
         recorderRef.current.onstop = function (e) {
           const blob = new Blob(chunks, { type: "audio/webm" });
-          const mp3encoder = new lamejs.Mp3Encoder(1, 44100, 128);
-
-          // Convert the Blob of audio data to an MP3 file
-          const mp3Data = [];
-          mp3encoder.encodeBuffer(
-            blob.slice(0, blob.size, { type: "audio/mp3" })
+          // Convert the Blob of audio data to a WAV file
+          const wavData = encode(
+            blob.slice(0, blob.size, { type: "audio/wav" })
           );
-          mp3Data.push(new Int8Array(mp3encoder.flush()));
 
-          // Create a Blob of the MP3 data
-          const mp3Blob = new Blob(mp3Data, { type: "audio/mp3" });
+          // Create a Blob of the WAV data
+          const wavBlob = new Blob([wavData], { type: "audio/wav" });
 
-          console.log(mp3Blob);
+          console.log(wavBlob);
           // console.log(chunks);
           // console.log(blob);
 
