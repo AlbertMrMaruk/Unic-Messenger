@@ -1,8 +1,29 @@
 import React, { useState, useRef, useEffect } from "react";
+import { createFFmpeg } from "@ffmpeg/ffmpeg";
+// import * as FFmpeg from "@ffmpeg/ffmpeg";
 import { FaMicrophone } from "react-icons/fa";
-import { encode } from "audiobuffer-to-wav";
 
 // Create a new WAV encoder
+// async function convertWebmToMp3(webmBlob) {
+//   // const ffmpeg = ({ log: false });
+//   await ffmpeg.load();
+
+//   const inputName = "input.webm";
+//   const outputName = "output.mp3";
+
+//   ffmpeg.FS(
+//     "writeFile",
+//     inputName,
+//     await fetch(webmBlob).then((res) => res.arrayBuffer())
+//   );
+
+//   await ffmpeg.run("-i", inputName, outputName);
+
+//   const outputData = ffmpeg.FS("readFile", outputName);
+//   const outputBlob = new Blob([outputData.buffer], { type: "audio/mp3" });
+//   console.log(outputBlob, outputData);
+//   return outputBlob;
+// }
 
 function TooltipVoice({ children, setAudioUrl }) {
   const [recording, setRecording] = useState(false);
@@ -26,33 +47,14 @@ function TooltipVoice({ children, setAudioUrl }) {
 
         recorderRef.current.onstop = function (e) {
           const blob = new Blob(chunks, { type: "audio/webm" });
-          // Convert the Blob of audio data to a WAV file
-          const wavData = encode(
-            blob.slice(0, blob.size, { type: "audio/wav" })
-          );
 
-          // Create a Blob of the WAV data
-          const wavBlob = new Blob([wavData], { type: "audio/wav" });
-
-          console.log(wavBlob);
-          // console.log(chunks);
-          // console.log(blob);
-
-          // const url = URL.createObjectURL(blob);
-
-          // console.log(url);
           chunks = [];
 
           setRecording(false);
-          // use the blob...
         };
 
         recorderRef.current.start();
-        // recorderRef.current = RecordRTC(stream, {
-        //   mimeType: "audio/wav",
-        // });
 
-        // recorderRef.current.startRecording();
         setRecording(true);
 
         timerRef.current = setInterval(() => {
@@ -128,18 +130,6 @@ function TooltipVoice({ children, setAudioUrl }) {
       console.error("Recorder is not defined.");
     }
   };
-
-  // const toggleAudio = () => {
-  //   if (audioElement.current) {
-  //     if (audioElement.current.paused || audioElement.current.ended) {
-  //       audioElement.current.play();
-  //       paused.current = false;
-  //     } else {
-  //       audioElement.current.pause();
-  //       paused.current = true;
-  //     }
-  //   }
-  // };
 
   useEffect(() => {
     if (!recording) {
