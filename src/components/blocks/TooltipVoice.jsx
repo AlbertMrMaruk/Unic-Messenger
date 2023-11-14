@@ -3,9 +3,9 @@ import React, { useState, useRef, useEffect } from "react";
 import * as createFFmpeg from "@ffmpeg/ffmpeg";
 // import * as FFmpeg from "@ffmpeg/ffmpeg";
 import { FaMicrophone } from "react-icons/fa";
-const ffmpeg = createFFmpeg();
 // Create a new WAV encoder
 async function convertWebmToMp3(webmBlob) {
+  const ffmpeg = createFFmpeg.FFmpeg.createFFmpeg({ log: false });
   await ffmpeg.load();
 
   const inputName = "input.webm";
