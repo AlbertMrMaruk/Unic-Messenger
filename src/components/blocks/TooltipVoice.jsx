@@ -124,10 +124,16 @@ function TooltipVoice({ children, setAudioUrl }) {
   }, [recording]);
 
   const onRecordingComplete = async (blob) => {
-    console.log("recording", blob);
     const url = URL.createObjectURL(blob);
-    console.log(url);
-    console.log(await blobToBase64(blob));
+    const dataURL = await blobToBase64(blob);
+
+    let encoded = dataURL.replace(/^data:(.*,)?/, "");
+    if (encoded.length % 4 > 0) {
+      encoded += "=".repeat(4 - (encoded.length % 4));
+    }
+    console.log("recording", encoded);
+    setAudioUrl({ url, encoded });
+    setShow(false);
   };
 
   const onRecordingError = (err) => {
@@ -143,16 +149,17 @@ function TooltipVoice({ children, setAudioUrl }) {
       }}
     >
       {children}
-      <Recorder
-        onRecordingComplete={onRecordingComplete}
-        onRecordingError={onRecordingError}
-      />
-      {/* <div
+
+      <div
         className={`absolute whitespace-nowrap bottom-full flex flex-col items-center left-[-.7rem]   ${
           !show ? "hidden" : null
         }`}
       >
-        <div
+        <Recorder
+          onRecordingComplete={onRecordingComplete}
+          onRecordingError={onRecordingError}
+        />
+        {/* <div
           className={`p-2 rounded-md  bg-secondarylight
           }`}
         >
@@ -176,9 +183,9 @@ function TooltipVoice({ children, setAudioUrl }) {
               <div className="text-sm text-gray-600">{calcDur(duration)}</div>
             )}
           </div>
-        </div>
+        </div> */}
         <div className="w-3 h-3 -mt-2 rotate-45 bg-secondarylight mb-2" />
-      </div> */}
+      </div>
     </div>
   );
 }
