@@ -16,8 +16,8 @@ function Message({ message }) {
 
     return h + ":" + m;
   };
-  const isPdf = (url) => {
-    return url?.split(".").at(-1) === "pdf";
+  const isFile = (url) => {
+    return url && !isVideo(url) && !isImg(url) && !isAudio(url);
   };
   const isVideo = (url) => {
     return url?.split(".").at(-1) === "mp4";
@@ -30,7 +30,13 @@ function Message({ message }) {
     );
   };
   const isImg = (url) => {
-    return url && !isVideo(url) && !isPdf(url) && !isAudio(url);
+    return (
+      url?.split(".").at(-1) === "jpeg" ||
+      url?.split(".").at(-1) === "png" ||
+      url?.split(".").at(-1) === "hrec" ||
+      url?.split(".").at(-1) === "webm" ||
+      url?.split(".").at(-1) === "jpg"
+    );
   };
   return (
     <div
@@ -66,14 +72,16 @@ function Message({ message }) {
             !message?.fromMe ? "text-left mr-[2.5rem]" : "text-right mr-[2rem]"
           } `}
         >
-          {isPdf(url, message) ? (
+          {isFile(url, message) ? (
             <a href={API_URL + url.slice(21)} target="_blank" className="flex">
               <FaFilePdf
                 className={`text-primary text-[1.4rem] my-auto mr-[.5rem] ${
                   message?.fromMe ? "text-white" : "text-primary"
                 }`}
               />
-              {text}
+              {text.length > 30
+                ? text.slice(0, 30) + "..." + text.slice(0, -6)
+                : text}
             </a>
           ) : (
             text

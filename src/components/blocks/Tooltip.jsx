@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaFile, FaImage } from "react-icons/fa";
+import { FaFile } from "react-icons/fa";
 import EmojiPicker from "emoji-picker-react";
 
 export const Tooltip = ({
@@ -85,7 +85,7 @@ export const Tooltip = ({
                   onChange={(e) => {
                     getBase64(e.target.files[0]);
                   }}
-                  accept="image/png, image/jpeg, application/pdf, image/gif, video/*, audio/*, image/*"
+                  accept="*"
                 />
               </div>
             </>
