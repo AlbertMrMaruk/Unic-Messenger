@@ -73,7 +73,7 @@ export default function ModalChats({
                     >
                       <div className="flex flex-col gap-1 text-[#e9e9e9] text-left w-[60%]">
                         <h3 className="text-lg md:text-md font-bold ml-[2rem]">
-                          {el?.pushName ?? el?.name}
+                          {el?.pushName ?? el?.name ?? "+" + el?.number}
                         </h3>
                       </div>
                     </div>
