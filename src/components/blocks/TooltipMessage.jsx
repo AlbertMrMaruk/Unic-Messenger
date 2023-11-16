@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-export const TooltipMessage = ({ message, children, setReplyMessage }) => {
+export const TooltipMessage = ({
+  message,
+  children,
+  setReplyMessage,
+  isGroup,
+}) => {
   const [show, setShow] = useState(false);
 
   return (
@@ -16,7 +21,16 @@ export const TooltipMessage = ({ message, children, setReplyMessage }) => {
         setShow(!show);
       }}
     >
-      {children}
+      {isGroup ? (
+        <>
+          <div className="flex flex-row">
+            <div className="bg-[#ababab]  rounded-full w-[40px] h-[40px]"></div>
+            {children}
+          </div>
+        </>
+      ) : (
+        { children }
+      )}
 
       <div
         className={`absolute whitespace-nowrap bottom-full flex flex-col  items-center ${

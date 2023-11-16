@@ -833,3 +833,34 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
 }
 
 export default Chats;
+
+//
+<div
+  class="relative flex flex-col  group w-[100%]"
+  style="
+    flex-direction: row;
+"
+>
+  <div class="bg-[#ababab]  rounded-full w-[40px] h-[40px]"></div>
+  <div class="mx-3 mb-2 rounded-xl  text-white pr-2 pl-3 min-w-[9%] py-2   flex flex-col gap-1 bg-primary self-end  max-w-[70%] md:max-w-[45%] w-fit">
+    <span
+      class=" text-left mr-[2.5rem] "
+      style="
+    font-weight: 800;
+    font-size: 17px;
+"
+    >
+      Анна
+    </span>
+    <span class=" text-right mr-[2rem] ">хорошо</span>
+    <span class="text-right text-[10px]   mt-[-1.1rem] ">15:25</span>
+  </div>
+  <div class="absolute whitespace-nowrap bottom-full flex flex-col  items-center right-[-1rem]  hidden">
+    <span class="relative z-10 p-[.9rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3">
+      <div class="flex flex-col gap-3  font-bold ">
+        <span class=" cursor-pointer">Ответить на сообщение</span>
+      </div>
+    </span>
+    <div class="w-3 h-3 -mt-2 rotate-45 bg-secondarylight mb-2"></div>
+  </div>
+</div>;

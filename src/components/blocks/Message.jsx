@@ -1,12 +1,11 @@
 import { FaFile } from "react-icons/fa";
 const API_URL = "https://unicmessenger.ru";
 
-function Message({ message }) {
+function Message({ message, isGroup }) {
   const url = message?.mediaUrl;
   const text = message?.body;
   const timestamp =
     +(message?.payload?.timestamp + "000") || +(message?.timestamp + "000");
-  // const isGroup = message.
   const calcDate = (timestamp) => {
     let h = new Date(+timestamp).getHours();
     let m = new Date(+timestamp).getMinutes();
