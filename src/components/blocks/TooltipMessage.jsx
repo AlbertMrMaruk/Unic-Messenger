@@ -23,7 +23,7 @@ export const TooltipMessage = ({
     >
       {isGroup ? (
         <>
-          <div className="flex flex-row">
+          <div className="flex flex-row items-center">
             <div className="bg-[#ababab]  rounded-full w-[40px] h-[40px]"></div>
             {children}
           </div>
