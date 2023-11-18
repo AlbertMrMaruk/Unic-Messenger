@@ -326,7 +326,7 @@ function Chats() {
               .then((res) => {
                 data.chats[currentSession][index].messages = res.map((el) => {
                   delete el.vCards;
-                  el.author.user = el._data?.author?.user;
+                  el.author = { user: el._data?.author?.user };
                   el.notifyName = el._data.notifyName;
                   if (el.hasMedia) {
                     console.log(el._data.size, allSize);
