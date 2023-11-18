@@ -640,7 +640,6 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
             <Spinner />
           ) : (
             messages.map((el, index) => {
-              console.log(formatDate(+(el?.timestamp + "000")));
               const formattedDate1 = formatDate(+(el?.timestamp + "000"));
               const formattedDate2 = formatDate(
                 +(messages[index - 1]?.timestamp + "000")
@@ -655,6 +654,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                       </span>
                       <div className="bg-primary h-[2px] w-[45%]"></div>
                     </div>
+                    {console.log(el)}
                     <TooltipMessage
                       message={el}
                       isGroup={el?.isGroup}
