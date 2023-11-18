@@ -43,6 +43,11 @@ function Message({ message, isGroup }) {
         !message?.fromMe ? "bg-[#2a2a2e] self-start" : "bg-primary self-end"
       } ${isAudio(url) ? "w-[40%]" : " max-w-[70%] md:max-w-[45%] w-fit"}`}
     >
+      {isGroup && (
+        <span className="text-left font-bold  text-[17px] mr-[2.5rem]">
+          {message?._data?.notifyName ?? "+" + message?._data?.author?.user}
+        </span>
+      )}
       {/* Проверка файла на тип если пдф или видео */}
       {isVideo(url) && (
         <video
