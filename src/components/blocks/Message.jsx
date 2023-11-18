@@ -45,7 +45,7 @@ function Message({ message, isGroup }) {
     >
       {isGroup && (
         <span className="text-left font-bold  text-[17px] mr-[2.5rem]">
-          {message?._data?.notifyName ?? "+" + message?._data?.author?.user}
+          {message?.notifyName ?? "+" + message?.author?.user}
         </span>
       )}
       {/* Проверка файла на тип если пдф или видео */}
