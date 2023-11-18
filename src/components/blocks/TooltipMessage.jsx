@@ -25,7 +25,7 @@ export const TooltipMessage = ({
         <>
           <div className="flex flex-row">
             <div className="bg-[#ababab]  rounded-full w-[40px] h-[40px]"></div>
-            {children}
+            children
           </div>
         </>
       ) : (
