@@ -102,17 +102,17 @@ function Chats() {
             message.payload.notifyName = message.payload._data.notifyName;
             setMessages((prev) => prev);
             const chatIndex = chats.findIndex(
-              (el) => el?.id?._serialized === message.payload.from
+              (el) => el?.id?._serialized === message.payload.to
             );
             if (chatIndex === -1) {
               const newChat = {
                 id: {
-                  _serialized: message.payload.from,
+                  _serialized: message.payload.to,
                 },
                 name:
                   message.payload._data.notifyName ??
-                  message.payload.from.slice(0, -5),
-                isGroup: message.payload.from.at(-5) === "g",
+                  message.payload.to.slice(0, -5),
+                isGroup: message.payload.to.at(-5) === "g",
                 unreadCount: 0,
                 messages: [message.payload],
                 lastMessage: {
