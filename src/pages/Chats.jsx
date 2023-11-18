@@ -741,6 +741,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               const formattedDate2 = formatDate(
                 +(messages[index - 1]?.timestamp + "000")
               );
+              console.log(el);
               if (formattedDate1 !== formattedDate2 && messages[index - 1]) {
                 return (
                   <>
@@ -751,7 +752,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                       </span>
                       <div className="bg-primary h-[2px] w-[45%]"></div>
                     </div>
-                    {console.log(el)}
+
                     <TooltipMessage
                       message={el}
                       isGroup={el.from.at(-4) === "g"}
