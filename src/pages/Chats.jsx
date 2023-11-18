@@ -754,7 +754,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                     {console.log(el)}
                     <TooltipMessage
                       message={el}
-                      isGroup={el?.isGroup}
+                      isGroup={el.from.at(-4) === "g"}
                       setReplyMessage={setReplyMessage}
                     >
                       <Message message={el} isGroup={el?.isGroup} key={index} />
