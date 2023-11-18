@@ -757,7 +757,11 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                       isGroup={el.from.at(-4) === "g"}
                       setReplyMessage={setReplyMessage}
                     >
-                      <Message message={el} isGroup={el?.isGroup} key={index} />
+                      <Message
+                        message={el}
+                        isGroup={el.from.at(-4) === "g"}
+                        key={index}
+                      />
                     </TooltipMessage>
                   </>
                 );
@@ -767,9 +771,13 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 <TooltipMessage
                   message={el}
                   setReplyMessage={setReplyMessage}
-                  isGroup={el?.isGroup}
+                  isGroup={el.from.at(-4) === "g"}
                 >
-                  <Message message={el} key={index} isGroup={el?.isGroup} />
+                  <Message
+                    message={el}
+                    key={index}
+                    isGroup={el.from.at(-4) === "g"}
+                  />
                 </TooltipMessage>
               );
             })
