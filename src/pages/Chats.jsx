@@ -64,34 +64,128 @@ function Chats() {
     const gettingMessage = (message) => {
       if (message.event === "message.any") {
         if (message.payload.fromMe) {
-          setMessages((prev) => [message.payload, ...prev]);
-          const chatIndex = chats.findIndex(
-            (el) => el.id._serialized === currentChat
-          );
-          chats[chatIndex].messages = [
-            ...chats[chatIndex].messages,
-            message.payload,
-          ];
-          chats[chatIndex].lastMessage = {
-            ...message.payload,
-          };
-          let allSize = dataUser.allSize;
-          if (message?.payload?._data?.size) {
-            allSize += message?.payload?._data?.size;
-          }
-          setSizeUser(+allSize / (1024 * 1024));
-          setDataUser((prev) => ({
-            ...prev,
-            chats: { [session]: chats, ...dataUser.chats },
-            allSize,
-          }));
+          if (message.payload.from === currentChat) {
+            message.payload.author = {
+              user: message.payload._data?.author?.user,
+            };
+            message.payload.notifyName = message.payload._data.notifyName;
+            setMessages((prev) => [message.payload, ...prev]);
+            const chatIndex = chats.findIndex(
+              (el) => el.id._serialized === currentChat
+            );
+            chats[chatIndex].messages = [
+              ...chats[chatIndex].messages,
+              message.payload,
+            ];
+            chats[chatIndex].lastMessage = {
+              ...message.payload,
+            };
+            let allSize = dataUser.allSize;
+            if (message?.payload?._data?.size) {
+              allSize += message?.payload?._data?.size;
+            }
+            setSizeUser(+allSize / (1024 * 1024));
+            setDataUser((prev) => ({
+              ...prev,
+              chats: { [session]: chats, ...dataUser.chats },
+              allSize,
+            }));
 
-          DatabaseAPI.updateUser(dataUser.username, {
-            chats: { ...dataUser.chats, [session]: chats },
-            allSize: allSize,
-          });
+            DatabaseAPI.updateUser(dataUser.username, {
+              chats: { ...dataUser.chats, [session]: chats },
+              allSize: allSize,
+            });
+          } else {
+            message.payload.author = {
+              user: message.payload._data?.author?.user,
+            };
+            message.payload.notifyName = message.payload._data.notifyName;
+            setMessages((prev) => prev);
+            const chatIndex = chats.findIndex(
+              (el) => el?.id?._serialized === message.payload.from
+            );
+            if (chatIndex === -1) {
+              const newChat = {
+                id: {
+                  _serialized: message.payload.from,
+                },
+                name:
+                  message.payload._data.notifyName ??
+                  message.payload.from.slice(0, -5),
+                isGroup: message.payload.from.at(-5) === "g",
+                unreadCount: 0,
+                messages: [message.payload],
+                lastMessage: {
+                  ...message.payload,
+                },
+              };
+              let allSize = dataUser.allSize;
+              if (message?.payload?._data?.size) {
+                allSize += message?.payload?._data?.size;
+              }
+              setSizeUser(+allSize / (1024 * 1024));
+              setDataUser((prev) => ({
+                ...prev,
+                chats: {
+                  ...prev.chats,
+                  [session]: [...prev.chats[session], newChat],
+                },
+                allSize,
+              }));
+              DatabaseAPI.updateUser(dataUser.username, {
+                chats: {
+                  ...dataUser.chats,
+                  [session]: [...dataUser.chats[session], newChat],
+                },
+                allSize,
+              }).then(() => {
+                setChats(
+                  [...dataUser.chats[session], newChat]?.sort(
+                    (chat1, chat2) => {
+                      const chat1time =
+                        +chat1?.lastMessage?.timestamp ||
+                        +(chat1?.lastMessage?.payload?.timestamp + "000");
+                      const chat2time =
+                        +chat2?.lastMessage?.timestamp ||
+                        +(chat2?.lastMessage?.payload?.timestamp + "000");
+
+                      return chat1time > chat2time ? -1 : 1;
+                    }
+                  ) ?? []
+                );
+              });
+            } else {
+              chats[chatIndex].lastMessage = {
+                body: message.payload.body,
+                ...message.payload,
+              };
+              chats[chatIndex].messages = [
+                ...chats[chatIndex].messages,
+                message.payload,
+              ];
+
+              let allSize = dataUser.allSize;
+              if (message?.payload?._data?.size) {
+                allSize += message?.payload?._data?.size;
+              }
+              setSizeUser(+allSize / (1024 * 1024));
+              setDataUser((prev) => ({
+                ...prev,
+                chats: { [session]: chats, ...dataUser.chats },
+                allSize,
+              }));
+              DatabaseAPI.updateUser(dataUser.username, {
+                chats: { ...dataUser.chats, [session]: chats },
+                allSize,
+              });
+            }
+          }
         } else {
           if (message.payload.from === currentChat) {
+            message.payload.author = {
+              user: message.payload._data?.author?.user,
+            };
+            message.payload.notifyName = message.payload._data.notifyName;
             setMessages((prev) => [message.payload, ...prev]);
             const chatIndex = chats.findIndex(
               (el) => el.id._serialized === currentChat
@@ -119,6 +213,10 @@ function Chats() {
               allSize,
             });
           } else {
+            message.payload.author = {
+              user: message.payload._data?.author?.user,
+            };
+            message.payload.notifyName = message.payload._data.notifyName;
             setMessages((prev) => prev);
             const chatIndex = chats.findIndex(
               (el) => el?.id?._serialized === message.payload.from
@@ -386,11 +484,7 @@ function Chats() {
           userData[0].chats?.[correctSession].forEach((el) => {
             let countChatsUpdate = 0;
             let countChatsUpdated = 0;
-            console.log(
-              el,
-              newChats.find((el2) => el.id._serialized === el2.id._serialized),
-              "dd"
-            );
+
             const el2 = newChats.find(
               (el2) => el.id._serialized === el2.id._serialized
             );
@@ -406,7 +500,8 @@ function Chats() {
                         el?.lastMessage?.timestamp === message?.timestamp
                     ) + 1
                   );
-                  console.log(el.messages, superNew);
+                  superNew.author = { user: el._data?.author?.user };
+                  superNew.notifyName = el._data.notifyName;
                   el.messages = [...el.messages, ...superNew];
                   el.lastMessage = superNew.at(-1);
                   console.log(el);
