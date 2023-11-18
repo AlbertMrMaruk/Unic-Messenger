@@ -657,17 +657,22 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                     </div>
                     <TooltipMessage
                       message={el}
+                      isGroup={el?.isGroup}
                       setReplyMessage={setReplyMessage}
                     >
-                      <Message message={el} key={index} />
+                      <Message message={el} isGroup={el?.isGroup} key={index} />
                     </TooltipMessage>
                   </>
                 );
               }
 
               return (
-                <TooltipMessage message={el} setReplyMessage={setReplyMessage}>
-                  <Message message={el} key={index} />
+                <TooltipMessage
+                  message={el}
+                  setReplyMessage={setReplyMessage}
+                  isGroup={el?.isGroup}
+                >
+                  <Message message={el} key={index} isGroup={el?.isGroup} />
                 </TooltipMessage>
               );
             })
