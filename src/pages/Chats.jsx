@@ -99,7 +99,7 @@ function Chats() {
             message.payload.author = {
               user: message.payload._data?.author?.user,
             };
-            message.payload.notifyName = message.payload._data.notifyName;
+            message.payload.notifyName = message.payload?._data?.notifyName;
             setMessages((prev) => prev);
             const chatIndex = chats.findIndex(
               (el) => el?.id?._serialized === message.payload.to
@@ -110,7 +110,7 @@ function Chats() {
                   _serialized: message.payload.to,
                 },
                 name:
-                  message.payload._data.notifyName ??
+                  message.payload?._data?.notifyName ??
                   message.payload.to.slice(0, -5),
                 isGroup: message.payload.to.at(-5) === "g",
                 unreadCount: 0,
@@ -185,7 +185,7 @@ function Chats() {
             message.payload.author = {
               user: message.payload._data?.author?.user,
             };
-            message.payload.notifyName = message.payload._data.notifyName;
+            message.payload.notifyName = message.payload?._data?.notifyName;
             setMessages((prev) => [message.payload, ...prev]);
             const chatIndex = chats.findIndex(
               (el) => el.id._serialized === currentChat
@@ -216,7 +216,7 @@ function Chats() {
             message.payload.author = {
               user: message.payload._data?.author?.user,
             };
-            message.payload.notifyName = message.payload._data.notifyName;
+            message.payload.notifyName = message.payload?._data?.notifyName;
             setMessages((prev) => prev);
             const chatIndex = chats.findIndex(
               (el) => el?.id?._serialized === message.payload.from
@@ -227,7 +227,7 @@ function Chats() {
                   _serialized: message.payload.from,
                 },
                 name:
-                  message.payload._data.notifyName ??
+                  message.payload?._data?.notifyName ??
                   message.payload.from.slice(0, -5),
                 isGroup: message.payload.from.at(-5) === "g",
                 unreadCount: 1,
@@ -425,7 +425,7 @@ function Chats() {
                 data.chats[currentSession][index].messages = res.map((el) => {
                   delete el.vCards;
                   el.author = { user: el._data?.author?.user };
-                  el.notifyName = el._data.notifyName;
+                  el.notifyName = el?._data?.notifyName;
                   if (el.hasMedia) {
                     console.log(el._data.size, allSize);
                     if (+el._data.size > 0) {
@@ -501,7 +501,7 @@ function Chats() {
                     ) + 1
                   );
                   superNew.author = { user: el._data?.author?.user };
-                  superNew.notifyName = el._data.notifyName;
+                  superNew.notifyName = el?._data?.notifyName;
                   el.messages = [...el.messages, ...superNew];
                   el.lastMessage = superNew.at(-1);
                   console.log(el);
