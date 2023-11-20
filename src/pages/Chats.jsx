@@ -736,7 +736,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         )}
         {/* Messages in chat */}
         <div
-          className={`w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[75h] ${
+          className={`w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[75vh] ${
             replyMessage ? "md:h-[75vh]" : "md:h-[80vh]"
           }  mt-2`}
         >
