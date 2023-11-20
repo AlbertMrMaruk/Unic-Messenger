@@ -41,7 +41,9 @@ function Message({ message, isGroup }) {
     <div
       className={`mx-3 mb-2 rounded-xl  text-white pr-2 pl-3 min-w-[9%] py-2   flex flex-col gap-1 ${
         !message?.fromMe ? "bg-[#2a2a2e] self-start" : "bg-primary self-end"
-      } ${isAudio(url) ? "w-[40%]" : " max-w-[70%] md:max-w-[45%] w-fit"}`}
+      } ${
+        isAudio(url) ? "w-[80%] md:[40%]" : " max-w-[70%] md:max-w-[45%] w-fit"
+      }`}
     >
       {isGroup && (
         <span className="text-left font-bold  text-[17px] mr-[2.5rem]">
