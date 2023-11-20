@@ -327,6 +327,7 @@ function Chats() {
   // Запуск Вебсокета
   useEffect(() => {
     console.log("Started WEBSOCKET");
+    console.log(session);
     if (session && !webSocket) {
       setWebSocket(clickChat(setNewMessage, session));
     } else if (session && webSocket) {
