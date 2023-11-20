@@ -513,6 +513,10 @@ function Chats() {
       dataToApp(userData[0], correctSession);
     }
   };
+
+  // useEffect(() => {
+  //   onLoad();
+  // }, []);
   useEffect(() => {
     const changeState = async () => {
       console.log(state);
@@ -529,14 +533,12 @@ function Chats() {
       }
       if (state?.session !== session) {
         console.log(state?.session, "IT s wil changed");
-        session = state?.session;
+        setSession(state?.session);
+        onLoad(state?.session);
       }
     };
     changeState();
   }, [state]);
-  useEffect(() => {
-    onLoad();
-  }, []);
 
   // Смена чата
 
