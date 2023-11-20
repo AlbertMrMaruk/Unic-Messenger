@@ -518,9 +518,9 @@ function Chats() {
     }
   };
 
-  // useEffect(() => {
-  //   onLoad();
-  // }, []);
+  useEffect(() => {
+    onLoad();
+  }, []);
   useEffect(() => {
     const changeState = async () => {
       console.log(state);
@@ -539,6 +539,8 @@ function Chats() {
         console.log(state?.session, "IT s wil changed");
         setSession(state?.session);
         onLoad(state?.session);
+      } else if (!session) {
+        onLoad();
       }
     };
     changeState();
