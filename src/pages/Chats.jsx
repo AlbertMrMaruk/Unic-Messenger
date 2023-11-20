@@ -698,7 +698,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
       >
         {/* Top Menu Contact Name */}
         {state && (
-          <div className="bg-inherit flex justify-center items-center gap-2 md:block h-[10vh] border-b-[1px] border-[#2a2a2a]">
+          <div className="sticky top-0 bg-inherit flex justify-center items-center gap-2 md:block h-[10vh] border-b-[1px] border-[#2a2a2a]">
             <div
               className="block mr-[1.5rem]  ml-[1rem] md:hidden"
               onClick={() => setShowChats(true)}
@@ -792,7 +792,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           )}
         </div>
         {/* Input and buttons for send messages */}
-        <div className="w-[100%] h-[8vh]  sticky bottom-2 justify-center items-center">
+        <div className="w-[100%] h-[8vh]  justify-center items-center">
           {replyMessage && (
             <div className="w-[95%] md:w-[90%] flex bg-[#b5b5b566] rounded-t-xl m-auto py-2 px-3 justify-between items-center">
               <div className="flex justify-center items-center">
