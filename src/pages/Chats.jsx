@@ -693,7 +693,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
       <div
         className={`w-[100%] ${
           !showChats ? "block" : "hidden"
-        } md:block md:w-[72%] bg-inherit h-[100vh]
+        } md:block md:w-[72%] bg-inherit 
             `}
       >
         {/* Top Menu Contact Name */}
