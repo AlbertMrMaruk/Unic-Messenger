@@ -45,6 +45,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         } else {
           navigate("/", {
             state: {
+              session,
               id: chat.id._serialized,
               name: chat.name,
               img: chat.avatar ?? "",
