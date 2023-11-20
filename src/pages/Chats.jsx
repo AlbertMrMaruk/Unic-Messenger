@@ -68,7 +68,7 @@ function Chats() {
             message.payload.author = {
               user: message.payload._data?.author?.user,
             };
-            message.payload.notifyName = message.payload._data.notifyName;
+            message.payload.notifyName = message.payload?._data?.notifyName;
             setMessages((prev) => [message.payload, ...prev]);
             const chatIndex = chats.findIndex(
               (el) => el.id._serialized === currentChat
