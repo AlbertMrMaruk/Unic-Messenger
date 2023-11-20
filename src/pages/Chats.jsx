@@ -64,7 +64,7 @@ function Chats() {
     const gettingMessage = (message) => {
       if (message.event === "message.any") {
         if (message.payload.fromMe) {
-          if (message.payload.from === currentChat) {
+          if (message.payload.to === currentChat) {
             message.payload.author = {
               user: message.payload._data?.author?.user,
             };
