@@ -335,6 +335,7 @@ function Chats() {
       setFiltChats();
       setWebSocket(clickChat(setNewMessage, session));
     }
+    onLoad();
   }, [session]);
 
   // Загрузка базы данных
@@ -535,7 +536,6 @@ function Chats() {
       if (state?.session !== session) {
         console.log(state?.session, "IT s wil changed");
         setSession(state?.session);
-        onLoad();
       }
     };
     changeState();
