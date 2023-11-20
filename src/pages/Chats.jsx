@@ -69,7 +69,7 @@ function Chats() {
               user: message.payload._data?.author?.user,
             };
             message.payload.notifyName = message.payload?._data?.notifyName;
-            console.log("Hmm new one", message.payload);
+
             setMessages((prev) => [message.payload, ...prev]);
             const chatIndex = chats.findIndex(
               (el) => el.id._serialized === currentChat
@@ -328,10 +328,8 @@ function Chats() {
   useEffect(() => {
     console.log("Started WEBSOCKET");
     if (session && !webSocket) {
-      console.log(session);
       setWebSocket(clickChat(setNewMessage, session));
     } else if (session && webSocket) {
-      console.log(webSocket);
       webSocket.close(3333);
       setFiltChats();
       setWebSocket(clickChat(setNewMessage, session));
@@ -387,13 +385,7 @@ function Chats() {
     };
     //Включается спиннер
     setShowSpinnerMessages(true);
-    console.log(
-      userData[0].accounts.length > 0 &&
-        (userData[0].chats?.[session]?.length === 0 || !userData[0].chats),
-      userData[0].chats,
-      userData[0],
-      session
-    );
+
     //Проверка аккаунтов пользователя
     if (userData[0].accounts.length === 0) {
       setShowSpinnerMessages(false);
@@ -406,7 +398,7 @@ function Chats() {
       let currentSession = session ?? userData[0].accounts[0];
       setSession(currentSession);
       setShowModalDownload(true);
-      console.log(currentSession);
+
       ChatsApi.getChats(currentSession)
         .then((resp) => resp.json())
         .then(async (res) => {
@@ -428,7 +420,6 @@ function Chats() {
                   el.author = { user: el._data?.author?.user };
                   el.notifyName = el?._data?.notifyName;
                   if (el.hasMedia) {
-                    console.log(el._data.size, allSize);
                     if (+el._data.size > 0) {
                       el.size = el._data.size;
                       allSize += +el._data.size;
@@ -443,13 +434,11 @@ function Chats() {
             await ChatsApi.getAvatar(el.id.user, currentSession)
               .then((el) => el.json())
               .then((el) => {
-                console.log(el?.profilePictureURL);
                 data.chats[currentSession][index].avatar =
                   el?.profilePictureURL;
                 setPercentage((prev) => +prev + 1);
                 data.chatsCount += 1;
                 if (data.chatsCount === 5) {
-                  console.log(allSize, "and nooooowwww");
                   data.allSize = allSize;
 
                   DatabaseAPI.updateUser(userData[0].username, {
@@ -459,7 +448,6 @@ function Chats() {
                   })
                     .then((res) => res.json())
                     .then((res) => {
-                      console.log(res);
                       setPercentage(100);
                       dataToApp(data, currentSession);
                     });
@@ -491,7 +479,7 @@ function Chats() {
             );
             if (el2?.lastMessage?.timestamp > el?.lastMessage?.timestamp) {
               countChatsUpdate++;
-              console.log("OH YEAAA");
+
               ChatsApi.getMessages(el.id._serialized, 20, correctSession)
                 .then((el) => el.json())
                 .then((messages) => {
@@ -505,7 +493,7 @@ function Chats() {
                   superNew.notifyName = el?._data?.notifyName;
                   el.messages = [...el.messages, ...superNew];
                   el.lastMessage = superNew.at(-1);
-                  console.log(el);
+
                   countChatsUpdated++;
                   if (countChatsUpdate === countChatsUpdated) {
                     DatabaseAPI.updateUser(userData[0].username, {
@@ -514,7 +502,7 @@ function Chats() {
                         [correctSession]: userData[0].chats?.[correctSession],
                       },
                     });
-                    console.log("ddd");
+
                     dataToApp(userData[0], correctSession);
                   }
                 });
@@ -542,8 +530,9 @@ function Chats() {
         );
         setShowSpinnerMessages(false);
       }
-      if (state?.account) {
-        setSession(state?.account);
+      if (state?.session !== session) {
+        console.log(state?.session);
+        setSession(state?.session);
       }
     };
     changeState();
@@ -626,7 +615,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               onClick={() => {
                 navigate("/", {
                   state: {
-                    account: el,
+                    session: el,
                   },
                 });
                 onLoad(el);
@@ -750,7 +739,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               const formattedDate2 = formatDate(
                 +(messages[index - 1]?.timestamp + "000")
               );
-              console.log(el);
+
               if (formattedDate1 !== formattedDate2 && messages[index - 1]) {
                 return (
                   <>
