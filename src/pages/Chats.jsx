@@ -521,6 +521,8 @@ function Chats() {
   useEffect(() => {
     onLoad();
   }, []);
+
+  // Смена чата
   useEffect(() => {
     const changeState = async () => {
       console.log(state);
@@ -545,9 +547,6 @@ function Chats() {
     };
     changeState();
   }, [state]);
-
-  // Смена чата
-
   //Функция отправки сообщения
   const sendMessage = async (text, type, data) => {
     await ChatsApi.sendSeen(currentChat, session);
@@ -737,7 +736,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         )}
         {/* Messages in chat */}
         <div
-          className={`w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[70vh] ${
+          className={`w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[75h] ${
             replyMessage ? "md:h-[75vh]" : "md:h-[80vh]"
           }  mt-2`}
         >
