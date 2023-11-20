@@ -542,6 +542,9 @@ function Chats() {
         );
         setShowSpinnerMessages(false);
       }
+      if (state?.account) {
+        setSession(state?.account);
+      }
     };
     changeState();
   }, [state]);
@@ -621,7 +624,11 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               }`}
               key={index}
               onClick={() => {
-                navigate("/");
+                navigate("/", {
+                  state: {
+                    account: el,
+                  },
+                });
                 onLoad(el);
               }}
             >
