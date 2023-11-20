@@ -736,7 +736,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         )}
         {/* Messages in chat */}
         <div
-          className={`w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[75vh] ${
+          className={`w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[70vh] ${
             replyMessage ? "md:h-[75vh]" : "md:h-[80vh]"
           }  mt-2`}
         >
@@ -792,7 +792,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           )}
         </div>
         {/* Input and buttons for send messages */}
-        <div className="w-[100%] h-[8h]  justify-center items-center">
+        <div className="w-[100%] h-[8h]  sticky justify-center items-center">
           {replyMessage && (
             <div className="w-[95%] md:w-[90%] flex bg-[#b5b5b566] rounded-t-xl m-auto py-2 px-3 justify-between items-center">
               <div className="flex justify-center items-center">
