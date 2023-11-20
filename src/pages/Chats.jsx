@@ -513,9 +513,9 @@ function Chats() {
       dataToApp(userData[0], correctSession);
     }
   };
-  useEffect(() => {
-    onLoad();
-  }, []);
+  // useEffect(() => {
+  //   onLoad();
+  // }, []);
 
   // Смена чата
   useEffect(() => {
@@ -535,6 +535,7 @@ function Chats() {
       if (state?.session !== session) {
         console.log(state?.session, "IT s wil changed");
         setSession(state?.session);
+        onLoad();
       }
     };
     changeState();
