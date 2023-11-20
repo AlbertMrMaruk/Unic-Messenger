@@ -335,7 +335,6 @@ function Chats() {
       setFiltChats();
       setWebSocket(clickChat(setNewMessage, session));
     }
-    onLoad();
   }, [session]);
 
   // Загрузка базы данных
@@ -514,11 +513,6 @@ function Chats() {
       dataToApp(userData[0], correctSession);
     }
   };
-  // useEffect(() => {
-  //   onLoad();
-  // }, []);
-
-  // Смена чата
   useEffect(() => {
     const changeState = async () => {
       console.log(state);
@@ -535,11 +529,16 @@ function Chats() {
       }
       if (state?.session !== session) {
         console.log(state?.session, "IT s wil changed");
-        setSession(state?.session);
+        session = state?.session;
       }
     };
     changeState();
   }, [state]);
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  // Смена чата
 
   //Функция отправки сообщения
   const sendMessage = async (text, type, data) => {
