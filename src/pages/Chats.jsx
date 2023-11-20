@@ -410,7 +410,7 @@ function Chats() {
           console.log("Starting");
           const data = {
             ...userData[0],
-            chats: { ...userData[0].chats, [currentSession]: res.slice(0, 5) },
+            chats: { ...userData[0].chats, [currentSession]: res.slice(0, 40) },
             chatsCount: 0,
           };
           let allSize = 0;
@@ -443,7 +443,7 @@ function Chats() {
                   el?.profilePictureURL;
                 setPercentage((prev) => +prev + 1);
                 data.chatsCount += 1;
-                if (data.chatsCount === 5) {
+                if (data.chatsCount === 40) {
                   data.allSize = allSize;
 
                   DatabaseAPI.updateUser(userData[0].username, {
@@ -459,7 +459,7 @@ function Chats() {
                 }
               });
           };
-          for (let i = 0; i < 5; i++) {
+          for (let i = 0; i < 40; i++) {
             await fetchChat(data.chats[currentSession][i], i);
             if (i === 10) {
               console.log("Delay");
