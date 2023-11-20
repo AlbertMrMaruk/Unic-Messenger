@@ -63,6 +63,10 @@ function Chats() {
   useEffect(() => {
     const gettingMessage = (message) => {
       if (message.event === "message.any") {
+        //Убираем путсые сообщения
+        if (message.payload?.ackName === "UNKNOWN") {
+          return;
+        }
         if (message.payload.fromMe) {
           if (message.payload.to === currentChat) {
             message.payload.author = {
