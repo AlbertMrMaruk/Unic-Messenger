@@ -520,6 +520,7 @@ function Chats() {
   // Смена чата
   useEffect(() => {
     const changeState = async () => {
+      console.log(state);
       if (state?.id && dataUser?.chats) {
         setShowSpinnerMessages(true);
         setCurrentChat(state?.id);
@@ -532,7 +533,7 @@ function Chats() {
         setShowSpinnerMessages(false);
       }
       if (state?.session !== session) {
-        console.log(state?.session);
+        console.log(state?.session, "IT s wil changed");
         setSession(state?.session);
       }
     };
