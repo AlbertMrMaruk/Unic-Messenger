@@ -44,7 +44,14 @@ export const TooltipMessage = ({
           <div className="flex flex-col gap-3  font-bold ">
             <div className="flex gap-1 border-b-2 border-[#3f4145] w-full p-[.7rem]">
               <div className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] ">
-                😘
+                ❤️
+              </div>
+              <div className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] ">
+                😍
+              </div>
+
+              <div className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] ">
+                👍
               </div>
               <div className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] ">
                 😂
