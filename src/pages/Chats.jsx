@@ -62,6 +62,9 @@ function Chats() {
   // Функция получения сообщения
   useEffect(() => {
     const gettingMessage = (message) => {
+      if (sizeUser === 0) {
+        return;
+      }
       if (message.event === "message.any") {
         //Убираем путсые сообщения
         if (message.payload?.ackName === "UNKNOWN") {
