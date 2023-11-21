@@ -49,6 +49,7 @@ function Chats() {
   const [qrCode, setQrCode] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showModalChats, setShowModalChats] = useState(false);
+  const [showModalReply, setShowModalReply] = useState(false);
   const [showModalAccount, setShowModalAccount] = useState(false);
   const [showModalDownload, setShowModalDownload] = useState(false);
   const [audioUrl, setAudioUrl] = useState(null);
@@ -766,6 +767,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                     <TooltipMessage
                       message={el}
                       isGroup={el.from.at(-4) === "g"}
+                      setShowModalReply={setShowModalReply}
                       setReplyMessage={setReplyMessage}
                     >
                       <Message
@@ -947,6 +949,13 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           dataUser={dataUser}
           setDataUser={setDataUser}
           setChats={setChats}
+        />
+      )}
+      {showModalReply && (
+        <ModalChats
+          setShowModal={setShowModalReply}
+          session={session}
+          setReplyMessage={setReplyMessage}
         />
       )}
     </div>

@@ -4,6 +4,7 @@ export const TooltipMessage = ({
   message,
   children,
   setReplyMessage,
+  setShowModalReply,
   isGroup,
 }) => {
   const [show, setShow] = useState(false);
@@ -52,11 +53,20 @@ export const TooltipMessage = ({
             </span>
             <span
               className="cursor-pointer"
-              onClick={async (e) => {
+              onClick={async () => {
                 await navigator.clipboard.writeText(message?.body);
               }}
             >
               Копировать сообщение
+            </span>
+            <span
+              className="cursor-pointer"
+              onClick={() => {
+                setReplyMessage(message);
+                setShowModalReply(true);
+              }}
+            >
+              Переслать сообщение
             </span>
           </div>
         </span>
