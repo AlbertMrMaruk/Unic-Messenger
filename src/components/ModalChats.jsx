@@ -137,6 +137,7 @@ export default function ModalChats({
                       }
                     ) ?? []
                   );
+                  setShowSpinner(false);
                   setShowModal(false);
                 });
               }}

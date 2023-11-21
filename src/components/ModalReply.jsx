@@ -91,7 +91,6 @@ export default function ModalReply({ setShowModal, session, setReplyMessage }) {
               className="text-white bg-primary font-bold uppercase text-sm px-6 py-3 rounded-[5px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
               type="button"
               onClick={() => {
-                setShowSpinner(true);
                 navigate("/", {
                   state: {
                     id: activeContact?.id,
