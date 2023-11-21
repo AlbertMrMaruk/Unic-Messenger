@@ -17,6 +17,20 @@ class ChatsAPI {
       body: JSON.stringify(data),
     });
   }
+  sendReaction(messageId, reaction, session) {
+    return fetch(`${API_URL}/api/reaction`, {
+      method: "put",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        messageId,
+        session,
+        reaction,
+      }),
+    });
+  }
   getAvatar(chatId, session) {
     return fetch(
       `${API_URL}/api/contacts/profile-picture?contactId=${chatId}&session=${session}`

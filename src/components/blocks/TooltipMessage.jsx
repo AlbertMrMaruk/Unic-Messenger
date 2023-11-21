@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import ChatsApi from "../../api/ChatsApi";
 
 export const TooltipMessage = ({
   message,
   children,
+  session,
   setReplyMessage,
   setShowModalReply,
   isGroup,
@@ -43,17 +45,22 @@ export const TooltipMessage = ({
         >
           <div className="flex flex-col gap-3  font-bold ">
             <div className="flex gap-1 border-b-2 border-[#3f4145] w-full p-[.7rem]">
-              <div className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] ">
+              <div
+                className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] cursor-pointer"
+                onClick={() => {
+                  ChatsApi.sendReaction(message?.id, "❤️", session);
+                }}
+              >
                 ❤️
               </div>
-              <div className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] ">
+              <div className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] cursor-pointer">
                 😍
               </div>
 
-              <div className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] ">
+              <div className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] cursor-pointer ">
                 👍
               </div>
-              <div className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] ">
+              <div className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] cursor-pointer">
                 😂
               </div>
             </div>

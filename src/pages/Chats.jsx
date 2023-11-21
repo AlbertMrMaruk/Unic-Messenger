@@ -766,6 +766,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                     </div>
 
                     <TooltipMessage
+                      session={session}
                       message={el}
                       isGroup={el.from.at(-4) === "g"}
                       setShowModalReply={setShowModalReply}
@@ -783,6 +784,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
 
               return (
                 <TooltipMessage
+                  session={session}
                   message={el}
                   setShowModalReply={setShowModalReply}
                   setReplyMessage={setReplyMessage}
