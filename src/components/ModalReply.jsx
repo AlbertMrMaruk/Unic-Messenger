@@ -102,6 +102,7 @@ export default function ModalReply({ setShowModal, session, setReplyMessage }) {
                     img: activeContact?.avatar ?? "",
                   },
                 });
+                setShowModal(false);
               }}
             >
               Создать
