@@ -56,7 +56,7 @@ export const TooltipMessage = ({
               <div
                 className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] cursor-pointer"
                 onClick={() => {
-                  ChatsApi.sendReaction(message?.id, "❤️", session);
+                  ChatsApi.sendReaction(message?.id, "😍", session);
                 }}
               >
                 😍
@@ -65,7 +65,7 @@ export const TooltipMessage = ({
               <div
                 className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] cursor-pointer "
                 onClick={() => {
-                  ChatsApi.sendReaction(message?.id, "❤️", session);
+                  ChatsApi.sendReaction(message?.id, "👍", session);
                 }}
               >
                 👍
@@ -73,7 +73,7 @@ export const TooltipMessage = ({
               <div
                 className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] cursor-pointer"
                 onClick={() => {
-                  ChatsApi.sendReaction(message?.id, "❤️", session);
+                  ChatsApi.sendReaction(message?.id, "😂", session);
                 }}
               >
                 😂
