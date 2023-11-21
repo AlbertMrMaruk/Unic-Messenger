@@ -51,7 +51,7 @@ export const TooltipMessage = ({
               </div>
             </div>
             <span
-              className=" cursor-pointer p-[.9rem]"
+              className=" cursor-pointer px-[.9rem]"
               onClick={() => {
                 console.log(message);
                 setReplyMessage(message);
@@ -60,7 +60,7 @@ export const TooltipMessage = ({
               Ответить на сообщение
             </span>
             <span
-              className="cursor-pointer p-[.9rem]"
+              className="cursor-pointer px-[.9rem]"
               onClick={async () => {
                 await navigator.clipboard.writeText(message?.body);
               }}
@@ -68,7 +68,7 @@ export const TooltipMessage = ({
               Копировать сообщение
             </span>
             <span
-              className="cursor-pointer p-[.9rem]"
+              className="cursor-pointer px-[.9rem]"
               onClick={() => {
                 setReplyMessage(message);
                 setShowModalReply(true);
