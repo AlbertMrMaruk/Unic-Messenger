@@ -50,9 +50,14 @@ export const TooltipMessage = ({
             >
               Ответить на сообщение
             </span>
-            {/* <span className="text-red-500 cursor-pointer">
-              Удалить сообщение
-            </span> */}
+            <span
+              className="cursor-pointer"
+              onClick={async (e) => {
+                await navigator.clipboard.writeText(message?.body);
+              }}
+            >
+              Копировать сообщение
+            </span>
           </div>
         </span>
         <div className="w-3 h-3 -mt-2 rotate-45 bg-secondarylight mb-2" />
