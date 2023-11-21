@@ -30,6 +30,7 @@ import ModalDownload from "../components/ModalDownload";
 import TooltipVoice from "../components/blocks/TooltipVoice";
 import ModalChats from "../components/ModalChats";
 import { formatDate } from "../utils/utils";
+import ModalReply from "../components/ModalReply";
 
 function Chats() {
   const navigate = useNavigate();
@@ -952,7 +953,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         />
       )}
       {showModalReply && (
-        <ModalChats
+        <ModalReply
           setShowModal={setShowModalReply}
           session={session}
           setReplyMessage={setReplyMessage}

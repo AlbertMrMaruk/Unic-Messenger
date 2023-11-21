@@ -94,10 +94,13 @@ export default function ModalReply({ setShowModal, session, setReplyMessage }) {
                 setShowSpinner(true);
                 navigate("/", {
                   state: {
-                    id: el?.id,
+                    id: activeContact?.id,
                     session,
-                    name: el?.pushName ?? el?.name ?? "+" + el?.number,
-                    img: el?.avatar ?? "",
+                    name:
+                      activeContact?.pushName ??
+                      activeContact?.name ??
+                      "+" + activeContact?.number,
+                    img: activeContact?.avatar ?? "",
                   },
                 });
               }}
