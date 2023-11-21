@@ -42,13 +42,16 @@ export const TooltipMessage = ({
           className={`relative z-10 p-[.9rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3`}
         >
           <div className="flex flex-col gap-3  font-bold ">
-            <div className="flex gap-1">
-              <div className=" rounded-full p-3 hover:bg-[#ccc] bg-inherit">
+            <div className="flex gap-1 border-b-2 border-[#3f4145] w-full p-[.9rem]">
+              <div className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] ">
                 😘
+              </div>
+              <div className=" rounded-full p-[.7rem] hover:bg-[#3f4145] bg-inherit text-[22px] ">
+                😂
               </div>
             </div>
             <span
-              className=" cursor-pointer"
+              className=" cursor-pointer p-[.9rem]"
               onClick={() => {
                 console.log(message);
                 setReplyMessage(message);
@@ -57,7 +60,7 @@ export const TooltipMessage = ({
               Ответить на сообщение
             </span>
             <span
-              className="cursor-pointer"
+              className="cursor-pointer p-[.9rem]"
               onClick={async () => {
                 await navigator.clipboard.writeText(message?.body);
               }}
@@ -65,7 +68,7 @@ export const TooltipMessage = ({
               Копировать сообщение
             </span>
             <span
-              className="cursor-pointer"
+              className="cursor-pointer p-[.9rem]"
               onClick={() => {
                 setReplyMessage(message);
                 setShowModalReply(true);
