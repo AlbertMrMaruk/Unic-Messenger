@@ -42,6 +42,11 @@ export const TooltipMessage = ({
           className={`relative z-10 p-[.9rem] text-[.85rem] text-left leading-none text-white whitespace-no-wrap bg-secondarylight shadow-lg rounded-md flex gap-3`}
         >
           <div className="flex flex-col gap-3  font-bold ">
+            <div className="flex gap-1">
+              <div className=" rounded-full p-3 hover:bg-[#ccc] bg-inherit">
+                😘
+              </div>
+            </div>
             <span
               className=" cursor-pointer"
               onClick={() => {
