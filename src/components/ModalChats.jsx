@@ -102,7 +102,7 @@ export default function ModalChats({
                 );
                 if (index !== -1) {
                   console.log("dkdjndjdn");
-                  setShowChats(true);
+                  setShowChats(false);
                   navigate("/", {
                     state: {
                       id: dataUser.chats[session][index].id._serialized,
@@ -124,7 +124,7 @@ export default function ModalChats({
                     unreadCount: 0,
                     messages: [],
                     lastMessage: {
-                      body: "",
+                      body: "Пустое сообщение",
                       fromMe: false,
                       timestamp: +(Date.now() + "").slice(0, -3),
                     },
