@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import ChatsApi from "../api/ChatsApi";
 import { useNavigate } from "react-router-dom";
 
-export default function ModalReply({ setShowModal, session, setReplyMessage }) {
+export default function ModalReply({
+  setShowModal,
+  session,
+  setReplyMessage,
+  setShowChats,
+}) {
   const [showSpinner, setShowSpinner] = useState(true);
   const [contacts, setContacts] = useState([]);
   const [activeContact, setActiveContact] = useState();
@@ -91,6 +96,9 @@ export default function ModalReply({ setShowModal, session, setReplyMessage }) {
               className="text-white bg-primary font-bold uppercase text-sm px-6 py-3 rounded-[5px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
               type="button"
               onClick={() => {
+                if (window.innerWidth < 768) {
+                  setShowChats(false);
+                }
                 navigate("/", {
                   state: {
                     id: activeContact?.id,

@@ -69,6 +69,7 @@ export default function ModalChats({
           }`}
                       onClick={() => {
                         setActiveContact(el);
+
                         // if (window.innerWidth < 768) {
                         //   setShowChats(false);
                         // }
@@ -102,7 +103,11 @@ export default function ModalChats({
                 );
                 if (index !== -1) {
                   console.log("dkdjndjdn");
-                  setShowChats(false);
+                  if (window.innerWidth < 768) {
+                    setShowChats(false);
+                  }
+                  setShowSpinner(false);
+                  setShowModal(false);
                   navigate("/", {
                     state: {
                       id: dataUser.chats[session][index].id._serialized,
@@ -163,7 +168,9 @@ export default function ModalChats({
                     );
                     setShowSpinner(false);
                     setShowModal(false);
-                    setShowChats(true);
+                    if (window.innerWidth < 768) {
+                      setShowChats(false);
+                    }
                     navigate("/", {
                       state: {
                         id: activeContact.id,
