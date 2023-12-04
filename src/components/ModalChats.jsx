@@ -97,19 +97,20 @@ export default function ModalChats({
               type="button"
               onClick={() => {
                 setShowSpinner(true);
-
-                if (dataUser.chats[session].includes(activeContact)) {
-                  console.log(
-                    dataUser.chats[session].includes(activeContact),
-                    "dkdjndjdn"
-                  );
+                const index = dataUser.chats[session].findIndex(
+                  (el) => el.id._serialized === activeContact.id
+                );
+                if (index !== -1) {
+                  console.log("dkdjndjdn");
                   setShowChats(true);
                   navigate("/", {
                     state: {
-                      id: activeContact.id,
+                      id: dataUser.chats[session][index].id._serialized,
                       session,
-                      name: activeContact.pushName ?? activeContact.name,
-                      img: "",
+                      name:
+                        dataUser.chats[session][index].pushName ??
+                        dataUser.chats[session][index].name,
+                      img: dataUser.chats[session][index].avatar ?? "",
                     },
                   });
                 } else {
