@@ -465,7 +465,13 @@ function Chats() {
               });
           };
           for (let i = 0; i < 15; i++) {
-            await fetchChat(data.chats[currentSession][i], i);
+            try {
+              await fetchChat(data.chats[currentSession][i], i);
+            } catch (error) {
+              console.log(error);
+              continue;
+            }
+
             if (i === 10) {
               console.log("Delay");
               await delay(3000);
