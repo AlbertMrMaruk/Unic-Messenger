@@ -956,6 +956,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         <ModalChats
           setShowModal={setShowModalChats}
           session={session}
+          setShowChats={setShowChats}
           dataUser={dataUser}
           setDataUser={setDataUser}
           setChats={setChats}
@@ -965,6 +966,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
         <ModalReply
           setShowModal={setShowModalReply}
           session={session}
+          setShowChats={setShowChats}
           setReplyMessage={setReplyMessage}
         />
       )}
