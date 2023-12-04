@@ -99,6 +99,10 @@ export default function ModalChats({
                 setShowSpinner(true);
 
                 if (dataUser.chats[session].includes(activeContact)) {
+                  console.log(
+                    dataUser.chats[session].includes(activeContact),
+                    "dkdjndjdn"
+                  );
                   setShowChats(true);
                   navigate("/", {
                     state: {
@@ -124,6 +128,10 @@ export default function ModalChats({
                       timestamp: +(Date.now() + "").slice(0, -3),
                     },
                   };
+                  console.log(
+                    dataUser.chats[session].includes(activeContact),
+                    "HDDDDDD"
+                  );
 
                   setDataUser((prev) => ({
                     ...prev,
