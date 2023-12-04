@@ -10,7 +10,6 @@ export const TooltipMessage = ({
   isGroup,
 }) => {
   const [show, setShow] = useState(false);
-
   return (
     <div
       className="relative flex flex-col  group w-[100%]"
