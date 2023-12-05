@@ -86,6 +86,7 @@ module.exports = (app) => {
         secure: true,
         httpOnly: true,
       });
+      console.log(res?.headers?.cookie, res, token);
       return res.send(response);
     } else {
       res.json(response);
