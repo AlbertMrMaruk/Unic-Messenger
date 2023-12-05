@@ -83,6 +83,7 @@ module.exports = (app) => {
       res.cookie("token", token, {
         // expiresIn: "365d ",
         maxAge: 900000,
+        secure: true,
         httpOnly: true,
       });
       return res.send(response);
