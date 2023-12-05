@@ -86,7 +86,7 @@ module.exports = (app) => {
         secure: true,
         httpOnly: true,
       });
-      console.log(res?.headers?.cookie, res, token);
+      console.log("DKDKDMDKMDKDM", token);
       return res.send(response);
     } else {
       res.json(response);
@@ -107,7 +107,7 @@ module.exports = (app) => {
   });
 
   app.get(`/database/users/login/verifyToken`, async (req, res) => {
-    console.log(req.headers, req.headers.cookie);
+    console.log("AAAAAAA", req.headers.cookie);
     if (req.headers.cookie) {
       const cookies = req.headers.cookie.split(";");
       const tokenCookie = cookies.find((el) => el.split("=")[0] === "token");
