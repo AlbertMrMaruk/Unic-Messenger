@@ -110,6 +110,7 @@ module.exports = (app) => {
       const cookies = req.headers.cookie.split(";");
       const tokenCookie = cookies.find((el) => el.split("=")[0] === "token");
       const token = tokenCookie.split("=")[1];
+      console.log(req.headers.cookie, token);
       try {
         const verify = jwt.verify(token, JWT_SECRET);
         if (verify.type === "user") {
