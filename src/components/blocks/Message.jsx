@@ -80,7 +80,7 @@ function Message({ message, isGroup }) {
         <span
           className={` ${
             !message?.fromMe ? "text-left mr-[2.5rem]" : "text-right mr-[2rem]"
-          } `}
+          }  break-words `}
         >
           {isFile(url, message) ? (
             <a href={API_URL + url.slice(21)} target="_blank" className="flex">
