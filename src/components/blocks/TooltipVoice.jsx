@@ -35,10 +35,7 @@ function TooltipVoice({ children, setAudioUrl }) {
   return (
     <div
       className="relative flex flex-col  group "
-      onClick={() => {
-        console.log("gmgmg");
-        setShow(true);
-      }}
+      onClick={() => setShow(!show)}
     >
       {children}
 
