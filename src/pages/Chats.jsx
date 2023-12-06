@@ -764,11 +764,11 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 return (
                   <>
                     <div className="flex w-[100%] gap-[0.5rem] items-center px-3 my-[1rem]">
-                      <div className="bg-primary h-[2px] w-[40%]"></div>
-                      <span className="text-[14px] font-semibold text-primary w-[20%] text-center">
+                      <div className="bg-primary h-[2px] w-[42%]"></div>
+                      <span className="text-[14px] font-semibold text-primary w-[16%] text-center">
                         {formattedDate2}
                       </span>
-                      <div className="bg-primary h-[2px] w-[40%]"></div>
+                      <div className="bg-primary h-[2px] w-[42%]"></div>
                     </div>
 
                     <TooltipMessage
