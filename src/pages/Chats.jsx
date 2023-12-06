@@ -861,16 +861,8 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 <FaSmile className="text-white w-[18px] h-[18px] m-auto" />
               </button>
             </Tooltip>
-            <TooltipVoice setAudioUrl={setAudioUrl}>
-              <button
-                className={`bg-secondarylight  text-white p-1 text-xs ${
-                  audioUrl && "hidden"
-                }  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]
-                `}
-                type="button"
-              >
-                <FaMicrophone className="text-white w-[18px] h-[18px] m-auto" />
-              </button>
+            <TooltipVoice setAudioUrl={setAudioUrl} audioUrl={audioUrl}>
+              <FaMicrophone className="text-white w-[18px] h-[18px] m-auto" />
             </TooltipVoice>
             {audioUrl && (
               <div

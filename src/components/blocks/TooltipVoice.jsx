@@ -10,7 +10,7 @@ function blobToBase64(blob) {
   });
 }
 
-function TooltipVoice({ children, setAudioUrl }) {
+function TooltipVoice({ children, setAudioUrl, audioUrl }) {
   const [show, setShow] = useState(false);
 
   const onRecordingComplete = async (blob) => {
@@ -31,11 +31,19 @@ function TooltipVoice({ children, setAudioUrl }) {
   };
 
   return (
-    <div
-      className="relative flex flex-col  group "
-      onClick={() => setShow(!show)}
-    >
-      {children}
+    <div className="relative flex flex-col  group ">
+      <button
+        className={`bg-secondarylight  text-white p-1 text-xs ${
+          audioUrl && "hidden"
+        }  z-[2] inline-block  rounded-none font-bold uppercase leading-normal w-[30px] h-[45px]
+                `}
+        type="button"
+        onClick={() => {
+          setShow(!show);
+        }}
+      >
+        {children}
+      </button>
 
       <div
         className={`absolute whitespace-nowrap bottom-full flex flex-col items-center left-[-.7rem]   ${
