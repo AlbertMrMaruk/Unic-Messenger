@@ -2,8 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 // import Recorder from "react-mp3-recorder";
 import Recorder from "./Recorder";
 
-import { FaMicrophone } from "react-icons/fa";
-
 function blobToBase64(blob) {
   return new Promise((resolve, _) => {
     const reader = new FileReader();
