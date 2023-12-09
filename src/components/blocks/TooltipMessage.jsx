@@ -43,7 +43,9 @@ export const TooltipMessage = ({
 
       <div
         className={`absolute whitespace-nowrap bottom-full flex flex-col  items-center ${
-          message?.fromMe ? "right-[-1rem]" : "left-[-1rem]"
+          message?.fromMe
+            ? "md:right-[-1rem] right-[2rem]"
+            : " md:left-[-1rem] left-[2rem]"
         }  ${!show ? "hidden" : ""}`}
       >
         <span
