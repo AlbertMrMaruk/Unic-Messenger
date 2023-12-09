@@ -29,7 +29,12 @@ export const TooltipMessage = ({
           <div className="flex flex-row items-center">
             <div className="bg-[#ababab]  rounded-full w-[40px] h-[40px]"></div>
             {children}
-            <FaDotCircle className="w-[20px] mt-[2rem] text-white" />
+            <FaDotCircle
+              className="md:hidden w-[20px] mt-[2rem] text-white"
+              onClick={() => {
+                setShow(!show);
+              }}
+            />
           </div>
         </>
       ) : (
