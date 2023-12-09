@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ChatsApi from "../../api/ChatsApi";
+import { FaDotCircle } from "react-icons/fa";
 
 export const TooltipMessage = ({
   message,
@@ -28,6 +29,7 @@ export const TooltipMessage = ({
           <div className="flex flex-row items-center">
             <div className="bg-[#ababab]  rounded-full w-[40px] h-[40px]"></div>
             {children}
+            <FaDotCircle className="w-[45px] h-[45px] text-white" />
           </div>
         </>
       ) : (
