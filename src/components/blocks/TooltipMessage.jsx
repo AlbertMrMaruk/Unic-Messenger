@@ -48,7 +48,7 @@ export const TooltipMessage = ({
           {children}
         </div>
       ) : (
-        <div className="flex flex-row items-center justify-end">
+        <div className="flex flex-row items-center ">
           {children}
           <FaDotCircle
             className="md:hidden w-[20px] text-white"
