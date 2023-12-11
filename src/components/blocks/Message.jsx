@@ -50,9 +50,9 @@ function Message({ message, isGroup }) {
       {console.log(message?.notifyName, message?.author?.user, message)}
       {isGroup && (
         <span className="text-left font-bold  text-[17px] mr-[2.5rem]">
-          {message?.notifyName
-            ? message?.notifyName
-            : "+" + message?.author?.user}
+          {message?.notifyName || message?._data.notifyName
+            ? message?.notifyName ?? message?._data.notifyName
+            : "+" + (message?.author?.user ?? message?._data?.author?.user)}
         </span>
       )}
       {/* Проверка файла на тип если пдф или видео */}

@@ -505,8 +505,19 @@ function Chats() {
                         el?.lastMessage?.timestamp === message?.timestamp
                     ) + 1
                   );
-                  superNew.author = { user: el._data?.author?.user };
-                  superNew.notifyName = el?._data?.notifyName;
+                  superNew.forEach((message) => {
+                    delete message.vCards;
+                    message.author = { user: message._data?.author?.user };
+                    message.notifyName = message?._data?.notifyName;
+                    if (message.hasMedia) {
+                      if (+message._data.size > 0) {
+                        message.size = message._data.size;
+                        dataUser.allSize += +message._data.size;
+                      }
+                    }
+                    delete message._data;
+                  });
+
                   el.messages = [...el.messages, ...superNew];
                   el.lastMessage = superNew.at(-1);
 
