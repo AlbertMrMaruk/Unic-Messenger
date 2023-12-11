@@ -30,7 +30,7 @@ export const TooltipMessage = ({
             <div className="bg-[#ababab]  rounded-full w-[40px] h-[40px]"></div>
             {children}
             <FaDotCircle
-              className="md:hidden w-[20px] mt-[2rem] text-white"
+              className="md:hidden w-[20px]  text-white"
               onClick={() => {
                 setShow(!show);
               }}
@@ -40,7 +40,7 @@ export const TooltipMessage = ({
       ) : message?.fromMe ? (
         <div className="flex flex-row items-center">
           <FaDotCircle
-            className="md:hidden w-[20px] mt-[2rem] text-white"
+            className="md:hidden w-[20px] text-white"
             onClick={() => {
               setShow(!show);
             }}
@@ -51,7 +51,7 @@ export const TooltipMessage = ({
         <div className="flex flex-row items-center">
           {children}
           <FaDotCircle
-            className="md:hidden w-[20px] mt-[2rem] text-white"
+            className="md:hidden w-[20px] text-white"
             onClick={() => {
               setShow(!show);
             }}
