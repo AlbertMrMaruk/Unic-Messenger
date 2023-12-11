@@ -47,6 +47,7 @@ function Message({ message, isGroup }) {
           : " max-w-[70%] md:max-w-[45%] w-fit"
       }`}
     >
+      {console.log(message?.notifyName, message?.author?.user, message)}
       {isGroup && (
         <span className="text-left font-bold  text-[17px] mr-[2.5rem]">
           {message?.notifyName
