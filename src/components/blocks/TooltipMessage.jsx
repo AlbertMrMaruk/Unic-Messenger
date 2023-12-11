@@ -38,7 +38,7 @@ export const TooltipMessage = ({
           </div>
         </>
       ) : message?.fromMe ? (
-        <div className="flex flex-row items-center">
+        <div className="flex flex-row items-center justify-end">
           <FaDotCircle
             className="md:hidden w-[20px] text-white"
             onClick={() => {
@@ -48,7 +48,7 @@ export const TooltipMessage = ({
           {children}
         </div>
       ) : (
-        <div className="flex flex-row items-center">
+        <div className="flex flex-row items-center justify-end">
           {children}
           <FaDotCircle
             className="md:hidden w-[20px] text-white"
