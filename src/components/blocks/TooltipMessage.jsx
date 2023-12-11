@@ -37,8 +37,26 @@ export const TooltipMessage = ({
             />
           </div>
         </>
+      ) : message?.fromMe ? (
+        <div className="flex flex-row items-center">
+          <FaDotCircle
+            className="md:hidden w-[20px] mt-[2rem] text-white"
+            onClick={() => {
+              setShow(!show);
+            }}
+          />
+          {children}
+        </div>
       ) : (
-        children
+        <div className="flex flex-row items-center">
+          {children}
+          <FaDotCircle
+            className="md:hidden w-[20px] mt-[2rem] text-white"
+            onClick={() => {
+              setShow(!show);
+            }}
+          />
+        </div>
       )}
 
       <div
