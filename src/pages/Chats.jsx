@@ -35,7 +35,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeMessages,
   setReplyMessage,
-  setChats,
+  // setChats,
 } from "../store/reducers/chat";
 
 function Chats() {
@@ -50,7 +50,7 @@ function Chats() {
   const [showSpinnerMessages, setShowSpinnerMessages] = useState(true);
   const [webSocket, setWebSocket] = useState();
   const [showChats, setShowChats] = useState(true);
-  // const [chats, setChats] = useState([]);
+  const [chats, setChats] = useState([]);
   const [file, setFile] = useState("");
   const [qrCode, setQrCode] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -70,7 +70,7 @@ function Chats() {
   const messagesStore = useSelector((state) => state.chat.messages);
   const dispatch = useDispatch();
   const replyMessage = useSelector((state) => state.chat.replyMessage);
-  const chats = useSelector((state) => state.chat.chats);
+  // const chats = useSelector((state) => state.chat.chats);
   console.log(chats);
 
   // Функция получения сообщения
@@ -161,21 +161,21 @@ function Chats() {
                 },
                 allSize,
               }).then(() => {
-                dispatch(setChats([...dataUser.chats[session], newChat]));
-                // setChats(
-                //   [...dataUser.chats[session], newChat]?.sort(
-                //     (chat1, chat2) => {
-                //       const chat1time =
-                //         +chat1?.lastMessage?.timestamp ||
-                //         +(chat1?.lastMessage?.payload?.timestamp + "000");
-                //       const chat2time =
-                //         +chat2?.lastMessage?.timestamp ||
-                //         +(chat2?.lastMessage?.payload?.timestamp + "000");
+                // dispatch(setChats([...dataUser.chats[session], newChat]));
+                setChats(
+                  [...dataUser.chats[session], newChat]?.sort(
+                    (chat1, chat2) => {
+                      const chat1time =
+                        +chat1?.lastMessage?.timestamp ||
+                        +(chat1?.lastMessage?.payload?.timestamp + "000");
+                      const chat2time =
+                        +chat2?.lastMessage?.timestamp ||
+                        +(chat2?.lastMessage?.payload?.timestamp + "000");
 
-                //       return chat1time > chat2time ? -1 : 1;
-                //     }
-                //   ) ?? []
-                // );
+                      return chat1time > chat2time ? -1 : 1;
+                    }
+                  ) ?? []
+                );
               });
             } else {
               chats[chatIndex].lastMessage = {
@@ -279,21 +279,21 @@ function Chats() {
                 },
                 allSize,
               }).then(() => {
-                dispatch(setChats([...dataUser.chats[session], newChat]));
-                // setChats(
-                //   [...dataUser.chats[session], newChat]?.sort(
-                //     (chat1, chat2) => {
-                //       const chat1time =
-                //         +chat1?.lastMessage?.timestamp ||
-                //         +(chat1?.lastMessage?.payload?.timestamp + "000");
-                //       const chat2time =
-                //         +chat2?.lastMessage?.timestamp ||
-                //         +(chat2?.lastMessage?.payload?.timestamp + "000");
+                // dispatch(setChats([...dataUser.chats[session], newChat]));
+                setChats(
+                  [...dataUser.chats[session], newChat]?.sort(
+                    (chat1, chat2) => {
+                      const chat1time =
+                        +chat1?.lastMessage?.timestamp ||
+                        +(chat1?.lastMessage?.payload?.timestamp + "000");
+                      const chat2time =
+                        +chat2?.lastMessage?.timestamp ||
+                        +(chat2?.lastMessage?.payload?.timestamp + "000");
 
-                //       return chat1time > chat2time ? -1 : 1;
-                //     }
-                //   ) ?? []
-                // );
+                      return chat1time > chat2time ? -1 : 1;
+                    }
+                  ) ?? []
+                );
               });
             } else {
               chats[chatIndex].unreadCount += 1;
@@ -331,18 +331,18 @@ function Chats() {
       //   }
       // }
 
-      dispatch(setChats(chats));
-      // setChats((prev) =>
-      //   prev.sort((chat1, chat2) => {
-      //     const chat1time =
-      //       +(chat1?.lastMessage?.payload?.timestamp + "000") ||
-      //       +chat1?.lastMessage?.timestamp;
-      //     const chat2time =
-      //       +(chat2?.lastMessage?.payload?.timestamp + "000") ||
-      //       +chat2?.lastMessage?.timestamp;
-      //     return chat1time > chat2time ? -1 : 1;
-      //   })
-      // );
+      // dispatch(setChats(chats));
+      setChats((prev) =>
+        prev.sort((chat1, chat2) => {
+          const chat1time =
+            +(chat1?.lastMessage?.payload?.timestamp + "000") ||
+            +chat1?.lastMessage?.timestamp;
+          const chat2time =
+            +(chat2?.lastMessage?.payload?.timestamp + "000") ||
+            +chat2?.lastMessage?.timestamp;
+          return chat1time > chat2time ? -1 : 1;
+        })
+      );
     };
     if (newMessage) {
       gettingMessage(newMessage);
@@ -383,19 +383,19 @@ function Chats() {
         setSession(session);
         console.log("Session changed");
       }
-      dispatch(setChats(data.chats[session]));
-      // setChats(
-      //   data.chats[session]?.sort((chat1, chat2) => {
-      //     const chat1time =
-      //       +chat1?.lastMessage?.timestamp ||
-      //       +(chat1?.lastMessage?.payload?.timestamp + "000");
-      //     const chat2time =
-      //       +chat2?.lastMessage?.timestamp ||
-      //       +(chat2?.lastMessage?.payload?.timestamp + "000");
+      // dispatch(setChats(data.chats[session]));
+      setChats(
+        data.chats[session]?.sort((chat1, chat2) => {
+          const chat1time =
+            +chat1?.lastMessage?.timestamp ||
+            +(chat1?.lastMessage?.payload?.timestamp + "000");
+          const chat2time =
+            +chat2?.lastMessage?.timestamp ||
+            +(chat2?.lastMessage?.payload?.timestamp + "000");
 
-      //     return chat1time > chat2time ? -1 : 1;
-      //   }) ?? []
-      // );
+          return chat1time > chat2time ? -1 : 1;
+        }) ?? []
+      );
 
       setSizeUser(+data.allSize / (1024 * 1024));
       setShowSpinner(false);
