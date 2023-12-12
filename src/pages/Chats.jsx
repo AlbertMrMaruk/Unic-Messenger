@@ -31,6 +31,8 @@ import TooltipVoice from "../components/blocks/TooltipVoice";
 import ModalChats from "../components/ModalChats";
 import { formatDate } from "../utils/utils";
 import ModalReply from "../components/ModalReply";
+import { useDispatch, useSelector } from "react-redux";
+import { changeMessages } from "../store/reducers/chat";
 
 function Chats() {
   const navigate = useNavigate();
@@ -60,6 +62,12 @@ function Chats() {
   const [currentChat, setCurrentChat] = useState(state?.id ?? "");
   const [newMessage, setNewMessage] = useState();
   const [percentage, setPercentage] = useState(0);
+
+  //Configuring Store Redux
+
+  const messagesStore = useSelector((state) => state.chat.messages);
+  console.log(messagesStore, "Store");
+  const dispatch = useDispatch();
 
   // Функция получения сообщения
   useEffect(() => {
@@ -551,12 +559,11 @@ function Chats() {
       if (state?.id && dataUser?.chats) {
         setShowSpinnerMessages(true);
         setCurrentChat(state?.id);
-
-        setMessages(
-          dataUser.chats[session ?? dataUser.accounts[0]]
-            .find((el) => el.id._serialized === state?.id)
-            .messages.toReversed()
-        );
+        const updatedMessages = dataUser.chats[session ?? dataUser.accounts[0]]
+          .find((el) => el.id._serialized === state?.id)
+          .messages.toReversed();
+        dispatch(changeMessages(updatedMessages));
+        setMessages(updatedMessages);
         setShowSpinnerMessages(false);
       }
       if (state?.session !== session) {
