@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   messages: [],
-  replyMessage: undefined,
+  replyMessage: "",
 };
 
 export const chatSlice = createSlice({
