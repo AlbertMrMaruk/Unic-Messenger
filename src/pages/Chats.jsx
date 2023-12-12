@@ -830,7 +830,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               <div className="flex justify-center items-center">
                 <FaReply className="w-[30px] mr-3" />
                 <span className="text-md">
-                  {replyMessage.body ?? replyMessage.payload.body}
+                  {replyMessage?.body ?? replyMessage?.payload?.body}
                 </span>
               </div>
               <FaWindowClose
