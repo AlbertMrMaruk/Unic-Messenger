@@ -2,13 +2,16 @@ import Spinner from "./blocks/Spinner";
 import { useEffect, useState } from "react";
 import ChatsApi from "../api/ChatsApi";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setReplyMessage } from "../store/reducers/chat";
 
 export default function ModalReply({
   setShowModal,
   session,
-  setReplyMessage,
+  // setReplyMessage,
   setShowChats,
 }) {
+  const dispatch = useDispatch();
   const [showSpinner, setShowSpinner] = useState(true);
   const [contacts, setContacts] = useState([]);
   const [activeContact, setActiveContact] = useState();
@@ -87,7 +90,7 @@ export default function ModalReply({
               type="button"
               onClick={() => {
                 setShowModal(false);
-                setReplyMessage();
+                dispatch(setReplyMessage(""));
               }}
             >
               Отменить

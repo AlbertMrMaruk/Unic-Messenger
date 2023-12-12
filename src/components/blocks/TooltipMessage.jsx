@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import ChatsApi from "../../api/ChatsApi";
 import { FaDotCircle } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { setReplyMessage } from "../../store/reducers/chat";
 
 export const TooltipMessage = ({
   message,
   children,
   session,
-  setReplyMessage,
+  // setReplyMessage,
   setShowModalReply,
   isGroup,
 }) => {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   return (
     <div
@@ -109,7 +112,7 @@ export const TooltipMessage = ({
               className=" cursor-pointer px-[.9rem]"
               onClick={() => {
                 console.log(message);
-                setReplyMessage(message);
+                dispatch(setReplyMessage(message));
               }}
             >
               Ответить на сообщение
@@ -125,7 +128,7 @@ export const TooltipMessage = ({
             <span
               className="cursor-pointer px-[.9rem] pb-[.9rem]"
               onClick={() => {
-                setReplyMessage(message);
+                dispatch(setReplyMessage(message));
                 setShowModalReply(true);
               }}
             >

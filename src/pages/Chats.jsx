@@ -32,12 +32,12 @@ import ModalChats from "../components/ModalChats";
 import { formatDate } from "../utils/utils";
 import ModalReply from "../components/ModalReply";
 import { useDispatch, useSelector } from "react-redux";
-import { changeMessages } from "../store/reducers/chat";
+import { changeMessages, setReplyMessage } from "../store/reducers/chat";
 
 function Chats() {
   const navigate = useNavigate();
   const [session, setSession] = useState();
-  const [replyMessage, setReplyMessage] = useState();
+  // const [replyMessage, setReplyMessage] = useState();
   const [accounts, setAccounts] = useState([]);
   const [messages, setMessages] = useState([]);
   const [dataUser, setDataUser] = useState();
@@ -64,10 +64,9 @@ function Chats() {
   const [percentage, setPercentage] = useState(0);
 
   //Configuring Store Redux
-
   const messagesStore = useSelector((state) => state.chat.messages);
-  console.log(messagesStore, "Store");
   const dispatch = useDispatch();
+  const replyMessage = useSelector((state) => state.chat.messages);
 
   // Функция получения сообщения
   useEffect(() => {
@@ -593,7 +592,7 @@ function Chats() {
           ChatsApi.sendText(text, currentChat, session);
         } else {
           ChatsApi.replyTo(text, currentChat, session, replyMessage);
-          setReplyMessage("");
+          dispatch(setReplyMessage(""));
         }
       }
     }, 1000);
@@ -836,7 +835,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               </div>
               <FaWindowClose
                 className="w-[50px]"
-                onClick={() => setReplyMessage()}
+                onClick={() => dispatch(setReplyMessage())}
               />
             </div>
           )}
