@@ -66,7 +66,7 @@ function Chats() {
   //Configuring Store Redux
   const messagesStore = useSelector((state) => state.chat.messages);
   const dispatch = useDispatch();
-  const replyMessage = useSelector((state) => state.chat.messages);
+  const replyMessage = useSelector((state) => state.chat.replyMessage);
 
   // Функция получения сообщения
   useEffect(() => {
