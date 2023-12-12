@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import ChatsApi from "../api/ChatsApi";
 import DatabaseAPI from "../api/DatabaseAPI";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setChats } from "../store/reducers/chat";
 
 export default function ModalChats({
   setShowModal,
@@ -10,8 +12,9 @@ export default function ModalChats({
   setShowChats,
   setDataUser,
   dataUser,
-  setChats,
+  // setChats,
 }) {
+  const dispatch = useDispatch();
   const [showSpinner, setShowSpinner] = useState(true);
   const [contacts, setContacts] = useState([]);
   const [activeContact, setActiveContact] = useState();
@@ -152,20 +155,21 @@ export default function ModalChats({
                       [session]: [...dataUser.chats[session], newChat],
                     },
                   }).then(() => {
-                    setChats(
-                      [...dataUser.chats[session], newChat]?.sort(
-                        (chat1, chat2) => {
-                          const chat1time =
-                            +chat1?.lastMessage?.timestamp ||
-                            +(chat1?.lastMessage?.payload?.timestamp + "000");
-                          const chat2time =
-                            +chat2?.lastMessage?.timestamp ||
-                            +(chat2?.lastMessage?.payload?.timestamp + "000");
+                    dispatch(setChats([...dataUser.chats[session], newChat]));
+                    // setChats(
+                    //   [...dataUser.chats[session], newChat]?.sort(
+                    //     (chat1, chat2) => {
+                    //       const chat1time =
+                    //         +chat1?.lastMessage?.timestamp ||
+                    //         +(chat1?.lastMessage?.payload?.timestamp + "000");
+                    //       const chat2time =
+                    //         +chat2?.lastMessage?.timestamp ||
+                    //         +(chat2?.lastMessage?.payload?.timestamp + "000");
 
-                          return chat1time > chat2time ? -1 : 1;
-                        }
-                      ) ?? []
-                    );
+                    //       return chat1time > chat2time ? -1 : 1;
+                    //     }
+                    //   ) ?? []
+                    // );
                     setShowSpinner(false);
                     setShowModal(false);
                     if (window.innerWidth < 768) {
