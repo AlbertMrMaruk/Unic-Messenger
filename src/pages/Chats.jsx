@@ -71,6 +71,7 @@ function Chats() {
   const dispatch = useDispatch();
   const replyMessage = useSelector((state) => state.chat.replyMessage);
   const chats = useSelector((state) => state.chat.chats);
+  console.log(chats);
 
   // Функция получения сообщения
   useEffect(() => {
