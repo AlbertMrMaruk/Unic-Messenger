@@ -47,7 +47,6 @@ function Message({ message, isGroup }) {
           : " max-w-[70%] md:max-w-[45%] w-fit"
       }`}
     >
-      {console.log(message?.notifyName, message?.author?.user, message)}
       {isGroup && (
         <span className="text-left font-bold  text-[17px] mr-[2.5rem]">
           {message?.notifyName || message?._data?.notifyName
@@ -97,7 +96,6 @@ function Message({ message, isGroup }) {
           )}
         </span>
       )}
-      {/* <span className={`font-bold`}></span> */}
       <span
         className={`text-right text-[10px]  ${
           isAudio(url)
