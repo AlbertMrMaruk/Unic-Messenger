@@ -85,142 +85,352 @@ function Chats() {
           return;
         }
 
-        if (message.payload.fromMe) {
-          if (message.payload.to === currentChat) {
-            message.payload.author = {
-              user: message.payload._data?.author?.user,
-            };
-            message.payload.notifyName = message.payload?._data?.notifyName;
+        // if (message.payload.fromMe) {
+        //   if (message.payload.to === currentChat) {
+        //     message.payload.author = {
+        //       user: message.payload._data?.author?.user,
+        //     };
+        //     message.payload.notifyName = message.payload?._data?.notifyName;
 
-            setMessages((prev) => [message.payload, ...prev]);
-            const chatIndex = chats.findIndex(
-              (el) => el.id._serialized === currentChat
-            );
-            chats[chatIndex].messages = [
-              ...chats[chatIndex].messages,
-              message.payload,
-            ];
-            chats[chatIndex].lastMessage = {
-              ...message.payload,
-            };
-            let allSize = dataUser.allSize;
-            if (message?.payload?._data?.size) {
-              allSize += message?.payload?._data?.size;
-            }
-            setSizeUser(+allSize / (1024 * 1024));
-            setDataUser((prev) => ({
-              ...prev,
-              chats: { [session]: chats, ...dataUser.chats },
-              allSize,
-            }));
+        //     setMessages((prev) => [message.payload, ...prev]);
+        //     const chatIndex = chats.findIndex(
+        //       (el) => el.id._serialized === currentChat
+        //     );
+        //     chats[chatIndex].messages = [
+        //       ...chats[chatIndex].messages,
+        //       message.payload,
+        //     ];
+        //     chats[chatIndex].lastMessage = {
+        //       ...message.payload,
+        //     };
+        //     let allSize = dataUser.allSize;
+        //     if (message?.payload?._data?.size) {
+        //       allSize += message?.payload?._data?.size;
+        //     }
+        //     setSizeUser(+allSize / (1024 * 1024));
+        //     setDataUser((prev) => ({
+        //       ...prev,
+        //       chats: { [session]: chats, ...dataUser.chats },
+        //       allSize,
+        //     }));
 
-            DatabaseAPI.updateUser(dataUser.username, {
-              chats: { ...dataUser.chats, [session]: chats },
-              allSize: allSize,
-            });
-          } else {
-            message.payload.author = {
-              user: message.payload._data?.author?.user,
-            };
-            message.payload.notifyName = message.payload?._data?.notifyName;
-            setMessages((prev) => prev);
-            const chatIndex = chats.findIndex(
-              (el) => el?.id?._serialized === message.payload.to
-            );
-            if (chatIndex === -1) {
-              const newChat = {
-                id: {
-                  _serialized: message.payload.to,
-                },
-                name:
-                  message.payload?._data?.notifyName ??
-                  message.payload.to.slice(0, -5),
-                isGroup: message.payload.to.at(-5) === "g",
-                unreadCount: 0,
-                messages: [message.payload],
-                lastMessage: {
-                  ...message.payload,
-                },
-              };
-              let allSize = dataUser.allSize;
-              if (message?.payload?._data?.size) {
-                allSize += message?.payload?._data?.size;
-              }
-              setSizeUser(+allSize / (1024 * 1024));
-              setDataUser((prev) => ({
-                ...prev,
-                chats: {
-                  ...prev.chats,
-                  [session]: [...prev.chats[session], newChat],
-                },
-                allSize,
-              }));
-              DatabaseAPI.updateUser(dataUser.username, {
-                chats: {
-                  ...dataUser.chats,
-                  [session]: [...dataUser.chats[session], newChat],
-                },
-                allSize,
-              }).then(() => {
-                // dispatch(setChats([...dataUser.chats[session], newChat]));
-                setChats(
-                  [...dataUser.chats[session], newChat]?.sort(
-                    (chat1, chat2) => {
-                      const chat1time =
-                        +chat1?.lastMessage?.timestamp ||
-                        +(chat1?.lastMessage?.payload?.timestamp + "000");
-                      const chat2time =
-                        +chat2?.lastMessage?.timestamp ||
-                        +(chat2?.lastMessage?.payload?.timestamp + "000");
+        //     DatabaseAPI.updateUser(dataUser.username, {
+        //       chats: { ...dataUser.chats, [session]: chats },
+        //       allSize: allSize,
+        //     });
+        //   } else {
+        //     message.payload.author = {
+        //       user: message.payload._data?.author?.user,
+        //     };
+        //     message.payload.notifyName = message.payload?._data?.notifyName;
+        //     setMessages((prev) => prev);
+        //     const chatIndex = chats.findIndex(
+        //       (el) => el?.id?._serialized === message.payload.to
+        //     );
+        //     if (chatIndex === -1) {
+        //       const newChat = {
+        //         id: {
+        //           _serialized: message.payload.to,
+        //         },
+        //         name:
+        //           message.payload?._data?.notifyName ??
+        //           message.payload.to.slice(0, -5),
+        //         isGroup: message.payload.to.at(-5) === "g",
+        //         unreadCount: 0,
+        //         messages: [message.payload],
+        //         lastMessage: {
+        //           ...message.payload,
+        //         },
+        //       };
+        //       let allSize = dataUser.allSize;
+        //       if (message?.payload?._data?.size) {
+        //         allSize += message?.payload?._data?.size;
+        //       }
+        //       setSizeUser(+allSize / (1024 * 1024));
+        //       setDataUser((prev) => ({
+        //         ...prev,
+        //         chats: {
+        //           ...prev.chats,
+        //           [session]: [...prev.chats[session], newChat],
+        //         },
+        //         allSize,
+        //       }));
+        //       DatabaseAPI.updateUser(dataUser.username, {
+        //         chats: {
+        //           ...dataUser.chats,
+        //           [session]: [...dataUser.chats[session], newChat],
+        //         },
+        //         allSize,
+        //       }).then(() => {
+        //         // dispatch(setChats([...dataUser.chats[session], newChat]));
+        //         setChats(
+        //           [...dataUser.chats[session], newChat]?.sort(
+        //             (chat1, chat2) => {
+        //               const chat1time =
+        //                 +chat1?.lastMessage?.timestamp ||
+        //                 +(chat1?.lastMessage?.payload?.timestamp + "000");
+        //               const chat2time =
+        //                 +chat2?.lastMessage?.timestamp ||
+        //                 +(chat2?.lastMessage?.payload?.timestamp + "000");
 
-                      return chat1time > chat2time ? -1 : 1;
-                    }
-                  ) ?? []
-                );
-              });
-            } else {
-              chats[chatIndex].lastMessage = {
-                body: message.payload.body,
-                ...message.payload,
-              };
-              chats[chatIndex].messages = [
-                ...chats[chatIndex].messages,
-                message.payload,
-              ];
+        //               return chat1time > chat2time ? -1 : 1;
+        //             }
+        //           ) ?? []
+        //         );
+        //       });
+        //     } else {
+        //       chats[chatIndex].lastMessage = {
+        //         body: message.payload.body,
+        //         ...message.payload,
+        //       };
+        //       chats[chatIndex].messages = [
+        //         ...chats[chatIndex].messages,
+        //         message.payload,
+        //       ];
 
-              let allSize = dataUser.allSize;
-              if (message?.payload?._data?.size) {
-                allSize += message?.payload?._data?.size;
-              }
-              setSizeUser(+allSize / (1024 * 1024));
-              setDataUser((prev) => ({
-                ...prev,
-                chats: { [session]: chats, ...dataUser.chats },
-                allSize,
-              }));
-              DatabaseAPI.updateUser(dataUser.username, {
-                chats: { ...dataUser.chats, [session]: chats },
-                allSize,
-              });
-            }
+        //       let allSize = dataUser.allSize;
+        //       if (message?.payload?._data?.size) {
+        //         allSize += message?.payload?._data?.size;
+        //       }
+        //       setSizeUser(+allSize / (1024 * 1024));
+        //       setDataUser((prev) => ({
+        //         ...prev,
+        //         chats: { [session]: chats, ...dataUser.chats },
+        //         allSize,
+        //       }));
+        //       DatabaseAPI.updateUser(dataUser.username, {
+        //         chats: { ...dataUser.chats, [session]: chats },
+        //         allSize,
+        //       });
+        //     }
+        //   }
+        // } else {
+        //   if (message.payload.from === currentChat) {
+        //     message.payload.author = {
+        //       user: message.payload._data?.author?.user,
+        //     };
+        //     message.payload.notifyName = message.payload?._data?.notifyName;
+        //     setMessages((prev) => [message.payload, ...prev]);
+        //     const chatIndex = chats.findIndex(
+        //       (el) => el.id._serialized === currentChat
+        //     );
+        //     chats[chatIndex].messages = [
+        //       ...chats[chatIndex].messages,
+        //       message.payload,
+        //     ];
+        //     chats[chatIndex].lastMessage = {
+        //       ...message.payload,
+        //     };
+        //     let allSize = dataUser.allSize;
+        //     if (message?.payload?._data?.size) {
+        //       allSize += message?.payload?._data?.size;
+        //     }
+        //     setSizeUser(+allSize / (1024 * 1024));
+        //     setDataUser((prev) => ({
+        //       ...prev,
+        //       chats: { [session]: chats, ...dataUser.chats },
+        //       allSize,
+        //     }));
+
+        //     DatabaseAPI.updateUser(dataUser.username, {
+        //       chats: { ...dataUser.chats, [session]: chats },
+        //       allSize,
+        //     });
+        //   } else {
+        //     message.payload.author = {
+        //       user: message.payload._data?.author?.user,
+        //     };
+        //     message.payload.notifyName = message.payload?._data?.notifyName;
+        //     setMessages((prev) => prev);
+        //     const chatIndex = chats.findIndex(
+        //       (el) => el?.id?._serialized === message.payload.from
+        //     );
+        //     if (chatIndex === -1) {
+        //       const newChat = {
+        //         id: {
+        //           _serialized: message.payload.from,
+        //         },
+        //         name:
+        //           message.payload?._data?.notifyName ??
+        //           message.payload.from.slice(0, -5),
+        //         isGroup: message.payload.from.at(-5) === "g",
+        //         unreadCount: 1,
+        //         messages: [message.payload],
+        //         lastMessage: {
+        //           ...message.payload,
+        //         },
+        //       };
+        //       let allSize = dataUser.allSize;
+        //       if (message?.payload?._data?.size) {
+        //         allSize += message?.payload?._data?.size;
+        //       }
+        //       setSizeUser(+allSize / (1024 * 1024));
+        //       setDataUser((prev) => ({
+        //         ...prev,
+        //         chats: {
+        //           ...prev.chats,
+        //           [session]: [...prev.chats[session], newChat],
+        //         },
+        //         allSize,
+        //       }));
+        //       DatabaseAPI.updateUser(dataUser.username, {
+        //         chats: {
+        //           ...dataUser.chats,
+        //           [session]: [...dataUser.chats[session], newChat],
+        //         },
+        //         allSize,
+        //       }).then(() => {
+        //         // dispatch(setChats([...dataUser.chats[session], newChat]));
+        //         setChats(
+        //           [...dataUser.chats[session], newChat]?.sort(
+        //             (chat1, chat2) => {
+        //               const chat1time =
+        //                 +chat1?.lastMessage?.timestamp ||
+        //                 +(chat1?.lastMessage?.payload?.timestamp + "000");
+        //               const chat2time =
+        //                 +chat2?.lastMessage?.timestamp ||
+        //                 +(chat2?.lastMessage?.payload?.timestamp + "000");
+
+        //               return chat1time > chat2time ? -1 : 1;
+        //             }
+        //           ) ?? []
+        //         );
+        //       });
+        //     } else {
+        //       chats[chatIndex].unreadCount += 1;
+        //       chats[chatIndex].lastMessage = {
+        //         body: message.payload.body,
+        //         ...message.payload,
+        //       };
+        //       chats[chatIndex].messages = [
+        //         ...chats[chatIndex].messages,
+        //         message.payload,
+        //       ];
+
+        //       let allSize = dataUser.allSize;
+        //       if (message?.payload?._data?.size) {
+        //         allSize += message?.payload?._data?.size;
+        //       }
+        //       setSizeUser(+allSize / (1024 * 1024));
+        //       setDataUser((prev) => ({
+        //         ...prev,
+        //         chats: { [session]: chats, ...dataUser.chats },
+        //         allSize,
+        //       }));
+        //       DatabaseAPI.updateUser(dataUser.username, {
+        //         chats: { ...dataUser.chats, [session]: chats },
+        //         allSize,
+        //       });
+        //     }
+        //   }
+        // }
+
+        //TODO: Обработать уведомления о статусе чтобы убрать их из сообщений
+        const messageFromMe = message.payload.fromMe
+          ? message.payload.to
+          : message.payload.from;
+        if (message.payload.to === currentChat) {
+          message.payload.author = {
+            user: message.payload._data?.author?.user,
+          };
+          message.payload.notifyName = message.payload?._data?.notifyName;
+
+          setMessages((prev) => [message.payload, ...prev]);
+          const chatIndex = chats.findIndex(
+            (el) => el.id._serialized === currentChat
+          );
+          chats[chatIndex].messages = [
+            ...chats[chatIndex].messages,
+            message.payload,
+          ];
+          chats[chatIndex].lastMessage = {
+            ...message.payload,
+          };
+          let allSize = dataUser.allSize;
+          if (message?.payload?._data?.size) {
+            allSize += message?.payload?._data?.size;
           }
+          setSizeUser(+allSize / (1024 * 1024));
+          setDataUser((prev) => ({
+            ...prev,
+            chats: { [session]: chats, ...dataUser.chats },
+            allSize,
+          }));
+
+          DatabaseAPI.updateUser(dataUser.username, {
+            chats: { ...dataUser.chats, [session]: chats },
+            allSize: allSize,
+          });
         } else {
-          if (message.payload.from === currentChat) {
-            message.payload.author = {
-              user: message.payload._data?.author?.user,
+          message.payload.author = {
+            user: message.payload._data?.author?.user,
+          };
+          message.payload.notifyName = message.payload?._data?.notifyName;
+          setMessages((prev) => prev);
+          const chatIndex = chats.findIndex(
+            (el) => el?.id?._serialized === messageFromMe
+          );
+          if (chatIndex === -1) {
+            const newChat = {
+              id: {
+                _serialized: messageFromMe,
+              },
+              name:
+                message.payload?._data?.notifyName ??
+                messageFromMe.slice(0, -5),
+              isGroup: messageFromMe.at(-5) === "g",
+              unreadCount: message.payload.fromMe ? 0 : 1,
+              messages: [message.payload],
+              lastMessage: {
+                ...message.payload,
+              },
             };
-            message.payload.notifyName = message.payload?._data?.notifyName;
-            setMessages((prev) => [message.payload, ...prev]);
-            const chatIndex = chats.findIndex(
-              (el) => el.id._serialized === currentChat
-            );
+            let allSize = dataUser.allSize;
+            if (message?.payload?._data?.size) {
+              allSize += message?.payload?._data?.size;
+            }
+            setSizeUser(+allSize / (1024 * 1024));
+            setDataUser((prev) => ({
+              ...prev,
+              chats: {
+                ...prev.chats,
+                [session]: [...prev.chats[session], newChat],
+              },
+              allSize,
+            }));
+            DatabaseAPI.updateUser(dataUser.username, {
+              chats: {
+                ...dataUser.chats,
+                [session]: [...dataUser.chats[session], newChat],
+              },
+              allSize,
+            }).then(() => {
+              // dispatch(setChats([...dataUser.chats[session], newChat]));
+              setChats(
+                [...dataUser.chats[session], newChat]?.sort((chat1, chat2) => {
+                  const chat1time =
+                    +chat1?.lastMessage?.timestamp ||
+                    +(chat1?.lastMessage?.payload?.timestamp + "000");
+                  const chat2time =
+                    +chat2?.lastMessage?.timestamp ||
+                    +(chat2?.lastMessage?.payload?.timestamp + "000");
+
+                  return chat1time > chat2time ? -1 : 1;
+                }) ?? []
+              );
+            });
+          } else {
+            //Если сообщение не от меня то добавить количество непрочитанных
+            if (message.payload.fromMe) chats[chatIndex].unreadCount += 1;
+            chats[chatIndex].lastMessage = {
+              body: message.payload.body,
+              ...message.payload,
+            };
             chats[chatIndex].messages = [
               ...chats[chatIndex].messages,
               message.payload,
             ];
-            chats[chatIndex].lastMessage = {
-              ...message.payload,
-            };
+
             let allSize = dataUser.allSize;
             if (message?.payload?._data?.size) {
               allSize += message?.payload?._data?.size;
@@ -231,97 +441,10 @@ function Chats() {
               chats: { [session]: chats, ...dataUser.chats },
               allSize,
             }));
-
             DatabaseAPI.updateUser(dataUser.username, {
               chats: { ...dataUser.chats, [session]: chats },
               allSize,
             });
-          } else {
-            message.payload.author = {
-              user: message.payload._data?.author?.user,
-            };
-            message.payload.notifyName = message.payload?._data?.notifyName;
-            setMessages((prev) => prev);
-            const chatIndex = chats.findIndex(
-              (el) => el?.id?._serialized === message.payload.from
-            );
-            if (chatIndex === -1) {
-              const newChat = {
-                id: {
-                  _serialized: message.payload.from,
-                },
-                name:
-                  message.payload?._data?.notifyName ??
-                  message.payload.from.slice(0, -5),
-                isGroup: message.payload.from.at(-5) === "g",
-                unreadCount: 1,
-                messages: [message.payload],
-                lastMessage: {
-                  ...message.payload,
-                },
-              };
-              let allSize = dataUser.allSize;
-              if (message?.payload?._data?.size) {
-                allSize += message?.payload?._data?.size;
-              }
-              setSizeUser(+allSize / (1024 * 1024));
-              setDataUser((prev) => ({
-                ...prev,
-                chats: {
-                  ...prev.chats,
-                  [session]: [...prev.chats[session], newChat],
-                },
-                allSize,
-              }));
-              DatabaseAPI.updateUser(dataUser.username, {
-                chats: {
-                  ...dataUser.chats,
-                  [session]: [...dataUser.chats[session], newChat],
-                },
-                allSize,
-              }).then(() => {
-                // dispatch(setChats([...dataUser.chats[session], newChat]));
-                setChats(
-                  [...dataUser.chats[session], newChat]?.sort(
-                    (chat1, chat2) => {
-                      const chat1time =
-                        +chat1?.lastMessage?.timestamp ||
-                        +(chat1?.lastMessage?.payload?.timestamp + "000");
-                      const chat2time =
-                        +chat2?.lastMessage?.timestamp ||
-                        +(chat2?.lastMessage?.payload?.timestamp + "000");
-
-                      return chat1time > chat2time ? -1 : 1;
-                    }
-                  ) ?? []
-                );
-              });
-            } else {
-              chats[chatIndex].unreadCount += 1;
-              chats[chatIndex].lastMessage = {
-                body: message.payload.body,
-                ...message.payload,
-              };
-              chats[chatIndex].messages = [
-                ...chats[chatIndex].messages,
-                message.payload,
-              ];
-
-              let allSize = dataUser.allSize;
-              if (message?.payload?._data?.size) {
-                allSize += message?.payload?._data?.size;
-              }
-              setSizeUser(+allSize / (1024 * 1024));
-              setDataUser((prev) => ({
-                ...prev,
-                chats: { [session]: chats, ...dataUser.chats },
-                allSize,
-              }));
-              DatabaseAPI.updateUser(dataUser.username, {
-                chats: { ...dataUser.chats, [session]: chats },
-                allSize,
-              });
-            }
           }
         }
       }
