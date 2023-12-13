@@ -329,7 +329,7 @@ function Chats() {
         const messageFromMe = message.payload.fromMe
           ? message.payload.to
           : message.payload.from;
-        if (message.payload.to === currentChat) {
+        if (messageFromMe === currentChat) {
           message.payload.author = {
             user: message.payload._data?.author?.user,
           };
