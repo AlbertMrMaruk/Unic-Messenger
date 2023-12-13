@@ -2,21 +2,21 @@ import { useState } from "react";
 import ChatsApi from "../../api/ChatsApi";
 import DatabaseAPI from "../../api/DatabaseAPI";
 import { useDispatch, useSelector } from "react-redux";
-import { setChats } from "../../store/reducers/chat";
+// import { setChats } from "../../store/reducers/chat";
 
 export const TooltipChats = ({
   children,
   session,
   chatId,
   dataUser,
-  // setChats,
+  setChats,
   setDataUser,
-  // chats,
+  chats,
   setMessages,
 }) => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
-  const chats = useSelector((state) => state.chat.chats);
+  // const chats = useSelector((state) => state.chat.chats);
 
   return (
     <div
@@ -69,8 +69,8 @@ export const TooltipChats = ({
                     ...prev,
                     chats: { ...dataUser.chats, [session]: newChats },
                   }));
-
-                  dispatch(setChats(newChats));
+                  setChats(newChats);
+                  // dispatch(setChats(newChats));
                   DatabaseAPI.updateUser(dataUser.username, {
                     chats: { ...dataUser.chats, [session]: newChats },
                   });
