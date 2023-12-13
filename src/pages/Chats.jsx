@@ -80,10 +80,11 @@ function Chats() {
         return;
       }
       if (message.event === "message.any") {
-        //Убираем путсые сообщения
+        //Убираем пустые сообщения
         if (message.payload?.ackName === "UNKNOWN") {
           return;
         }
+
         if (message.payload.fromMe) {
           if (message.payload.to === currentChat) {
             message.payload.author = {
@@ -324,12 +325,6 @@ function Chats() {
           }
         }
       }
-      // if (message.event === "session.status") {
-      //   if (message.payload.status === "SCAN_QR_CODE") {
-      //     console.log("scaaaan");
-      //     setQrCode(`http://89.111.131.15/api/${message.session}/auth/qr`);
-      //   }
-      // }
 
       // dispatch(setChats(chats));
       setChats((prev) =>
@@ -528,7 +523,8 @@ function Chats() {
                     if (message.hasMedia) {
                       if (+message._data.size > 0) {
                         message.size = message._data.size;
-                        dataUser.allSize += +message._data.size;
+                        dataUser.allSize =
+                          (dataUser?.allSize ?? 0) + +message._data.size;
                       }
                     }
                     delete message._data;
