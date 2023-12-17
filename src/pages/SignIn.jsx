@@ -27,7 +27,6 @@ function SignIn() {
     DatabaseAPI.signInUser(formData)
       .then((res) => res.json())
       .then((el) => {
-        console.log(el);
         if (el) {
           navigate("/");
         }
