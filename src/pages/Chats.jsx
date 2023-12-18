@@ -396,6 +396,7 @@ function Chats() {
             );
             console.log(el2);
             if (!el2) {
+              countChatsUpdate++;
               el.messages = [el.lastMessage];
               DatabaseAPI.updateUser(userData[0].username, {
                 chats: {
@@ -405,6 +406,19 @@ function Chats() {
                     ...userData[0].chats?.[correctSession],
                   ],
                 },
+              }).then(() => {
+                countChatsUpdated++;
+                if (countChatsUpdate === countChatsUpdated) {
+                  DatabaseAPI.updateUser(userData[0].username, {
+                    chats: {
+                      ...userData[0].chats,
+                      [correctSession]: userData[0].chats?.[correctSession],
+                    },
+                  });
+
+                  dataToApp(userData[0], correctSession);
+                  return;
+                }
               });
               return;
             }
@@ -452,6 +466,7 @@ function Chats() {
                     });
 
                     dataToApp(userData[0], correctSession);
+                    return;
                   }
                 });
             }
