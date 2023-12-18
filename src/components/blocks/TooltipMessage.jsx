@@ -48,6 +48,7 @@ export const TooltipMessage = ({
             onClick={() => {
               setShow(!show);
               const onClick = () => {
+                console.log("hmm");
                 if (show) {
                   setShow(false);
                   window.removeEventListener("click", onClick);
@@ -66,6 +67,7 @@ export const TooltipMessage = ({
             onClick={() => {
               setShow(!show);
               const onClick = () => {
+                console.log("hmm");
                 if (show) {
                   setShow(false);
                   window.removeEventListener("click", onClick);
