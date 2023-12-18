@@ -396,6 +396,7 @@ function Chats() {
             );
             console.log(el2);
             if (!el2) {
+              el.messages = [el.lastMessage];
               DatabaseAPI.updateUser(userData[0].username, {
                 chats: {
                   ...userData[0].chats,
