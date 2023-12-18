@@ -176,7 +176,7 @@ function Chats() {
             });
           } else {
             //Если сообщение не от меня то добавить количество непрочитанных
-            if (message.payload.fromMe) chats[chatIndex].unreadCount += 1;
+            if (!message.payload.fromMe) chats[chatIndex].unreadCount += 1;
             chats[chatIndex].lastMessage = {
               body: message.payload.body,
               ...message.payload,
@@ -337,7 +337,7 @@ function Chats() {
                   el?.profilePictureURL;
                 setPercentage((prev) => +prev + 1);
                 data.chatsCount += 1;
-                if (data.chatsCount === 15) {
+                if (data.chatsCount === 35) {
                   data.allSize = allSize;
 
                   DatabaseAPI.updateUser(userData[0].username, {
@@ -353,7 +353,7 @@ function Chats() {
                 }
               });
           };
-          for (let i = 0; i < 15; i++) {
+          for (let i = 0; i < 35; i++) {
             try {
               await fetchChat(data.chats[currentSession][i], i);
             } catch (error) {
