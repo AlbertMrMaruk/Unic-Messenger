@@ -358,6 +358,7 @@ function Chats() {
               await fetchChat(data.chats[currentSession][i], i);
             } catch (error) {
               console.log(error);
+              data.chatsCount += 1;
               continue;
             }
 
