@@ -400,8 +400,8 @@ function Chats() {
                 chats: {
                   ...userData[0].chats,
                   [correctSession]: [
-                    ...el,
-                    userData[0].chats?.[correctSession],
+                    el,
+                    ...userData[0].chats?.[correctSession],
                   ],
                 },
               });
