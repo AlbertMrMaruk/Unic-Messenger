@@ -46,12 +46,12 @@ export const TooltipMessage = ({
           <FaDotCircle
             className="md:hidden w-[20px] text-white"
             onClick={() => {
+              setShow(!show);
               const onClick = () => {
                 setShow(false);
                 window.removeEventListener("click", onClick);
               };
               window.addEventListener("click", onClick);
-              setShow(!show);
             }}
           />
           {children}
@@ -61,14 +61,13 @@ export const TooltipMessage = ({
           {children}
           <FaDotCircle
             className="md:hidden w-[20px] text-white"
-            onClick={(e) => {
-              e.preventDefault();
+            onClick={() => {
+              setShow(!show);
               const onClick = () => {
                 setShow(false);
                 window.removeEventListener("click", onClick);
               };
               window.addEventListener("click", onClick);
-              setShow(!show);
             }}
           />
         </div>
