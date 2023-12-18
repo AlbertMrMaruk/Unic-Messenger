@@ -394,8 +394,9 @@ function Chats() {
             const el2 = userData[0].chats?.[correctSession].find(
               (el2) => el.id._serialized === el2.id._serialized
             );
-            console.log(el2);
+            // console.log(el2, el);
             if (!el2) {
+              console.log(el2, el);
               countChatsUpdate++;
               el.messages = [el.lastMessage];
               DatabaseAPI.updateUser(userData[0].username, {
