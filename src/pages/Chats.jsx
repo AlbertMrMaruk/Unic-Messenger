@@ -712,6 +712,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                 <TooltipMessage
                   session={session}
                   message={el}
+                  focusOn={focusOn}
                   setShowModalReply={setShowModalReply}
                   setReplyMessage={setReplyMessage}
                   isGroup={el.from.at(-4) === "g"}
