@@ -396,35 +396,35 @@ function Chats() {
             );
 
             console.log(el2);
-            if (!el2) {
-              setDataUser((prev) => ({
-                ...prev,
-                chats: {
-                  ...prev.chats,
-                  [session]: [...prev.chats[session], el],
-                },
-              }));
-              DatabaseAPI.updateUser(dataUser.username, {
-                chats: {
-                  ...dataUser.chats,
-                  [session]: [...dataUser.chats[session], el],
-                },
-              }).then(() => {
-                // dispatch(setChats([...dataUser.chats[session], el]));
-                setChats(
-                  [...dataUser.chats[session], el]?.sort((chat1, chat2) => {
-                    const chat1time =
-                      +chat1?.lastMessage?.timestamp ||
-                      +(chat1?.lastMessage?.payload?.timestamp + "000");
-                    const chat2time =
-                      +chat2?.lastMessage?.timestamp ||
-                      +(chat2?.lastMessage?.payload?.timestamp + "000");
+            // if (!el2) {
+            //   setDataUser((prev) => ({
+            //     ...prev,
+            //     chats: {
+            //       ...prev.chats,
+            //       [session]: [...prev.chats[session], el],
+            //     },
+            //   }));
+            //   DatabaseAPI.updateUser(dataUser.username, {
+            //     chats: {
+            //       ...dataUser.chats,
+            //       [session]: [...dataUser.chats[session], el],
+            //     },
+            //   }).then(() => {
+            //     // dispatch(setChats([...dataUser.chats[session], el]));
+            //     setChats(
+            //       [...dataUser.chats[session], el]?.sort((chat1, chat2) => {
+            //         const chat1time =
+            //           +chat1?.lastMessage?.timestamp ||
+            //           +(chat1?.lastMessage?.payload?.timestamp + "000");
+            //         const chat2time =
+            //           +chat2?.lastMessage?.timestamp ||
+            //           +(chat2?.lastMessage?.payload?.timestamp + "000");
 
-                    return chat1time > chat2time ? -1 : 1;
-                  }) ?? []
-                );
-              });
-            }
+            //         return chat1time > chat2time ? -1 : 1;
+            //       }) ?? []
+            //     );
+            //   });
+            // }
 
             if (el?.lastMessage?.timestamp > el2?.lastMessage?.timestamp) {
               countChatsUpdate++;
