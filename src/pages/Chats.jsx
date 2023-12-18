@@ -41,6 +41,7 @@ import {
 function Chats() {
   const navigate = useNavigate();
   const inputRef = useRef();
+  const messagesRef = useRef();
   const [session, setSession] = useState();
   const [accounts, setAccounts] = useState([]);
   const [messages, setMessages] = useState([]);
@@ -72,7 +73,6 @@ function Chats() {
   const dispatch = useDispatch();
   const replyMessage = useSelector((state) => state.chat.replyMessage);
   // const chats = useSelector((state) => state.chat.chats);
-  console.log(chats);
 
   // Функция получения сообщения
   useEffect(() => {
@@ -458,6 +458,7 @@ function Chats() {
         dispatch(changeMessages(updatedMessages));
         setMessages(updatedMessages);
         setShowSpinnerMessages(false);
+        messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
       }
       if (state?.session !== session) {
         console.log(state?.session, "IT s wil changed");
@@ -662,6 +663,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           className={`w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[70vh] ${
             replyMessage ? "md:h-[75vh]" : "md:h-[80vh]"
           }  mt-2`}
+          ref={messagesRef}
         >
           {showSpinnerMessages ? (
             <Spinner />
