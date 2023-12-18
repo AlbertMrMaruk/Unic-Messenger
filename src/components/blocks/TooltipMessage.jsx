@@ -47,14 +47,6 @@ export const TooltipMessage = ({
             className="md:hidden w-[20px] text-white"
             onClick={() => {
               setShow(!show);
-              const onClick = () => {
-                console.log("hmm");
-                if (show) {
-                  setShow(false);
-                  window.removeEventListener("click", onClick);
-                }
-              };
-              window.addEventListener("click", onClick);
             }}
           />
           {children}
@@ -66,14 +58,6 @@ export const TooltipMessage = ({
             className="md:hidden w-[20px] text-white"
             onClick={() => {
               setShow(!show);
-              const onClick = () => {
-                console.log("hmm");
-                if (show) {
-                  setShow(false);
-                  window.removeEventListener("click", onClick);
-                }
-              };
-              window.addEventListener("click", onClick);
             }}
           />
         </div>
