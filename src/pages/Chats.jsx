@@ -77,9 +77,14 @@ function Chats() {
   // Функция получения сообщения
   useEffect(() => {
     const gettingMessage = (message) => {
-      if (sizeUser === 0 || message?.payload?.ackName === "UNKNOWN") {
+      if (
+        sizeUser === 0 ||
+        message?.payload?.ackName === "UNKNOWN" ||
+        message?.payload?.from === "status@broadcast"
+      ) {
         return;
       }
+
       if (message.event === "message.any") {
         const messageFromMe = message.payload.fromMe
           ? message.payload.to
