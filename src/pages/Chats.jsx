@@ -304,7 +304,7 @@ function Chats() {
           console.log("Starting");
           const data = {
             ...userData[0],
-            chats: { ...userData[0].chats, [currentSession]: res.slice(0, 15) },
+            chats: { ...userData[0].chats, [currentSession]: res.slice(0, 35) },
             chatsCount: 0,
           };
           let allSize = 0;
