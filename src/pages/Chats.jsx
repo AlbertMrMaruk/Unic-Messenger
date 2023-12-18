@@ -394,7 +394,6 @@ function Chats() {
             const el2 = userData[0].chats?.[correctSession].find(
               (el2) => el.id._serialized === el2.id._serialized
             );
-
             console.log(el2);
             // if (!el2) {
             //   setDataUser((prev) => ({
