@@ -470,6 +470,11 @@ function Chats() {
     };
     changeState();
   }, [state]);
+
+  const focusOn = () => {
+    console.log(inputRef);
+    inputRef.current.focus();
+  };
   //Функция отправки сообщения
   const sendMessage = async (text, type, data) => {
     await ChatsApi.sendSeen(currentChat, session);
@@ -492,7 +497,7 @@ function Chats() {
       }
     }, 1000);
     setText("");
-    inputRef.current.focus();
+    focusOn();
   };
   return (
     <div className="bg-secondary text-white flex  h-[100vh]">
@@ -690,7 +695,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                       message={el}
                       isGroup={el.from.at(-4) === "g"}
                       setShowModalReply={setShowModalReply}
-                      inputRef={inputRef}
+                      focusOn={focusOn}
                       setReplyMessage={setReplyMessage}
                     >
                       <Message
