@@ -401,8 +401,11 @@ function Chats() {
                     if (message.hasMedia) {
                       if (+message._data.size > 0) {
                         message.size = message._data.size;
-                        dataUser.allSize =
-                          (dataUser?.allSize ?? 0) + +message._data.size;
+                        setDataUser((el) => ({
+                          ...el,
+                          allSize:
+                            (dataUser?.allSize ?? 0) + +message._data.size,
+                        }));
                       }
                     }
                     delete message._data;
