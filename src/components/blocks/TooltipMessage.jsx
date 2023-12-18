@@ -45,8 +45,7 @@ export const TooltipMessage = ({
         <div className="flex flex-row items-center justify-end">
           <FaDotCircle
             className="md:hidden w-[20px] text-white"
-            onClick={(e) => {
-              e.preventDefault();
+            onClick={() => {
               const onClick = () => {
                 setShow(false);
                 window.removeEventListener("click", onClick);
