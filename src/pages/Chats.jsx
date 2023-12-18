@@ -361,6 +361,7 @@ function Chats() {
           };
           for (let i = 0; i < 35; i++) {
             try {
+              console.log(data.chats[currentSession][i], i, data.chatsCount);
               await fetchChat(data.chats[currentSession][i], i);
             } catch (error) {
               console.log(error);
