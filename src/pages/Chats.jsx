@@ -385,16 +385,19 @@ function Chats() {
       ChatsApi.getChats(correctSession)
         .then((el) => el.json())
         .then((res) => {
-          const newChats = res.slice(0, 5);
+          const newChats = res.slice(0, 20);
 
-          userData[0].chats?.[correctSession].forEach((el) => {
+          newChats.forEach((el) => {
             let countChatsUpdate = 0;
             let countChatsUpdated = 0;
 
-            const el2 = newChats.find(
+            const el2 = userData[0].chats?.[correctSession].find(
               (el2) => el.id._serialized === el2.id._serialized
             );
-            if (el2?.lastMessage?.timestamp > el?.lastMessage?.timestamp) {
+
+            console.log(el2);
+
+            if (el?.lastMessage?.timestamp > el2?.lastMessage?.timestamp) {
               countChatsUpdate++;
 
               ChatsApi.getMessages(el.id._serialized, 20, correctSession)
@@ -441,6 +444,62 @@ function Chats() {
                 });
             }
           });
+
+          //   userData[0].chats?.[correctSession].forEach((el) => {
+          //     let countChatsUpdate = 0;
+          //     let countChatsUpdated = 0;
+
+          //     const el2 = newChats.find(
+          //       (el2) => el.id._serialized === el2.id._serialized
+          //     );
+
+          //     if (el2?.lastMessage?.timestamp > el?.lastMessage?.timestamp) {
+          //       countChatsUpdate++;
+
+          //       ChatsApi.getMessages(el.id._serialized, 20, correctSession)
+          //         .then((el) => el.json())
+          //         .then((messages) => {
+          //           const superNew = messages.slice(
+          //             messages.findIndex(
+          //               (message) =>
+          //                 el?.lastMessage?.timestamp === message?.timestamp
+          //             ) + 1
+          //           );
+          //           superNew.forEach((message) => {
+          //             delete message.vCards;
+          //             message.author = { user: message._data?.author?.user };
+          //             message.notifyName = message?._data?.notifyName;
+          //             if (message.hasMedia) {
+          //               if (+message._data.size > 0) {
+          //                 message.size = message._data.size;
+          //                 console.log(dataUser, message);
+          //                 setDataUser((el) => ({
+          //                   ...el,
+          //                   allSize:
+          //                     (dataUser?.allSize ?? 0) + +message?._data?.size,
+          //                 }));
+          //               }
+          //             }
+          //             delete message._data;
+          //           });
+
+          //           el.messages = [...el.messages, ...superNew];
+          //           el.lastMessage = superNew.at(-1);
+
+          //           countChatsUpdated++;
+          //           if (countChatsUpdate === countChatsUpdated) {
+          //             DatabaseAPI.updateUser(userData[0].username, {
+          //               chats: {
+          //                 ...userData[0].chats,
+          //                 [correctSession]: userData[0].chats?.[correctSession],
+          //               },
+          //             });
+
+          //             dataToApp(userData[0], correctSession);
+          //           }
+          //         });
+          //     }
+          //   });
         });
       dataToApp(userData[0], correctSession);
     }
