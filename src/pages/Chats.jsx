@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ChatsApi from "../api/ChatsApi";
 import {
   FaWhatsapp,
@@ -40,6 +40,7 @@ import {
 
 function Chats() {
   const navigate = useNavigate();
+  const inputRef = useRef();
   const [session, setSession] = useState();
   const [accounts, setAccounts] = useState([]);
   const [messages, setMessages] = useState([]);
@@ -479,6 +480,7 @@ function Chats() {
       }
     }, 1000);
     setText("");
+    inputRef.current.focus();
   };
   return (
     <div className="bg-secondary text-white flex  h-[100vh]">
@@ -675,6 +677,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                       message={el}
                       isGroup={el.from.at(-4) === "g"}
                       setShowModalReply={setShowModalReply}
+                      inputRef={inputRef}
                       setReplyMessage={setReplyMessage}
                     >
                       <Message
@@ -739,6 +742,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
                     sendMessage(text);
                   }
                 }}
+                ref={inputRef}
                 className={`
             bg-secondarylight text-white    ${
               replyMessage ? "rounded-bl-xl" : "rounded-l-xl"
@@ -858,6 +862,7 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
           setShowModal={setShowModalReply}
           session={session}
           setShowChats={setShowChats}
+          inputRef={inputRef}
           setReplyMessage={setReplyMessage}
         />
       )}

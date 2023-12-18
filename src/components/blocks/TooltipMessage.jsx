@@ -8,6 +8,7 @@ export const TooltipMessage = ({
   message,
   children,
   session,
+  inputRef,
   // setReplyMessage,
   setShowModalReply,
   isGroup,
@@ -113,6 +114,7 @@ export const TooltipMessage = ({
               onClick={() => {
                 console.log(message);
                 dispatch(setReplyMessage(message));
+                inputRef.current.focus();
               }}
             >
               Ответить на сообщение
@@ -129,6 +131,7 @@ export const TooltipMessage = ({
               className="cursor-pointer px-[.9rem] pb-[.9rem]"
               onClick={() => {
                 dispatch(setReplyMessage(message));
+                inputRef.current.focus();
                 setShowModalReply(true);
               }}
             >
