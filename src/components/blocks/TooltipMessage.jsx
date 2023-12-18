@@ -114,6 +114,7 @@ export const TooltipMessage = ({
               onClick={() => {
                 console.log(message);
                 dispatch(setReplyMessage(message));
+                console.log(inputRef);
                 inputRef.current.focus();
               }}
             >
@@ -131,8 +132,9 @@ export const TooltipMessage = ({
               className="cursor-pointer px-[.9rem] pb-[.9rem]"
               onClick={() => {
                 dispatch(setReplyMessage(message));
-                inputRef.current.focus();
+
                 setShowModalReply(true);
+                inputRef.current.focus();
               }}
             >
               Переслать сообщение
