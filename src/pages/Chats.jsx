@@ -396,32 +396,14 @@ function Chats() {
             );
             console.log(el2);
             if (!el2) {
-              setDataUser((prev) => ({
-                ...prev,
+              DatabaseAPI.updateUser(userData[0].username, {
                 chats: {
-                  ...prev.chats,
-                  [session]: [...prev.chats[session], el],
+                  ...userData[0].chats,
+                  [correctSession]: [
+                    ...el,
+                    userData[0].chats?.[correctSession],
+                  ],
                 },
-              }));
-              DatabaseAPI.updateUser(dataUser.username, {
-                chats: {
-                  ...dataUser.chats,
-                  [session]: [...dataUser.chats[session], el],
-                },
-              }).then(() => {
-                // dispatch(setChats([...dataUser.chats[session], el]));
-                setChats(
-                  [...dataUser.chats[session], el]?.sort((chat1, chat2) => {
-                    const chat1time =
-                      +chat1?.lastMessage?.timestamp ||
-                      +(chat1?.lastMessage?.payload?.timestamp + "000");
-                    const chat2time =
-                      +chat2?.lastMessage?.timestamp ||
-                      +(chat2?.lastMessage?.payload?.timestamp + "000");
-
-                    return chat1time > chat2time ? -1 : 1;
-                  }) ?? []
-                );
               });
               return;
             }
