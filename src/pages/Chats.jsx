@@ -406,7 +406,7 @@ function Chats() {
                   const superNew = messages.slice(
                     messages.findIndex(
                       (message) =>
-                        el?.lastMessage?.timestamp === message?.timestamp
+                        el2?.lastMessage?.timestamp === message?.timestamp
                     ) + 1
                   );
                   superNew.forEach((message) => {
@@ -427,8 +427,8 @@ function Chats() {
                     delete message._data;
                   });
 
-                  el.messages = [...el.messages, ...superNew];
-                  el.lastMessage = superNew.at(-1);
+                  el2.messages = [...el2.messages, ...superNew];
+                  el2.lastMessage = superNew.at(-1);
 
                   countChatsUpdated++;
                   if (countChatsUpdate === countChatsUpdated) {
