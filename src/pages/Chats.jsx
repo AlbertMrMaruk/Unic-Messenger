@@ -311,7 +311,6 @@ function Chats() {
           // FETCH FUNCTION
           const delay = (ms) => new Promise((res) => setTimeout(res, ms));
           const fetchChat = async (el, index) => {
-            console.log(el);
             if (!el?.id?._serialized) {
               data.chatsCount += 1;
               return;
@@ -361,12 +360,11 @@ function Chats() {
           };
           for (let i = 0; i < 35; i++) {
             try {
-              console.log(data.chats[currentSession][i], i, data.chatsCount);
               await fetchChat(data.chats[currentSession][i], i);
             } catch (error) {
               console.log(error);
               data.chatsCount += 1;
-              console.log(data.chatsCount);
+
               continue;
             }
 
