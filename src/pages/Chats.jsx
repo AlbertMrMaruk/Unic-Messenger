@@ -471,10 +471,9 @@ function Chats() {
     changeState();
   }, [state]);
 
-  const focusOn = () => {
-    console.log(inputRef);
-    inputRef.current.focus();
-  };
+  // Фокусировка на инпуте
+  const focusOn = () => inputRef.current.focus();
+
   //Функция отправки сообщения
   const sendMessage = async (text, type, data) => {
     await ChatsApi.sendSeen(currentChat, session);
