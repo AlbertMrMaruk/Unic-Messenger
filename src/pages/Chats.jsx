@@ -40,8 +40,8 @@ import {
 
 function Chats() {
   const navigate = useNavigate();
-  const inputRef = useRef();
-  const messagesRef = useRef();
+  const inputRef = useRef(null);
+  const messagesRef = useRef(null);
   const [session, setSession] = useState();
   const [accounts, setAccounts] = useState([]);
   const [messages, setMessages] = useState([]);
