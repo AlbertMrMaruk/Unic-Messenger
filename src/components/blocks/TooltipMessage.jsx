@@ -40,7 +40,7 @@ export const TooltipMessage = ({
               className="md:hidden w-[20px]  text-white"
               onClick={() => {
                 setShow(!show);
-                closeModal();
+                setTimeout(closeModal, 1000);
               }}
             />
           </div>
