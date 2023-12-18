@@ -15,16 +15,19 @@ export const TooltipMessage = ({
 }) => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
+  const closeModal = () => {
+    const onClick = () => {
+      setShow(false);
+      window.removeEventListener("click", onClick);
+    };
+    window.addEventListener("click", onClick);
+  };
   return (
     <div
       className="relative flex flex-col  group w-[100%]"
       onContextMenu={(e) => {
         e.preventDefault();
-        const onClick = () => {
-          setShow(false);
-          window.removeEventListener("click", onClick);
-        };
-        window.addEventListener("click", onClick);
+        closeModal();
         setShow(!show);
       }}
     >
@@ -37,6 +40,7 @@ export const TooltipMessage = ({
               className="md:hidden w-[20px]  text-white"
               onClick={() => {
                 setShow(!show);
+                closeModal();
               }}
             />
           </div>
