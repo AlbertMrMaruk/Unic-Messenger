@@ -457,18 +457,18 @@ function Chats() {
                 });
             }
 
-            if (countChatsUpdate === countChatsUpdated) {
-              console.log("Updated", userData[0].chats);
-              DatabaseAPI.updateUser(userData[0].username, {
-                chats: {
-                  ...userData[0].chats,
-                  [correctSession]: userData[0].chats?.[correctSession],
-                },
-              });
+            // if (countChatsUpdate === countChatsUpdated) {
+            //   console.log("Updated", userData[0].chats);
+            //   DatabaseAPI.updateUser(userData[0].username, {
+            //     chats: {
+            //       ...userData[0].chats,
+            //       [correctSession]: userData[0].chats?.[correctSession],
+            //     },
+            //   });
 
-              dataToApp(userData[0], correctSession);
-              return;
-            }
+            //   dataToApp(userData[0], correctSession);
+            //   return;
+            // }
           });
         });
       dataToApp(userData[0], correctSession);
