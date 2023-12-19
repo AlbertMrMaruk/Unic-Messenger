@@ -403,7 +403,9 @@ function Chats() {
                 ...userData[0].chats,
                 [correctSession]: [el, ...userData[0].chats?.[correctSession]],
               };
+              console.log(userData[0].chats);
               countChatsUpdated++;
+
               // DatabaseAPI.updateUser(userData[0].username, {
               //   chats: {
               //     ...userData[0].chats,
@@ -464,6 +466,7 @@ function Chats() {
 
                   countChatsUpdated++;
                   if (countChatsUpdate === countChatsUpdated) {
+                    console.log("Updated", userData[0].chats);
                     DatabaseAPI.updateUser(userData[0].username, {
                       chats: {
                         ...userData[0].chats,
@@ -475,6 +478,19 @@ function Chats() {
                     return;
                   }
                 });
+            }
+
+            if (countChatsUpdate === countChatsUpdated) {
+              console.log("Updated", userData[0].chats);
+              DatabaseAPI.updateUser(userData[0].username, {
+                chats: {
+                  ...userData[0].chats,
+                  [correctSession]: userData[0].chats?.[correctSession],
+                },
+              });
+
+              dataToApp(userData[0], correctSession);
+              return;
             }
           });
 
