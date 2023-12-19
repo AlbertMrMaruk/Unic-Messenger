@@ -399,28 +399,33 @@ function Chats() {
               console.log(el2, el);
               countChatsUpdate++;
               el.messages = [el.lastMessage];
-              DatabaseAPI.updateUser(userData[0].username, {
-                chats: {
-                  ...userData[0].chats,
-                  [correctSession]: [
-                    el,
-                    ...userData[0].chats?.[correctSession],
-                  ],
-                },
-              }).then(() => {
-                countChatsUpdated++;
-                if (countChatsUpdate === countChatsUpdated) {
-                  DatabaseAPI.updateUser(userData[0].username, {
-                    chats: {
-                      ...userData[0].chats,
-                      [correctSession]: userData[0].chats?.[correctSession],
-                    },
-                  });
+              userData[0].chats = {
+                ...userData[0].chats,
+                [correctSession]: [el, ...userData[0].chats?.[correctSession]],
+              };
+              countChatsUpdated++;
+              // DatabaseAPI.updateUser(userData[0].username, {
+              //   chats: {
+              //     ...userData[0].chats,
+              //     [correctSession]: [
+              //       el,
+              //       ...userData[0].chats?.[correctSession],
+              //     ],
+              //   },
+              // }).then(() => {
+              //   countChatsUpdated++;
+              //   if (countChatsUpdate === countChatsUpdated) {
+              //     DatabaseAPI.updateUser(userData[0].username, {
+              //       chats: {
+              //         ...userData[0].chats,
+              //         [correctSession]: userData[0].chats?.[correctSession],
+              //       },
+              //     });
 
-                  dataToApp(userData[0], correctSession);
-                  return;
-                }
-              });
+              //     dataToApp(userData[0], correctSession);
+              //     return;
+              //   }
+              // });
               return;
             }
 
