@@ -394,40 +394,17 @@ function Chats() {
             const el2 = userData[0].chats?.[correctSession].find(
               (el2) => el.id._serialized === el2.id._serialized
             );
-            // console.log(el2, el);
+
             if (!el2) {
-              console.log(el2, el);
               countChatsUpdate++;
               el.messages = [el.lastMessage];
               userData[0].chats = {
                 ...userData[0].chats,
                 [correctSession]: [el, ...userData[0].chats?.[correctSession]],
               };
-              console.log(userData[0].chats);
+
               countChatsUpdated++;
 
-              // DatabaseAPI.updateUser(userData[0].username, {
-              //   chats: {
-              //     ...userData[0].chats,
-              //     [correctSession]: [
-              //       el,
-              //       ...userData[0].chats?.[correctSession],
-              //     ],
-              //   },
-              // }).then(() => {
-              //   countChatsUpdated++;
-              //   if (countChatsUpdate === countChatsUpdated) {
-              //     DatabaseAPI.updateUser(userData[0].username, {
-              //       chats: {
-              //         ...userData[0].chats,
-              //         [correctSession]: userData[0].chats?.[correctSession],
-              //       },
-              //     });
-
-              //     dataToApp(userData[0], correctSession);
-              //     return;
-              //   }
-              // });
               return;
             }
 
@@ -493,62 +470,6 @@ function Chats() {
               return;
             }
           });
-
-          //   userData[0].chats?.[correctSession].forEach((el) => {
-          //     let countChatsUpdate = 0;
-          //     let countChatsUpdated = 0;
-
-          //     const el2 = newChats.find(
-          //       (el2) => el.id._serialized === el2.id._serialized
-          //     );
-
-          //     if (el2?.lastMessage?.timestamp > el?.lastMessage?.timestamp) {
-          //       countChatsUpdate++;
-
-          //       ChatsApi.getMessages(el.id._serialized, 20, correctSession)
-          //         .then((el) => el.json())
-          //         .then((messages) => {
-          //           const superNew = messages.slice(
-          //             messages.findIndex(
-          //               (message) =>
-          //                 el?.lastMessage?.timestamp === message?.timestamp
-          //             ) + 1
-          //           );
-          //           superNew.forEach((message) => {
-          //             delete message.vCards;
-          //             message.author = { user: message._data?.author?.user };
-          //             message.notifyName = message?._data?.notifyName;
-          //             if (message.hasMedia) {
-          //               if (+message._data.size > 0) {
-          //                 message.size = message._data.size;
-          //                 console.log(dataUser, message);
-          //                 setDataUser((el) => ({
-          //                   ...el,
-          //                   allSize:
-          //                     (dataUser?.allSize ?? 0) + +message?._data?.size,
-          //                 }));
-          //               }
-          //             }
-          //             delete message._data;
-          //           });
-
-          //           el.messages = [...el.messages, ...superNew];
-          //           el.lastMessage = superNew.at(-1);
-
-          //           countChatsUpdated++;
-          //           if (countChatsUpdate === countChatsUpdated) {
-          //             DatabaseAPI.updateUser(userData[0].username, {
-          //               chats: {
-          //                 ...userData[0].chats,
-          //                 [correctSession]: userData[0].chats?.[correctSession],
-          //               },
-          //             });
-
-          //             dataToApp(userData[0], correctSession);
-          //           }
-          //         });
-          //     }
-          //   });
         });
       dataToApp(userData[0], correctSession);
     }
@@ -846,7 +767,13 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               <div className="flex justify-center items-center">
                 <FaReply className="w-[30px] mr-3" />
                 <span className="text-md">
-                  {replyMessage?.body ?? replyMessage?.payload?.body}
+                  {(replyMessage?.body ?? replyMessage?.payload?.body).length >
+                  30
+                    ? (replyMessage?.body ?? replyMessage?.payload?.body).slice(
+                        0,
+                        30
+                      ) + "..."
+                    : replyMessage?.body ?? replyMessage?.payload?.body}
                 </span>
               </div>
               <FaWindowClose
