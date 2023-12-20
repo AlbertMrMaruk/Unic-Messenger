@@ -858,6 +858,9 @@ border-[#2a2a2a] w-[100%] rounded-xl flex items-center gap-6 cursor-pointer hove
               } w-[55px] h-[45px] text-white font-bold uppercase`}
               type="button"
               onClick={() => {
+                if (text === "") {
+                  return;
+                }
                 if (audioUrl) {
                   sendMessage(audioUrl.encoded, "voice");
                 } else {
