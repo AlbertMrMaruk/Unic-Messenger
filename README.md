@@ -1,75 +1,60 @@
-# Getting Started with Create React App
+# UNIC MESSENGER APP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Мессенджер, позволяющий использовать несколько WhatsApp аккаунтов, и сохранять переписку или удалять при необходимости (+все функции самого WhatsApp) Проект дорабатывается и обновляется. В проекте используются такие технологии как:
 
-## Available Scripts
+- React JS, NodeJS, TailwindCSS, Express, Mongoose, MongoDB, Redux, JWT
+- Проект защищен от DOS и XSS атак, приложение соответствует стандарту SPA, используется роутер для навигации
 
-"build": "react-scripts build && node ./server.js",
-"dev": "npm run build && node ./server.js",
-~/users# docker run --rm -d -v `pwd`/.sessions:/app/.sessionsUser -p 8080:3000/tcp -e WHATSAPP_START_SESSION=default --name whatsapp-http-api-4 devlikeapro/whatsapp-http-api-plus
-4250a7bc58f80b9aa3cea08f8bff3b4fbd44e249711c5423ca71635f272a79ea
+### Функционал:
 
-In the project directory, you can run:
+- Добавление несколько WhatsApp аккаунтов
+- Переписка в реальном времени через WhatsApp
+- Добавление реакций на сообщения
+- Удаление сообщений и переписок
+- Запись голосовых сообщений и отправка файлов
+- Фильтр чатов и создание новых
 
-### `npm start`
+## Команда для сборки проекта:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+npm run build
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Команда для запуска проекта:
 
-### `npm test`
+```
+node index.js
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Установка
+Чтобы установить и запустить это приложение на своем локальном компьютере, следуйте этим шагам:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Клонируйте этот репозиторий на свой локальный компьютер.
+2. Перейдите в директорию проекта.
+3. Запустите команду npm install, чтобы установить необходимые зависимости.
+4. Запустите команду node index.js, чтобы запустить приложение.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Вклад в проект
+Вклад в этот проект приветствуется. Чтобы внести свой вклад, следуйте этим шагам:
 
-### `npm run eject`
+1. Сделайте форк этого репозитория.
+2. Создайте новую ветку для вашей функциональности или исправления ошибок.
+3. Внесите свои изменения и закоммитьте их.
+4. Отправьте свои изменения в ваш форк репозитория.
+5. Создайте pull request из вашей ветки в ветку
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Планы по доработке
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+-  Защищенная авторизация
+- Доработка реакций и ответов на сообщений
+- Возможность изменить данные профиля и пароль
+- Настройка групповых чатов
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Опубликованный проект:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://unicmessenger.ru
