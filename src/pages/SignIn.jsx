@@ -47,6 +47,7 @@ function SignIn() {
         ></Field>
         <Field
           icon={<FaLock className="text-primary text-4xl my-auto" />}
+          type={"password"}
           placeholder={"Пароль"}
           setText={(e) => setFormData({ ...formData, password: e })}
           text={password}

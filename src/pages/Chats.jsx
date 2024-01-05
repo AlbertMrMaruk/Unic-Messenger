@@ -806,6 +806,7 @@ function Chats() {
           setShowModal={setShowModalDownload}
         />
       )}
+      {/* Modal to show chats actions */}
       {showModalChats && (
         <ModalChats
           setShowModal={setShowModalChats}
@@ -816,6 +817,7 @@ function Chats() {
           setChats={setChats}
         />
       )}
+      {/* Modal to reply message to another chat */}
       {showModalReply && (
         <ModalReply
           setShowModal={setShowModalReply}

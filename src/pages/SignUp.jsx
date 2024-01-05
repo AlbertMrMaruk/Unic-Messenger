@@ -54,6 +54,7 @@ function SignUp() {
           icon={<FaLock className="text-primary text-4xl my-auto" />}
           placeholder={"Пароль"}
           setText={(e) => setFormData({ ...formData, password: e })}
+          type={"password"}
           text={password}
         ></Field>
         <div
