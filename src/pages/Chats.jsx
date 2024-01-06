@@ -558,7 +558,7 @@ function Chats() {
       >
         {/* Top Menu Contact Name */}
         {state && (
-          <div className="bg-inherit flex justify-center items-center gap-2 md:block h-[10vh] border-b-[1px] border-[#2a2a2a]">
+          <div className="sticky top-0  z-50 bg-inherit flex justify-center items-center gap-2 md:block h-[10vh] border-b-[1px] border-[#2a2a2a]">
             <div
               className="block mr-[1.5rem]  ml-[1rem] md:hidden"
               onClick={() => setShowChats(true)}
@@ -596,7 +596,7 @@ function Chats() {
         )}
         {/* Messages in chat */}
         <div
-          className={`w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[70vh] ${
+          className={`bg-inherit w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[80vh] ${
             replyMessage ? "md:h-[75vh]" : "md:h-[80vh]"
           }  mt-2`}
           ref={messagesRef}
@@ -659,7 +659,7 @@ function Chats() {
           )}
         </div>
         {/* Input and buttons for send messages */}
-        <div className="sticky bottom-0 w-[100%] h-[8vh]  ">
+        <div className="sticky bg-inherit pt-[1rem] pb-[4rem] bottom-0 w-[100%] h-[8vh]  ">
           {replyMessage && (
             <div className="w-[95%] md:w-[90%] flex bg-[#b5b5b566] rounded-t-xl m-auto py-2 px-3 justify-between items-center">
               <div className="flex justify-center items-center">
@@ -806,6 +806,7 @@ function Chats() {
           setShowModal={setShowModalDownload}
         />
       )}
+      {/* Modal to show chats actions */}
       {showModalChats && (
         <ModalChats
           setShowModal={setShowModalChats}
@@ -816,6 +817,7 @@ function Chats() {
           setChats={setChats}
         />
       )}
+      {/* Modal to reply message to another chat */}
       {showModalReply && (
         <ModalReply
           setShowModal={setShowModalReply}
