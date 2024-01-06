@@ -37,7 +37,7 @@
   },
   "scripts": {
     "start": "npm run build && node index.js",
-    "build": "npm run build",
+    "build": "react-scripts build",
     "push:dev": "npm run build && git add . && git commit -m 'Git' && git push -u ",
     "push": "npm run build && git add . && git commit -m 'Git' && git push -u "
   },
