@@ -30,7 +30,7 @@ function Sidebar({
        `}
     >
       {/* Top menu */}
-      <div className="flex  items-center pt-[.5rem] w-[100%] px-[1rem]  cursor-pointer">
+      <div className="flex items-center pt-[.5rem] w-[100%] px-[1rem] cursor-pointer justify-between ">
         <div
           className="bg-white rounded-full w-[41px] h-[40px]"
           onClick={() => navigate("/profile")}
@@ -44,14 +44,14 @@ function Sidebar({
           )}
         </div>
         <h3
-          className="font-bold text-white text-xl ml-[1.5rem]"
+          className="font-bold text-white text-xl "
           onClick={() => navigate("/profile")}
         >
           {currentUser?.pushName ?? ""}
         </h3>
         {chats && (
           <div
-            className="ml-[10rem] rounded-full bg-primary p-[0.65rem] cursor-pointer"
+            className=" rounded-full bg-primary p-[0.65rem] cursor-pointer"
             onClick={() => setShowModalChats(true)}
           >
             <FaPen className="color-white bg-inherit w-[15px] h-[15px]" />
