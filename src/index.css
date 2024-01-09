@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --toastify-color-success: #44a0ff;
-  --toastify-color-dark: #1b1d1f;
+  --toastify-color-success: #44a0ff !important;
+  --toastify-color-dark: #1b1d1f !important;
 }
 
 body {
