@@ -37,7 +37,7 @@ function SignIn() {
         if (el && el?.status !== "error") {
           navigate("/");
         } else {
-          toast.error("Неправильный пароль или имя пользователя");
+          toast.error("Вы ввели неверное имя пользователя или пароль");
         }
       });
   };
