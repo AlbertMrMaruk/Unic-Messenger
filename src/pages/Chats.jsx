@@ -660,7 +660,7 @@ function Chats() {
         </div>
         {/* Input and buttons for send messages */}
         <div
-          className={`sticky bg-inherit pt-[1rem]  bottom-0 w-[100%] h-[8vh] ${
+          className={`sticky bg-inherit pt-[1rem] md:p-0 bottom-0 w-[100%] h-[8vh] ${
             replyMessage ? "pb-[7rem]" : "pb-[4rem]"
           } `}
         >
