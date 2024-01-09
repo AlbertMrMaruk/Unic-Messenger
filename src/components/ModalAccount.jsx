@@ -2,6 +2,8 @@ import ChatsApi from "../api/ChatsApi";
 import DatabaseAPI from "../api/DatabaseAPI";
 import Spinner from "./blocks/Spinner";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ModalAccount({
   session,
@@ -20,42 +22,25 @@ export default function ModalAccount({
   const [phone, setPhone] = useState("");
   const [confirm, setConfirm] = useState(false);
 
-  // if (qrCode) {
-  //   console.log("scanning yeee");
-  //   setShowSpinner(false);
-  //   setConfirm(true);
-  //   setAccount(phone);
-  // }
-  // const startSession = (phone) => {
-  //   console.log(phone);
-  //   return fetch(`http://89.111.131.15/api/sessions/start`, {
-  //     method: "post",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //     },
+  const handleClickContinue = () => {
+    setShowSpinner(true);
+    ChatsApi.startSession(phone)
+      .catch(() =>
+        toast.error("Что-то пошло не так :( Попробуйте повторить позже!")
+      )
+      .then(() => {
+        setTimeout(() => {
+          setQrCode(`https://unicmessenger.ru/api/${phone}/auth/qr`);
+          setShowSpinner(false);
+          setConfirm(true);
+          setAccount(phone);
+          if (!session) {
+            setSession(phone);
+          }
+        }, 15000);
+      });
+  };
 
-  //     // make sure to serialize your JSON body
-  //     body: JSON.stringify({
-  //       name: phone,
-  //       config: {
-  //         proxy: null,
-  //         webhooks: [
-  //           {
-  //             url: `http://89.111.131.15/post/${phone}`,
-  //             events: ["message.any"],
-  //             hmac: null,
-  //             retries: {
-  //               delaySeconds: 2,
-  //               attempts: 15,
-  //             },
-  //             customHeaders: null,
-  //           },
-  //         ],
-  //       },
-  //     }),
-  //   });
-  // };
   return (
     <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-[rgba(0,0,0,.7)]">
       <div className="relative my-6 mx-auto w-[90%] md:w-[50%]">
@@ -103,22 +88,7 @@ export default function ModalAccount({
               <button
                 className="text-white bg-primary  font-bold uppercase text-sm px-6 py-3 rounded-[5px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                 type="button"
-                onClick={() => {
-                  setShowSpinner(true);
-                  ChatsApi.startSession(phone).then(() => {
-                    setTimeout(() => {
-                      setQrCode(
-                        `https://unicmessenger.ru/api/${phone}/auth/qr`
-                      );
-                      setShowSpinner(false);
-                      setConfirm(true);
-                      setAccount(phone);
-                      if (!session) {
-                        setSession(phone);
-                      }
-                    }, 15000);
-                  });
-                }}
+                onClick={handleClickContinue}
               >
                 Далее
               </button>
