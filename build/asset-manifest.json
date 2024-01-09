@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.8e59a00f.css",
-    "main.js": "/static/js/main.b79947ef.js",
+    "main.js": "/static/js/main.ffa0b13b.js",
     "static/media/vmsg.wasm": "/static/media/vmsg.f7dac8161acd61bfdb1a.wasm",
     "static/media/logoMessenger.png": "/static/media/logoMessenger.c1040cc64acc5fc41b3b.png",
     "static/media/785-4.gif": "/static/media/785-4.0fad339909b2f57555be.gif",
@@ -9,6 +9,6 @@
   },
   "entrypoints": [
     "static/css/main.8e59a00f.css",
-    "static/js/main.b79947ef.js"
+    "static/js/main.ffa0b13b.js"
   ]
 }

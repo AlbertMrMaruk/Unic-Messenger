@@ -35,6 +35,7 @@ function SignIn() {
         progress: undefined,
         theme: "colored",
       });
+      return;
     }
     e.preventDefault();
     console.log(formData);
