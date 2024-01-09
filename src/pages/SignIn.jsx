@@ -35,6 +35,7 @@ function SignIn() {
       .then((el) => {
         console.log(el);
         if (el && el?.status !== "error") {
+          toast.success(`Вход в систему успешен! Добро пожаловать!`);
           navigate("/");
         } else {
           toast.error("Вы ввели неверное имя пользователя или пароль");
