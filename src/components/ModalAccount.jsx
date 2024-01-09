@@ -26,23 +26,23 @@ export default function ModalAccount({
     setShowSpinner(true);
     if (phone.length === 0 || !phone.match(/7\d{10}/)) {
       toast.error("Телефон должен быть в формате 79876543210!");
-      return;
+    } else {
+      ChatsApi.startSession(phone)
+        .catch(() =>
+          toast.error("Что-то пошло не так :( Попробуйте повторить позже!")
+        )
+        .then(() => {
+          setTimeout(() => {
+            setQrCode(`https://unicmessenger.ru/api/${phone}/auth/qr`);
+            setShowSpinner(false);
+            setConfirm(true);
+            setAccount(phone);
+            if (!session) {
+              setSession(phone);
+            }
+          }, 15000);
+        });
     }
-    ChatsApi.startSession(phone)
-      .catch(() =>
-        toast.error("Что-то пошло не так :( Попробуйте повторить позже!")
-      )
-      .then(() => {
-        setTimeout(() => {
-          setQrCode(`https://unicmessenger.ru/api/${phone}/auth/qr`);
-          setShowSpinner(false);
-          setConfirm(true);
-          setAccount(phone);
-          if (!session) {
-            setSession(phone);
-          }
-        }, 15000);
-      });
   };
 
   return (
