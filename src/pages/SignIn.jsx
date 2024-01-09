@@ -57,7 +57,7 @@ function SignIn() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="colored"
       />
       <Navbar />
       <div className="static rounded-2xl bg-[#2c2e30] pt-6 px-3 pb-10 w-[90%] md:w-[55%] m-auto   shadow-xl shadow-[#00000047] mt-[10rem] md:mt-[5rem]">
