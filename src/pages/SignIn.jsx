@@ -45,6 +45,7 @@ function SignIn() {
       })
       .then((res) => res.json())
       .then((el) => {
+        console.log(el);
         if (el) {
           navigate("/");
         }
