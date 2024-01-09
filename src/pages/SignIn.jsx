@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DatabaseAPI from "../api/DatabaseAPI";
 import Navbar from "../components/blocks/Navbar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SignIn() {
   useEffect(() => {
@@ -22,6 +24,18 @@ function SignIn() {
   });
   const { username, password } = formData;
   const onSubmit = async (e) => {
+    if (formData.password.length === 0) {
+      toast.error("Заполните поле для ввода пароля", {
+        position: "top-right",
+        autoClose: 6000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
     e.preventDefault();
     console.log(formData);
     DatabaseAPI.signInUser(formData)
