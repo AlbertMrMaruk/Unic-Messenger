@@ -595,6 +595,7 @@ function Chats() {
           </div>
         )}
         {/* Messages in chat */}
+
         <div
           className={`bg-inherit w-[100%] flex-col-reverse py-3  flex items-start justify-start px-[.25rem] md:px-[2.5rem] overflow-scroll h-[77vh] ${
             replyMessage ? "md:h-[75vh]" : "md:h-[80vh]"
