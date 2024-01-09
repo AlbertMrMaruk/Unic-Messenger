@@ -24,6 +24,9 @@ export default function ModalAccount({
 
   const handleClickContinue = () => {
     setShowSpinner(true);
+    if (phone.length === 0 || !phone.match(/7\d{10}/)) {
+      toast.error("Телефон должен быть в формате 79876543210!");
+    }
     ChatsApi.startSession(phone)
       .catch(() =>
         toast.error("Что-то пошло не так :( Попробуйте повторить позже!")
