@@ -25,29 +25,19 @@ function SignIn() {
   const { username, password } = formData;
   const onSubmit = async (e) => {
     if (password.length === 0 || username.length === 0) {
-      toast.error("Заполните все поля", {
-        position: "top-right",
-        autoClose: 6000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      toast.error("Заполните все поля");
       return;
     }
     e.preventDefault();
     console.log(formData);
     DatabaseAPI.signInUser(formData)
-      .catch((err) => {
-        console.log(err);
-      })
       .then((res) => res.json())
       .then((el) => {
         console.log(el);
-        if (el) {
+        if (el && el?.status !== "error") {
           navigate("/");
+        } else {
+          toast.error("Неправильный пароль или имя пользователя");
         }
       });
   };
@@ -56,7 +46,18 @@ function SignIn() {
 
   return (
     <div className="bg-secondary h-[100vh] ">
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Navbar />
       <div className="static rounded-2xl bg-[#2c2e30] pt-6 px-3 pb-10 w-[90%] md:w-[55%] m-auto   shadow-xl shadow-[#00000047] mt-[10rem] md:mt-[5rem]">
         <Field
