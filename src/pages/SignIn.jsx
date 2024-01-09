@@ -24,8 +24,8 @@ function SignIn() {
   });
   const { username, password } = formData;
   const onSubmit = async (e) => {
-    if (formData.password.length === 0) {
-      toast.error("Заполните поле для ввода пароля", {
+    if (password.length === 0 || username.length === 0) {
+      toast.error("Заполните все поля", {
         position: "top-right",
         autoClose: 6000,
         hideProgressBar: false,
@@ -40,6 +40,9 @@ function SignIn() {
     e.preventDefault();
     console.log(formData);
     DatabaseAPI.signInUser(formData)
+      .catch((err) => {
+        console.log(err);
+      })
       .then((res) => res.json())
       .then((el) => {
         if (el) {
